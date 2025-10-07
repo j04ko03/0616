@@ -1,0 +1,18 @@
+html, body {
+    border: 1px solid blue;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedorNavBar { 
+    border: 1px solid green; 
+    width: 100%; 
+    height: 50px; 
+}
+
+.fondo {
+    border: 1px solid red;
+    width: 100%;
+    height: calc(99vh - 50px);
+}
