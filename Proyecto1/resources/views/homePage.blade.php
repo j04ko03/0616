@@ -1,23 +1,35 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME</title>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-</head>
-<body>
-    <div style="height: 100%">
-        <div class="contenedorNavBar">
+@extends('layouts.app')
 
+@section('content')
+    <div class="container mx-auto p-4" style="border: 1px solid black">
+        <h1 class="text-2xl font-bold mb-4" style="border: 1px solid red">DASHBOARD</h1>
+        <div class="flex space-x-4 border-b mb-6" style="border: 1px solid blue">
+            <button class="text-green-600 border-b-2 border-green-600 pb-2">Proyectos recientes</button>
+            <button class="text-gray-500 pb-2 hover:text-green-600">Tareas asignadas</button>
         </div>
-        <div class="fondo">
-            <div style= "border: 1px solid black; width: 300px; height: 100px; text-align: center; margin: auto; margin-top: 20%; padding-top: 5%;">
-                <h2>HOME PAGE</h2>
-                <a href="{{ route('saludo.controller') }}">Saludo</a><br>
-                <a href="{{ route('login.controller') }}">Login</a>
-            </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" style="border: 1px solid purple">
+            @foreach($proyectosRecientes as $proyecto)
+                <!--<div class="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition cursor-pointer">
+                    <h2 class="text-lg font-semibold">{{ $proyecto['titulo'] }}</h2>
+                    <p class="text-gray-600">{{ $proyecto['descripcion'] }}</p>
+                </div>-->
+                <x-cardItemReciente 
+                    titulo="{{ $proyecto['titulo'] }}" 
+                    descripcion="{{ $proyecto['descripcion'] }}"
+                />  
+            @endforeach
         </div>
-    </div>
-</body>
-</html>
+
+        <h2 class="text-xl font-bold mb-2">Proyectos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4"  style="border: 1px solid orange">
+            @foreach ($proyectosTotal as $proyectoT)
+                <x-cardItempProyectos 
+                    titulo="{{ $proyectoT['titulo'] }}" 
+                    descripcion="{{ $proyectoT['descripcion'] }}"
+                />
+            @endforeach
+        </div>
+    </div>   
+    
+@endsection

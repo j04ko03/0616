@@ -18,6 +18,23 @@ class SiteController extends Controller
     }
     public function home()
     {
-        return view('homePage');
+        //Carga de base de datos a objetos
+        $proyectosRecientes = [
+            ['titulo' => 'Proyecto de prueba', 'descripcion' => 'Descripción del proyecto de prueba'],
+            ['titulo' => 'Primer Proyecto', 'descripcion' => 'Descripción del proyecto 1'],
+            ['titulo' => 'Segundo Proyecto', 'descripcion' => 'Descripción del proyecto 2'],
+            ['titulo' => 'Tercer Proyecto', 'descripcion' => 'Descripción del proyecto 3'],
+            ['titulo' => 'Cuarto Proyecto', 'descripcion' => 'Descripción del proyecto 4'],
+        ];
+
+        $proyectosTotal=[
+            ['titulo' => 'Proyecto de prueba', 'descripcion' => 'Descripción del proyecto de prueba'],
+            ['titulo' => 'Primer Proyecto', 'descripcion' => 'Descripción del proyecto 1'],
+            ['titulo' => 'Segundo Proyecto', 'descripcion' => 'Descripción del proyecto 2'],
+            ['titulo' => 'Tercer Proyecto', 'descripcion' => 'Descripción del proyecto 3'],
+            ['titulo' => 'Cuarto Proyecto', 'descripcion' => 'Descripción del proyecto 4'],
+            
+        ];
+        return view('homePage', compact('proyectosRecientes', 'proyectosTotal'));
     }
 }
