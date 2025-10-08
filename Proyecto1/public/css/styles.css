@@ -28,9 +28,6 @@ html, body {
 }
 
 
-
-/* Estilos para la barra de navegación. */
-
 /* Estilos para la barra de navegación */
 nav {
     background-color: var(--color-white);
@@ -38,12 +35,42 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 2rem;
     height: 50px;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--color-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-link);
+}
+
+.nav-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 
@@ -52,7 +79,6 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 50px); /* Restamos altura de la barra de navegación */
     background-color: var(--color-background);
     padding: 20px;
 }
@@ -123,7 +149,7 @@ nav {
 }
 
 .btn-signup:hover {
-    background-color: #75a534; /* Versión más oscura del color primario */
+    background-color: #75a534; /* Un verde un poco más oscuro para el hover */
 }
 
 .error-message {
@@ -131,6 +157,47 @@ nav {
     font-size: 0.875rem;
     margin-top: 0.25rem;
     display: block;
+}
+
+.contenedor-signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 50px);
+    background-color: var(--color-background);
+    padding: 20px;
+}
+
+.signin-box {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.signin-box h2 {
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.btn-signin {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-signin:hover {
+    background-color: #75a534;
 }
 
 /* Estilos para mensajes de validación */
