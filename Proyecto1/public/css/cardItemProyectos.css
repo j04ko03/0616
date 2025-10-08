@@ -1,0 +1,77 @@
+.card-contenedor{
+    background-color: #f3f4f6;                  /* bg-gray-100 */
+    height: 300px;                                /* h-80 ≈ 20rem, pero tú lo fijas a 300px */
+    border-radius: 0.75rem;                       /* rounded-xl */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);  /* shadow-sm */
+    position: relative;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out;      /* transition */
+}
+
+.card-contenedor:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1),
+                0 4px 6px rgba(0, 0, 0, 0.05);  /* shadow-lg */
+}
+
+.card-interior {
+    padding: 1rem;                  /* p-4 o 16px*/
+    border: 1px solid hotpink;    
+    height: 300px;                
+}
+
+.card-cabecera {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+}
+
+.card-titulo{
+    border: 1px solid red; 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.titulo {
+    font-size: 1.125rem;   /* text-lg */
+    line-height: 1.75rem;  /* text-lg */
+    font-weight: 600;      /* font-semibold */
+}
+
+.padding-right{
+    padding-right: 10px;
+}
+
+.texto-gris{
+    color: #4b5563;
+    font-size: 12px;
+}
+
+.card-tareas{
+    border: 1px solid blue;
+    margin-top: 15%; 
+    position: absolute; 
+    bottom: 10%; 
+    left:0; 
+    right: 0;
+}
+
+div, div, ul, li {
+    font-size: 14px
+}
+
+.card-estado{
+    border:1px solid firebrick; 
+    position: absolute; 
+    bottom: 0; 
+    left:0; 
+    right: 0; 
+    height: 15px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-md */
+    border-radius: 0.75rem;                      /* rounded-xl */
+    padding: 0.5rem;                             /* p-2 */  
+}

@@ -31,7 +31,7 @@
         </div>
         <!-- Queda oculto al cargar la página display: none; -->
         <div id="section-tareas" style="display: none; border: 1px solid darkorange; height: 200px; overflow-y: auto; scrollbar-width: none;">
-            <ul class="list-disc pl-6">
+            <ul>
                 @foreach($tareasAsignadas as $tarea)
                     <li>{{ $tarea['titulo'] }} — {{ $tarea['descripcion'] }}</li>
                 @endforeach
