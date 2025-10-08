@@ -57,7 +57,28 @@ class SiteController extends Controller
             ['titulo' => 'Tercer Proyecto', 'descripcion' => 'Descripción del proyecto 3', 'estado' => 2],
             ['titulo' => 'Cuarto Proyecto', 'descripcion' => 'Descripción del proyecto 4', 'estado' => 1]
         ];
-        return view('homePage', compact('proyectosRecientes', 'proyectosTotal'));
+
+        $tareasAsignadas = [
+            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
+            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción']
+        ];
+        return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
     }
     public function signUp()
     {
