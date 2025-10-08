@@ -1,5 +1,9 @@
 @extends('layouts.barraNavegacion')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+@endpush
+
 @section('content')
 <div class="contenedor-signup">
     <div class="signup-box">

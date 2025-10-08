@@ -1,3 +1,7 @@
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+@endpush
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +17,7 @@
     <!-- Navbar -->
     <nav class="bg-blue-100 border-b p-4 flex justify-between items-center">
         <div class="flex space-x-4">
-            <a href="{{ route('login.controller') }}" class="font-bold text-gray-700">OrgaTime</a>
+            <a href="{{ route('home.controller') }}" class="font-bold text-gray-700">OrgaTime</a>
             <a href="{{ route('home.controller') }}" class="bg-yellow-300 px-3 py-1 rounded">Dashboard</a>
             <a href="#" class="text-gray-600 hover:text-gray-800">Projects</a>
             <a href="#" class="text-gray-600 hover:text-gray-800">Calendar</a>
