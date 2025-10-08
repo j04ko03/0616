@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.barraNavegacion')
 
 @section('content')
     <div class="container mx-auto p-4" style="border: 1px solid black">
