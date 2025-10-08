@@ -8,27 +8,32 @@
             <button class="text-gray-500 pb-2 hover:text-green-600">Tareas asignadas</button>
         </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8" style="border: 1px solid purple">
-            @foreach($proyectosRecientes as $proyecto)
-                <!--<div class="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition cursor-pointer">
-                    <h2 class="text-lg font-semibold">{{ $proyecto['titulo'] }}</h2>
-                    <p class="text-gray-600">{{ $proyecto['descripcion'] }}</p>
-                </div>-->
-                <x-cardItemReciente 
-                    titulo="{{ $proyecto['titulo'] }}" 
-                    descripcion="{{ $proyecto['descripcion'] }}"
-                />  
-            @endforeach
+        <div style="border: 1px solid green; height: 200px; overflow-y: auto; scrollbar-width: none;">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8" style="border: 1px solid purple">
+                @foreach($proyectosRecientes as $proyecto)
+                    <!--<div class="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition cursor-pointer">
+                        <h2 class="text-lg font-semibold">{{ $proyecto['titulo'] }}</h2>
+                        <p class="text-gray-600">{{ $proyecto['descripcion'] }}</p>
+                    </div>-->
+                    <x-cardItemReciente 
+                        titulo="{{ $proyecto['titulo'] }}" 
+                        descripcion="{{ $proyecto['descripcion'] }}"
+                    />  
+                @endforeach
+            </div>
         </div>
 
         <h2 class="text-xl font-bold mb-2">Proyectos</h2>
+        <div style="height: 450px; overflow-y: auto; scrollbar-width: none;">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4"  style="border: 1px solid orange">
             @foreach ($proyectosTotal as $proyectoT)
                 <x-cardItempProyectos 
                     titulo="{{ $proyectoT['titulo'] }}" 
                     descripcion="{{ $proyectoT['descripcion'] }}"
+                    estado="{{ $proyectoT['estado'] }}"
                 />
             @endforeach
+        </div>
         </div>
     </div>   
     
