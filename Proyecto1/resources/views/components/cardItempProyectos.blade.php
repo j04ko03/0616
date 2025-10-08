@@ -10,7 +10,7 @@
         default:
             $color = 'red';
     }
-@endphp
+@endphp 
 
 <div class="bg-gray-100 h-80 rounded-xl shadow-sm hover:shadow-lg transition cursor-pointer" style="height: 300px; position: relative;">
    <div class="p-4" style="border: 1px solid hotpink; height: 300px;">
