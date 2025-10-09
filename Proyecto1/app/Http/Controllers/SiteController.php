@@ -80,12 +80,11 @@ class SiteController extends Controller
         ];
         return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
     }
-    public function signUp()
+    public function signUp(Request $request)
     {
-        return view('signUp');
-    }
-    public function register(Request $request)
-    {
+        if ($request->isMethod('POST')) {
+            return view('signUp');
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -96,6 +95,6 @@ class SiteController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('home.controller')->with('success', 'Registration successful. Please log in.');
+        return redirect()->route('home.controller')->with('success');
     }
 }
