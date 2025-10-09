@@ -17,8 +17,19 @@
 <div class="card-contenedor">
     <div class="card-interior">
         <div class="card-cabecera">
-            <div style="height: 90px;">
-                <!--Iconos-->
+            <div style="border: 1px solid rgb(65, 65, 161); align-content: center">
+                <div style="height: 90px; border: 1px solid rgb(170, 24, 37); display: flex; flex-wrap: wrap; justify-content: space-between; margin-inline: 20%; align-items: center">
+                    <!--Iconos-->
+                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
+                        
+                    </div>
+                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
+                        
+                    </div>
+                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
+                        
+                    </div>
+                </div>
             </div>
         </div>
     <div class="card-titulo">
