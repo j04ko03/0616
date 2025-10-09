@@ -29,12 +29,16 @@
 
         <!-- Queda oculto al cargar la página display: none; -->
         <div id="section-tareas" style="display: none; border: 1px solid darkorange; height: 200px; overflow-y: auto; scrollbar-width: none;">
-            <ul>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8" style="margin-inline: 2%">
                 @foreach($tareasAsignadas as $tarea)
                     <!--<li>{{ $tarea['titulo'] }} — {{ $tarea['descripcion'] }}</li>-->
-                    <li> <x-listItemTarea/> a</li>
+                        <x-listItemTarea
+                            titulo="{{ $tarea['titulo'] }}"
+                            descripcion="{{ $tarea['descripcion'] }}"
+                            :tag="$tarea['tag']"
+                        />
                 @endforeach
-            </ul>
+            </div >
         </div>
 
 

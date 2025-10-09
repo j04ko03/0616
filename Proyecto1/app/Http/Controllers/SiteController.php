@@ -59,26 +59,41 @@ class SiteController extends Controller
         ];
 
         $tareasAsignadas = [
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción']
+            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue']]
+            ],
+            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción', 'tag' =>[
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción', 'tag' =>[]],
+            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción', 'tag' =>[
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow'],
+                ['descripcion' =>'java', 'color' => 'green'], 
+                ['descripcion' =>'c#', 'color' => 'purple'], 
+                ['descripcion' =>'html', 'color' => 'red']]
+            ]
         ];
-        return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
+        //return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
+        /**return view('homePage', ['proyectosRecientes' => $proyectosRecientes,
+                                            'proyectosTotal' => $proyectosTotal,
+                                            'tareasAsignadas' => $tareasAsignadas**/
+        return view('homePage')->with(['proyectosRecientes' => $proyectosRecientes,
+                                                    'proyectosTotal' => $proyectosTotal,
+                                                    'tareasAsignadas' => $tareasAsignadas ]);
     }
     public function signUp(Request $request)
     {
