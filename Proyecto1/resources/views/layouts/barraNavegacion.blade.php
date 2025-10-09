@@ -16,7 +16,7 @@
     <nav class="navbar">
         <div class="navbar-container">
             <div class="navbar-left">
-                <a href="{{ route('home.controller') }}" class="navbar-brand">OrgaTime</a>
+                <a href="{{ route('home.controller') }}" class="nav-brand" id="logo"><img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo"></a>
                 <div class="navbar-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                     <a href="#" class="nav-link">Projects</a>
