@@ -1,0 +1,39 @@
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+@endpush
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrgaTime Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    @stack('styles')
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-left">
+                <a href="{{ route('home.controller') }}" class="navbar-brand">OrgaTime</a>
+                <div class="navbar-links">
+                    <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
+                    <a href="#" class="nav-link">Projects</a>
+                    <a href="#" class="nav-link">Reports</a>
+                </div>
+            </div>
+            
+            <div class="navbar-right">
+                <span class="username">Nombre usuario</span>
+                <button class="settings-btn">⚙️</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        @yield('content')
+    </main>
+</body>
+</html>
