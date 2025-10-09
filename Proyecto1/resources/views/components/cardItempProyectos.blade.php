@@ -17,17 +17,19 @@
 <div class="card-contenedor">
     <div class="card-interior">
         <div class="card-cabecera">
-            <div style="border: 1px solid rgb(65, 65, 161); align-content: center">
-                <div style="height: 90px; border: 1px solid rgb(170, 24, 37); display: flex; flex-wrap: wrap; justify-content: space-between; margin-inline: 20%; align-items: center">
-                    <!--Iconos-->
-                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
-                        
+            <div style="border: 1px solid rgb(65, 65, 161); display: flex; justify-content: center">
+                <div style="height: 90px; width: 90px; border: 1px solid rgb(170, 24, 37); 
+                display: flex; flex-wrap: wrap; justify-content: space-between; 
+                align-items: center;">
+                    <!-- Iconos -->
+                    <div style="border: 1px solid pink; flex: 1; margin: 0.5px; align-items: center">
+                        <img src="../storage/assets/icons/NOajustes.svg" alt="" style="width: 100%; height: 100%;">
                     </div>
-                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
-                        
+                    <div style="border: 1px solid pink; flex: 1; margin: 0.5px; margin: 0 5px; align-items: center">
+                        <img src="../storage/assets/icons/NOhome.svg" alt="" style="width: 100%; height: 100%;">
                     </div>
-                    <div style="border: 1px solid pink; width: 25%; height: 45px;">
-                        
+                    <div style="border: 1px solid pink; flex: 1; margin: 0.5px; margin: 0 5px; align-items: center">
+                        <img src="../storage/assets/icons/NOReports.svg" alt="" style="width: 100%; height: 100%;">
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
             <li>Tareas pendientes: 0</li>
         </ul>
     </div>
-    <div style="background-color: {{ $color }};" class="card-estado">    
+    <div class="card-estado" style="background-color: {{ $color }}">    
     </div>
 
     </div>

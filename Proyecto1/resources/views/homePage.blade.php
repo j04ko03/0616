@@ -2,7 +2,7 @@
 
 @section('content')
     <!--<div class="contenedor-padre" style="border: 1px solid black">-->
-    <div class="container mx-auto p-4" style="border: 1px solid black">
+    <div class="container mx-auto p-4" style="border: 1px solid black;">
         <h1 class="text-2xl font-bold mb-4" style="border: 1px solid red">DASHBOARD</h1>
         <div class="flex space-x-4 border-b mb-6" style="border: 1px solid blue">
             <button id="btn-proyectos"
@@ -31,7 +31,8 @@
         <div id="section-tareas" style="display: none; border: 1px solid darkorange; height: 200px; overflow-y: auto; scrollbar-width: none;">
             <ul>
                 @foreach($tareasAsignadas as $tarea)
-                    <li>{{ $tarea['titulo'] }} — {{ $tarea['descripcion'] }}</li>
+                    <!--<li>{{ $tarea['titulo'] }} — {{ $tarea['descripcion'] }}</li>-->
+                    <li> <x-listItemTarea/> a</li>
                 @endforeach
             </ul>
         </div>
