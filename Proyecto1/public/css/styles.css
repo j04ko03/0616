@@ -39,6 +39,14 @@ a, p, span, li, button, input, label {
     gap:2rem;
 }
 
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
 .navbar-left {
     display: flex;
     align-items: center;
@@ -98,24 +106,26 @@ a, p, span, li, button, input, label {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: calc(100vh - 50px);
     background-color: var(--color-background);
-    padding: 20px;
+    padding: 2rem;
 }
 
-.signup-box {
+.signin-box {
     background-color: var(--color-white);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
 }
 
 .signup-box h2 {
     text-align: center;
     color: var(--color-dark);
     margin-bottom: 2rem;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
 }
 
 .form-group {

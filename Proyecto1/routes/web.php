@@ -36,3 +36,4 @@ Route::get('/js/{filename}', function ($filename) {
         'Content-Type' => 'application/javascript'
     ]);
 });
+

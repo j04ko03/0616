@@ -14,7 +14,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav id="navbar" class="navbar">
         <div class="navbar-container">
             <!-- Logo a la izquierda -->
             <a href="{{ route('home.controller') }}" class="nav-logo">
