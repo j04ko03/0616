@@ -15,9 +15,13 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
+            <!-- Logo a la izquierda -->
+            <a href="{{ route('home.controller') }}" class="nav-logo">
+                <img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo">
+            </a>
+            
             <div class="navbar-left">
-                <a href="{{ route('home.controller') }}" class="nav-brand" id="logo"><img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo"></a>
-                <div class="navbar-links">
+                <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                     <a href="#" class="nav-link">Projects</a>
                     <a href="#" class="nav-link">Reports</a>
