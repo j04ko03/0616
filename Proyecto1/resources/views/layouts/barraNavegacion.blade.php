@@ -20,7 +20,7 @@
                 <img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo">
             </a>
             
-            <div class="navbar-left">
+            <div class="navbar-left"> 
                 <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                     <a href="#" class="nav-link">Projects</a>
