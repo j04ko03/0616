@@ -55,8 +55,7 @@
     </div>   
     
 
-
-    <script>
+    <!--<script>
         document.addEventListener('DOMContentLoaded', () => {
             const btnProyectos = document.getElementById('btn-proyectos');
             const btnTareas = document.getElementById('btn-tareas');
@@ -83,5 +82,5 @@
                 btnProyectos.style.color = '#6b7280';
             });
         });
-    </script>
+    </script>-->
 @endsection
