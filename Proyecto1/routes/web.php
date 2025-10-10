@@ -14,3 +14,4 @@ Route::get('/login', [SiteController::class, 'login'])->name('login.controller')
 Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
 Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
+Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');

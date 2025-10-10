@@ -1,5 +1,6 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
             <div class="navbar-left"> 
                 <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
-                    <a href="#" class="nav-link">Projects</a>
+                    <a href="{{ route('proyectos.controller') }}" class="nav-link">Projects</a>
                     <a href="#" class="nav-link">Reports</a>
                 </div>
             </div>
