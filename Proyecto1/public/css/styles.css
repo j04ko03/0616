@@ -7,29 +7,18 @@
     --color-link-hover: #082854;  /* Color azul oscuro para letra con interacción en la barra de navegación */
 }
 
-
-html, body {
-    border: 1px solid blue;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Zilla Slab', serif, bold;
+    color: var(--color-dark);
 }
 
-.contenedorNavBar { 
-    border: 1px solid green; 
-    width: 100%; 
-    height: 50px; 
-}
-
-.fondo {
-    border: 1px solid red;
-    width: 100%;
-    height: calc(99vh - 50px);
+a, p, span, li, button, input, label {
+    font-family: 'Lato', sans-serif;
 }
 
 
 /* Estilos para la barra de navegación */
-nav {
+.navbar {
     background-color: var(--color-white);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -37,10 +26,43 @@ nav {
     align-items: center;
     padding: 0 2rem;
     height: 50px;
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000;  
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap:2rem;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    gap:2rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: flex-end;
+    gap:1rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-links {
@@ -49,15 +71,12 @@ nav {
     align-items: center;
 }
 
-.nav-links a {
+.nav-links a, .navbar-right span{
     color: var(--color-dark);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: var(--color-link);
+    font-size: small;
 }
 
 .nav-brand {

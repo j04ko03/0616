@@ -1,5 +1,6 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 <!DOCTYPE html>
@@ -15,11 +16,15 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
+            <!-- Logo a la izquierda -->
+            <a href="{{ route('home.controller') }}" class="nav-logo">
+                <img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo">
+            </a>
+            
             <div class="navbar-left">
-                <a href="{{ route('home.controller') }}" class="navbar-brand">OrgaTime</a>
-                <div class="navbar-links">
+                <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
-                    <a href="#" class="nav-link">Projects</a>
+                    <a href="{{ route('proyectos.controller') }}" class="nav-link">Projects</a>
                     <a href="#" class="nav-link">Reports</a>
                 </div>
             </div>
