@@ -23,9 +23,6 @@
         }
 
         /*  SELECT PROYECTOS    */
-        #select-container {
-            margin-top: 100px;
-        }
 
         select {
             padding: 10px;
@@ -36,6 +33,7 @@
             background-color: #f4f5f7;
             border-radius: 10px;
             border: 1px solid black;
+            cursor: pointer;
         }
 
         select,
@@ -59,13 +57,20 @@
             padding: 8px;
             border: 1px solid black;
             margin: 10px;
+            transition: all 400ms;
+        }
+
+        option:hover {
+            background-color: #d9d9d9;
         }
 
         /*  PESTAÑA BOTONES     */
         #tab-container {
+            width: fit-content;
             margin-top: 30px;
             margin-bottom: 30px;
             display: flex;
+            flex-wrap: wrap;
         }
 
         .tabs-btn {
@@ -99,7 +104,7 @@
         .content-section-3 {
             box-sizing: border-box;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
         }
 
@@ -163,6 +168,7 @@
         }
 
         .task-container>span:nth-child(4) {
+            margin-top: 15px;
             display: flex;
             justify-content: space-between;
             font-size: .75rem;
@@ -283,6 +289,12 @@
 
         .content-active {
             display: grid;
+        }
+
+        @media (width < 400px) {
+            main {
+                padding: 10px;
+            }
         }
     </style>
 
@@ -962,7 +974,7 @@
                         </div>
                         <div>
                             <span>
-                                <p>Ferdinand Jr Pinto dolortio</p>
+                                <p>Nombre integrante</p>
                                 <button class="button-task">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -1105,8 +1117,9 @@
         const tabsContent = document.querySelectorAll(".tabs-content");
 
         btnContainer.addEventListener("click", function(e) {
-            tabsBtn.forEach((btn) => btn.classList.remove("btn-active"));
             const clicked = e.target.closest(".tabs-btn");
+            if (!clicked) return;
+            tabsBtn.forEach((btn) => btn.classList.remove("btn-active"));
             clicked.classList.add("btn-active");
 
             tabsContent.forEach((tab) => tab.classList.remove("content-active"));
