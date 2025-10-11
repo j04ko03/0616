@@ -36,3 +36,5 @@ Route::get('/js/{filename}', function ($filename) {
         'Content-Type' => 'application/javascript'
     ]);
 });
+
+Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
