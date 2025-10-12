@@ -1,11 +1,8 @@
-@extends('layouts.barraNavegacion')
-
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @endpush
 
 @section('content')
-
 <div class="contenedor-signup">
     <div class="signup-box">
         <h2>Sign Up</h2>
@@ -83,13 +80,11 @@
 
             <div class="form-footer">
                 <p class="account-text">¿Ya tienes cuenta?</p>
-                <a href="{{ route('login.controller') }}" class="login-link">Iniciar sesión</a>
+                <a href="{{ route('register.controller') }}" class="login-link">Iniciar sesión</a>
             </div>
 
             <button type="submit" class="btn-signup">Crear cuenta</button>
         </form>
     </div>
 </div>
-
-<script src="{{('../js/controladorBarraNavegacion.js') }}"></script>
 @endsection

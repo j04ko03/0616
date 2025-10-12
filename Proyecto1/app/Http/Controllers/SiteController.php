@@ -116,7 +116,6 @@ class SiteController extends Controller
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
-
     public function proyectos(){
         return view('proyectos');
     }
