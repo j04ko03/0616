@@ -6,11 +6,16 @@
 @endpush
 
 @section('content')
-<div class="contenedor-signup">
-    <div class="signup-box">
-        <div class="contenedor-header">
-        <img src="{{ url('/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo">
-        <h2>Sign Up</h2>
+<div class="contenedor-signin">
+    <!-- Logo arriba del todo y fuera del formulario -->
+    <div class="signin-logo-top">
+        <img src="{{ url('/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo-top">
+    </div>
+
+    <div class="signin-box">
+        <!-- Título dentro del formulario -->
+        <div class="signin-header">
+            <h2>Sign In</h2>
         </div>
 
         @if ($errors->any())
@@ -27,11 +32,11 @@
             @csrf
             
             <div class="form-group">
-                <label for="email" class="form-label">Mail</label>
-                <input type="email"
+                <label for="email" class="form-label">Usuario/Mail</label>
+                <input type="text"
                        name="email"
                        id="email"
-                       placeholder="Tu correo electrónico"
+                       placeholder="Tu usuario o correo electrónico"
                        value="{{ old('email') }}"
                        class="form-input"
                        required>
@@ -41,40 +46,16 @@
             </div>
 
             <div class="form-group">
-                <label for="name" class="form-label">Nombre usuario</label>
-                <input type="text"
-                       name="name"
-                       id="name"
-                       placeholder="Tu nombre de usuario"
-                       value="{{ old('name') }}"
-                       class="form-input"
-                       required>
-                @error('name')
-                    <span class="error-message">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group">
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password"
                        name="password"
                        id="password"
-                       placeholder="Crea una contraseña"
+                       placeholder="Tu contraseña"
                        class="form-input"
                        required>
                 @error('password')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
-            </div>
-
-            <div class="form-group">
-                <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-                <input type="password"
-                       name="password_confirmation"
-                       id="password_confirmation"
-                       placeholder="Repite tu contraseña"
-                       class="form-input"
-                       required>
             </div>
 
             <div class="form-options">
@@ -84,15 +65,17 @@
                 </div>
             </div>
 
-            <div class="form-footer">
-                <p class="account-text">¿Ya tienes cuenta?</p>
-                <a href="{{ route('signin.controller') }}" class="login-link">Iniciar sesión</a>
+            <div class="form-footer-signin">
+                <p class="account-text">¿No tienes cuenta?</p>
+                <a href="{{ route('signup.controller') }}" class="signup-link">Crear cuenta</a>
             </div>
 
-            <button type="submit" class="btn-signup">Crear cuenta</button>
+            <div class="form-submit-container">
+                <button type="submit" class="btn-signin">Iniciar sesión</button>
+            </div>
         </form>
     </div>
 </div>
 
-    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
+<script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
 @endsection

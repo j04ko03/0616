@@ -13,7 +13,7 @@ Route::get('/login', [SiteController::class, 'login'])->name('login.controller')
 
 // Rutas para sign in y sign up
 Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
-Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
+Route::post('/signin', [SiteController::class, 'signin'])->name('signin.controller');
 
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
@@ -36,6 +36,51 @@ Route::get('/js/{filename}', function ($filename) {
    
     return response()->file($path, [
         'Content-Type' => 'application/javascript'
+    ]);
+});
+
+//Cargas de CSS
+Route::get('/css/{filename}', function ($filename) {
+    $path = storage_path("assets/css/$filename");
+
+    try {
+        if (!File::exists($path)) {
+            abort(404);
+        }
+    } catch (\Exception $e) {
+        abort(404);
+    }
+   
+    return response()->file($path, [
+        'Content-Type' => 'text/css'
+    ]);
+});
+
+
+// Carga imagenes
+Route::get('/assets/logotipos/{filename}', function ($filename) {
+    $path = storage_path("assets/logotipos/$filename");
+    
+    try {
+        if (!File::exists($path)) {
+            abort(404);
+        }
+    } catch (\Exception $e) {
+        abort(404);
+    }
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $contentType = match($extension) {
+        'png' => 'image/png',
+        'jpg', 'jpeg' => 'image/jpeg',
+        'gif' => 'image/gif',
+        'svg' => 'image/svg+xml',
+        'webp' => 'image/webp',
+        default => 'image/' . $extension
+    };
+   
+    return response()->file($path, [
+        'Content-Type' => $contentType
     ]);
 });
 

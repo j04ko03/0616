@@ -95,6 +95,10 @@ class SiteController extends Controller
                                                     'proyectosTotal' => $proyectosTotal,
                                                     'tareasAsignadas' => $tareasAsignadas ]);
     }
+    public function signIn (){
+        return view ('signIn');
+    }
+
     public function signUp()
     {
         return view('signUp');
@@ -116,6 +120,7 @@ class SiteController extends Controller
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
+    
     public function proyectos(){
         return view('proyectos');
     }
