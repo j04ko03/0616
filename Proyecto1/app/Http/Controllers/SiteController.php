@@ -112,4 +112,8 @@ class SiteController extends Controller
         ]);
         return redirect()->route('home.controller')->with('success');
     }
+
+    public function proyectos(){
+        return view('proyectos');
+    }
 }
