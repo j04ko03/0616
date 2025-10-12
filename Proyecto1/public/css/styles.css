@@ -107,6 +107,37 @@ a, p, span, li, button, input, label {
     padding: 2rem;
 }
 
+.contenedor-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0 1rem; 
+}
+
+.contenedor-header h2 {
+    color: var(--color-dark);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    order: 1; 
+}
+
+.logo {
+    height: 35px; 
+    width: auto;
+    object-fit: contain;
+    order: 2; 
+}
+
+.signup-box {
+    background-color: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
 .signup-box {
     background-color: var(--color-white);
     padding: 2.5rem;

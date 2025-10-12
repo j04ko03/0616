@@ -7,8 +7,11 @@
 @section('content')
 <div class="contenedor-signup">
     <div class="signup-box">
+        <div class="contenedor-header">
+        <img src="{{ url('../storage/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo">
         <h2>Sign Up</h2>
-        
+        </div>
+
         @if ($errors->any())
             <div class="alert alert-error">
                 <ul>
