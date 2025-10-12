@@ -1,3 +1,5 @@
+@extends('layouts.barraNavegacion')
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @endpush
@@ -87,4 +89,6 @@
         </form>
     </div>
 </div>
+
+    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
 @endsection

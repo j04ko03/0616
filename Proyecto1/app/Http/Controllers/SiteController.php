@@ -119,4 +119,9 @@ class SiteController extends Controller
     public function proyectos(){
         return view('proyectos');
     }
+
+    public function project()
+    {
+        return view('project');
+    }
 }

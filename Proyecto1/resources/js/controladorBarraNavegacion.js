@@ -2,7 +2,7 @@ const hostWithPort = window.location.href;
 const navbar = document.getElementById('navbar');
 console.log(hostWithPort);
 
-if (hostWithPort.includes('signup') || hostWithPort.includes('register')) {
+if (hostWithPort.includes('signup') || hostWithPort.includes('signin')) {
     console.log('estoy en signup')
     navbar.style.display = 'none';
 } else {
