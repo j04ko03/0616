@@ -8,12 +8,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/saludo', [SiteController::class, 'saludo'])->name('saludo.controller'); 
-Route::get('/login', [SiteController::class, 'login'])->name('login.controller');
-
 // Rutas para sign in y sign up
 Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
-Route::post('/signin', [SiteController::class, 'signin'])->name('signin.controller');
+Route::get('/signin', [SiteController::class, 'signIn'])->name('signin.controller');
+
+// Ruta del formulario
+Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
 
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
