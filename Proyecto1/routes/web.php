@@ -20,6 +20,27 @@ Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
 Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
+Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
+Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
+
+
+//Carga de Scripts
+Route::get('/js/{filename}', function ($filename) {
+    $path = resource_path("js/$filename");
+
+    try{
+        if (!File::exists($path)) {
+        abort(404);
+    }
+    }catch (\Exception $e){
+        abort(404);
+        //console.log("Error al cargar el archivo: " . $e->getMessage() + "Error: " + $e->getCode());
+    }
+   
+    return response()->file($path, [
+        'Content-Type' => 'application/javascript'
+    ]);
+});
 
 
 //Carga de Scripts
