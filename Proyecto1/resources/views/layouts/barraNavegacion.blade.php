@@ -5,6 +5,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     @stack('styles')
 </head>
+
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav id="navbar" class="navbar">
         <div class="navbar-container">
             <!-- Logo a la izquierda -->
             <a href="{{ route('home.controller') }}" class="nav-logo">
@@ -28,7 +30,7 @@
                     <a href="#" class="nav-link">Reports</a>
                 </div>
             </div>
-            
+
             <div class="navbar-right">
                 <span class="username">Nombre usuario</span>
                 <button class="settings-btn">⚙️</button>
@@ -43,4 +45,5 @@
 
     @stack('scripts')
 </body>
+
 </html>

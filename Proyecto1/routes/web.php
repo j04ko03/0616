@@ -11,12 +11,14 @@ Route::get('/', function () {
 Route::get('/saludo', [SiteController::class, 'saludo'])->name('saludo.controller'); 
 Route::get('/login', [SiteController::class, 'login'])->name('login.controller');
 
-
+// Rutas para sign in y sign up
 Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
 Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
+
+// Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
-
+Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
 
 
 //Carga de Scripts
@@ -36,3 +38,5 @@ Route::get('/js/{filename}', function ($filename) {
         'Content-Type' => 'application/javascript'
     ]);
 });
+
+

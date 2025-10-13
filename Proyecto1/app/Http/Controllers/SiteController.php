@@ -126,26 +126,33 @@ class SiteController extends Controller
             'proyectosTotal'                                    => $proyectosTotal,
             'tareasAsignadas'                                   => $tareasAsignadas]);
     }
-    public function signUp(Request $request)
+    public function signUp()
     {
-        if ($request->isMethod('POST')) {
-            return view('signUp');
-        }
+        return view('signUp');
+    }
+
+    public function register(Request $request)
+    {
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
+
         User::create([
             'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('home.controller')->with('success');
+
+        return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
+    }
+    public function proyectos(){
+        return view('proyectos');
     }
 
-    public function proyectos()
+    public function project()
     {
-        return view('proyectos');
+        return view('project');
     }
 }
