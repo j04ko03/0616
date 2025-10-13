@@ -304,7 +304,7 @@
 }
 
 /* Footer específico para signin */
-.form-footer-signin {
+/* .form-footer-signin {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -314,7 +314,7 @@
     border-top: 1px solid #e5e7eb;
     background-color: #f8f9fa;
     border-radius: 6px;
-}
+} */
 
 .account-text {
     color: var(--color-dark);
@@ -336,15 +336,6 @@
     color: var(--color-link-hover);
     text-decoration: underline;
     background-color: rgba(51, 121, 221, 0.1);
-}
-
-/* Contenedor del botón de iniciar sesión */
-.form-submit-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e5e7eb;
 }
 
 /* Botón de iniciar sesión */
@@ -429,12 +420,6 @@
         padding: 0.75rem 2rem;
         min-width: 140px;
     }
-    
-    .form-footer-signin {
-        flex-direction: column;
-        gap: 0.75rem;
-        text-align: center;
-    }
 }
 
 /* ===== ESTILOS DE ESTADOS ===== */
@@ -475,7 +460,7 @@
 }
 
 /* Efectos de transición para todo el formulario */
-.signin-box {
+.signin-box, .signup-box{
     animation: fadeInUp 0.6s ease-out;
 }
 

@@ -32,12 +32,12 @@
             @csrf
             
             <div class="form-group">
-                <label for="email" class="form-label">Usuario/Mail</label>
+                <label for="email" class="form-label">Usuario</label>
                 <input type="text"
-                       name="email"
-                       id="email"
-                       placeholder="Tu usuario o correo electrónico"
-                       value="{{ old('email') }}"
+                       name="username"
+                       id="username"
+                       placeholder="Tu usuario"
+                       value="{{ old('username') }}"
                        class="form-input"
                        required>
                 @error('email')
@@ -57,7 +57,6 @@
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
-
             <div class="form-options">
                 <div class="form-check">
                     <input type="checkbox" name="remember" id="remember">
@@ -65,14 +64,12 @@
                 </div>
             </div>
 
-            <div class="form-footer-signin">
+            <div class="form-footer">
                 <p class="account-text">¿No tienes cuenta?</p>
-                <a href="{{ route('signup.controller') }}" class="signup-link">Crear cuenta</a>
+                <a href="{{ route('signup.controller') }}" class="login-link">Crear cuenta</a>
             </div>
 
-            <div class="form-submit-container">
-                <button type="submit" class="btn-signin">Iniciar sesión</button>
-            </div>
+            <button type="submit" class="btn-signup">Iniciar sesión</button>
         </form>
     </div>
 </div>

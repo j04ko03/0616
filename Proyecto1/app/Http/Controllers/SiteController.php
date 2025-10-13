@@ -95,17 +95,22 @@ class SiteController extends Controller
                                                     'proyectosTotal' => $proyectosTotal,
                                                     'tareasAsignadas' => $tareasAsignadas ]);
     }
-    public function signIn (){
+    public function signIn ()
+    {
+        $testUsers = $this->getUsersTest();
         return view ('signIn');
     }
 
     public function signUp()
     {
+        $testUsers = $this->getUsersTest();
         return view('signUp');
     }
 
     public function register(Request $request)
     {
+        $testUsers = $this->getUsersTest();
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -120,7 +125,7 @@ class SiteController extends Controller
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
-    
+
     public function proyectos(){
         return view('proyectos');
     }
@@ -128,5 +133,24 @@ class SiteController extends Controller
     public function project()
     {
         return view('project');
+    }
+
+    // Creacion array de usuarios de prueba
+    public function getUsersTest()
+    {
+        return [
+            [
+                'name' => 'test1',
+                'email' => 'test1@orgatime.com',
+                'password' => 'test1',
+                'role' => 'admin'
+            ],
+            [
+                'name' => 'María García', 
+                'email' => 'maria@orgatime.com',
+                'password' => 'maria123',
+                'role' => 'user'
+            ]
+        ];
     }
 }
