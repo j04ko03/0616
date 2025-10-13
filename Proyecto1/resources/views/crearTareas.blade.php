@@ -14,10 +14,11 @@
         }
 
         /* Títulos */
-        h1 {
+        .espacio {
             font-size: 24px;
             margin-bottom: 10px;
             color: #2c3e50;
+            border-bottom: 2px solid #83C427;
         }
 
         h2 {
@@ -119,7 +120,7 @@
         }
     </style>
     <div class="crearTareas">
-        <h1>Título Tarea</h1>
+        <h1 class="espacio">Título Tarea</h1>
         <p>Indicar fecha límite</p>
         <input type="date" name="calendar" id="calendar">
         <textarea name="objetivoTarea" id="objetivoTarea" cols="30" rows="10" placeholder="Objetivo de la tarea..."></textarea>
