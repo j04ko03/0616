@@ -129,4 +129,8 @@ class SiteController extends Controller
     {
         return view('project');
     }
+
+    public function crearTareas(){
+        return view('crearTareas');
+    }
 }

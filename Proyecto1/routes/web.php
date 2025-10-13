@@ -19,6 +19,7 @@ Route::post('/signin', [SiteController::class, 'signin'])->name('signin.controll
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
+Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 
 
 //Carga de Scripts
