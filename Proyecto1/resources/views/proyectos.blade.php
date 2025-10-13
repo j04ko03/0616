@@ -46,7 +46,7 @@
 <h1>Lista de proyectos</h1>
 <button class="botonCrearProyecto">Crear nuevo proyecto</button>
 <div class="container">
-    @for($i= 1; $i <= 6; $i++)
+    @for($i= 1; $i <= 26; $i++)
     <div class="card">
         <img src="" alt="foto">
         <h2 class="titleCard"><strong>Proyecto X</strong></h2>
