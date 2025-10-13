@@ -59,42 +59,73 @@ class SiteController extends Controller
         ];
 
         $tareasAsignadas = [
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción'],
-            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción']
+            ['titulo' => 'Tarea1', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea2', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea3', 'descripcion' => 'Descripción', 'tag' => [
+                ['descripcion' =>'php', 'color' => 'blue']]
+            ],
+            ['titulo' => 'Tarea4', 'descripcion' => 'Descripción', 'tag' =>[
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow']]
+            ],
+            ['titulo' => 'Tarea5', 'descripcion' => 'Descripción', 'tag' =>[]],
+            ['titulo' => 'Tarea6', 'descripcion' => 'Descripción', 'tag' =>[
+                ['descripcion' =>'php', 'color' => 'blue'], 
+                ['descripcion' =>'css', 'color' => 'orange'], 
+                ['descripcion' =>'js', 'color' => 'yellow'],
+                ['descripcion' =>'java', 'color' => 'green'], 
+                ['descripcion' =>'c#', 'color' => 'purple'], 
+                ['descripcion' =>'html', 'color' => 'red']]
+            ]
         ];
-        return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
+        //return view('homePage', compact('proyectosRecientes', 'proyectosTotal', 'tareasAsignadas'));
+        /**return view('homePage', ['proyectosRecientes' => $proyectosRecientes,
+                                            'proyectosTotal' => $proyectosTotal,
+                                            'tareasAsignadas' => $tareasAsignadas**/
+        return view('homePage')->with(['proyectosRecientes' => $proyectosRecientes,
+                                                    'proyectosTotal' => $proyectosTotal,
+                                                    'tareasAsignadas' => $tareasAsignadas ]);
     }
-    public function signUp(Request $request)
+    public function signUp()
     {
-        if ($request->isMethod('POST')) {
-            return view('signUp');
-        }
+        return view('signUp');
+    }
+
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('home.controller')->with('success');
+
+        return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
+    }
+    public function proyectos(){
+        return view('proyectos');
+    }
+
+    public function project()
+    {
+        return view('project');
+    }
+
+    public function crearTareas(){
+        return view('crearTareas');
     }
 }

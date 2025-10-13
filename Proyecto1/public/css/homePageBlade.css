@@ -1,5 +1,5 @@
 .container-Padre {
-    width: 100%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     padding: 1rem;
@@ -12,18 +12,131 @@
     padding: 1rem;
 }
 
-@media (min-width: 640px) { /* sm */
-    .container { max-width: 640px; }
+.contenedorBtnsPrincipales {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 1.5rem;
 }
-@media (min-width: 768px) { /* md */
-    .container { max-width: 768px; }
+
+.h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
-@media (min-width: 1024px) { /* lg */
-    .container { max-width: 1024px; }
+
+.btnInteractivoProyectos {
+    color: #16a34a;
+    border-bottom: 2px solid #16a34a;
+    padding-bottom: 0.5rem;
 }
-@media (min-width: 1280px) { /* xl */
-    .container { max-width: 1280px; }
+
+.btnInteractivoTareas {
+    color: #6b7280;
+    padding-bottom: 0.5rem;
+    transition: color 0.2s;
 }
-@media (min-width: 1536px) { /* 2xl */
-    .container { max-width: 1536px; }
+
+.btnInteractivoTareas:hover {
+    color: #16a34a;
+    /* hover:text-green-600 */
+}
+
+.gridCards {
+    display: grid;
+    /* grid */
+    grid-template-columns: 1fr;
+    /* grid-cols-1 → una columna por defecto */
+    gap: 1rem;
+    /* gap-4 → separación entre filas y columnas */
+    margin-bottom: 2rem;
+    /* mb-8 → 2rem de margen inferior */
+}
+
+.margenElementsGridTareas{
+    margin-inline: 2%;
+}
+
+.contenedorPadreGrid {
+    border: 1px solid green;
+    height: 200px;
+}
+
+.contenedorScroll {
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.oculto {
+    display: none;
+    border: 1px solid darkorange;
+}
+
+.alturaFija{
+    height: 450px;
+}
+
+.gridCardsProyectos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+h2{
+  font-size: 1.25rem;  
+  font-weight: 700;     
+  margin-bottom: 0.5rem; 
+}
+
+@media (min-width: 640px) {
+    .gridCards {
+        grid-template-columns: repeat(2, 1fr);
+        /* sm:grid-cols-2 */
+    }
+}
+
+@media (min-width: 768px) {
+    .gridCardsProyectos {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 740px) {
+
+    /* sm */
+    .container {
+        max-width: 640px;
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* md */
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    /* lg */
+    .container {
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+
+    /* xl */
+    .container {
+        max-width: 1280px;
+    }
+}
+
+@media (min-width: 1536px) {
+
+    /* 2xl */
+    .container {
+        max-width: 1536px;
+    }
 }
