@@ -49,6 +49,24 @@
 
             </div>
 
+            <div style="border: 1px solid purple; height: 60%; display: flex; flex-wrap: wrap; justify-content: space-between">
+                <div style="width: 33%; border: 1px solid blue">
+                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
+                        <p>Cambiar datos generales</p>
+                    </div>
+                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
+                        <p>Cerrar sesión</p>    
+                    </div>
+                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
+                        <p>solicitar ser super usuario</p>
+                    </div>
+                </div>
+                <div style="width: 66%; border: 1px solid blue">
+                    <!--Datos a modificar y otras pantallas emergentes-->
+
+                </div>
+            </div>
+
         </div>
 
     </div>
