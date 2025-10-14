@@ -187,7 +187,6 @@
     min-height: calc(100vh - 50px);
     background-color: var(--color-background);
     padding: 2rem;
-    gap: 2rem;
 }
 
 /* Logo arriba del todo */
@@ -197,10 +196,11 @@
     align-items: center;
     margin-bottom: 1rem;
     padding: 1rem;
+    padding-bottom: 0;
 }
 
 .logo-top {
-    height: 70px; /* Más grande para destacar */
+    height: 180px; /* Más grande para destacar */
     width: auto;
     object-fit: contain;
 }

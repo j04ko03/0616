@@ -8,12 +8,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Meter middleware('auth') en las rutas cuando se termine proyecto
+
+
 // Rutas para sign in y sign up
 Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
 Route::get('/signin', [SiteController::class, 'signIn'])->name('signin.controller');
 
 // Ruta del formulario
+    // Crear cuenta
 Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
+    // Iniciar sesion
+Route::post('/signin', [SiteController::class, 'login'])->name('login.controller');
+
 
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');

@@ -9,7 +9,7 @@
 <div class="contenedor-signin">
     <!-- Logo arriba del todo y fuera del formulario -->
     <div class="signin-logo-top">
-        <img src="{{ url('/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo-top">
+        <img src="{{ url('/assets/logotipos/logoLetraSinFondo.png') }}" alt="OrgaTime" class="logo-top">
     </div>
 
     <div class="signin-box">
@@ -28,16 +28,16 @@
             </div>
         @endif
 
-        <form action="{{ route('register.controller') }}" method="POST">
+        <form action="{{ route('login.controller') }}" method="POST">
             @csrf
             
             <div class="form-group">
-                <label for="email" class="form-label">Usuario</label>
+                <label for="email" class="form-label">Email</label>
                 <input type="text"
-                       name="username"
-                       id="username"
-                       placeholder="Tu usuario"
-                       value="{{ old('username') }}"
+                       name="email"
+                       id="email"
+                       placeholder="Tu email"
+                       value="{{ old('email') }}"
                        class="form-input"
                        required>
                 @error('email')

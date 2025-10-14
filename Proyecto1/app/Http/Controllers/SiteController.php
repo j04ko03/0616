@@ -5,20 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
 {
-    public function saludo()
-    {
-        return view('saludoPrueba');
-    }
-    public function login()
-    {
-        return view('login');
-    }
     public function home()
     {
         //Carga de base de datos a objetos
@@ -95,21 +88,11 @@ class SiteController extends Controller
                                                     'proyectosTotal' => $proyectosTotal,
                                                     'tareasAsignadas' => $tareasAsignadas ]);
     }
-    public function signIn ()
-    {
-        $testUsers = $this->getUsersTest();
-        return view ('signIn');
-    }
 
-    public function signUp()
-    {
-        $testUsers = $this->getUsersTest();
-        return view('signUp');
-    }
-
+    // Crear cuenta
     public function register(Request $request)
     {
-        $testUsers = $this->getUsersTest();
+        // $testUsers = $this->getUsersTest();
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -126,6 +109,45 @@ class SiteController extends Controller
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
 
+
+    // Iniciar sesion
+    public function signIn ()
+    {
+        return view ('signIn');
+    }
+
+    public function login (Request $request)
+    {
+        // $testUsers = $this->getUsersTest();
+
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string'
+        ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            
+        return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Mail incorrecto.',
+            'password' => 'Contraseña incorrecta.',
+        ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('signin.controller');
+    }
+
+    public function signUp()
+    {
+        // $testUsers = $this->getUsersTest();
+        return view('signUp');
+    }
+
     public function proyectos(){
         return view('proyectos');
     }
@@ -136,21 +158,21 @@ class SiteController extends Controller
     }
 
     // Creacion array de usuarios de prueba
-    public function getUsersTest()
-    {
-        return [
-            [
-                'name' => 'test1',
-                'email' => 'test1@orgatime.com',
-                'password' => 'test1',
-                'role' => 'admin'
-            ],
-            [
-                'name' => 'María García', 
-                'email' => 'maria@orgatime.com',
-                'password' => 'maria123',
-                'role' => 'user'
-            ]
-        ];
-    }
+    // public function getUsersTest()
+    // {
+    //     return [
+    //         [
+    //             'name' => 'test1',
+    //             'email' => 'test1@orgatime.com',
+    //             'password' => 'test1',
+    //             'role' => 'admin'
+    //         ],
+    //         [
+    //             'name' => 'María García', 
+    //             'email' => 'maria@orgatime.com',
+    //             'password' => 'maria123',
+    //             'role' => 'user'
+    //         ]
+    //     ];
+    // }
 }
