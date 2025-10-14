@@ -62,7 +62,7 @@ a, p, span, li, button, input, label {
 }
 
 .nav-logo img {
-    height: 50px;
+    height: 75px;
     width: auto;
     object-fit: contain;
 }
