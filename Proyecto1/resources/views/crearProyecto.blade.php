@@ -15,38 +15,81 @@
         }
 
         body {
-            height: 100%;
+            height: 95vh;
             background-color: #f4f5f7;
         }
 
         /*    CREAR PROYECTO CONTAINER    */
         main {
             box-sizing: border-box;
-            display: flex;
-            justify-content: center;
+            display: grid;
             height: 100%;
+
+            background: green
         }
 
         form {
             box-sizing: border-box;
             padding: 20px;
+
             border: 1px solid black;
             border-radius: 10px;
-            margin: 20px;
-            margin-top: 70px;
-            min-width: 60%;
-            max-width: 800px;
+
             height: auto;
-            margin-top: 30px;
+            min-height: 80%;
+            width: 100%;
+            max-width: 800px;
+
+            margin: auto;
+
             display: flex;
             flex-direction: column;
             font-family: "Lato";
+
+            position: relative;
+        }
+
+        #quit-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #000;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: .8rem;
+
+            transition: all 400ms;
+        }
+
+        #quit-btn:hover {
+            background-color: #313131;
+        }
+
+        form>div>div {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
         }
 
         form>div {
             box-sizing: border-box;
+            margin-top: 30px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            height: 100%;
+        }
+
+        form>div input {
+            margin-bottom: 40px;
         }
 
         #titulo {
@@ -54,18 +97,21 @@
             font-size: 2rem;
             font-family: "Zilla Slab", serif;
             font-weight: 600;
+            border-bottom: 2px solid #83c427;
+
+            transition: all 400ms;
         }
 
-        form>div {
-            border: 1px solid black;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr)
+        #titulo:hover,
+        #titulo:focus,
+        #titulo:active {
+            border: none;
+            border-bottom: 2px solid #83c427;
         }
 
         input {
             box-sizing: border-box;
             padding: 10px;
-
         }
 
         input[type="number"]:hover,
@@ -98,15 +144,58 @@
             background-color: #ffff;
         }
 
+        #add-documento {
+            border: 1px solid black;
+            background: red;
+            width: 70%;
+            position: relative;
+        }
+
+        #add-documento>input {
+            opacity: 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        #add-documento>span {
+            background: yellow;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            font-size: .8rem;
+        }
+
         input[type="submit"] {
             margin: auto 0 0 auto;
         }
+
+        @media (width < 600px) {
+            form {
+                margin: 10px;
+            }
+
+            form>div {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-    <main>
-        <div id="create-project">
+
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <main>
+
             <form action="/" method="POST">
+                <button id="quit-btn">X</button>
                 <label for="titulo"></label>
-                <input type="text" name="titulo" id="titulo" placeholder="TITULO PROYECTO">
+                <input type="text" name="titulo" id="titulo" placeholder="TITULO PROYECTO...">
                 <div>
                     <div>
                         <label for="fecha-limite">Indica fecha límite</label>
@@ -115,8 +204,11 @@
                         <label for="presupuesto">Presupuesto</label>
                         <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
 
-                        <label for="documento">Añadir documento</label>
-                        <input type="file" name="documento" id="documento">
+                        <label for="documento" id="add-documento">
+                            <input type="file" name="documento" id="documento">
+                            <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
+                            </span>
+                        </label>
                     </div>
                     <div>
                         <button>Añadir tarea</button>
@@ -129,6 +221,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </main>
+        </main>
+    </body>
 @endsection
