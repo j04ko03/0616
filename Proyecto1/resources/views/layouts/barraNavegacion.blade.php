@@ -16,11 +16,11 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav id="navbar" class="navbar">
         <div class="navbar-container">
             <!-- Logo a la izquierda -->
             <a href="{{ route('home.controller') }}" class="nav-logo">
-                <img src="{{ asset('../storage/assets/logotipos/conFondo.png') }}" alt="OrgaTime Logo">
+                <img src="{{ asset('../storage/assets/logotipos/sinFondo.png') }}" alt="OrgaTime Logo">
             </a>
             
             <div class="navbar-left"> 
