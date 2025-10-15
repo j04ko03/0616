@@ -15,17 +15,18 @@
         }
 
         body {
-            height: 95vh;
             background-color: #f4f5f7;
         }
 
         /*    CREAR PROYECTO CONTAINER    */
         main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10px;
             box-sizing: border-box;
-            display: grid;
             height: 100%;
-
-            background: green
+            width: 100%;
         }
 
         form {
@@ -36,11 +37,11 @@
             border-radius: 10px;
 
             height: auto;
-            min-height: 80%;
+            min-height: 700px;
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
 
-            margin: auto;
+            margin: 40px auto 0 auto;
 
             display: flex;
             flex-direction: column;
@@ -73,18 +74,20 @@
             background-color: #313131;
         }
 
-        form>div>div {
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-        }
-
         form>div {
+            flex: 1;
             box-sizing: border-box;
             margin-top: 30px;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
+            height: 100%;
+        }
+
+        form>div>div {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
             height: 100%;
         }
 
@@ -106,23 +109,37 @@
         #titulo:focus,
         #titulo:active {
             border: none;
+            outline: none;
+            box-shadow: none;
             border-bottom: 2px solid #83c427;
         }
 
         input {
             box-sizing: border-box;
             padding: 10px;
+
+            transition: all 400ms;
+        }
+
+        input[type="number"],
+        input[type="date"] {
+            border: 2px solid transparent;
         }
 
         input[type="number"]:hover,
-        input[type="number"]:focus {
-            outline: 2px solid #83c427;
+        input[type="number"]:active,
+        input[type="number"]:focus,
+        input[type="date"]:hover,
+        input[type="date"]:active,
+        input[type="date"]:focus {
+            outline: none;
+            box-shadow: none;
+            border: 2px solid #83c427;
         }
 
         form button,
         input[type="submit"] {
             background: #83c427;
-            border: 1px solid black;
             border-radius: 7px;
             padding: 5px 15px;
             cursor: pointer;
@@ -136,19 +153,40 @@
             background-color: #b3eb65;
         }
 
+        #tareas {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            overflow: auto;
+            max-height: 300px;
+        }
+
         .tarea {
-            margin: 5px 0;
-            border: 1px solid black;
+            color: #636363;
+            font-size: .8rem;
+            border: 1px solid #636363;
             border-radius: 5px;
             padding: 5px;
             background-color: #ffff;
         }
 
         #add-documento {
-            border: 1px solid black;
-            background: red;
-            width: 70%;
+            box-sizing: border-box;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid #83c427;
+            width: 50%;
+            min-width: 170px;
+            height: 1rem;
+            padding: 20px;
             position: relative;
+
+            transition: all 400ms;
+        }
+
+        #add-documento:hover {
+            background: #efefef;
         }
 
         #add-documento>input {
@@ -158,7 +196,6 @@
         }
 
         #add-documento>span {
-            background: yellow;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -168,51 +205,88 @@
             justify-content: center;
             gap: 5px;
             font-size: .8rem;
+
+            white-space: nowrap;
+        }
+
+        #add-documento img {
+            width: 1.2rem;
         }
 
         input[type="submit"] {
             margin: auto 0 0 auto;
         }
 
+        #selected-documents {
+            font-style: italic;
+            color: #636363;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow: auto;
+
+            list-style: inside;
+        }
+
+        #selected-documents>li {
+            font-size: 1rem;
+        }
+
         @media (width < 600px) {
+            main {
+                padding: 0;
+            }
+
             form {
-                margin: 10px;
+                margin: 10px 0 0 0;
+                border: 0;
+                width: 100%;
+                height: 100%;
             }
 
             form>div {
                 grid-template-columns: 1fr;
             }
+
+            input[type="submit"] {
+                margin-top: 50px;
+            }
         }
     </style>
-
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </head>
 
     <body>
         <main>
 
-            <form action="/" method="POST">
-                <button id="quit-btn">X</button>
+            <form action="project" method="POST">
+                <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
                 <label for="titulo"></label>
-                <input type="text" name="titulo" id="titulo" placeholder="TITULO PROYECTO...">
+                <input type="text" name="titulo" id="titulo" placeholder="TITULO PROYECTO..." required
+                    maxlength="100">
                 <div>
                     <div>
-                        <label for="fecha-limite">Indica fecha límite</label>
-                        <input type="date" name="fecha-limite" id="fecha-limite">
+                        <label for="fecha-limite">Fecha límite</label>
+                        <input type="date" name="fecha-limite" id="fecha-limite" required min="">
 
                         <label for="presupuesto">Presupuesto</label>
                         <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
 
                         <label for="documento" id="add-documento">
-                            <input type="file" name="documento" id="documento">
+                            <input type="file" name="documento" id="documento" multiple="true"
+                                accept=".pdf, .doc, .docx, .odt, .rtf, .txt">
                             <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
                             </span>
                         </label>
+                        <ul id="selected-documents">No se han añadido documentos</ul>
                     </div>
                     <div>
-                        <button>Añadir tarea</button>
+                        <button type="button">Añadir tarea</button>
                         <div id="tareas">
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
                             <div class="tarea">TAREA</div>
                             <div class="tarea">TAREA</div>
                             <div class="tarea">TAREA</div>
@@ -223,4 +297,22 @@
             </form>
         </main>
     </body>
+    <script>
+        const selectedDocs = document.querySelector("#selected-documents");
+        const docInput = document.querySelector("#documento");
+        docInput.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                selectedDocs.textContent = 'Documentos:';
+                [...e.target.files].forEach(file => {
+                    selectedDocs.insertAdjacentHTML("beforeend", `<li>${file.name}</li>`)
+                });
+            } else {
+                selectedDocs.textContent = 'No se han añadido documentos'
+            }
+        })
+
+        const today = new Date().toISOString().split("T")[0];
+        console.log(new Date().toISOString())
+        document.querySelector("#fecha-limite").min = today;
+    </script>
 @endsection
