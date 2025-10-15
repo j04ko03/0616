@@ -1,6 +1,7 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
 @endpush
 
 <!DOCTYPE html>
@@ -33,7 +34,7 @@
 
             <div class="navbar-right">
                 <span class="username">Nombre usuario</span>
-                <button class="settings-btn">⚙️</button>
+                <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
             </div>
         </div>
     </nav>

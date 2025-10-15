@@ -126,7 +126,13 @@ class SiteController extends Controller
             'proyectosTotal'                                    => $proyectosTotal,
             'tareasAsignadas'                                   => $tareasAsignadas]);
     }
-    public function signUp()
+
+    public function perfil()
+    {
+        return view('perfil');
+    }
+
+    public function signUp(Request $request)
     {
         return view('signUp');
     }

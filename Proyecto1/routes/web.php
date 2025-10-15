@@ -18,6 +18,7 @@ Route::post('/register', [SiteController::class, 'register'])->name('register.co
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
+Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
 Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
 
 
