@@ -153,7 +153,7 @@
             background-color: #b3eb65;
         }
 
-        #tareas .addUser{
+        #tareas {
             margin-top: 10px;
             display: flex;
             flex-direction: column;
@@ -252,43 +252,52 @@
             }
         }
     </style>
-    <main>
-        <form action="project" method="POST">
-            <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
-            <label for="titulo"></label>
-            <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
-                maxlength="100">
-            <div>
-                <div>
-                    <label for="fecha-limite">Fecha límite</label>
-                    <input type="date" name="fecha-limite" id="fecha-limite" required min="">
 
-                    <label for="presupuesto">Presupuesto</label>
-                    <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
-                    
-                    <label for="documento" id="add-documento">
-                        <input type="file" name="documento" id="documento" multiple="true"
-                                    accept=".pdf, .doc, .docx, .odt, .rtf, .txt">
-                        <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
-                        </span>
+    <body>
+        <main>
+
+            <form action="project" method="POST">
+                <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
+                <label for="titulo"></label>
+                <input type="text" name="titulo" id="titulo" placeholder="TITULO PROYECTO..." required
+                    maxlength="100">
+                <div>
+                    <div>
+                        <label for="fecha-limite">Fecha límite</label>
+                        <input type="date" name="fecha-limite" id="fecha-limite" required min="">
+
+                        <label for="presupuesto">Presupuesto</label>
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
+
+                        <label for="documento" id="add-documento">
+                            <input type="file" name="documento" id="documento" multiple="true"
+                                accept=".pdf, .doc, .docx, .odt, .rtf, .txt">
+                            <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
+                            </span>
                         </label>
                         <ul id="selected-documents">No se han añadido documentos</ul>
-                </div>
-                <div>
-                    <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
-                </div>
-                <br>
-                <div class="addUser">
-                    <button type="button">Añadir usuario</button>
-                    <div id="tareas">
-                        <div class="tarea">Pepa</div>
-                        <div class="tarea">Juanjo</div>
                     </div>
-                    <input type="submit" value="Añadir tarea">
+                    <div>
+                        <a href="{{ route('tareas.controller') }}">
+                            <button type="button">Añadir tarea</button>
+                        </a>
+                        <div id="tareas">
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                            <div class="tarea">TAREA</div>
+                        </div>
+                        <input type="submit" value="Añadir proyecto">
+                    </div>
                 </div>
-            </div>
-        </form>
-    </main>
+            </form>
+        </main>
     </body>
     <script>
         const selectedDocs = document.querySelector("#selected-documents");

@@ -61,7 +61,7 @@
         }
 
         option:hover {
-            background-color: #d9d9d9;
+            background-color: #f4f5f7;
         }
 
         /*  PESTAÑA BOTONES     */
@@ -71,10 +71,11 @@
             margin-bottom: 30px;
             display: flex;
             flex-wrap: wrap;
+            background-color: #f9fafb;
         }
 
         .tabs-btn {
-            background-color: #f4f5f7;
+            background-color: #f9fafb;
             padding: 5px 20px;
             border: 0;
             border-bottom: 1px solid black;
