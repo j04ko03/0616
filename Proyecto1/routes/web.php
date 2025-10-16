@@ -26,6 +26,7 @@ Route::post('/signin', [SiteController::class, 'login'])->name('login.controller
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
+Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
 Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
 Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 
