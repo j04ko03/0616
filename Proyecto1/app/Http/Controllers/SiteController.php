@@ -125,11 +125,6 @@ class SiteController extends Controller
         return view('perfil');
     }
 
-    public function signUp(Request $request)
-    {
-        return view('signUp');
-    }
-
     // Crear cuenta
     public function register(Request $request)
     {
@@ -201,25 +196,6 @@ class SiteController extends Controller
     {
         return view('project');
     }
-
-    // Creacion array de usuarios de prueba
-    // public function getUsersTest()
-    // {
-    //     return [
-    //         [
-    //             'name' => 'test1',
-    //             'email' => 'test1@orgatime.com',
-    //             'password' => 'test1',
-    //             'role' => 'admin'
-    //         ],
-    //         [
-    //             'name' => 'María García', 
-    //             'email' => 'maria@orgatime.com',
-    //             'password' => 'maria123',
-    //             'role' => 'user'
-    //         ]
-    //     ];
-    // }
 
     public function crearTareas(){
         return view('crearTareas');
