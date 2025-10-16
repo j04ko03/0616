@@ -278,7 +278,9 @@
                         <ul id="selected-documents">No se han añadido documentos</ul>
                     </div>
                     <div>
-                        <button type="button">Añadir tarea</button>
+                        <a href="{{ route('tareas.controller') }}">
+                            <button type="button">Añadir tarea</button>
+                        </a>
                         <div id="tareas">
                             <div class="tarea">TAREA</div>
                             <div class="tarea">TAREA</div>
