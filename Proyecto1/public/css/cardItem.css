@@ -181,9 +181,17 @@ div, div, ul, li {
     }
 }
 
+@media (min-width: 320px) {
+    .contendorFoto{
+        height: 60%;
+        width: 90%; 
+    }
+}
+
 @media (min-width: 640px) {
     .contendorFoto{
         height: 45%; 
+        width: 60%;
     }
     .contenedorCabeceraPerfil{
         height: 30%;

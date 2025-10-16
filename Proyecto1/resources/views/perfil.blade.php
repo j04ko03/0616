@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-cabecera" style="width: 66%; height: 87%;">
                     <!--Datos a modificar y otras pantallas emergentes-->
-                    <div class="" style="height: 100%; margin-bottom: 5%;">
+                    <div class="oculto" style="height: 100%; margin-bottom: 5%;">
                         <div style="margin: 5%;">
                             <h2 class="h2">
                                 Solicitud
@@ -82,7 +82,7 @@
                         </div>
                     </div>
 
-                    <div class="oculto" style="height: 100%; margin-bottom: 5%;">
+                    <div class="" style="height: 100%; margin-bottom: 5%;">
                         <div style="margin: 5%;">
                             <h2 class="h2">
                                 Modificación de datos
