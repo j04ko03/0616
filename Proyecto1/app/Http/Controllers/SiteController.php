@@ -179,4 +179,8 @@ class SiteController extends Controller
     //         ]
     //     ];
     // }
+
+    public function crearTareas(){
+        return view('crearTareas');
+    }
 }
