@@ -4,18 +4,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
 {
-    public function saludo()
-    {
-        return view('saludoPrueba');
-    }
-    public function login()
-    {
-        return view('login');
-    }
     public function home()
     {
         //Carga de base de datos a objetos
@@ -137,8 +130,11 @@ class SiteController extends Controller
         return view('signUp');
     }
 
+    // Crear cuenta
     public function register(Request $request)
     {
+        // $testUsers = $this->getUsersTest();
+
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',

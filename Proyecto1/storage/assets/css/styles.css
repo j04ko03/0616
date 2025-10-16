@@ -1,0 +1,126 @@
+:root {
+    --color-white: #FFFFFF;       /*Color de la barra de navegación y recuadros de formularios*/
+    --color-background: #f4f5f7;  /* Color de fondo */
+    --color-primary: #83c427;     /* Color verde para botones importantes */
+    --color-dark: #202020;        /* Color "negro" para textos */
+    --color-link: #3379dd;        /* Color azul para letra con interacción */
+    --color-link-hover: #082854;  /* Color azul oscuro para letra con interacción en la barra de navegación */
+    --color-error: #dc3545;       /* Color rojo para mensajes de error */
+    --color-success: #28a745;     /* Color verde para mensajes de éxito */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Zilla Slab', sans-serif, bold;
+    color: var(--color-dark);
+}
+
+a, p, span, li, button, input, label {
+    font-family: 'Lato', sans-serif;
+}
+
+
+/* Estilos para la barra de navegación */
+.navbar {
+    background-color: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    height: 50px;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;  
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap:2rem;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    gap:2rem;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: flex-end;
+    gap:1rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 75px;
+    width: auto;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a, .navbar-right span{
+    color: var(--color-dark);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    font-size: small;
+}
+
+.nav-brand {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ERROR MENSAJES */
+.error-message {
+    color: var(--color-error);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 500;
+}
+
+.alert-success {
+    background-color: #f0f9ff;
+    color: var(--color-success); ;
+    border: 1px solid #bae6fd;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    color: var(--color-error);
+    border: 1px solid #fecaca;
+}
+
+.alert-error ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alert-error li {
+    margin: 0.25rem 0;
+}
