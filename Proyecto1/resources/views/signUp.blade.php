@@ -1,14 +1,15 @@
 @extends('layouts.barraNavegacion')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/signup-signin.css') }}">
 @endpush
 
 @section('content')
 <div class="contenedor-signup">
     <div class="signup-box">
         <div class="contenedor-header">
-        <img src="{{ url('../storage/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo">
+        <img src="{{ url('/assets/logotipos/logoSinFondo.png') }}" alt="OrgaTime" class="logo">
         <h2>Sign Up</h2>
         </div>
 
@@ -85,7 +86,7 @@
 
             <div class="form-footer">
                 <p class="account-text">¿Ya tienes cuenta?</p>
-                <a href="{{ route('register.controller') }}" class="login-link">Iniciar sesión</a>
+                <a href="{{ route('signin.controller') }}" class="login-link">Iniciar sesión</a>
             </div>
 
             <button type="submit" class="btn-signup">Crear cuenta</button>
