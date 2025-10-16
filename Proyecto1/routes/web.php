@@ -30,6 +30,7 @@ Route::get('/project', [SiteController::class, 'project'])->name('project.contro
 Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
+Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
 
 
 //Carga de Scripts

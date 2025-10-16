@@ -130,11 +130,8 @@ class SiteController extends Controller
         return view('signUp');
     }
 
-    // Crear cuenta
     public function register(Request $request)
     {
-        // $testUsers = $this->getUsersTest();
-
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
@@ -149,9 +146,12 @@ class SiteController extends Controller
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
-
-    public function proyectos()
-    {
+    public function proyectos(){
         return view('proyectos');
+    }
+
+    public function project()
+    {
+        return view('project');
     }
 }
