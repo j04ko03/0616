@@ -74,3 +74,184 @@ div, div, ul, li {
     border-radius: 0 0 0.75rem 0.75rem;                    /* rounded-xl */
     padding: 0.5rem;                             /* p-2 */  
 }
+
+/**********************************************************************************************/
+/*Parte de perfil*/
+.flex1{
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: space-between
+}
+
+.flex2{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.contendorFoto{
+    height: 85%; 
+    width: 60%; 
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.contenedorCabeceraPerfil{
+    width: 100%; 
+    height: 40%;
+}
+
+.contenedorDatosPerfil{
+    height: 70%; 
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.subContenedorDatosPerfil{
+    height: 100%; 
+    width: 50%; 
+    padding: 2%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+    align-content: center;
+}
+
+.ultimoContenedorDatosPerfil{
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.campoTexto {
+        width: 100%;
+        /*padding: 10px;*/
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        box-sizing: border-box;
+        resize: none;
+    }
+
+.botonPersonalizado {
+    height: fit-content;
+    width: 150px;
+    background-color: #4CAF50;                      /* Verde */
+    color: white;                                   /* Texto blanco */
+    padding: 1% 2%;                               /* Espaciado interno */
+    border: none;                                     /* Sin borde */
+    border-radius: 8px;                               /* Bordes redondeados */
+    font-size: 16px;                                  /* Tamaño del texto */
+    cursor: pointer;                                  /* Cambia el cursor al pasar */
+    transition: background-color 0.3s, transform 0.2s; /* Animación suave */
+}
+
+.botonPersonalizadobonito:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar */
+    transform: scale(1.05);     /* Efecto pequeño de agrandar */
+}
+
+.botonPersonalizado:active {
+    background-color: #3e8e41; /* Verde aún más oscuro al presionar */
+    transform: scale(0.98);     /* Efecto de presionar */
+}
+@media (min-width: 0px) {
+    .contendorFoto{
+        height: 45%; 
+    }
+    .contenedorCabeceraPerfil{
+        height: 25%;
+    }
+    .contenedorDatosPerfil{
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+    .subContenedorDatosPerfil{
+        height: 50%; 
+        width: 100%; 
+        align-content: center;
+        overflow-y: auto;
+        scrollbar-width: none;
+        padding: 0%;
+    }
+    .ultimoContenedorDatosPerfil{
+        flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 640px) {
+    .contendorFoto{
+        height: 45%; 
+    }
+    .contenedorCabeceraPerfil{
+        height: 30%;
+    }
+}
+
+@media (min-width: 768px) {
+    
+}
+
+@media (min-width: 740px) {
+
+    /* sm */
+    .contendorFoto{
+        height: 45%;  
+    }
+    .contenedorCabeceraPerfil{
+        height: 30%;
+    }
+}
+
+@media (min-width: 768px) {
+
+    /* md */
+    .contendorFoto{ 
+        height: 48%; 
+    }
+    .contenedorCabeceraPerfil{
+        height: 35%;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    /* lg */
+    .contendorFoto{
+        height: 55%;  
+    }
+    .contenedorCabeceraPerfil{
+        height: 40%;
+    }
+    .contenedorDatosPerfil{
+        flex-wrap: wrap;
+        flex-direction: row;
+    } 
+    .subContenedorDatosPerfil{
+        height: 100%; 
+        width: 50%; 
+        overflow-y: hidden;
+        padding: 2%;
+    }
+    .ultimoContenedorDatosPerfil{
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-width: 1280px) {
+
+    /* xl */
+    .contendorFoto{
+        height: 70%;  
+    }
+}
+
+@media (min-width: 1536px) {
+
+    /* 2xl */
+    .contendorFoto{
+        height: 85%; 
+    }
+}

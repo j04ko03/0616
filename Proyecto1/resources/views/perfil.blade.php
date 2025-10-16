@@ -3,44 +3,44 @@
 @section('content')
 
 
-<div class="container mx-auto p-4" style="border: 1px solid black; height: 800px;">
+<div class="container mx-auto p-4" style="height: 800px;">
 
-    <div class="container-Padre" style="border: 1px solid blue; height: 100%;"> 
+    <div class="container-Padre" style="height: 100%;"> 
 
-        <div class="card-contenedor" style="height: 100%; width: 100%; background-color: blanchedalmond; border: 1px solid green">
+        <div class="card-contenedor" style="height: 100%; width: 100%;">
 
-            <div class="" style="width: 100%; height: 40%; border: 1px solid red; display: flex; flex-wrap: wrap; justify-content: space-between">
+            <div class="contenedorCabeceraPerfil flex1">
 
-                <div style="width: 33%; height: 100%; border: 1px solid rgb(118, 23, 207); display: flex; justify-content: center; align-items: center">
-                    <div style="border: 1px solid brown; height: 85%; width: 60%; border-radius: 50%;">
+                <div class="flex2" style="width: 33%; height: 100%;">
+                    <div class="contendorFoto   ">
 
                     </div>
                 </div>
-                <div style="width: 66%; height: 100%; border: 1px solid rgb(118, 23, 207);">
-                    <div style="border: 1px solid red; height: 30%; align-content: center;">
+                <div style="width: 66%; height: 100%;">
+                    <div style="height: 30%; align-content: center;">
                         <h1 class="h1">
                         Datos generales 
                         </h1>
                     </div>
-                    <div style="border: 1px solid pink; height: 70%; display: flex; flex-wrap: wrap;">
-                        <div style="border: 1px solid green; height: 100%; width: 50%; align-content: center;">                            
-                            <div style="border: 1px solid red; display: flex; flex-wrap: wrap;">
-                                <p style="border: 1px solid blue; width: fit-content; margin-right: 1%">Nombre completo: </p>
-                                <p style="border: 1px solid blue; width: fit-content">Juán jiménez del rosario</p>
+                    <div class="contenedorDatosPerfil">
+                        <div class="subContenedorDatosPerfil">                            
+                            <div class="ultimoContenedorDatosPerfil">
+                                <p style="width: fit-content; margin-right: 1%">Nombre completo: </p>
+                                <p style="width: fit-content">Juán jiménez del rosario</p>
                             </div>
-                            <div style="border: 1px solid red; display: flex; flex-wrap: wrap; margin-top: 5%">
-                                <p style="border: 1px solid blue; width: fit-content; margin-right: 1%">Apodo: </p>
-                                <p style="border: 1px solid blue; width: fit-content"">Juán</p>
+                            <div class="ultimoContenedorDatosPerfil">
+                                <p style="width: fit-content; margin-right: 1%">Apodo: </p>
+                                <p style="width: fit-content">Juán</p>
                             </div>
                         </div>
-                    <div style="border: 1px solid green; height: 100%; width: 50%; align-content: center;">  
-                            <div style="border: 1px solid red; display: flex; flex-wrap: wrap;">
-                                <p style="border: 1px solid blue; width: fit-content; margin-right: 1%">Creación de cuenta: </p>
-                                <p style="border: 1px solid blue; width: fit-content">00-00-0000</p>
+                    <div class="subContenedorDatosPerfil">  
+                            <div class="ultimoContenedorDatosPerfil">
+                                <p style="width: fit-content; margin-right: 1%">Creación de cuenta: </p>
+                                <p style="width: fit-content">00-00-0000</p>
                             </div>
-                            <div style="border: 1px solid red; display: flex; flex-wrap: wrap; margin-top: 5%">
-                                <p style="border: 1px solid blue; width: fit-content; margin-right: 1%">Tipo de usuario: </p>
-                                <p style="border: 1px solid blue; width: fit-content"">User</p>
+                            <div class="ultimoContenedorDatosPerfil">
+                                <p style="width: fit-content; margin-right: 1%">Tipo de usuario: </p>
+                                <p style="width: fit-content">User</p>
                             </div>
                     </div>
 
@@ -49,20 +49,66 @@
 
             </div>
 
-            <div style="border: 1px solid purple; height: 60%; display: flex; flex-wrap: wrap; justify-content: space-between">
-                <div style="width: 33%; border: 1px solid blue">
-                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
-                        <p>Cambiar datos generales</p>
+            <div class="flex1" style="height: 60%;">
+                <div style="width: 33%;">
+                    <div style="height: 33%; align-content: center; justify-items: center">
+                        <p class="card-cabecera" style=" width: 75%;">Cambiar datos generales</p>
                     </div>
-                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
-                        <p>Cerrar sesión</p>    
+                    <div style="height: 33%; align-content: center; justify-items: center">
+                        <p class="card-cabecera" style="width: 75%;">Cerrar sesión</p>    
                     </div>
-                    <div style="height: 33%; border: 1px solid rgb(19, 179, 152); align-content: center; justify-items: center">
-                        <p>solicitar ser super usuario</p>
+                    <div style="height: 33%; align-content: center; justify-items: center">
+                        <p class="card-cabecera" style="width: 75%;">Solicitar ser super usuario</p>
                     </div>
                 </div>
-                <div style="width: 66%; border: 1px solid blue">
+                <div class="card-cabecera" style="width: 66%; height: 87%;">
                     <!--Datos a modificar y otras pantallas emergentes-->
+                    <div class="" style="height: 100%; margin-bottom: 5%;">
+                        <div style="margin: 5%;">
+                            <h2 class="h2">
+                                Solicitud
+                            </h2>
+                        </div>
+                        <div style="margin: 5%; height: 60%;">
+                            <p style="width: 100%;">Introducir password para solicitud de Super User.</p>
+                            
+                            <div style="margin-top: 5%;">
+                                <input style="border: 1px solid black;" type="password" id="clave" name="clave" placeholder="Escribe tu contraseña">
+                            </div>
+
+                            <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oculto" style="height: 100%; margin-bottom: 5%;">
+                        <div style="margin: 5%;">
+                            <h2 class="h2">
+                                Modificación de datos
+                            </h2>
+                        </div>
+                        <div style="margin: 5%; height: 40%;">
+                            <div style="height: 85%; display: flex; flex-direction: column; gap: 3%;">
+                                <div style="" class="flex1">
+                                    <p style="width: 40%;">Nombre completo</p>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
+                                </div>
+                                <div style="" class="flex1">
+                                    <p style="width: 40%;">Apodo</p>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
+                                </div>
+                                <div style="" class="flex1">
+                                    <p style="width: 40%;">Otro</p>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
+                                </div>
+                                <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                    <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
