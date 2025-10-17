@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
+<link rel="stylesheet" href="{{ url('/css/cardItem.css') }}">
 
 @php
     $color = 'red'; // valor por defecto

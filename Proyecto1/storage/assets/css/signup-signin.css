@@ -1,0 +1,476 @@
+/* Estilos para registro y login */
+
+/* Estilos para el SIGNUP */
+.contenedor-signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 50px);
+    background-color: var(--color-background);
+    padding: 2rem;
+}
+
+.contenedor-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0 1rem; 
+}
+
+.contenedor-header h2 {
+    color: var(--color-dark);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    order: 1; 
+}
+
+.logo {
+    height: 35px; 
+    width: auto;
+    object-fit: contain;
+    order: 2; 
+}
+
+.signup-box {
+    background-color: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+.signup-box {
+    background-color: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+}
+
+.signup-box h2 {
+    text-align: center;
+    color: var(--color-dark);
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fafbfc;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(131, 196, 39, 0.1);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+}
+
+.form-options {
+    margin: 1.5rem 0;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+}
+
+.form-check-label {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin: 0;
+}
+
+/* Footer del formulario */
+.form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    padding: 1rem 0;
+}
+
+.account-text {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.login-link {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.login-link:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+.btn-signup {
+    width: 100%;
+    padding: 0.875rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-signup:hover {
+    background-color: #75a534;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(131, 196, 39, 0.3);
+}
+
+/* ===== ESTILOS ESPECÍFICOS PARA SIGNIN ===== */
+
+/* Contenedor principal de signin */
+.contenedor-signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: calc(100vh - 50px);
+    background-color: var(--color-background);
+    padding: 2rem;
+}
+
+/* Logo arriba del todo */
+.signin-logo-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    padding-bottom: 0;
+}
+
+.logo-top {
+    height: 180px; /* Más grande para destacar */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Caja del formulario de signin */
+.signin-box {
+    background-color: var(--color-white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 420px;
+    margin-top: 0;
+}
+
+/* Header del formulario */
+.signin-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.signin-header h2 {
+    color: var(--color-dark);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Labels específicos para signin */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Inputs para signin */
+.form-input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #fafbfc;
+    margin-bottom: 0.5rem;
+}
+
+.form-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    background-color: var(--color-white);
+    box-shadow: 0 0 0 3px rgba(131, 196, 39, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input::placeholder {
+    color: #9ca3af;
+    font-weight: 300;
+}
+
+/* Grupos de formulario para signin */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Checkbox para signin */
+.form-options {
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--color-primary);
+    transform: scale(1.1);
+}
+
+.form-check-label {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Footer específico para signin */
+/* .form-footer-signin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem 0 1.5rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid #e5e7eb;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+} */
+
+.account-text {
+    color: var(--color-dark);
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+.signup-link {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.signup-link:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+    background-color: rgba(51, 121, 221, 0.1);
+}
+
+/* Botón de iniciar sesión */
+.btn-signin {
+    padding: 0.875rem 2.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-signin:hover {
+    background-color: #75a534;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(131, 196, 39, 0.4);
+}
+
+.btn-signin:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(131, 196, 39, 0.3);
+}
+
+/* ===== ESTILOS DE ERROR Y VALIDACIÓN ===== */
+
+.error-message {
+    color: var(--color-error);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 500;
+    padding: 0.5rem;
+    background-color: #fef2f2;
+    border-radius: 4px;
+    border-left: 3px solid var(--color-error);
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    color: var(--color-error);
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.alert-error ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.alert-error li {
+    margin: 0.5rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--color-error);
+}
+
+/* ===== ESTILOS RESPONSIVE ===== */
+
+@media (max-width: 480px) {
+    .contenedor-signin {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .signin-box {
+        padding: 2rem 1.5rem;
+    }
+    
+    .logo-top {
+        height: 50px;
+    }
+    
+    .btn-signin {
+        padding: 0.75rem 2rem;
+        min-width: 140px;
+    }
+}
+
+/* ===== ESTILOS DE ESTADOS ===== */
+
+.form-input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--color-error);
+    background-color: #fef2f2;
+}
+
+.form-input:valid:not(:focus):not(:placeholder-shown) {
+    border-color: var(--color-success);
+    background-color: #f0f9f0;
+}
+
+/* Efectos de carga */
+.btn-signin.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn-signin.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Efectos de transición para todo el formulario */
+.signin-box, .signup-box{
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
