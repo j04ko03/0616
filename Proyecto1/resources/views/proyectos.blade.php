@@ -44,7 +44,7 @@
         }
     </style>
     <h1>Lista de proyectos</h1>
-    <button class="botonCrearProyecto">Crear nuevo proyecto</button>
+    <a href="{{ route('crearProyecto.controller') }}"><button class="botonCrearProyecto">Crear nuevo proyecto</button></a>
     <div class="container">
         @for ($i = 1; $i <= 26; $i++)
             <div class="card">
