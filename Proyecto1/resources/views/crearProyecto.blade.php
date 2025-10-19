@@ -64,7 +64,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background-color: #000;
+            background-color: #000000;
             color: #fff;
             font-size: 24px;
             cursor: pointer;
@@ -75,10 +75,6 @@
             font-size: .8rem;
 
             transition: all 400ms;
-        }
-
-        #quit-btn:hover {
-            background-color: #313131;
         }
 
         form>div {
@@ -110,6 +106,10 @@
             border-bottom: 2px solid #83c427;
 
             transition: all 400ms;
+        }
+
+        #titulo::selection {
+            background: #83c427;
         }
 
         #titulo:hover,
@@ -196,17 +196,18 @@
         }
 
         .remove-btn {
-            background: #d42d20;
-            color: #fff;
+            background: #d42c2000;
+            color: #636363;
             margin-left: auto;
             height: 100%;
             border-radius: 0 4px 4px 0;
             transition: all 400ms;
         }
 
-        .remove-btn:hover {
-            background: #a8190f;
-            color: #fff;
+        .remove-btn:hover,
+        .remove-btn:focus {
+            background: #d42c20;
+            color: #ffffff;
         }
 
         #add-documento {
