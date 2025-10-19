@@ -385,7 +385,6 @@
                 </div>
                 <div>
                     <div class="form-group">
-                        <label for="textArea">Objetivos de la tarea</label>
                         <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
                     </div>
                     
