@@ -95,4 +95,5 @@
 </div>
 
     <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
+    <script src="{{ url('/js/contraseña.js') }}"></script>
 @endsection
