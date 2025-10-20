@@ -1,24 +1,21 @@
 .card-contenedor{
-    background-color: #f3f4f6;                  /* bg-gray-100 */
-    height: 300px;                                /* h-80 ≈ 20rem, pero tú lo fijas a 300px */
-    border-radius: 0.75rem;                       /* rounded-xl */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);  /* shadow-sm */
+    background-color: #f3f4f6;
+    height: 300px;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     position: relative;
     cursor: pointer;
-    transition: box-shadow 0.2s ease-in-out;      /* transition */
+    transition: box-shadow 0.2s ease-in-out;
 }
-
 .card-contenedor:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1),
-                0 4px 6px rgba(0, 0, 0, 0.05);  /* shadow-lg */
+                0 4px 6px rgba(0, 0, 0, 0.05);
 }
-
 .card-interior {
-    padding: 1rem;                  /* p-4 o 16px*/
+    padding: 1rem;
     border: 1px solid hotpink;    
     height: 300px;                
 }
-
 .card-cabecera {
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
@@ -26,7 +23,6 @@
     border-radius: 0.75rem;
     padding: 0.5rem;
 }
-
 .card-titulo{
     border: 1px solid red; 
     display: flex; 
@@ -34,22 +30,18 @@
     justify-content: space-between; 
     align-items: center;
 }
-
 .titulo {
-    font-size: 1.125rem;   /* text-lg */
-    line-height: 1.75rem;  /* text-lg */
-    font-weight: 600;      /* font-semibold */
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 600;
 }
-
 .padding-right{
     padding-right: 10px;
 }
-
 .texto-gris{
     color: #4b5563;
     font-size: 12px;
 }
-
 .card-tareas{
     border: 1px solid blue;
     margin-top: 15%; 
@@ -58,11 +50,9 @@
     left:0; 
     right: 0;
 }
-
 div, div, ul, li {
     font-size: 14px
 }
-
 .card-estado{
     position: absolute; 
     bottom: 0; 
@@ -73,193 +63,4 @@ div, div, ul, li {
                 0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-md */
     border-radius: 0 0 0.75rem 0.75rem;                    /* rounded-xl */
     padding: 0.5rem;                             /* p-2 */  
-}
-
-/**********************************************************************************************/
-/*Parte de perfil*/
-.flex1{
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: space-between
-}
-
-.flex2{
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-}
-
-.contendorFoto{
-    height: 85%; 
-    width: 60%; 
-    border-radius: 50%;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1),
-                0 2px 4px rgba(0, 0, 0, 0.06);
-}
-
-.contenedorCabeceraPerfil{
-    width: 100%; 
-    height: 40%;
-}
-
-.contenedorDatosPerfil{
-    height: 70%; 
-    display: flex; 
-    flex-wrap: wrap;
-}
-
-.subContenedorDatosPerfil{
-    height: 100%; 
-    width: 50%; 
-    padding: 2%;
-
-    display: flex;
-    flex-direction: column;
-    gap: 5%;
-    align-content: center;
-}
-
-.ultimoContenedorDatosPerfil{
-    display: flex; 
-    flex-wrap: wrap;
-}
-
-.campoTexto {
-        width: 100%;
-        /*padding: 10px;*/
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        font-size: 16px;
-        box-sizing: border-box;
-        resize: none;
-    }
-
-.botonPersonalizado {
-    height: fit-content;
-    width: 150px;
-    background-color: #4CAF50;                      /* Verde */
-    color: white;                                   /* Texto blanco */
-    padding: 1% 2%;                               /* Espaciado interno */
-    border: none;                                     /* Sin borde */
-    border-radius: 8px;                               /* Bordes redondeados */
-    font-size: 16px;                                  /* Tamaño del texto */
-    cursor: pointer;                                  /* Cambia el cursor al pasar */
-    transition: background-color 0.3s, transform 0.2s; /* Animación suave */
-}
-
-.botonPersonalizadobonito:hover {
-    background-color: #45a049; /* Verde más oscuro al pasar */
-    transform: scale(1.05);     /* Efecto pequeño de agrandar */
-}
-
-.botonPersonalizado:active {
-    background-color: #3e8e41; /* Verde aún más oscuro al presionar */
-    transform: scale(0.98);     /* Efecto de presionar */
-}
-@media (min-width: 0px) {
-    .contendorFoto{
-        height: 45%; 
-    }
-    .contenedorCabeceraPerfil{
-        height: 25%;
-    }
-    .contenedorDatosPerfil{
-        flex-wrap: nowrap;
-        flex-direction: column;
-    }
-    .subContenedorDatosPerfil{
-        height: 50%; 
-        width: 100%; 
-        align-content: center;
-        overflow-y: auto;
-        scrollbar-width: none;
-        padding: 0%;
-    }
-    .ultimoContenedorDatosPerfil{
-        flex-wrap: nowrap;
-    }
-}
-
-@media (min-width: 320px) {
-    .contendorFoto{
-        height: 60%;
-        width: 90%; 
-    }
-}
-
-@media (min-width: 640px) {
-    .contendorFoto{
-        height: 45%; 
-        width: 60%;
-    }
-    .contenedorCabeceraPerfil{
-        height: 30%;
-    }
-}
-
-@media (min-width: 768px) {
-    
-}
-
-@media (min-width: 740px) {
-
-    /* sm */
-    .contendorFoto{
-        height: 45%;  
-    }
-    .contenedorCabeceraPerfil{
-        height: 30%;
-    }
-}
-
-@media (min-width: 768px) {
-
-    /* md */
-    .contendorFoto{ 
-        height: 48%; 
-    }
-    .contenedorCabeceraPerfil{
-        height: 35%;
-    }
-}
-
-@media (min-width: 1024px) {
-
-    /* lg */
-    .contendorFoto{
-        height: 55%;  
-    }
-    .contenedorCabeceraPerfil{
-        height: 40%;
-    }
-    .contenedorDatosPerfil{
-        flex-wrap: wrap;
-        flex-direction: row;
-    } 
-    .subContenedorDatosPerfil{
-        height: 100%; 
-        width: 50%; 
-        overflow-y: hidden;
-        padding: 2%;
-    }
-    .ultimoContenedorDatosPerfil{
-        flex-wrap: wrap;
-    }
-}
-
-@media (min-width: 1280px) {
-
-    /* xl */
-    .contendorFoto{
-        height: 70%;  
-    }
-}
-
-@media (min-width: 1536px) {
-
-    /* 2xl */
-    .contendorFoto{
-        height: 85%; 
-    }
 }
