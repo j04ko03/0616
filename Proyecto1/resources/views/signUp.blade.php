@@ -67,20 +67,24 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <!-- CONFIRMACIÓN DESPLEGABLE -->
+            <div class="form-group password-confirm-group" id="passwordConfirmGroup">
                 <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
                 <input type="password"
                        name="password_confirmation"
                        id="password_confirmation"
                        placeholder="Repite tu contraseña"
-                       class="form-input"
-                       required>
+                       class="form-input">
             </div>
 
+            <!-- TOGGLE PERSONALIZADO -->
             <div class="form-options">
-                <div class="form-check">
-                    <input type="checkbox" name="remember" id="remember">
-                    <label for="remember" class="form-check-label">Recordarme en este dispositivo</label>
+                <div class="toggle-container">
+                    <div class="toggle">
+                        <input type="checkbox" name="remember" id="rememberToggle">
+                        <label for="rememberToggle"></label>
+                    </div>
+                    <span class="toggle-label">Recordarme en este dispositivo</span>
                 </div>
             </div>
 
@@ -95,5 +99,5 @@
 </div>
 
     <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
-    <script src="{{ url('/js/contraseña.js') }}"></script>
+    <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

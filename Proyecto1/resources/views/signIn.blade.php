@@ -7,13 +7,13 @@
 
 @section('content')
 <div class="contenedor-signin">
-    <!-- Logo arriba del todo y fuera del formulario -->
+    
     <div class="signin-logo-top">
         <img src="{{ url('/assets/logotipos/logoLetraSinFondo.png') }}" alt="OrgaTime" class="logo-top">
     </div>
 
     <div class="signin-box">
-        <!-- Título dentro del formulario -->
+        
         <div class="signin-header">
             <h2>Sign In</h2>
         </div>
@@ -57,22 +57,26 @@
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
+
             <div class="form-options">
-                <div class="form-check">
-                    <input type="checkbox" name="remember" id="remember">
-                    <label for="remember" class="form-check-label">Recordarme en este dispositivo</label>
+                <div class="toggle-container">
+                    <div class="toggle">
+                        <input type="checkbox" name="remember" id="rememberToggle">
+                        <label for="rememberToggle"></label>
+                    </div>
+                    <span class="toggle-label">Recordarme en este dispositivo</span>
                 </div>
             </div>
 
             <div class="form-footer">
                 <p class="account-text">¿No tienes cuenta?</p>
-                <a href="{{ route('signup.controller') }}" class="login-link">Crear cuenta</a>
+                <a href="{{ route('signup.controller') }}" class="signup-link">Crear cuenta</a>
             </div>
 
-            <button type="submit" class="btn-signup">Iniciar sesión</button>
+            <button type="submit" class="btn-signin">Iniciar sesión</button>
         </form>
     </div>
 </div>
 
-<script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
+    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
 @endsection
