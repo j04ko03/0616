@@ -154,6 +154,7 @@
             border: none;
             color: white;
             font-weight: bold;
+            margin-bottom: 0;
 
             transition: all 400ms;
         }
@@ -335,6 +336,19 @@
             resize: none;
         }
 
+        /* Nuevos estilos para la reorganización */
+        .documents-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .objectives-section {
+            display: flex;
+            flex-direction: row;
+            gap: 15px;
+        }
+
         @media (width < 600px) {
             main {
                 padding: 0;
@@ -375,20 +389,16 @@
                         <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
                     </div>
                     
-                    <label for="documento" id="add-documento">
-                        <input type="file" name="documento" id="documento" multiple="true"
-                                    accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .jpg, .jpeg, .png, .gif, .bmp">
-                        <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
-                        </span>
-                    </label>
-                    <ul id="selected-documents"></ul>
-                </div>
-                <div>
-                    <div class="form-group">
-                        <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
-                    </div>
-                    
-                    <div id="tareas-container">
+                    <div class="documents-section">
+                        <label for="documento" id="add-documento">
+                            <input type="file" name="documento" id="documento" multiple="true"
+                                        accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .jpg, .jpeg, .png, .gif, .bmp">
+                            <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
+                            </span>
+                        </label>
+                        <ul id="selected-documents"></ul>
+                        
+                        <!-- Botón Añadir usuario movido aquí -->
                         <div class="user-dropdown">
                             <button type="button" id="add-user-btn">Añadir usuario</button>
                             <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
@@ -408,9 +418,18 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="submit-container">
-                <input type="submit" value="Añadir tarea">
+                <div>
+                    <div class="objetives-section">
+                        <div class="form-group">
+                            <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
+                        </div>
+                        
+                        <!-- Botón Añadir tarea movido aquí -->
+                        <div class="submit-container">
+                            <input type="submit" value="Añadir tarea">
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </main>
