@@ -332,7 +332,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
-            resize: vertical;
+            resize: none;
         }
 
         @media (width < 600px) {
