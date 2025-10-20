@@ -2,6 +2,10 @@
 
 @section('content')
     <style>
+        .titulo {
+            text-align: center;
+            font-size: 35px;
+        }
         .botonCrearProyecto {
             color: black;
             background-color: #83C427;
@@ -43,7 +47,7 @@
             text-align: center;
         }
     </style>
-    <h1>Lista de proyectos</h1>
+    <h1 class="titulo">Lista de proyectos</h1>
     <a href="{{ route('crearProyecto.controller') }}"><button class="botonCrearProyecto">Crear nuevo proyecto</button></a>
     <div class="container">
         @for ($i = 1; $i <= 26; $i++)
