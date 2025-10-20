@@ -28,12 +28,11 @@
                 <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                     <a href="{{ route('proyectos.controller') }}" class="nav-link">Projects</a>
-                    <a href="#" class="nav-link">Reports</a>
                 </div>
             </div>
 
             <div class="navbar-right">
-                <span class="username">Nombre usuario</span>
+                <span class="username" href="{{ route('perfil.controller') }}">Juán</span>
                 <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
             </div>
         </div>
@@ -46,5 +45,4 @@
 
     @stack('scripts')
 </body>
-
 </html>
