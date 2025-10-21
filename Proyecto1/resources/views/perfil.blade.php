@@ -3,11 +3,11 @@
 @section('content')
 
 <!--comentario-->
-<div class="container" style="border: 1px solid red; height: 800px;">
+<div class="container" style="height: 800px;">
 
     <div class="container-Padre" style="height: 100%;"> 
 
-        <div class="card-contenedor" style="height: 100%; width: 100%;">
+        <div class="card-contenedor" style="height: 100%; width: 100%; cursor:auto;">
 
             <div class="contenedorCabeceraPerfil flex1">
 
@@ -49,20 +49,20 @@
 
             </div>
 
-            <div style="height: 450px;  border: 1px solid blue; display: flex; flex-wrap: nowrap; ">
-                <div style="width: 33%;  border: 1px solid red;">
+            <div class="contenedorCardDatos">
+                <div class="botoneraPerfil">
                     <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style=" width: 75%;">Cambiar datos generales</p>
+                        <p class="card-cabecera" style=" width: 75%; cursor: pointer;">Cambiar datos generales</p>
                     </div>
                     <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style="width: 75%;">Cerrar sesión</p>    
+                        <p class="card-cabecera" style="width: 75%; cursor: pointer;">Cerrar sesión</p>    
                     </div>
                     <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style="width: 75%;">Solicitar ser super usuario</p>
+                        <p class="card-cabecera" style="width: 75%; cursor: pointer;">Solicitar ser super usuario</p>
                     </div>
                 </div>
-                <div class="flex2" style="width: 80%;">
-                    <div class="card-cabecera" style="width: 100%; height: 80%; border: 1px solid yellow;">
+                <div class="flex2 contenedorModificaciones">
+                    <div id="contenedorOcultos" class="card-cabecera" style="width: 100%; height: 80%; margin-inline: 5%;">
                     <!--Datos a modificar y otras pantallas emergentes-->
                     <div class="oculto" style="height: 100%; margin-bottom: 5%;">
                         <div style="margin: 5%;">

@@ -68,6 +68,17 @@
     background-color: #3e8e41;
     transform: scale(0.98);
 }
+.contenedorCardDatos{
+    height: 450px;  
+    display: flex; 
+    flex-wrap: nowrap; 
+}
+.botoneraPerfil{
+    width: 33%;  
+}
+.contenedorModificaciones{
+    width: 80%; 
+}
 
 
 @media (min-width: 0px) {
@@ -92,6 +103,18 @@
     .ultimoContenedorDatosPerfil{
         flex-wrap: nowrap;
     }
+    .contenedorCardDatos{
+        flex-wrap: wrap;
+        height: 72%;
+        align-content: space-around;
+    }
+    .botoneraPerfil{
+        width: 100%;  
+        height: 33%;
+    }
+    .contenedorModificaciones{
+        width: 100%; 
+    }
 }
 @media (min-width: 320px) {
     .contendorFoto{
@@ -106,6 +129,17 @@
     }
     .contenedorCabeceraPerfil{
         height: 30%;
+    }
+    .contenedorCardDatos{
+        flex-wrap: nowrap;
+        height: 450px;
+    }
+    .botoneraPerfil{
+        width: 33%;  
+        height: 100%;
+    }
+    .contenedorModificaciones{
+        width: 80%; 
     }
 }
 @media (min-width: 768px) {
