@@ -435,6 +435,10 @@
             margin-top: 20px;
         }
 
+        #fecha-limite #presupuesto {
+            width: 500px;
+        }
+
         #add-documento {
             box-sizing: border-box;
             border-radius: 10px;
