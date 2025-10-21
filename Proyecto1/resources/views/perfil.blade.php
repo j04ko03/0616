@@ -3,7 +3,7 @@
 @section('content')
 
 <!--comentario-->
-<div class="container mx-auto p-4" style="height: 800px;">
+<div class="container" style="border: 1px solid red; height: 800px;">
 
     <div class="container-Padre" style="height: 100%;"> 
 
@@ -49,8 +49,8 @@
 
             </div>
 
-            <div class="flex1" style="height: 60%;">
-                <div style="width: 33%;">
+            <div style="height: 450px;  border: 1px solid blue; display: flex; flex-wrap: nowrap; ">
+                <div style="width: 33%;  border: 1px solid red;">
                     <div style="height: 33%; align-content: center; justify-items: center">
                         <p class="card-cabecera" style=" width: 75%;">Cambiar datos generales</p>
                     </div>
@@ -61,7 +61,8 @@
                         <p class="card-cabecera" style="width: 75%;">Solicitar ser super usuario</p>
                     </div>
                 </div>
-                <div class="card-cabecera" style="width: 66%; height: 87%;">
+                <div class="flex2" style="width: 80%;">
+                    <div class="card-cabecera" style="width: 100%; height: 80%; border: 1px solid yellow;">
                     <!--Datos a modificar y otras pantallas emergentes-->
                     <div class="oculto" style="height: 100%; margin-bottom: 5%;">
                         <div style="margin: 5%;">
@@ -82,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="" style="height: 100%; margin-bottom: 5%;">
+                    <div class="" style="height: 100%;">
                         <div style="margin: 5%;">
                             <h2 class="h2">
                                 Modificación de datos
@@ -110,6 +111,7 @@
                         </div>
                     </div>
 
+                </div>
                 </div>
             </div>
 
