@@ -1,9 +1,9 @@
 @extends('layouts.barraNavegacion')
 
 @section('content')
-    <!--<div class="contenedor-padre" style="border: 1px solid black">-->
-    <div class="container mx-auto p-4" style="border: 1px solid black;">
-        <h1 class="h1">DASHBOARD</h1>
+
+    <h1 class="h1" style="margin-left: 3.5%; margin-top: 1%;">DASHBOARD</h1>
+    <div class="container mx-auto p-4">
         <div class="contenedorBtnsPrincipales">
             <button id="btn-proyectos" class="btnInteractivoProyectos">
                 Proyectos recientes
@@ -32,11 +32,11 @@
         </div>
 
         <!--pasamos objeto como JSON-->
-        <h2 class="text-xl font-bold mb-2">Proyectos</h2>
+        <h2 class="text-xl font-bold mb-2" style="margin-top: 2%; border-bottom: 1px solid #e5e7eb;">Proyectos</h2>
         <div class="alturaFija contenedorScroll" id="contenedorTodosProyectos">
             <div class="gridCardsProyectos">
                 @foreach ($proyectosTotal as $proyectoT)
-                    <x-cardItempProyectos class="cardProyectoId"
+                    <x-cardItemProyectos class="cardProyectoId"
                         titulo="{{ $proyectoT['titulo'] }}" 
                         descripcion="{{ $proyectoT['descripcion'] }}"
                         estado="{{ $proyectoT['estado'] }}"

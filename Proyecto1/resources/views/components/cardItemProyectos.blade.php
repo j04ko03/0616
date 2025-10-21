@@ -45,12 +45,31 @@
         </div>
     </div>
 
-    <div class="card-tareas">    
-        <ul>
-            <li id="TareasCompletadas">Tareas completadas: 0</li>
-            <li id="TareasValidar">Tareas creadas: 0</li>
-            <li id="TareasPendientes">Tareas pendientes: 0</li>
-        </ul>
+    <div class="card-tareas">
+        <div class="flex2">
+            <div style="width: 40%;">
+            <p>Tareas completadas:</p>
+            </div>
+            <div style="width: 50%;">
+                <p id="TareasCompletadas">0</p>
+            </div>
+        </div>
+        <div class="flex2">
+            <div style="width: 40%;">
+            <p>Tareas creadas:</p>
+            </div>
+            <div style="width: 50%;">
+                <p id="TareasValidar">0</p>
+            </div>
+        </div>
+        <div class="flex2">
+            <div style="width: 40%;">
+            <p>Tareas pendientes:</p>
+            </div>
+            <div style="width: 50%;">
+                <p id="TareasPendientes">0</p>
+            </div>
+        </div>
     </div>
     <div class="card-estado" style="background-color: {{ $color }}">    
     </div>

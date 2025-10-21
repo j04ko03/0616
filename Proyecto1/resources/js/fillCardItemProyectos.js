@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 });
                 
-                tareasValidar.textContent = "Tareas validadas: " + tareaValidarCuenta;
-                tareasCompletadas.textContent = "Tareas completadas: " + tareaCompletasCuenta;
-                tareasPendientes.textContent = "Tareas pendientes: " + tareaPendienteCuenta;
+                tareasValidar.textContent = tareaValidarCuenta;
+                tareasCompletadas.textContent = tareaCompletasCuenta;
+                tareasPendientes.textContent = tareaPendienteCuenta;
 
             });
 
