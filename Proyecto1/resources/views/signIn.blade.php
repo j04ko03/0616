@@ -45,14 +45,20 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+
+           <div class="form-group password-container">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password"
-                       name="password"
-                       id="password"
-                       placeholder="Tu contraseña"
-                       class="form-input"
-                       required>
+                <div class="password-input-wrapper">
+                    <input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Crea una contraseña"
+                        class="form-input password-input"
+                        required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <span class="eye-icon">🙈</span>
+                    </button>
+                </div>
                 @error('password')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
@@ -79,4 +85,5 @@
 </div>
 
     <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
+    <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

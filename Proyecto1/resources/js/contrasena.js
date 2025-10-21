@@ -3,15 +3,48 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordConfirmGroup = document.getElementById('passwordConfirmGroup');
     const passwordConfirmInput = document.getElementById('password_confirmation');
     
+    // ===== FUNCIÓN MEJORADA PARA TOGGLE =====
+    function setupPasswordToggle(toggleId, inputId) {
+        const toggle = document.getElementById(toggleId);
+        const input = document.getElementById(inputId);
+        
+        if (toggle && input) {
+            const eyeIcon = toggle.querySelector('.eye-icon');
+            
+            if (!eyeIcon) {
+                console.warn(`No se encontró eye-icon para ${toggleId}`);
+                return;
+            }
+            
+            toggle.addEventListener('click', function() {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                eyeIcon.textContent = isPassword ? '🙉' : '🙈';
+                eyeIcon.title = isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña';
+                
+                // Feedback visual opcional
+                input.classList.toggle('password-visible', isPassword);
+            });
+            
+            // Inicializar título
+            eyeIcon.title = 'Mostrar contraseña';
+        }
+    }
+    
+    // ===== INICIALIZAR TOGGLES =====
+    setupPasswordToggle('passwordToggle', 'password');
+    
+    if (document.getElementById('passwordConfirmToggle')) {
+        setupPasswordToggle('passwordConfirmToggle', 'password_confirmation');
+    }
+    
+    // ===== LÓGICA DE CONFIRMACIÓN (igual que la tuya, que está perfecta) =====
     if (passwordInput && passwordConfirmGroup) {
-        // Ocultar confirmación inicialmente
         passwordConfirmGroup.style.display = 'none';
         
-        // Mostrar confirmación cuando la contraseña cumple los requisitos
         passwordInput.addEventListener('input', function() {
             const password = this.value;
             
-            // Verificar si cumple requisitos mínimos (8 caracteres)
             if (password.length >= 8) {
                 passwordConfirmGroup.style.display = 'block';
                 setTimeout(() => {
@@ -22,11 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     passwordConfirmGroup.style.display = 'none';
                 }, 300);
-                passwordConfirmInput.value = ''; // Limpiar confirmación
+                if (passwordConfirmInput) {
+                    passwordConfirmInput.value = '';
+                }
             }
         });
-        
-        // Validación en tiempo real de coincidencia
+
         if (passwordConfirmInput) {
             passwordConfirmInput.addEventListener('input', function() {
                 const password = passwordInput.value;

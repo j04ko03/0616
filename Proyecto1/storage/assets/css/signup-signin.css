@@ -172,6 +172,56 @@
     border-color: var(--color-primary);
 }
 
+/*ojo contraseña*/
+.password-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    padding-right: 50px !important; /* Espacio para el botón del ojo */
+    width: 100%;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 2px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
+.password-toggle:active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.eye-icon {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+/* Estados visuales cuando se muestra la contraseña */
+.password-input[type="text"] {
+    border-color: var(--color-primary);
+    background-color: #f0f9f0;
+}
+
 .form-group {
     margin-bottom: 1rem;
 }
@@ -374,6 +424,8 @@
 
 /* Botón de iniciar sesión */
 .btn-signin {
+    display: block;
+    margin: 2rem auto 0 auto;
     padding: 0.875rem 2.5rem;
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -384,13 +436,14 @@
     cursor: pointer;
     transition: all 0.3s ease;
     min-width: 160px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     letter-spacing: 0.5px;
+    width: 100%;
 }
 
 .btn-signin:hover {
-    background-color: #75a534;
-    transform: translateY(-2px);
+    background-color: --color-primary;
+    transform: translateY(-1px);
     box-shadow: 0 6px 20px rgba(131, 196, 39, 0.4);
 }
 
