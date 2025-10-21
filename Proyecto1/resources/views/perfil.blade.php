@@ -89,21 +89,21 @@
                                 Modificación de datos
                             </h2>
                         </div>
-                        <div style="margin: 5%; height: 40%;">
-                            <div style="height: 85%; display: flex; flex-direction: column; gap: 3%;">
+                        <div style="margin: 5%;">
+                            <div style="height: 100%; display: flex; flex-direction: column; gap: 1rem;">
                                 <div style="" class="flex1">
                                     <p style="width: 40%;">Nombre completo</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px; padding-inline-start: 2%;" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
                                 </div>
                                 <div style="" class="flex1">
                                     <p style="width: 40%;">Apodo</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px; padding-inline-start: 2%;" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
                                 </div>
                                 <div style="" class="flex1">
                                     <p style="width: 40%;">Otro</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
+                                    <textarea class="campoTexto" style="width: 60%; height: 30px; padding-inline-start: 2%;" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
                                 </div>
-                                <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
                                     <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
                                 </div>
                             </div>

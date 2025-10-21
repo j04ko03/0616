@@ -114,6 +114,7 @@
     }
     .contenedorModificaciones{
         width: 100%; 
+        height: fit-content;
     }
 }
 @media (min-width: 320px) {
@@ -140,6 +141,7 @@
     }
     .contenedorModificaciones{
         width: 80%; 
+        height: 100%;
     }
 }
 @media (min-width: 768px) {
