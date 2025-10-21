@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrgaTime Dashboard</title>
+    <title class="pestaña">OrgaTime</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @stack('styles')
 </head>
@@ -44,5 +44,7 @@
     </main>
 
     @stack('scripts')
+
+    <script src="js/rutasMostrar.js"></script>
 </body>
 </html>
