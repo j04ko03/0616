@@ -17,7 +17,6 @@
 
         body {
             background-color: #f4f5f7;
-            font-family: "Lato", sans-serif;
         }
 
         /*    CREAR PROYECTO CONTAINER    */
@@ -29,32 +28,26 @@
             box-sizing: border-box;
             height: 100%;
             width: 100%;
+            font-family: "Zilla Slab", serif;
         }
 
         form {
             box-sizing: border-box;
             padding: 20px;
-
             border: 1px solid black;
             border-radius: 10px;
-
             height: auto;
-            min-height: 700px;
+            min-height: 450px;
             width: 100%;
             max-width: 900px;
-
             margin: 40px auto 0 auto;
-
             display: flex;
             flex-direction: column;
-            font-family: "Lato", sans-serif;
-
             position: relative;
         }
 
         #quit-btn {
             position: absolute;
-            top: 10px;
             right: 10px;
             width: 25px;
             height: 25px;
@@ -68,7 +61,6 @@
             justify-content: center;
             padding: 0;
             font-size: .8rem;
-
             transition: all 400ms;
         }
 
@@ -77,7 +69,6 @@
         }
 
         form>div {
-            flex: 1;
             box-sizing: border-box;
             margin-top: 30px;
             display: grid;
@@ -105,10 +96,8 @@
         #titulo {
             background: #f9fafb;
             font-size: 2rem;
-            font-family: "Zilla Slab", serif;
             font-weight: 600;
             border-bottom: 2px solid #83c427;
-
             transition: all 400ms;
         }
 
@@ -155,7 +144,6 @@
             color: white;
             font-weight: bold;
             margin-bottom: 0;
-
             transition: all 400ms;
         }
 
@@ -173,7 +161,6 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            overflow: auto;
             max-height: 300px;
         }
 
@@ -219,7 +206,6 @@
             padding: 20px;
             position: relative;
             margin-top: 10px;
-
             transition: all 400ms;
         }
 
@@ -315,8 +301,6 @@
         }
 
         .submit-container {
-            display: flex;
-            justify-content: flex-end;
             margin-top: 20px;
         }
 
@@ -328,8 +312,8 @@
 
         /* Estilos para el textarea de objetivos */
         #textArea {
-            width: 100%;
-            min-height: 150px;
+            height: 200px;
+            width: 300px;
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
@@ -343,10 +327,12 @@
             gap: 15px;
         }
 
-        .objectives-section {
+        .containerAddUser_TextArea_AddTask{
             display: flex;
-            flex-direction: row;
-            gap: 15px;
+            flex-direction: column;
+            justify-content: right;
+            align-items:center;
+            margin-left: 550px;
         }
 
         @media (width < 600px) {
@@ -398,35 +384,33 @@
                         </label>
                         <ul id="selected-documents"></ul>
                         
-                        <!-- Botón Añadir usuario movido aquí -->
-                        <div class="user-dropdown">
-                            <button type="button" id="add-user-btn">Añadir usuario</button>
-                            <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
-                            <div class="user-list">
-                                <div class="user-group">Grupos</div>
-                                <div class="user-item" data-user="Grupo 1">Grupo 1</div>
-                                <div class="user-item" data-user="Grupo 2">Grupo 2</div>
-                                <div class="user-group">Usuarios</div>
-                                <div class="user-item" data-user="Pepa">Pepa</div>
-                                <div class="user-item" data-user="Juanjo">Juanjo</div>
-                                <div class="user-item" data-user="María">María</div>
-                                <div class="user-item" data-user="Carlos">Carlos</div>
+                        <div class="containerAddUser_TextArea_AddTask">
+                            <!-- Botón Añadir usuario movido aquí -->
+                            <div class="user-dropdown">
+                                <button type="button" id="add-user-btn">Añadir usuario</button>
+                                <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
+                                <div class="user-list">
+                                    <div class="user-group">Grupos</div>
+                                    <div class="user-item" data-user="Grupo 1">Grupo 1</div>
+                                    <div class="user-item" data-user="Grupo 2">Grupo 2</div>
+                                    <div class="user-group">Usuarios</div>
+                                    <div class="user-item" data-user="Pepa">Pepa</div>
+                                    <div class="user-item" data-user="Juanjo">Juanjo</div>
+                                    <div class="user-item" data-user="María">María</div>
+                                    <div class="user-item" data-user="Carlos">Carlos</div>
+                                </div>
                             </div>
-                        </div>
-                        <div id="tareas">
-                            <!-- Los usuarios añadidos aparecerán aquí -->
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="objetives-section">
-                        <div class="form-group">
-                            <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
-                        </div>
-                        
-                        <!-- Botón Añadir tarea movido aquí -->
-                        <div class="submit-container">
-                            <input type="submit" value="Añadir tarea">
+                            <div id="tareas">
+                                <!-- Los usuarios añadidos aparecerán aquí -->
+                            </div>
+                            <div class="form-group">
+                                <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
+                            </div>
+                            
+                            <!-- Botón Añadir tarea movido aquí -->
+                            <div class="submit-container">
+                                <input type="submit" value="Añadir tarea">
+                            </div>
                         </div>
                     </div>
                 </div>

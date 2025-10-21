@@ -2,10 +2,23 @@
 
 @section('content')
     <style>
-        .titulo {
-            text-align: center;
-            font-size: 35px;
+        .title_btnCreateProject {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
+
+        .title_btnCreateProject > h1 {
+            font-size: 35px;
+            margin-left: 400px;
+        }
+
+        .title_btnCreateProject > a {
+            margin-right: 440px;
+        }
+
         .botonCrearProyecto {
             color: black;
             background-color: #83C427;
@@ -47,8 +60,10 @@
             text-align: center;
         }
     </style>
-    <h1 class="titulo">Lista de proyectos</h1>
-    <a href="{{ route('crearProyecto.controller') }}"><button class="botonCrearProyecto">Crear nuevo proyecto</button></a>
+    <div class="title_btnCreateProject">
+        <h1>Lista de proyectos</h1>
+        <a href="{{ route('crearProyecto.controller') }}"><button class="botonCrearProyecto">Crear nuevo proyecto</button></a>
+    </div>
     <div class="container">
         @for ($i = 1; $i <= 26; $i++)
             <div class="card">
