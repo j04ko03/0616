@@ -289,8 +289,8 @@
         }
 
         .submit-container {
-            display: flex;
-            justify-content: flex-start;
+            margin: auto 0 0 auto;
+            padding: 7px 25px !important;
         }
 
         /* Estilos para el calendario */
