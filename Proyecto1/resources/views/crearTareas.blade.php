@@ -2,7 +2,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/crearTareas.css') }}">
+    <link rel="stylesheet" href="{{ url(path: '/css/crearTareas.css') }}">
 @endpush
 
 @section('content')
@@ -77,7 +77,7 @@
                 </div>
                 
                 <div class="submit-container">
-                    <input type="submit" value="Añadir tarea">
+                    <input type="submit" value="Añadir tarea" id="add-task-btn">
                 </div>
             </div>
         </div>
