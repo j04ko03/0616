@@ -1,23 +1,34 @@
 :root {
-    --color-white: #FFFFFF;       /*Color de la barra de navegación y recuadros de formularios*/
-    --color-background: #f4f5f7;  /* Color de fondo */
-    --color-primary: #83c427;     /* Color verde para botones importantes */
-    --color-dark: #202020;        /* Color "negro" para textos */
-    --color-link: #3379dd;        /* Color azul para letra con interacción */
-    --color-link-hover: #082854;  /* Color azul oscuro para letra con interacción en la barra de navegación */
-    --color-error: #dc3545;       /* Color rojo para mensajes de error */
-    --color-success: #28a745;     /* Color verde para mensajes de éxito */
+    --color-white: #ffffff; /*Color de la barra de navegación y recuadros de formularios*/
+    --color-background: #f4f5f7; /* Color de fondo */
+    --color-primary: #83c427; /* Color verde para botones importantes */
+    --color-primary-modifier: #b3eb65; /* Color verde para acciones en botones */
+    --color-dark: #202020; /* Color "negro" para textos */
+    --color-link: #3379dd; /* Color azul para letra con interacción */
+    --color-link-hover: #082854; /* Color azul oscuro para letra con interacción en la barra de navegación */
+    --color-error: #dc3545; /* Color rojo para mensajes de error */
+    --color-success: #28a745; /* Color verde para mensajes de éxito */
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Zilla Slab', sans-serif, bold;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Zilla Slab", sans-serif, bold;
     color: var(--color-dark);
 }
 
-a, p, span, li, button, input, label {
-    font-family: 'Lato', sans-serif;
+a,
+p,
+span,
+li,
+button,
+input,
+label {
+    font-family: "Lato", sans-serif;
 }
-
 
 /* Estilos para la barra de navegación */
 .navbar {
@@ -31,21 +42,21 @@ a, p, span, li, button, input, label {
     position: sticky;
     top: 0;
     width: 100%;
-    z-index: 1000;  
+    z-index: 1000;
 }
 
 .navbar-container {
     display: flex;
     align-items: center;
     width: 100%;
-    gap:2rem;
+    gap: 2rem;
 }
 
 .navbar-left {
     display: flex;
     align-items: center;
     width: 80%;
-    gap:2rem;
+    gap: 2rem;
 }
 
 .navbar-right {
@@ -53,7 +64,7 @@ a, p, span, li, button, input, label {
     align-items: center;
     width: 20%;
     justify-content: flex-end;
-    gap:1rem;
+    gap: 1rem;
 }
 
 .nav-logo {
@@ -73,7 +84,8 @@ a, p, span, li, button, input, label {
     align-items: center;
 }
 
-.nav-links a, .navbar-right span{
+.nav-links a,
+.navbar-right span {
     color: var(--color-dark);
     text-decoration: none;
     font-size: 0.9rem;
@@ -105,7 +117,7 @@ a, p, span, li, button, input, label {
 
 .alert-success {
     background-color: #f0f9ff;
-    color: var(--color-success); ;
+    color: var(--color-success);
     border: 1px solid #bae6fd;
 }
 

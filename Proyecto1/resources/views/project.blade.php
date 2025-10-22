@@ -135,6 +135,14 @@
         }
 
         .task-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 1000px;
+            overflow-y: auto;
+        }
+
+        .task-card {
             box-sizing: border-box;
             background-color: #fff;
             border-radius: 10px;
@@ -145,30 +153,30 @@
             gap: 10px;
         }
 
-        .kanban-task-container:first-child>.task-container {
+        .kanban-task-container:first-child .task-card {
             box-shadow: #d42c2042 0px 3px 8px;
         }
 
-        .kanban-task-container:nth-child(2)>.task-container {
+        .kanban-task-container:nth-child(2) .task-card {
             box-shadow: #ffb90042 0px 3px 8px;
         }
 
-        .kanban-task-container:nth-child(3)>.task-container {
+        .kanban-task-container:nth-child(3) .task-card {
             box-shadow: #24b22e42 0px 3px 8px;
         }
 
 
-        .task-container span:first-child {
+        .task-card span:first-child {
             display: flex;
             justify-content: space-between;
         }
 
-        .task-container>span:first-child>p {
+        .task-card>span:first-child>p {
             font-size: 1.2rem;
             font-weight: 700;
         }
 
-        .task-container>span:nth-child(4) {
+        .task-card>span:nth-child(4) {
             margin-top: 15px;
             display: flex;
             justify-content: space-between;
@@ -320,59 +328,63 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            <span>
-                                <p>Título Tarea</p>
-                                <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                        height="16" fill="currentColor" class="bi bi-three-dots-vertical"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <span class="tags-container">
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                            </span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </p>
-                            <span>
-                                <p>Responsable</p>
-                                <p>Fecha de entrega</p>
-                            </span>
+                            <div class="task-card">
+                                <span>
+                                    <p>Título Tarea</p>
+                                    <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-three-dots-vertical"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                </span>
+                                <span class="tags-container">
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                </span>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </p>
+                                <span>
+                                    <p>Responsable</p>
+                                    <p>Fecha de entrega</p>
+                                </span>
+                            </div>
+                            <div class="task-card">
+                                <span>
+                                    <p>Título Tarea</p>
+                                    <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16" fill="currentColor" class="bi bi-three-dots-vertical"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                        </svg>
+                                    </button>
+                                </span>
+                                <span class="tags-container">
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                    <p class="tags">TAG</p>
+                                </span>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                </p>
+                                <span>
+                                    <p>Responsable</p>
+                                    <p>Fecha de entrega</p>
+                                </span>
+                            </div>
                         </div>
-                        <div class="task-container">
-                            <span>
-                                <p>Título Tarea</p>
-                                <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                        height="16" fill="currentColor" class="bi bi-three-dots-vertical"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <span class="tags-container">
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                                <p class="tags">TAG</p>
-                            </span>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet,
-                                consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </p>
-                            <span>
-                                <p>Responsable</p>
-                                <p>Fecha de entrega</p>
-                            </span>
-                        </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -397,11 +409,13 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -425,7 +439,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -449,7 +463,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -474,13 +488,15 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                 </div>
                 <div class="tabs-content content-section-2">
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -504,7 +520,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -528,7 +544,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -552,7 +568,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -576,7 +592,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -601,11 +617,13 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -630,11 +648,13 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -658,7 +678,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -683,13 +703,15 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                 </div>
                 <div class="tabs-content content-section-3">
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -713,7 +735,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -737,7 +759,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -761,7 +783,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -786,11 +808,13 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -814,7 +838,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -838,7 +862,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -862,7 +886,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -887,11 +911,13 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -915,7 +941,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -939,7 +965,7 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <div class="task-container">
+                        <div class="task-card">
                             <span>
                                 <p>Título Tarea</p>
                                 <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -964,7 +990,9 @@
                                 <p>Fecha de entrega</p>
                             </span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <a href="tareas">
+                            <button class="add-task">+ ADD TASK</button>
+                        </a>
                     </div>
                 </div>
                 <div class="tabs-content content-section-4">
