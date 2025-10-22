@@ -1,122 +1,128 @@
 @extends('layouts.barraNavegacion')
 
 @section('content')
+    <!--comentario-->
+    <div class="container" style="height: 800px;">
 
-<!--comentario-->
-<div class="container mx-auto p-4" style="height: 800px;">
+        <div class="container-Padre" style="height: 100%;">
 
-    <div class="container-Padre" style="height: 100%;"> 
+            <div class="card-contenedor" style="height: 100%; width: 100%; cursor:auto;">
 
-        <div class="card-contenedor" style="height: 100%; width: 100%;">
+                <div class="contenedorCabeceraPerfil flex1">
 
-            <div class="contenedorCabeceraPerfil flex1">
+                    <div class="flex2" style="width: 33%; height: 100%;">
+                        <div class="contendorFoto   ">
 
-                <div class="flex2" style="width: 33%; height: 100%;">
-                    <div class="contendorFoto   ">
-
+                        </div>
                     </div>
+                    <div style="width: 66%; height: 100%;">
+                        <div style="height: 30%; align-content: center;">
+                            <h1 class="h1">
+                                Datos generales
+                            </h1>
+                        </div>
+                        <div class="contenedorDatosPerfil">
+                            <div class="subContenedorDatosPerfil">
+                                <div class="ultimoContenedorDatosPerfil">
+                                    <p style="width: fit-content; margin-right: 1%">Nombre completo: </p>
+                                    <p style="width: fit-content">Juán jiménez del rosario</p>
+                                </div>
+                                <div class="ultimoContenedorDatosPerfil">
+                                    <p style="width: fit-content; margin-right: 1%">Apodo: </p>
+                                    <p style="width: fit-content">Juán</p>
+                                </div>
+                            </div>
+                            <div class="subContenedorDatosPerfil">
+                                <div class="ultimoContenedorDatosPerfil">
+                                    <p style="width: fit-content; margin-right: 1%">Creación de cuenta: </p>
+                                    <p style="width: fit-content">00-00-0000</p>
+                                </div>
+                                <div class="ultimoContenedorDatosPerfil">
+                                    <p style="width: fit-content; margin-right: 1%">Tipo de usuario: </p>
+                                    <p style="width: fit-content">User</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-                <div style="width: 66%; height: 100%;">
-                    <div style="height: 30%; align-content: center;">
-                        <h1 class="h1">
-                        Datos generales 
-                        </h1>
-                    </div>
-                    <div class="contenedorDatosPerfil">
-                        <div class="subContenedorDatosPerfil">                            
-                            <div class="ultimoContenedorDatosPerfil">
-                                <p style="width: fit-content; margin-right: 1%">Nombre completo: </p>
-                                <p style="width: fit-content">Juán jiménez del rosario</p>
-                            </div>
-                            <div class="ultimoContenedorDatosPerfil">
-                                <p style="width: fit-content; margin-right: 1%">Apodo: </p>
-                                <p style="width: fit-content">Juán</p>
-                            </div>
+
+                <div class="contenedorCardDatos">
+                    <div class="botoneraPerfil">
+                        <div style="height: 25%; align-content: center; justify-items: center">
+                            <p id="btnGeneralData" class="card-cabecera textoBtns" style=" width: 75%; cursor: pointer;">
+                                Cambiar datos generales</p>
                         </div>
-                    <div class="subContenedorDatosPerfil">  
-                            <div class="ultimoContenedorDatosPerfil">
-                                <p style="width: fit-content; margin-right: 1%">Creación de cuenta: </p>
-                                <p style="width: fit-content">00-00-0000</p>
-                            </div>
-                            <div class="ultimoContenedorDatosPerfil">
-                                <p style="width: fit-content; margin-right: 1%">Tipo de usuario: </p>
-                                <p style="width: fit-content">User</p>
-                            </div>
-                    </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="flex1" style="height: 60%;">
-                <div style="width: 33%;">
-                    <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style=" width: 75%;">Cambiar datos generales</p>
-                    </div>
-                    <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style="width: 75%;">Cerrar sesión</p>    
-                    </div>
-                    <div style="height: 33%; align-content: center; justify-items: center">
-                        <p class="card-cabecera" style="width: 75%;">Solicitar ser super usuario</p>
-                    </div>
-                </div>
-                <div class="card-cabecera" style="width: 66%; height: 87%;">
-                    <!--Datos a modificar y otras pantallas emergentes-->
-                    <div class="oculto" style="height: 100%; margin-bottom: 5%;">
-                        <div style="margin: 5%;">
-                            <h2 class="h2">
-                                Solicitud
-                            </h2>
+                        <div style="height: 25%; align-content: center; justify-items: center">
+                            <p id="btnCloseSesion" class="card-cabecera textoBtns">Cerrar sesión</p>
                         </div>
-                        <div style="margin: 5%; height: 60%;">
-                            <p style="width: 100%;">Introducir password para solicitud de Super User.</p>
-                            
-                            <div style="margin-top: 5%;">
-                                <input style="border: 1px solid black;" type="password" id="clave" name="clave" placeholder="Escribe tu contraseña">
-                            </div>
-
-                            <div style="margin-top: 5%; display: flex; justify-content: end;">
-                                <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
-                            </div>
+                        <div style="height: 25%; align-content: center; justify-items: center">
+                            <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
+                        </div>
+                        <div style="height: 25%; align-content: center; justify-items: center">
+                            <p id="btnIncidencias" class="card-cabecera textoBtns">Registrar incidencias</p>
                         </div>
                     </div>
-
-                    <div class="" style="height: 100%; margin-bottom: 5%;">
-                        <div style="margin: 5%;">
-                            <h2 class="h2">
-                                Modificación de datos
-                            </h2>
-                        </div>
-                        <div style="margin: 5%; height: 40%;">
-                            <div style="height: 85%; display: flex; flex-direction: column; gap: 3%;">
-                                <div style="" class="flex1">
-                                    <p style="width: 40%;">Nombre completo</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
+                    <div class="flex2 contenedorModificaciones">
+                        <div id="contenedorOcultos" class="card-cabecera"
+                            style="width: 100%; height: 80%; margin-inline: 5%;">
+                            <!--Datos a modificar y otras pantallas emergentes-->
+                            <div id="solicitarSuperUser" class="oculto" style="height: 100%; margin-bottom: 5%;">
+                                <div style="margin: 5%;">
+                                    <h2 class="h2">
+                                        Solicitud
+                                    </h2>
                                 </div>
-                                <div style="" class="flex1">
-                                    <p style="width: 40%;">Apodo</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
+                                <div style="margin: 5%; height: 60%;">
+                                    <p style="width: 100%;">Introducir password para solicitud de Super User.</p>
+
+                                    <div style="margin-top: 5%;">
+                                        <input type="password" id="clave" name="clave"
+                                            placeholder="Escribe tu contraseña">
+                                    </div>
+
+                                    <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                        <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                    </div>
                                 </div>
-                                <div style="" class="flex1">
-                                    <p style="width: 40%;">Otro</p>
-                                    <textarea class="campoTexto" style="width: 60%; height: 30px;" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
+                            </div>
+
+                            <div id="modificarDatos" class="" style="height: 100%;">
+                                <div style="margin: 5%;">
+                                    <h2 class="h2">
+                                        Modificación de datos
+                                    </h2>
                                 </div>
-                                <div style="margin-top: 5%; display: flex; justify-content: end;">
-                                    <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                <div style="margin: 5%;">
+                                    <div style="height: 100%; display: flex; flex-direction: column; gap: 1rem;">
+                                        <div style="" class="flex1">
+                                            <p style="width: 40%;">Nombre completo</p>
+                                            <textarea class="campoTexto" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
+                                        </div>
+                                        <div style="" class="flex1">
+                                            <p style="width: 40%;">Apodo</p>
+                                            <textarea class="campoTexto" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
+                                        </div>
+                                        <div style="" class="flex1">
+                                            <p style="width: 40%;">Otro</p>
+                                            <textarea class="campoTexto" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
+                                        </div>
+                                        <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
+                                            <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
 
         </div>
 
-    </div>
+    </div>  
 
-</div>
-
+    <script src="{{ url('/js/btnsPerfil.js') }}"></script>
 @endsection

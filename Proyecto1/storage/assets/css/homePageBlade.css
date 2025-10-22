@@ -58,7 +58,6 @@
 }
 
 .contenedorPadreGrid {
-    border: 1px solid green;
     height: 200px;
 }
 
@@ -69,7 +68,6 @@
 
 .oculto {
     display: none;
-    border: 1px solid darkorange;
 }
 
 .alturaFija{
