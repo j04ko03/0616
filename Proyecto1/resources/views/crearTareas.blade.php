@@ -487,7 +487,22 @@
             </div>
             
             <!-- Columna derecha -->
-            <div class="right-column">
+            <div class="right-column">               
+                <div class="form-group">
+                    <div class="objetivos-dropdown">
+                        <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea. Haz clic para seleccionar cursos..." readonly></textarea>
+                        <div class="cursos-list">
+                            <div class="curso-group">Cursos Disponibles</div>
+                            <div class="curso-item" data-curso="Matemáticas Avanzadas">Matemáticas Avanzadas</div>
+                            <div class="curso-item" data-curso="Programación Web">Programación Web</div>
+                            <div class="curso-item" data-curso="Diseño Gráfico">Diseño Gráfico</div>
+                            <div class="curso-item" data-curso="Inglés Técnico">Inglés Técnico</div>
+                            <div class="curso-item" data-curso="Gestión de Proyectos">Gestión de Proyectos</div>
+                            <div class="curso-item" data-curso="Base de Datos">Base de Datos</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="user-dropdown">
                         <button type="button" id="add-user-btn">Añadir usuario</button>
@@ -505,21 +520,6 @@
                     </div>
                     <div id="tareas">
                         <!-- Los usuarios añadidos aparecerán aquí -->
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="objetivos-dropdown">
-                        <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea. Haz clic para seleccionar cursos..." readonly></textarea>
-                        <div class="cursos-list">
-                            <div class="curso-group">Cursos Disponibles</div>
-                            <div class="curso-item" data-curso="Matemáticas Avanzadas">Matemáticas Avanzadas</div>
-                            <div class="curso-item" data-curso="Programación Web">Programación Web</div>
-                            <div class="curso-item" data-curso="Diseño Gráfico">Diseño Gráfico</div>
-                            <div class="curso-item" data-curso="Inglés Técnico">Inglés Técnico</div>
-                            <div class="curso-item" data-curso="Gestión de Proyectos">Gestión de Proyectos</div>
-                            <div class="curso-item" data-curso="Base de Datos">Base de Datos</div>
-                        </div>
                     </div>
                 </div>
                 
