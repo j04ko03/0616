@@ -2,7 +2,7 @@
     --color-white: #ffffff; /*Color de la barra de navegación y recuadros de formularios*/
     --color-background: #f4f5f7; /* Color de fondo */
     --color-primary: #83c427; /* Color verde para botones importantes */
-    --color-primary-modifier: #b3eb65; /* Color verde para acciones en botones */
+    --color-primary-hover: #b3eb65; /* Color verde para acciones en botones */
     --color-dark: #202020; /* Color "negro" para textos */
     --color-link: #3379dd; /* Color azul para letra con interacción */
     --color-link-hover: #082854; /* Color azul oscuro para letra con interacción en la barra de navegación */
