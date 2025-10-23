@@ -1,295 +1,89 @@
 @extends('layouts.barraNavegacion')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url(path: '/css/crearTareas.css') }}">
+@endpush
+
 @section('content')
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
-        :root {
-            --color-primary: #83c427;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #f4f5f7;
-        }
-
-        /*    CREAR PROYECTO CONTAINER    */
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 10px;
-            box-sizing: border-box;
-            height: 100%;
-            width: 100%;
-        }
-
-        form {
-            box-sizing: border-box;
-            padding: 20px;
-
-            border: 1px solid black;
-            border-radius: 10px;
-
-            height: auto;
-            min-height: 700px;
-            width: 100%;
-            max-width: 900px;
-
-            margin: 40px auto 0 auto;
-
-            display: flex;
-            flex-direction: column;
-            font-family: "Lato";
-
-            position: relative;
-        }
-
-        #quit-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            background-color: #000;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            font-size: .8rem;
-
-            transition: all 400ms;
-        }
-
-        #quit-btn:hover {
-            background-color: #313131;
-        }
-
-        form>div {
-            flex: 1;
-            box-sizing: border-box;
-            margin-top: 30px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            height: 100%;
-        }
-
-        form>div>div {
-            display: flex;
-            flex-direction: column;
-            padding: 10px;
-            height: 100%;
-        }
-
-        form>div input {
-            margin-bottom: 40px;
-        }
-
-        #titulo {
-            background: #f9fafb;
-            font-size: 2rem;
-            font-family: "Zilla Slab", serif;
-            font-weight: 600;
-            border-bottom: 2px solid #83c427;
-
-            transition: all 400ms;
-        }
-
-        #titulo:hover,
-        #titulo:focus,
-        #titulo:active {
-            border: none;
-            outline: none;
-            box-shadow: none;
-            border-bottom: 2px solid #83c427;
-        }
-
-        input {
-            box-sizing: border-box;
-            padding: 10px;
-
-            transition: all 400ms;
-        }
-
-        input[type="number"],
-        input[type="date"] {
-            border: 2px solid transparent;
-        }
-
-        input[type="number"]:hover,
-        input[type="number"]:active,
-        input[type="number"]:focus,
-        input[type="date"]:hover,
-        input[type="date"]:active,
-        input[type="date"]:focus {
-            outline: none;
-            box-shadow: none;
-            border: 2px solid #83c427;
-        }
-
-        form button,
-        input[type="submit"] {
-            background: #83c427;
-            border-radius: 7px;
-            padding: 5px 15px;
-            cursor: pointer;
-            width: max-content;
-
-            transition: all 400ms;
-        }
-
-        form button:hover,
-        input[type="submit"]:hover {
-            background-color: #b3eb65;
-        }
-
-        #tareas .addUser{
-            margin-top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            overflow: auto;
-            max-height: 300px;
-        }
-
-        .tarea {
-            color: #636363;
-            font-size: .8rem;
-            border: 1px solid #636363;
-            border-radius: 5px;
-            padding: 5px;
-            background-color: #ffff;
-        }
-
-        #add-documento {
-            box-sizing: border-box;
-            border-radius: 10px;
-            cursor: pointer;
-            border: 2px solid #83c427;
-            width: 50%;
-            min-width: 170px;
-            height: 1rem;
-            padding: 20px;
-            position: relative;
-
-            transition: all 400ms;
-        }
-
-        #add-documento:hover {
-            background: #efefef;
-        }
-
-        #add-documento>input {
-            opacity: 0;
-            width: 20px;
-            height: 20px;
-        }
-
-        #add-documento>span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            font-size: .8rem;
-
-            white-space: nowrap;
-        }
-
-        #add-documento img {
-            width: 1.2rem;
-        }
-
-        input[type="submit"] {
-            margin: auto 0 0 auto;
-        }
-
-        #selected-documents {
-            font-style: italic;
-            color: #636363;
-            margin-top: 10px;
-            max-height: 200px;
-            overflow: auto;
-
-            list-style: inside;
-        }
-
-        #selected-documents>li {
-            font-size: 1rem;
-        }
-
-        @media (width < 600px) {
-            main {
-                padding: 0;
-            }
-
-            form {
-                margin: 10px 0 0 0;
-                border: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            form>div {
-                grid-template-columns: 1fr;
-            }
-
-            input[type="submit"] {
-                margin-top: 50px;
-            }
-        }
-    </style>
     <main>
         <form action="project" method="POST">
-            <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
-            <label for="titulo"></label>
-            <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
-                maxlength="100">
-            <div>
-                <div>
+        @csrf
+        <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
+        <label for="titulo"></label>
+        <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
+            maxlength="100">
+        <div>
+            <!-- Columna izquierda -->
+            <div class="left-column">
+                <div class="form-group">
                     <label for="fecha-limite">Fecha límite</label>
+                    <br>
                     <input type="date" name="fecha-limite" id="fecha-limite" required min="">
-
+                </div>
+                
+                <div class="form-group">
                     <label for="presupuesto">Presupuesto</label>
+                    <br>
                     <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€">
-                    
+                </div>
+                
+                <div class="documents-section">
                     <label for="documento" id="add-documento">
                         <input type="file" name="documento" id="documento" multiple="true"
-                                    accept=".pdf, .doc, .docx, .odt, .rtf, .txt">
+                                    accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .jpg, .jpeg, .png, .gif, .bmp">
                         <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
                         </span>
-                        </label>
-                        <ul id="selected-documents">No se han añadido documentos</ul>
-                </div>
-                <div>
-                    <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea..."></textarea>
-                </div>
-                <br>
-                <div class="addUser">
-                    <button type="button">Añadir usuario</button>
-                    <div id="tareas">
-                        <div class="tarea">Pepa</div>
-                        <div class="tarea">Juanjo</div>
-                    </div>
-                    <input type="submit" value="Añadir tarea">
+                    </label>
+                    <ul id="selected-documents"></ul>
                 </div>
             </div>
-        </form>
+            
+            <!-- Columna derecha -->
+            <div class="right-column">               
+                <div class="form-group">
+                    <div class="objetivos-dropdown">
+                        <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea. Haz clic para seleccionar cursos..." readonly></textarea>
+                        <div class="cursos-list">
+                            <div class="curso-group">Cursos Disponibles</div>
+                            <div class="curso-item" data-curso="Matemáticas Avanzadas">Matemáticas Avanzadas</div>
+                            <div class="curso-item" data-curso="Programación Web">Programación Web</div>
+                            <div class="curso-item" data-curso="Diseño Gráfico">Diseño Gráfico</div>
+                            <div class="curso-item" data-curso="Inglés Técnico">Inglés Técnico</div>
+                            <div class="curso-item" data-curso="Gestión de Proyectos">Gestión de Proyectos</div>
+                            <div class="curso-item" data-curso="Base de Datos">Base de Datos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="user-dropdown">
+                        <button type="button" id="add-user-btn">Añadir usuario</button>
+                        <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
+                        <div class="user-list">
+                            <div class="user-group">Grupos</div>
+                            <div class="user-item" data-user="Grupo 1">Grupo 1</div>
+                            <div class="user-item" data-user="Grupo 2">Grupo 2</div>
+                            <div class="user-group">Usuarios</div>
+                            <div class="user-item" data-user="Pepa">Pepa</div>
+                            <div class="user-item" data-user="Juanjo">Juanjo</div>
+                            <div class="user-item" data-user="María">María</div>
+                            <div class="user-item" data-user="Carlos">Carlos</div>
+                        </div>
+                    </div>
+                    <div id="tareas">
+                        <!-- Los usuarios añadidos aparecerán aquí -->
+                    </div>
+                </div>
+                
+                <div class="submit-container">
+                    <input type="submit" value="Añadir tarea" id="add-task-btn">
+                </div>
+            </div>
+        </div>
+    </form>
     </main>
-    </body>
+
     <script>
         const selectedDocs = document.querySelector("#selected-documents");
         const docInput = document.querySelector("#documento");
@@ -300,12 +94,124 @@
                     selectedDocs.insertAdjacentHTML("beforeend", `<li>${file.name}</li>`)
                 });
             } else {
-                selectedDocs.textContent = 'No se han añadido documentos'
+                selectedDocs.textContent = '';
             }
         })
 
         const today = new Date().toISOString().split("T")[0];
-        console.log(new Date().toISOString())
         document.querySelector("#fecha-limite").min = today;
+
+        // Funcionalidad para el desplegable de usuarios
+        const addUserBtn = document.getElementById('add-user-btn');
+        const userSearch = document.querySelector('.user-search');
+        const userList = document.querySelector('.user-list');
+        const tareasContainer = document.getElementById('tareas');
+        const userItems = document.querySelectorAll('.user-item');
+
+        addUserBtn.addEventListener('click', function() {
+            userSearch.style.display = 'block';
+            userList.classList.add('show');
+            userSearch.focus();
+        });
+
+        userSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            userItems.forEach(item => {
+                const userName = item.getAttribute('data-user').toLowerCase();
+                if (userName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Añadir usuario a la lista
+        userItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const userName = this.getAttribute('data-user');
+                addUserToList(userName);
+                userSearch.value = '';
+                userSearch.style.display = 'none';
+                userList.classList.remove('show');
+            });
+        });
+
+        function addUserToList(userName) {
+            // Verificar si el usuario ya está en la lista
+            const existingUsers = Array.from(tareasContainer.querySelectorAll('.tarea .user-name'));
+            const isUserAlreadyAdded = existingUsers.some(el => el.textContent === userName);
+            
+            if (!isUserAlreadyAdded) {
+                const userElement = document.createElement('div');
+                userElement.className = 'tarea';
+                userElement.innerHTML = `
+                    <span class="user-name">${userName}</span>
+                    <button class="remove-user" type="button">×</button>
+                `;
+                tareasContainer.appendChild(userElement);
+                
+                // Añadir funcionalidad al botón de eliminar
+                userElement.querySelector('.remove-user').addEventListener('click', function() {
+                    userElement.remove();
+                });
+            }
+        }
+
+        // Cerrar el desplegable al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-dropdown')) {
+                userSearch.style.display = 'none';
+                userList.classList.remove('show');
+            }
+        });
+
+        // Funcionalidad para el desplegable de cursos
+        const textArea = document.getElementById('textArea');
+        const cursosList = document.querySelector('.cursos-list');
+        const cursoItems = document.querySelectorAll('.curso-item');
+
+        // Mostrar/ocultar lista de cursos al hacer clic en el textarea
+        textArea.addEventListener('click', function() {
+            cursosList.classList.toggle('show');
+        });
+
+        // Seleccionar curso
+        cursoItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const cursoNombre = this.getAttribute('data-curso');
+                
+                // Si el textarea está vacío, añadir el primer curso
+                if (!textArea.value) {
+                    textArea.value = cursoNombre;
+                } else {
+                    // Si ya tiene contenido, añadir con coma
+                    const cursosActuales = textArea.value.split(', ');
+                    
+                    // Verificar si el curso ya está seleccionado
+                    if (!cursosActuales.includes(cursoNombre)) {
+                        textArea.value += ', ' + cursoNombre;
+                    }
+                }
+                
+                // Añadir clase para estilo visual
+                textArea.classList.add('filled');
+                
+                // Ocultar la lista después de seleccionar
+                cursosList.classList.remove('show');
+            });
+        });
+
+        // Cerrar el desplegable al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.objetivos-dropdown')) {
+                cursosList.classList.remove('show');
+            }
+        });
+
+        // Opcional: Permitir escribir manualmente además de seleccionar
+        textArea.addEventListener('focus', function() {
+            this.removeAttribute('readonly');
+        });
     </script>
 @endsection

@@ -228,6 +228,8 @@ option:hover {
     display: grid;
 }
 
+
+/* MEDIA QUERIES */
 @media (width < 700px) {
     #sprints {
         min-width: 100%;
