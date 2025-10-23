@@ -207,6 +207,7 @@ option:hover {
     color: #464646;
 }
 
+/* TASK TAGS */
 .tags-container {
     display: flex;
     gap: 5px;
@@ -321,6 +322,8 @@ option:hover {
     display: grid;
 }
 
+
+/* MEDIA QUERIES */
 @media (width < 700px) {
     #sprints {
         min-width: 100%;
