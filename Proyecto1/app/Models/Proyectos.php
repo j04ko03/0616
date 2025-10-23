@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Grupo;
 use App\Models\Tarea;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Model;
@@ -32,5 +33,15 @@ class Proyectos extends Model
     public function tareas(): HasMany
     {
         return $this->hasMany(Tarea::class, 'proyectoId');
+    }
+
+    /**
+     * The grupos that belong to the Proyectos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function grupos(): BelongsToMany
+    {
+        return $this->belongsToMany(Grupo::class, 'grupo_proyecto', 'proyectoid', 'grupoId');
     }
 }
