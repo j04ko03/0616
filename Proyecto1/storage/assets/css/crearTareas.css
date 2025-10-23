@@ -516,4 +516,8 @@
             .submit-container {
                 margin-top: 50px;
             }
+            #selected-documents {
+                height: 200px;
+                margin-bottom: 20px;
+            }
         }
