@@ -7,3 +7,48 @@ body,
 main {
     background-color: var(--color-background);
 }
+
+main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+#tab-container {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: var(--color-background);
+}
+
+.tabs-btn {
+    background-color: var(--color-background);
+    padding: 5px 20px;
+    border: 0;
+    border-bottom: 1px solid var(--color-dark);
+    cursor: pointer;
+    margin: 0;
+
+    transition: all 400ms;
+}
+
+.tabs-btn:hover {
+    background-color: var(--color-primary-hover);
+    border-bottom: 1px solid var(--color-primary-hover);
+}
+
+.btn-active,
+.btn-active:hover {
+    background-color: var(--color-primary);
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.tabs-content {
+    display: none;
+}
+
+.content-active {
+    display: grid;
+}

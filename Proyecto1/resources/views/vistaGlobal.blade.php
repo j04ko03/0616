@@ -16,20 +16,38 @@
         <div id="main-content">
             <div class="tabs-content content-section-1 content-active">
                 <!-- USUARIOS -->
-
+                <p>1</p>
             </div>
-            <div class="tabs-content content-section-2 content-active">
+            <div class="tabs-content content-section-2">
                 <!-- SOLICITUDES SUPERUSUARIO -->
-
+                <p>2</p>
             </div>
-            <div class="tabs-content content-section-3 content-active">
+            <div class="tabs-content content-section-3">
                 <!-- PROYECTOS -->
+                <p>3</p>
 
             </div>
-            <div class="tabs-content content-section-4 content-active">
+            <div class="tabs-content content-section-4">
                 <!-- GRUPOS -->
-
+                <p>4</p>
             </div>
         </div>
     </main>
+    <script>
+        const btnContainer = document.querySelector("#tab-container");
+        const tabsBtn = document.querySelectorAll(".tabs-btn");
+        const tabsContent = document.querySelectorAll(".tabs-content");
+
+        btnContainer.addEventListener("click", function(e) {
+            const clicked = e.target.closest(".tabs-btn");
+            if (!clicked) return;
+            tabsBtn.forEach((btn) => btn.classList.remove("btn-active"));
+            clicked.classList.add("btn-active");
+
+            tabsContent.forEach((tab) => tab.classList.remove("content-active"));
+            document
+                .querySelector(`.content-section-${clicked.dataset.tab}`)
+                .classList.add("content-active");
+        });
+    </script>
 @endsection
