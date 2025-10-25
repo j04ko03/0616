@@ -1,4 +1,4 @@
-        // Tabs functionality (tu código existente)
+        // Tabs functionality
         const btnContainer = document.querySelector("#tab-container");
         const tabsBtn = document.querySelectorAll(".tabs-btn");
         const tabsContent = document.querySelectorAll(".tabs-content");
