@@ -128,8 +128,6 @@ class SiteController extends Controller
     // Crear cuenta
     public function register(Request $request)
     {
-        // $testUsers = $this->getUsersTest();
-
         $request->validate([
             'name'     => 'required|string|max:255',
             'email'    => 'required|string|email|max:255|unique:users',
@@ -154,8 +152,6 @@ class SiteController extends Controller
 
     public function login (Request $request)
     {
-        // $testUsers = $this->getUsersTest();
-
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string'
@@ -180,7 +176,6 @@ class SiteController extends Controller
 
     public function signUp()
     {
-        // $testUsers = $this->getUsersTest();
         return view('signUp');
     }
 
