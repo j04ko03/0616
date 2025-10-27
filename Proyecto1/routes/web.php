@@ -32,6 +32,8 @@ Route::get('/project', [SiteController::class, 'project'])->name('project.contro
 Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
 Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
+Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
+Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
 Route::resource('showProjects', ProyectosController::class); 
 Route::resource('tasks', TareaController::class);
 
