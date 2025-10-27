@@ -24,9 +24,12 @@
         <!-- Queda oculto al cargar la página display: none; -->
         <div id="section-tareas" class="contenedorPadreGrid contenedorScroll oculto">
             <div class="gridCards margenElementsGridTareas">
-                @foreach ($tareasAsignadas as $tarea)
-                    <x-listItemTarea titulo="{{ $tarea['titulo'] }}" descripcion="{{ $tarea['descripcion'] }}"
-                        :tag="$tarea['tag']" />
+                @foreach($tareasAsignadas as $tarea)
+                        <x-listItemTarea
+                            titulo="{{ $tarea['titulo'] }}"
+                            descripcion="{{ $tarea['descripcion'] }}"
+                            :tag="$tarea['tag']"
+                        />
                 @endforeach
             </div>
         </div>
