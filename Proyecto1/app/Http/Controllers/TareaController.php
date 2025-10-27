@@ -28,7 +28,12 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $task = new Tarea();
+        $task->nombre = $request->input('nombre');
+        $task->descripcion = $request->input('descripcion');
+
+        $task->save();
+        return redirect()->route('crearProyecto.controller');
     }
 
     /**

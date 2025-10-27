@@ -12,7 +12,10 @@ class ProyectosController extends Controller
      */
     public function index()
     {
-        //
+        $queryProjects = Proyectos::query();
+
+        $proyectos = $queryProjects->orderby('id')->get();
+        return view('proyectos', compact('proyectos'));
     }
 
     /**
