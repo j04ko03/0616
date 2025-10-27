@@ -1,5 +1,4 @@
 .member {
-    min-width: 200px;
     display: grid;
     grid-template-columns: 100px auto;
     background-color: #fff;

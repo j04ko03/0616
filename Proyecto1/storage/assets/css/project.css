@@ -214,6 +214,8 @@ option:hover {
 }
 
 /*  MEMBERS CONTAINER */
+
+
 .content-section-4 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
