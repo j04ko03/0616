@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
