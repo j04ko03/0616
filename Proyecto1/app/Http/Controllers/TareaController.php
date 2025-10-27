@@ -33,7 +33,7 @@ class TareaController extends Controller
         $task->descripcion = $request->input('descripcion');
 
         $task->save();
-        return redirect()->route('crearProyecto.controller');
+        return redirect()->route('tasks.index');
     }
 
     /**
