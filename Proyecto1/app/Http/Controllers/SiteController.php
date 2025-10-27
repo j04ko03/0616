@@ -2,8 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Usuario; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
@@ -132,17 +134,25 @@ class SiteController extends Controller
     // Crear cuenta
     public function register(Request $request)
     {
+
+        // dd('Datos ingresados:', $request->all());
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    $usuario = Usuario::create([
+        'nombre' => $validated['nombre'],
+        'email' => $validated['email'],
+        'contraseña' => bcrypt($validated['password']),
+        'tipoUser' => 1,
+        'apodo' => null,
+        'fechaCreacion' => now(),
+    ]);
+
+        // dd('Usuario creado exitosamente:', $usuario);
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
@@ -153,20 +163,20 @@ class SiteController extends Controller
         return view ('signIn');
     }
 
-    public function login (Request $request)
+    public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string'
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            
-        return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+        if (Auth::attempt($credentials, $request->remember)) { //Token 
+            $request->session()->regenerate(); // Importante para seguridad porque cambia el ID de sesion y evitamos que ocurra lo que se llaman ataques de fijacion de sesion. Crea un nuevo token de sesion cada vez que el usuario inicia sesion.
+            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
         }
 
         return back()->withErrors([
-            'email' => 'Mail incorrecto.',
+            'email' => 'Email incorrecto.', 
             'password' => 'Contraseña incorrecta.',
         ]);
     }

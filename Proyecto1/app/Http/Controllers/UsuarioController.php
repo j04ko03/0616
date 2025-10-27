@@ -20,7 +20,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        // Se encarga solo y unicamente de mostrar el formulario al usuario. NO PROCESA DATOS.
+        return view('signUp');
     }
 
     /**
@@ -28,8 +29,29 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Procesa y guarda la informacion introducida por el usuario.
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:100',
+            'email' => 'required|string|email|max:100|unique:usuarios',
+            'contraseña' => 'required|string|min:8|confirmed',
+        ]);
+
+        $createUsuario = Usuario::create([
+            'nombre' => $validated['nombre'],
+            'email' => $validated['email'],
+            'contraseña' => bcrypt($validated['contraseña']),
+            'tipoUser' => 1,
+            'apodo' => null, // Ver de que pueda añadir su apodo despues (perfil).
+            'fechaCreacion' => now(),
+        ]);
+
+        logger('Usuario creado:', $usuario->toArray());
+
+    // Redirecciona después de guardar
+    return redirect()->route('home.controller')->with('success', 'Usuario creado exitosamente!');
     }
+
+    
 
     /**
      * Display the specified resource.
