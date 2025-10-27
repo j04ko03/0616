@@ -1,138 +1,80 @@
 @extends('layouts.barraNavegacion')
 
+@push('styles')
+    <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url(path: '/css/crearTareas.css') }}">
+@endpush
+
 @section('content')
-    <style>
-        /* Contenedor principal */
-        .crearTareas {
-            max-width: 600px;
-            margin: 0 auto;
-            margin-top: 20px;
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
+    <main>
+        <form action="project" method="POST">
+            <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
+            <label for="titulo"></label>
+            <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
+                maxlength="100">
+            <div>
+                <div>
+                    <div>
+                        <label for="fecha-limite">Fecha límite</label>
+                        <br>
+                        <input type="date" name="fecha-limite" id="fecha-limite" required min="">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="presupuesto">Presupuesto</label>
+                        <br>
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="10">
+                    </div>
+                    
+                    <label for="documento" id="add-documento">
+                            <input type="file" name="documento" id="documento" multiple="true"
+                                accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .png, .jpg, .jpeg, .svg, .webp">
+                            <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
+                            </span>
+                        </label>
+                    <ul id="selected-documents"></ul>
+                </div>
+                <div>               
+                    <div>
+                        <div id="textArea-objetivos">
+                            <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea. Haz clic para seleccionar cursos..." readonly></textarea>
+                            <div class="cursos-list">
+                                <div class="curso-group">Cursos Disponibles</div>
+                                <div class="curso-item" data-curso="Matemáticas Avanzadas">Matemáticas Avanzadas</div>
+                                <div class="curso-item" data-curso="Programación Web">Programación Web</div>
+                                <div class="curso-item" data-curso="Diseño Gráfico">Diseño Gráfico</div>
+                                <div class="curso-item" data-curso="Inglés Técnico">Inglés Técnico</div>
+                                <div class="curso-item" data-curso="Gestión de Proyectos">Gestión de Proyectos</div>
+                                <div class="curso-item" data-curso="Base de Datos">Base de Datos</div>
+                            </div>
+                        </div>
+                    </div>
 
-        /* Títulos */
-        .espacio {
-            font-size: 24px;
-            margin-bottom: 10px;
-            color: #2c3e50;
-            border-bottom: 2px solid #83C427;
-        }
+                    <div>
+                        <div>
+                            <button type="button" id="add-user-btn">Añadir usuario</button>
+                            <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
+                            <div class="user-list">
+                                <div class="user-group">Grupos</div>
+                                <div class="user-item" data-user="Grupo 1">Grupo 1</div>
+                                <div class="user-item" data-user="Grupo 2">Grupo 2</div>
+                                <div class="user-group">Usuarios</div>
+                                <div class="user-item" data-user="Pepa">Pepa</div>
+                                <div class="user-item" data-user="Juanjo">Juanjo</div>
+                                <div class="user-item" data-user="María">María</div>
+                                <div class="user-item" data-user="Carlos">Carlos</div>
+                            </div>
+                        </div>
+                        <div id="tareas">
+                            <!-- Los usuarios añadidos aparecerán aquí -->
+                        </div>
 
-        h2 {
-            font-size: 18px;
-            margin: 20px 0 10px 0;
-            color: #2c3e50;
-        }
+                        <input type="submit" value="Añadir tarea" id="add-task-btn">
+                    </div>
+                </div>
+            </div>
+    </form>
+    </main>
 
-        /* Párrafos */
-        p {
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        /* Campos de formulario */
-        input[type="date"],
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        /* Lista de usuarios */
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 15px 0;
-        }
-
-        li {
-            padding: 8px 12px;
-            margin-bottom: 8px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            border: 1px solid #e9ecef;
-            position: relative;
-        }
-
-        li:after {
-            content: "×";
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-weight: bold;
-            color: #dc3545;
-            cursor: pointer;
-        }
-
-        /* Botones */
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .addUser {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .addFiles {
-            background-color: #17a2b8;
-            color: white;
-        }
-
-        .addTask {
-            background-color: #28a745;
-            color: white;
-            font-weight: bold;
-            padding: 12px 20px;
-        }
-
-        /* Efectos hover para botones */
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-            transition: all 0.2s;
-        }
-
-        /* Estilo para el placeholder del textarea */
-        textarea::placeholder {
-            color: #6c757d;
-            font-style: italic;
-        }
-    </style>
-    <div class="crearTareas">
-        <h1 class="espacio">Título Tarea</h1>
-        <p>Indicar fecha límite</p>
-        <input type="date" name="calendar" id="calendar">
-        <textarea name="objetivoTarea" id="objetivoTarea" cols="30" rows="10" placeholder="Objetivo de la tarea..."></textarea>
-        <h2>Presupuesto</h2>
-        <input type="text" name="presupuesto" id="presupuesto" placeholder="... $">
-        <button class="addUser">Añadir usuario</button>
-        <ul>
-            <li placeholder="Pepa">Pepa</li>
-            <li placeholder="Juanjo">Juanjo</li>
-        </ul>
-
-        <button class="addFiles">Añadir documentos💼</button>
-        <button type="submit" class="addTask">Añadir tarea</button>
-    </div>
+    <script src="/js/tareas.js"></script>
 @endsection

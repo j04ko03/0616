@@ -54,33 +54,46 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div class="form-group password-container">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password"
-                       name="password"
-                       id="password"
-                       placeholder="Crea una contraseña"
-                       class="form-input"
-                       required>
+                <div class="password-input-wrapper">
+                    <input type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Crea una contraseña"
+                        class="form-input password-input"
+                        required>
+                    <button type="button" class="password-toggle" id="passwordToggle">
+                        <span class="eye-icon">🙈</span>
+                    </button>
+                </div>
                 @error('password')
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
 
-            <div class="form-group">
+            <!-- CONFIRMACIÓN DESPLEGABLE -->
+            <div class="form-group password-confirm-group password-container" id="passwordConfirmGroup">
                 <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
-                <input type="password"
-                       name="password_confirmation"
-                       id="password_confirmation"
-                       placeholder="Repite tu contraseña"
-                       class="form-input"
-                       required>
+                <div class="password-input-wrapper">
+                    <input type="password"
+                        name="password_confirmation"
+                        id="password_confirmation"
+                        placeholder="Repite tu contraseña"
+                        class="form-input password-input">
+                    <button type="button" class="password-toggle" id="passwordConfirmToggle">
+                        <span class="eye-icon">🙉</span>
+                    </button>
+                </div>
             </div>
-
+            <!-- TOGGLE PERSONALIZADO -->
             <div class="form-options">
-                <div class="form-check">
-                    <input type="checkbox" name="remember" id="remember">
-                    <label for="remember" class="form-check-label">Recordarme en este dispositivo</label>
+                <div class="toggle-container">
+                    <div class="toggle">
+                        <input type="checkbox" name="remember" id="rememberToggle">
+                        <label for="rememberToggle"></label>
+                    </div>
+                    <span class="toggle-label">Recordarme en este dispositivo</span>
                 </div>
             </div>
 
@@ -95,4 +108,5 @@
 </div>
 
     <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
+    <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

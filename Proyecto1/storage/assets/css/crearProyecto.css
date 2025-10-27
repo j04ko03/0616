@@ -1,0 +1,304 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+body {
+    background-color: var(--color-background);
+    height: 90vh;
+}
+
+div,
+div,
+ul,
+li {
+    font-size: 1rem;
+}
+
+/*    CREAR PROYECTO CONTAINER    */
+main {
+    background-color: var(--color-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+
+form {
+    box-sizing: border-box;
+    padding: 20px;
+
+    border: 1px solid var(--color-dark);
+    border-radius: 10px;
+
+    height: auto;
+    min-height: 700px;
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 40px auto 40px auto;
+
+    display: flex;
+    flex-direction: column;
+    font-family: "Lato";
+
+    position: relative;
+}
+
+#quit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 0.8rem;
+
+    transition: all 400ms;
+}
+
+form > div {
+    flex: 1;
+    box-sizing: border-box;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    height: 100%;
+}
+
+form > div > div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+}
+
+form > div input {
+    margin-bottom: 40px;
+}
+
+#titulo {
+    background: var(--color-background) !important;
+    font-size: 2rem;
+    font-family: "Zilla Slab", serif;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primary);
+
+    transition: all 400ms;
+}
+
+#titulo::selection {
+    background: var(--color-primary);
+}
+
+#titulo:hover,
+#titulo:focus,
+#titulo:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+input {
+    box-sizing: border-box;
+    padding: 10px !important;
+
+    transition: all 400ms;
+}
+
+form > div > div:first-child > label:first-child {
+    margin-top: 15px;
+}
+
+form > div > div:first-child > label:first-child,
+form > div > div:first-child > label:nth-child(3) {
+    margin-bottom: 10px;
+}
+
+#fecha-limite,
+#presupuesto {
+    border: 2px solid transparent;
+    color: #9ca3af;
+}
+
+#fecha-limite:is(:hover, :active, :focus),
+#presupuesto:is(:hover, :active, :focus) {
+    outline: none;
+    box-shadow: none;
+    border: 2px solid var(--color-primary);
+}
+
+form button,
+input[type="submit"] {
+    background: var(--color-primary);
+    border-radius: 7px;
+    padding: 5px 15px;
+    cursor: pointer;
+    width: max-content;
+
+    transition: all 400ms;
+}
+
+form button:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-primary-hover);
+}
+
+form > div > div:nth-child(2) > a {
+    width: max-content;
+}
+
+#tareas {
+    margin-top: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: auto;
+    max-height: 400px;
+    height: 400px;
+
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+}
+
+#tareas > p {
+    color: #636363;
+    font-style: italic;
+}
+
+.tarea {
+    color: #636363;
+    font-size: 0.8rem;
+    border: 1px solid #636363;
+    border-radius: 5px;
+    background-color: var(--color-white);
+
+    padding-left: 10px;
+    min-height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-btn {
+    background: var(--color-white);
+    color: #636363;
+    margin-left: auto;
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    transition: all 400ms;
+}
+
+.remove-btn:hover,
+.remove-btn:focus {
+    background: #e4645b;
+    color: #fff;
+}
+
+#add-documento {
+    box-sizing: border-box;
+    cursor: pointer;
+
+    border-radius: 10px;
+    border: 2px solid var(--color-primary);
+
+    width: 50%;
+    min-width: 170px;
+    max-width: 200px;
+    height: 1rem;
+
+    padding: 20px;
+    margin-top: auto;
+    position: relative;
+
+    transition: all 400ms;
+}
+
+#add-documento:hover {
+    background: #efefef;
+}
+
+#add-documento > input {
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+}
+
+#add-documento > p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    font-size: 0.8rem;
+
+    white-space: nowrap;
+}
+
+#add-documento img {
+    width: 1.2rem;
+}
+
+#selected-documents {
+    font-style: italic;
+    color: #636363;
+    max-height: 200px;
+    overflow: auto;
+
+    list-style: inside;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+#selected-documents > li {
+    font-size: 1rem;
+}
+
+#add-proyecto-btn {
+    margin: auto 0 0 auto;
+    padding: 7px 25px !important;
+}
+
+@media (width < 600px) {
+    main {
+        padding: 0;
+    }
+
+    form {
+        margin: 10px 0 0 0;
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    form > div {
+        grid-template-columns: 1fr;
+    }
+
+    #add-proyecto-btn {
+        margin-top: 70px;
+        margin-bottom: 0;
+    }
+
+    #selected-documents {
+        height: 200px;
+        margin-bottom: 20px;
+    }
+}

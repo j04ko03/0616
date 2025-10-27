@@ -193,4 +193,16 @@ class SiteController extends Controller
     }
 
 
+    public function project()
+    {
+        return view('project');
+    }
+
+    public function crearTareas(){
+        return view('crearTareas');
+    }
+
+    public function vistaGlobal(){
+        return view('vistaGlobal');
+    }
 }

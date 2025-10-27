@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
 @endpush
 
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OrgaTime Dashboard</title>
+    <title class="pestaña">OrgaTime</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @stack('styles')
 </head>
@@ -28,12 +29,11 @@
                 <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                     <a href="{{ route('proyectos.controller') }}" class="nav-link">Projects</a>
-                    <a href="#" class="nav-link">Reports</a>
                 </div>
             </div>
 
             <div class="navbar-right">
-                <span class="username">Nombre usuario</span>
+                <span class="username" href="{{ route('perfil.controller') }}">Juán</span>
                 <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
             </div>
         </div>
@@ -45,6 +45,7 @@
     </main>
 
     @stack('scripts')
-</body>
 
+    <script src="js/rutasMostrar.js"></script>
+</body>
 </html>
