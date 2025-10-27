@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const passwordConfirmGroup = document.getElementById('passwordConfirmGroup');
     const passwordConfirmInput = document.getElementById('password_confirmation');
     
-    // ===== FUNCIÓN MEJORADA PARA TOGGLE =====
+    // ===== FUNCIÓN PARA TOGGLE =====
     function setupPasswordToggle(toggleId, inputId) {
         const toggle = document.getElementById(toggleId);
         const input = document.getElementById(inputId);
@@ -22,11 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 eyeIcon.textContent = isPassword ? '🙉' : '🙈';
                 eyeIcon.title = isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña';
                 
-                // Feedback visual opcional
                 input.classList.toggle('password-visible', isPassword);
             });
             
-            // Inicializar título
             eyeIcon.title = 'Mostrar contraseña';
         }
     }
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setupPasswordToggle('passwordConfirmToggle', 'password_confirmation');
     }
     
-    // ===== LÓGICA DE CONFIRMACIÓN (igual que la tuya, que está perfecta) =====
+    // ===== LÓGICA DE CONFIRMACIÓN =====
     if (passwordInput && passwordConfirmGroup) {
         passwordConfirmGroup.style.display = 'none';
         
