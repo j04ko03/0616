@@ -19,15 +19,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log(data);
                     console.log(data.titulo);
                     console.log(data.descripcion);
-                    console.log(data.estado);
+                    console.log(data.estadoId);
 
                     //Cambio estado de proyecto en el hidde
-                    btnCerrar.style.backgroundColor = administrarColorProyecto(data.estado);
+                    btnCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
                     
+                    console.log("*****************************************************************************************");
+                    console.log(data);
+                    console.log("*****************************************************************************************");
+
                     data.tareas.forEach(tarea => {
                         console.log(tarea.titulo);
                         console.log(tarea.descripcion);
-                        tarea.tag.forEach(tag => {
+                        tarea.tags.forEach(tag => {
                             console.log(tag.descripcion);
                             console.log(tag.color);
                         });
@@ -39,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     descripcion.textContent = data.descripcion;
                     const numTasks = document.getElementById('numeroTareas');
                     numTasks.textContent = `NUMBER OF TASKS: ${data.tareas.length}`;
+
+                    const tipo = document.getElementById('tipoUsuario');
+                    tipo.textContent = data.pivot.rol;
 
                     const contenedorTareas = document.getElementById('contenedorTareasProyecto');
                     contenedorTareas.innerHTML = ''; // Limpiamos el contenedor antes de agregar nuevas tareas
@@ -69,13 +76,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let colorDevuelto;
                 console.log(color);
                 switch(color){
-                    case 0:
+                    case "1":
                         colorDevuelto = "red";
                         break;
-                    case 1:
+                    case "2":
                         colorDevuelto = "yellow";
                         break;
-                    case 2:
+                    case "3":
                         colorDevuelto = "green";
                         break;
                     default:

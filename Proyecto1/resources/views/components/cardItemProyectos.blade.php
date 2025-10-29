@@ -4,9 +4,12 @@
     $color = 'red'; // valor por defecto
     switch ($estado) {
         case 1:
-            $color = 'yellow';
+            $color = 'red';
             break;
         case 2:
+            $color = 'yellow';
+            break;
+        case 3:
             $color = 'green';
             break;
         default:
@@ -41,7 +44,7 @@
             <h2 class="titulo">{{ $titulo }}</h2>
         </div>
         <div class="padding-right">
-            <p class="texto-gris">Fecha de entrega</p>
+            <p class="texto-gris">{{ $fechaEntrega }}</p>
         </div>
     </div>
 

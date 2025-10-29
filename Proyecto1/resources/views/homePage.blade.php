@@ -28,8 +28,9 @@
                         <x-listItemTarea
                             titulo="{{ $tarea['titulo'] }}"
                             descripcion="{{ $tarea['descripcion'] }}"
-                            :tag="$tarea['tag']"
+                            :tag="$tarea['tags']"
                         />
+                        <!-- tags es la relación del modelo tareas, el metodo -->
                 @endforeach
             </div>
         </div>
@@ -42,7 +43,8 @@
                     <x-cardItemProyectos class="cardProyectoId"
                         titulo="{{ $proyectoT['titulo'] }}" 
                         descripcion="{{ $proyectoT['descripcion'] }}"
-                        estado="{{ $proyectoT['estado'] }}"
+                        estado="{{ $proyectoT['estadoId'] }}"
+                        fechaEntrega="{{ $proyectoT['fechaEntrega'] }}"
                         :data-proyecto="$proyectoT"
                     />
                 @endforeach
@@ -88,10 +90,10 @@
                             <p>Presupuesto: 00,00€</p>
                         </div>        
                         <div>
-                            <p>Responsable: xxxxxx</p>
+                            <p id="tipoUsuario">xxxxxx</p>
                         </div>
-                        <div style="width: 10%; display: flex; justify-content: center; background-color: green; border-radius: 10px;">
-                            <p>Entrega</p>
+                        <div>
+                            <p>Responsable:</p>
                         </div>
                     </div>
 
