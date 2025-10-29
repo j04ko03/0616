@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <form action="{{ route('register.controller') }}" method="POST">
+        <form action="{{ route('usuarios.register.process') }}" method="POST">
             @csrf
             
             <div class="form-group">

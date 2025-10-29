@@ -6,7 +6,6 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
@@ -132,72 +131,10 @@ class SiteController extends Controller
         return view('proyectos');
     }
 
-    // Crear cuenta
-    public function register(Request $request)
-    {
-
-        // dd('Datos ingresados:', $request->all());
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-    $usuario = Usuario::create([
-        'nombre' => $validated['nombre'],
-        'email' => $validated['email'],
-        'contraseña' => bcrypt($validated['password']),
-        'tipoUser' => 1,
-        'apodo' => null,
-        'fechaCreacion' => now(),
-    ]);
-
-        // dd('Usuario creado exitosamente:', $usuario);
-
-        return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
-    }
-
-    // Iniciar sesion
-    public function signIn ()
-    {
-        return view ('signIn');
-    }
-
-    public function login(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string'
-        ]);
-
-        if (Auth::attempt($credentials, $request->remember)) { //Token 
-            $request->session()->regenerate(); // Importante para seguridad porque cambia el ID de sesion y evitamos que ocurra lo que se llaman ataques de fijacion de sesion. Crea un nuevo token de sesion cada vez que el usuario inicia sesion.
-            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
-        }
-
-        return back()->withErrors([
-            'email' => 'Email incorrecto.', 
-            'password' => 'Contraseña incorrecta.',
-        ]);
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('signin.controller');
-    }
-
-    public function signUp()
-    {
-        return view('signUp');
-    }
-
     public function crearProyecto()
     {
         return view('crearProyecto');
     }
-
 
     public function project()
     {

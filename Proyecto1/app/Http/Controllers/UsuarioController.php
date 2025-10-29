@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
@@ -12,7 +13,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        // Listar todos los usuarios (para la vista de admin).
+        $usuarios = Usuario::all(); // Obtener todos los usuarios (all()).
+        return view('usuarios.index', compact('usuarios')); // Pasar usuarios a la vista.
     }
 
     /**
@@ -20,45 +23,52 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        // Se encarga solo y unicamente de mostrar el formulario al usuario. NO PROCESA DATOS.
+        // Vista del formulario de registro.
         return view('signUp');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) // Procesar registro.
     {
-        // Procesa y guarda la informacion introducida por el usuario.
+
+        // Se valida la entrada, se crea el usuario, se autentica y se redirige.
+
+        // Registro de nuevo usuario.
         $validated = $request->validate([
-            'nombre' => 'required|string|max:100',
-            'email' => 'required|string|email|max:100|unique:usuarios',
-            'contraseña' => 'required|string|min:8|confirmed',
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:Usuario',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $createUsuario = Usuario::create([
+        // Debug de los datos validados
+        // dd('Datos validados:', $validated);
+
+        // Crear usuario - solo los campos esenciales.
+        $usuario = Usuario::create([
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
-            'contraseña' => bcrypt($validated['contraseña']),
-            'tipoUser' => 1,
-            'apodo' => null, // Ver de que pueda añadir su apodo despues (perfil).
-            'fechaCreacion' => now(),
+            'contraseña' => bcrypt($validated['password']),
+            // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
-        logger('Usuario creado:', $usuario->toArray());
+        // Debug de usuario creado (COMENTA esto cuando funcione)
+        // dd('Usuario creado exitosamente:', $usuario->toArray());
 
-    // Redirecciona después de guardar
-    return redirect()->route('home.controller')->with('success', 'Usuario creado exitosamente!');
+        // Iniciar sesión automáticamente después del registro.
+        Auth::login($usuario);
+
+        return redirect()->route('home.controller')->with('success', '¡Cuenta creada exitosamente!');
     }
-
-    
 
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuario)
+    public function show(Usuario $usuario) // Mostrar perfil de usuario específico.
     {
-        //
+        // Vista del perfil de usuario específico.
+        return view('usuarios.show', compact('usuario'));
     }
 
     /**
@@ -66,7 +76,8 @@ class UsuarioController extends Controller
      */
     public function edit(Usuario $usuario)
     {
-        //
+        // Vista del formulario de edición de perfil
+        return view('usuarios.edit', compact('usuario')); 
     }
 
     /**
@@ -74,7 +85,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        //
+        // PROCESAR actualización de perfil.
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:Usuario,email,' . $usuario->id,
+            'apodo' => 'nullable|string|max:255',
+        ]);
+
+        $usuario->update($validated);
+
+        return redirect()->route('usuarios.show', $usuario)->with('success', 'Perfil actualizado exitosamente!');
     }
 
     /**
@@ -82,6 +102,75 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        //
+        // Eliminar usuario.
+        $usuario->delete();
+        return redirect()->route('vistaGlobal.controller')->with('success', 'Cuenta eliminada exitosamente!');
+    }
+
+    // =============================================
+    // MÉTODOS DE AUTENTICACIÓN
+    // =============================================
+
+    /**
+     * Mostrar formulario de inicio de sesión.
+     */
+    public function signIn()
+    {
+        return view('signIn');
+    }
+
+    /**
+     * Procesar inicio de sesión.
+     */
+    public function login(Request $request)
+    {
+
+        // Validar credenciales, intentar autenticar y redirigir.
+        
+        $credentials = $request->validate([
+            'email' => 'required|string|email',
+            'contraseña' => 'required|string'
+        ]);
+
+        $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
+
+        // He editado el config:/auth.php para que use 'contraseña' en lugar de 'password'.
+        if (Auth::attempt([
+            'email' => $credentials['email'],
+            'contraseña' => $credentials['contraseña']
+        ], $request->remember)) {
+            $request->session()->regenerate();
+            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email incorrecto.', 
+            'contraseña' => 'Contraseña incorrecta.',
+        ]);
+    }
+
+    /**
+     * Cerrar sesión.
+     */
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('usuarios.signin');
+    }
+
+    /**
+     * Mostrar formulario de registro (alias de create()).
+     */
+    public function register()
+    {
+        return $this->create();
+    }
+
+    /**
+     * Procesar registro (alias de store())
+     */
+    public function registerProcess(Request $request)
+    {
+        return $this->store($request);
     }
 }

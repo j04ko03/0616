@@ -40,9 +40,9 @@
                        value="{{ old('email') }}"
                        class="form-input"
                        required>
-                @error('email')
+                {{-- @error('email')
                     <span class="error-message">{{ $message }}</span>
-                @enderror
+                @enderror --}}
             </div>
 
 
@@ -50,7 +50,7 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="password-input-wrapper">
                     <input type="password"
-                        name="password"
+                        name="contraseña"
                         id="password"
                         placeholder="Crea una contraseña"
                         class="form-input password-input"
