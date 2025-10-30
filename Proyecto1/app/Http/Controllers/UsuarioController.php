@@ -48,9 +48,9 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
 
         // Crear usuario - solo los campos esenciales.
         $usuario = Usuario::create([
-            'nombre' => $validated['nombre'],
-            'email' => $validated['email'],
-            'contraseña' => bcrypt($validated['password']),
+            'nombre' => Hash::make($validated['nombre']),
+            'email' => Hash::make($validated['email']),
+            'contraseña' => Hash::make($validated['password']),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
@@ -75,11 +75,12 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
-    {
-        // Vista del formulario de edición de perfil
-        return view('usuarios.edit', compact('usuario')); 
-    }
+    // public function edit(Usuario $usuario)
+    // {
+    //     // Vista del formulario de edición de perfil
+    //     return view('usuarios.edit', compact('usuario')); 
+
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -93,7 +94,12 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
             'apodo' => 'nullable|string|max:255',
         ]);
 
-        $usuario->update($validated);
+        
+        $usuario->update([
+            'nombre' => Hash::make($validated['nombre']),
+            'email' => Hash::make($validated['email']),
+            'apodo' => $validated['apodo'],
+        ]);
 
         return redirect()->route('usuarios.show', $usuario)->with('success', 'Perfil actualizado exitosamente!');
     }
@@ -133,7 +139,7 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
             'contraseña' => 'required|string'
         ]);
 
-        // $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
+        $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
         // Verificar contraseña y autenticar.
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
