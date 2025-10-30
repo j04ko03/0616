@@ -33,7 +33,9 @@
             </div>
             <div class="tabs-content content-section-2">
                 <!-- SOLICITUDES SUPERUSUARIO -->
-                <p>2</p>
+                @for ($i = 0; $i < 20; $i++)
+                    <x-suRequestItem />
+                @endfor
             </div>
             <div class="tabs-content content-section-3">
                 <!-- PROYECTOS -->
@@ -62,5 +64,14 @@
                 .querySelector(`.content-section-${clicked.dataset.tab}`)
                 .classList.add("content-active");
         });
+
+        const denyBtns = document.querySelectorAll(".deny");
+        const acceptBtn = document.querySelectorAll(".accept");
+
+        denyBtns.forEach(btn => {
+            btn.addEventListener("click", function(e) {
+                const target = e.target.closest(".member").remove()
+            })
+        })
     </script>
 @endsection

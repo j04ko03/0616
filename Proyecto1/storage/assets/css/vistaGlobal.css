@@ -101,11 +101,14 @@ svg {
 }
 
 /*   SECTION 1   */
-.content-section-1 {
+.tabs-content {
     max-width: 100%;
     flex-wrap: wrap;
-    justify-content: stretch;
     gap: 20px;
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: 5px;
 }
 
 .member {
@@ -114,7 +117,7 @@ svg {
 }
 
 .member:last-child {
-    flex: 1;
+    justify-self: start;
 }
 
 @media (width < 600px) {
