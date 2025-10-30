@@ -139,7 +139,7 @@ class UsuarioController extends Controller
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
             Auth::login($usuario, $request->remember);
             $request->session()->regenerate();
-            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!')->with('usuario', $usuario);
         }
 
         if ($usuario && Hash::check($request -> contraseña, $hashedValue))
