@@ -23,7 +23,7 @@
             </div>
         @endif
 
-        <form action="{{ route('register.controller') }}" method="POST">
+        <form action="{{ route('usuarios.register.process') }}" method="POST">
             @csrf
             
             <div class="form-group">
@@ -41,15 +41,15 @@
             </div>
 
             <div class="form-group">
-                <label for="name" class="form-label">Nombre usuario</label>
+                <label for="nombre" class="form-label">Nombre usuario</label>
                 <input type="text"
-                       name="name"
-                       id="name"
+                       name="nombre" 
+                       id="nombre" 
                        placeholder="Tu nombre de usuario"
-                       value="{{ old('name') }}"
+                       value="{{ old('nombre') }}" 
                        class="form-input"
                        required>
-                @error('name')
+                @error('nombre') 
                     <span class="error-message">{{ $message }}</span>
                 @enderror
             </div>
@@ -86,7 +86,7 @@
                     </button>
                 </div>
             </div>
-            <!-- TOGGLE PERSONALIZADO -->
+
             <div class="form-options">
                 <div class="toggle-container">
                     <div class="toggle">

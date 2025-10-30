@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Grupo;
 use App\Models\Tarea;
+use App\Models\Estado;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -43,5 +44,15 @@ class Proyectos extends Model
     public function grupos(): BelongsToMany
     {
         return $this->belongsToMany(Grupo::class, 'grupo_proyecto', 'proyectoid', 'grupoId');
+    }
+
+    /**
+     * Get all of the estado for the Proyectos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function estado(): HasMany
+    {
+        return $this->hasMany(Estado::class, 'id');
     }
 }

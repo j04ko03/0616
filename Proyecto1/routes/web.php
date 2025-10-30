@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TareaController;
+use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectosController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -14,28 +16,33 @@ Route::get('/', function () {
 
 
 // Rutas para sign in y sign up
-Route::get('/signup', [SiteController::class, 'signUp'])->name('signup.controller');
-Route::get('/signin', [SiteController::class, 'signIn'])->name('signin.controller');
+Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');
+Route::get('/signin', [UsuarioController::class, 'signIn'])->name('signin.controller');
 
 // Ruta del formulario
     // Crear cuenta
-Route::post('/register', [SiteController::class, 'register'])->name('register.controller');
+Route::post('/register', [UsuarioController::class, 'register'])->name('register.controller');
+Route::post('/register', [UsuarioController::class, 'registerProcess'])->name('usuarios.register.process');
     // Iniciar sesion
-Route::post('/signin', [SiteController::class, 'login'])->name('login.controller');
+Route::get('/login', [UsuarioController::class, 'login'])->name('login.controller');
 
 
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
-Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
+Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
 Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
+    // Rutas para crear tareas dentro de /project
+    Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
+    Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); 
 Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
 Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
-Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
-Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
 Route::resource('showProjects', ProyectosController::class); 
 Route::resource('tasks', TareaController::class);
+
+// Ruta de recursos para usuarios (CRUD)
+Route::resource('usuarios', UsuarioController::class);
 
 //Carga de Scripts
 Route::get('/js/{filename}', function ($filename) {
