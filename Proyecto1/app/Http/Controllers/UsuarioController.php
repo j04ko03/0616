@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UsuarioController extends Controller
+class UsuarioController extends Controller // Controlador para gestionar usuarios
 {
     /**
      * Display a listing of the resource.
