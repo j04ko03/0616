@@ -3,8 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
@@ -125,26 +125,28 @@ class SiteController extends Controller
         return view('perfil');
     }
 
+    public function proyectos()
+    {
+        return view('proyectos');
+    }
+
     // Crear cuenta
     public function register(Request $request)
     {
-        // $testUsers = $this->getUsersTest();
-
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|max:255|unique:users',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
+            'name' => $request->name,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
         return redirect()->route('home.controller')->with('success', 'Cuenta creada exitosamente!');
     }
-
 
     // Iniciar sesion
     public function signIn ()
@@ -154,8 +156,6 @@ class SiteController extends Controller
 
     public function login (Request $request)
     {
-        // $testUsers = $this->getUsersTest();
-
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string'
@@ -180,17 +180,14 @@ class SiteController extends Controller
 
     public function signUp()
     {
-        // $testUsers = $this->getUsersTest();
         return view('signUp');
     }
 
-    public function crearProyecto(){
+    public function crearProyecto()
+    {
         return view('crearProyecto');
     }
 
-    public function proyectos(){
-        return view('proyectos');
-    }
 
     public function project()
     {

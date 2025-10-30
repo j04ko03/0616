@@ -1,7 +1,7 @@
 @extends('layouts.barraNavegacion')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('/css/project.css') }}">
 @endpush
 
@@ -39,9 +39,7 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -50,9 +48,7 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -61,22 +57,26 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
+
+                <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
                 <div class="tabs-content content-section-2">
+                    <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            @for ($i = 0; $i < 8; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                            <!-- Tareas -->
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
+                    </div>
+                    <div class="kanban-task-container">
+                        <h3>IN PROGRESS</h3>
+                        <div class="task-container">
+                            <!-- Tareas -->
+                        </div>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -84,10 +84,10 @@
                             @for ($i = 0; $i < 6; $i++)
                                 <x-taskItemProject />
                             @endfor
+
+                            <!-- Tareas -->
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -95,12 +95,13 @@
                             @for ($i = 0; $i < 10; $i++)
                                 <x-taskItemProject />
                             @endfor
+
+                            <!-- Tareas -->
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
+
                 <div class="tabs-content content-section-3">
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
@@ -108,10 +109,10 @@
                             @for ($i = 0; $i < 5; $i++)
                                 <x-taskItemProject />
                             @endfor
+
+
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -119,10 +120,10 @@
                             @for ($i = 0; $i < 6; $i++)
                                 <x-taskItemProject />
                             @endfor
+
+
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -130,20 +131,49 @@
                             @for ($i = 0; $i < 4; $i++)
                                 <x-taskItemProject />
                             @endfor
+
+
                         </div>
-                        <a href="tareas">
-                            <button class="add-task">+ ADD TASK</button>
-                        </a>
+                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
+
                 <div class="tabs-content content-section-4">
                     @for ($i = 0; $i < 5; $i++)
                         <x-memberItem />
                     @endfor
+
+                    <div class="member">
+                        <div class="pfp">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
+                                alt="Profile picture">
+                        </div>
+                        <div>
+                            <span>
+                                <p>Nombre integrante</p>
+                                <button class="button-task">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                        <path
+                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                    </svg>
+                                </button>
+                            </span>
+                            <p>Rol</p>
+                            <p>correo@ejemplo.com</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </main>
     </body>
+
+    @component('components.popUpTarea')
+    @endcomponent
+
+    <script src="{{ url('/js/popUpTarea.js') }}"></script>
+
     <script>
         const btnContainer = document.querySelector("#tab-container");
         const tabsBtn = document.querySelectorAll(".tabs-btn");
