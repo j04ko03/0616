@@ -627,11 +627,15 @@ namespace App\Models {
     /**
      * App\Models\Proyectos
      *
+     * @property string|null $linkProyecto
+     * @property float|null $presupuesto
+     * @property string|null $fechaModificacion
+     * @property string|null $descripcion
      * @property mixed $isDeleted
      * @property int $estadoId
      * @property string $fechaEntrega
      * @property string $fechaCreacion
-     * @property string $nombre
+     * @property string $titulo
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Usuario> $usuarios
      * @property-read int|null $usuarios_count
@@ -642,11 +646,15 @@ namespace App\Models {
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Estado> $estado
      * @property-read int|null $estado_count
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereNombre($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereTitulo($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereFechacreacion($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereFechaentrega($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereEstadoid($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereIsdeleted($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereDescripcion($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereFechamodificacion($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos wherePresupuesto($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereLinkproyecto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos query()
@@ -950,7 +958,7 @@ namespace App\Models {
     /**
      * App\Models\Tag
      *
-     * @property bool $color
+     * @property string $color
      * @property string|null $descripcion
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tarea> $tareas
@@ -1266,13 +1274,13 @@ namespace App\Models {
      * @property int $proyectoId
      * @property int $estadoId
      * @property string|null $descripcion
-     * @property string $nombre
+     * @property string $titulo
      * @property int $id
      * @property-read \App\Models\Proyectos $proyecto
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $tags
      * @property-read int|null $tags_count
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereNombre($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereTitulo($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereDescripcion($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereEstadoid($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereProyectoid($value)
@@ -2215,7 +2223,7 @@ namespace App\Models {
      * @method static mixed macroCall($method, $parameters)
      * @mixin \Illuminate\Database\Query\Builder
      */
-    class Usuario extends \Illuminate\Database\Eloquent\Model
+    class Usuario extends \Illuminate\Foundation\Auth\User
     {
         //
     }
