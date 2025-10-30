@@ -42,7 +42,7 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     /**
      * The proyectos that belong to the Usuario
      */
-    public function proyectos(): BelongsToMany
+    public function proyectos(): BelongsToMany // Relación muchos a muchos con Proyectos
     {
         return $this->belongsToMany(Proyectos::class, 'usuario_proyecto', 'usuarioId', 'proyectoId')->withPivot('rol');
     }
