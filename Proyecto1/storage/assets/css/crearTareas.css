@@ -12,7 +12,8 @@
         }
 
         body {
-            background-color: #f4f5f7;
+            background-color: var(--color-background);
+            height: 90vh;
         }
 
         /*    CREAR PROYECTO CONTAINER    */
@@ -30,16 +31,32 @@
         form {
             box-sizing: border-box;
             padding: 20px;
-            border: 1px solid black;
+
+            border: 1px solid var(--color-dark);
             border-radius: 10px;
+
             height: auto;
-            min-height: 450px;
+            min-height: 700px;
             width: 100%;
-            max-width: 900px;
-            margin: 40px auto 0 auto;
+            max-width: 1200px;
+
+            margin: 40px auto 40px auto;
+
             display: flex;
             flex-direction: column;
+            font-family: "Lato";
+
             position: relative;
+        }
+
+        #titulo {
+            background: var(--color-background) !important;
+            font-size: 2rem;
+            font-family: "Zilla Slab", serif;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-primary);
+
+            transition: all 400ms;
         }
 
         #quit-btn {
@@ -71,20 +88,6 @@
             height: 100%;
         }
 
-        .left-column, .right-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .left-column {
-            padding-right: 20px;
-        }
-
-        .right-column {
-            padding-left: 20px;
-        }
-
         form > div > div {
             display: flex;
             flex-direction: column;
@@ -98,7 +101,6 @@
         }
 
         #titulo {
-            background: #f9fafb;
             font-size: 2rem;
             font-weight: 600;
             border-bottom: 2px solid #83c427;
@@ -136,6 +138,19 @@
             border: 2px solid #83c427;
         }
 
+        #fecha-limite,
+        #presupuesto {
+            border: 2px solid transparent;
+            color: #9ca3af;
+        }
+
+        #fecha-limite:is(:hover, :active, :focus),
+        #presupuesto:is(:hover, :active, :focus) {
+            outline: none;
+            box-shadow: none;
+            border: 2px solid var(--color-primary);
+        }
+
         form button,
         input[type="submit"] {
             background: #83c427;
@@ -150,6 +165,11 @@
         input[type="submit"]:hover {
             background-color: #b3eb65;
         }
+
+        form > div > div:nth-child(2) > a {
+            width: max-content;
+        }
+
 
         #tareas-container {
             margin-top: 20px;
@@ -287,14 +307,10 @@
         #add-task-btn {
             margin: auto 0 0 auto;
             margin-left: 400px;
+            margin-top: 170px;
             padding: 7px 25px !important;
         }
-
-        /* Estilos para el calendario */
-        input[type="date"] {
-            width: 100%;
-            max-width: 200px;
-        }
+        
 
         /* ESTILOS PARA EL TEXTAREA CORREGIDO */
         #textArea {
@@ -329,44 +345,6 @@
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
-        }
-
-        /* MEDIA QUERY CORREGIDA */
-        @media (max-width: 600px) {
-            main {
-                padding: 0;
-            }
-
-            form {
-                margin: 10px 0 0 0;
-                border: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            form > div {
-                grid-template-columns: 1fr;
-            }
-            
-            .left-column {
-                border-right: none;
-                border-bottom: 1px solid #e0e0e0;
-                padding-right: 0;
-                padding-bottom: 20px;
-            }
-            
-            .right-column {
-                padding-left: 0;
-                padding-top: 20px;
-            }
-            
-            #textArea {
-                height: 150px;
-            }
-
-            .submit-container {
-                margin-top: 50px;
-            }
         }
 
         /* Estilos para el desplegable de cursos */
@@ -436,6 +414,43 @@
             width: 500px;
         }
 
+        form > div > div {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            height: 100%;
+        }
+
+        form > div input {
+            margin-bottom: 40px;
+        }
+
+        form > div > div:first-child > label:first-child {
+            margin-top: 15px;
+        }
+
+        form > div > div:first-child > label:first-child,
+        form > div > div:first-child > label:nth-child(3) {
+            margin-bottom: 10px;
+        }
+
+        form button,
+        input[type="submit"] {
+            background: var(--color-primary);
+            border-radius: 7px;
+            padding: 5px 15px;
+            cursor: pointer;
+            width: max-content;
+
+            transition: all 400ms;
+        }
+
+        form button:hover,
+        input[type="submit"]:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+
         #add-documento {
             box-sizing: border-box;
             border-radius: 10px;
@@ -448,4 +463,61 @@
             position: relative;
             transition: all 400ms;
             margin-top: 146px;
+        }
+
+        #fecha-limite, #presupuesto {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dcdfe6;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background-color: #fafbfc;
+        }
+        
+        #fecha-limite, #presupuesto:focus {
+            outline: none;
+            background-color: white;
+        }
+
+        /* MEDIA QUERY CORREGIDA */
+        @media (max-width: 600px) {
+            main {
+                padding: 0;
+            }
+
+            form {
+                margin: 10px 0 0 0;
+                border: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            form > div {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding-right: 0;
+                padding-bottom: 20px;
+            }
+            
+            .right-column {
+                padding-left: 0;
+                padding-top: 20px;
+            }
+            
+            #textArea {
+                height: 150px;
+            }
+
+            .submit-container {
+                margin-top: 50px;
+            }
+            #selected-documents {
+                height: 200px;
+                margin-bottom: 20px;
+            }
         }
