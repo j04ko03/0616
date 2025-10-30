@@ -24,7 +24,7 @@ Route::get('/signin', [UsuarioController::class, 'signIn'])->name('signin.contro
 Route::post('/register', [UsuarioController::class, 'register'])->name('register.controller');
 Route::post('/register', [UsuarioController::class, 'registerProcess'])->name('usuarios.register.process');
     // Iniciar sesion
-Route::post('/login', [UsuarioController::class, 'login'])->name('login.controller');
+Route::get('/login', [UsuarioController::class, 'login'])->name('login.controller');
 
 
 // Rutas dentro de la aplicación
