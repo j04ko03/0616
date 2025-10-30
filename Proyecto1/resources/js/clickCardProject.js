@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-            //Cojemos el id del contenedor de todos los proyectos x
+            //Cojemos el id del contenedor de todos los proyectos
             const contenedorAllProyectos = document.getElementById('contenedorTodosProyectos');
             //Buscamos el id de la card a seleccionar
             const cards = document.querySelectorAll('.cardProyectoId');
