@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Auth;
-
-class Usuario extends Auth
+ 
+class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
     use HasFactory;
 
@@ -42,7 +42,7 @@ class Usuario extends Auth
     /**
      * The proyectos that belong to the Usuario
      */
-    public function proyectos(): BelongsToMany
+    public function proyectos(): BelongsToMany // Relación muchos a muchos con Proyectos
     {
         return $this->belongsToMany(Proyectos::class, 'usuario_proyecto', 'usuarioId', 'proyectoId')->withPivot('rol');
     }

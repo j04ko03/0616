@@ -5,7 +5,6 @@ use App\Models\Tarea;
 use App\Models\Usuario;
 use App\Models\Proyectos;
 use App\Models\User;
-use App\Models\Usuario; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +14,6 @@ class SiteController extends Controller
 {
     public function home()
     {
-        //Carga de base de datos a objetos
         $proyectosRecientes = Proyectos::orderBy('fechaModificacion', 'desc')
                                ->take(6)
                                ->get();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -132,16 +133,16 @@ class UsuarioController extends Controller
             'contraseña' => 'required|string'
         ]);
 
-        $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
+        // $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
-        // He editado el config:/auth.php para que use 'contraseña' en lugar de 'password'.
-        if (Auth::attempt([
-            'email' => $credentials['email'],
-            'contraseña' => $credentials['contraseña']
-        ], $request->remember)) {
+        // Verificar contraseña y autenticar.
+        if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
+            Auth::login($usuario, $request->remember);
             $request->session()->regenerate();
-            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!')->with('usuario', $usuario);
         }
+
+        if ($usuario && Hash::check($request -> contraseña, $hashedValue))
 
         return back()->withErrors([
             'email' => 'Email incorrecto.', 
@@ -155,7 +156,7 @@ class UsuarioController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('usuarios.signin');
+        return redirect()->route('signin.controller');
     }
 
     /**
