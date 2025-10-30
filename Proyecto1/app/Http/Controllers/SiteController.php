@@ -14,7 +14,6 @@ class SiteController extends Controller
 {
     public function home()
     {
-        //Carga de base de datos a objetos
         $proyectosRecientes = Proyectos::orderBy('fechaModificacion', 'desc')
                                ->take(6)
                                ->get();
