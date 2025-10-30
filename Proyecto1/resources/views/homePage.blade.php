@@ -61,13 +61,7 @@
                             <div style="width: 50%; height: auto; display: flex; align-items: flex-start;">
                                 <h3 class="text-l font-bold mb-2 texto-cortado" style="white-space: normal; overflow-wrap: break-word; word-break: break-all; margin: 0">Descripción</h3>
                             </div>
-                            <div style="width: 50%; height: 100%; display: flex; justify-content: flex-end;">
-                                <div style="width: 50px; height: 25px; background-color: blue; margin-left: 2px;">
-
-                                </div>
-                                <div style="width: 50px; height: 25px; background-color: blue; margin-left: 2px;">
-
-                                </div>
+                            <div id="tagsCompartidos" style="width: 50%; height: 100%; display: flex; justify-content: flex-end;">
                                 <div style="width: 50px; height: 25px; background-color: blue; margin-left: 2px;">
 
                                 </div>
@@ -81,13 +75,13 @@
                     </div>
 
                     <div style="width: 100%; height: auto; display: flex; align-items: flex-start; margin-left: 1%; overflow: hidden; margin-top: 10px;">
-                                <h3 class="text-l font-bold mb-2 texto-cortado" style="white-space: normal; overflow-wrap: break-word; word-break: break-all; margin: 0">Link del proyecto  </h3>
-                                <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-left: 3px; flex: 1;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vero architecto a optio eius, dolorem ullam! Itaque debitis veniam repudiandae architecto exercitationem necessitatibus dicta ut cum corrupti, numquam adipisci recusandae eum!º</p>
+                                <h3 class="text-l font-bold mb-2 texto-cortado" style="white-space: normal; overflow-wrap: break-word; word-break: break-all; margin: 0">Link del proyecto:  </h3>
+                                <a id="linkOut" href=""><p id="link" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-left: 3px; flex: 1;">X</p></a>
                     </div>
 
                     <div style="width: 99%; height: auto; display: flex; align-items: center; justify-content: space-around; margin-left: 2%; margin-top: 10px;">
                         <div>
-                            <p>Presupuesto: 00,00€</p>
+                            <p  id="presupuesto">Presupuesto: 00,00€</p>
                         </div>        
                         <div>
                             <p id="tipoUsuario">xxxxxx</p>
