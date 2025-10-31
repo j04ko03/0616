@@ -158,37 +158,19 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
             Auth::login($usuario, $request->remember);
             $request->session()->regenerate();
-            // return redirect()->route('home.controller', 'navbar.controller')->with('success', '¡Bienvenid@ de nuevo!');
+            $response = redirect('/'); // Nos lleva a la ruta protegida por auth middleware (home)
+            
         } else {
-            return back()->withErrors([
-                'email' => 'Email incorrecto.', 
-                'contraseña' => 'Contraseña incorrecta.',
-            ]); //todo: mejorar mensaje de error.
+            session()->flash('error', 'Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+            $response = redirect()->back()->withInput();
         }
 
-        // $usuarios = Usuario::all();
-        // $usuarioEncontrado = null;
+        return $response;
 
-        // foreach ($usuarios as $usuario) {
-        //     if ($request->input(Hash::check($credentials['email'], $usuario ->email))) {
-        //         $usuarioEncontrado = $usuario;
-        //         break;
-        //     }
-        // }
-
-        // // Verificar contraseña y autenticar.
-        // if ($usuarioEncontrado && Hash::check($credentials['contraseña'], $usuarioEncontrado->contraseña)) {
-        //     Auth::login($usuarioEncontrado, $request->remember);
-        //     $request->session()->regenerate();
-        //     return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
-        // }
-
-        // if ($usuario && Hash::check($request -> contraseña, $hashedValue))
-
-        return back()->withErrors([
-            'email' => 'Email incorrecto.', 
-            'contraseña' => 'Contraseña incorrecta.',
-        ]);
+        // return back()->withErrors([
+        //     'email' => 'Email incorrecto.', 
+        //     'contraseña' => 'Contraseña incorrecta.',
+        // ]);
     }
 
     /**
