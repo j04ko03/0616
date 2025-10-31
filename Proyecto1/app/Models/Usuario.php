@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Auth;
+use Illuminate\Notifications\Notifiable;
  
 class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
-    protected $table = 'Usuario'; 
-
-    // Desactiva timestamps si tu tabla no tiene created_at y updated_at
+    protected $table = 'Usuario';
+    protected $primaryKey = 'id'; 
+    protected $autoIncrement = true;
+    protected $keyType = 'int';
     public $timestamps = false;
 
     // Masificacion de campos asignables
@@ -54,4 +56,15 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     {
         return $this->belongsToMany(Grupo::class, 'grupo_usuario', 'usuarioId', 'grupoId');
     }
+
+    /**
+     * The rol that belong to the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function rol(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'tipoUser', 'id', 'id');
+    }
+    
 }

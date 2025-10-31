@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Hash;
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
 {
+
+    public function navbar()
+    {
+        return view('layouts.barraNavegacion');
+    }
+    
     public function home()
     {
         //Carga de base de datos a objetos

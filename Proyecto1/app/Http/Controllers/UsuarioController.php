@@ -15,8 +15,8 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
     public function index()
     {
         // Listar todos los usuarios (para la vista de admin).
-        $usuarios = Usuario::all(); // Obtener todos los usuarios (all()).
-        return view('usuarios.index', compact('usuarios')); // Pasar usuarios a la vista.
+        $usuarios = Usuario::orderBy('tipoUser', 'desc')->get(); // Obtener todos los usuarios (all()).
+        return view('vistaGlobal.index', compact('usuarios')); // Pasar usuarios a la vista del blade vista global.
     }
 
     /**
@@ -25,7 +25,7 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
     public function create()
     {
         // Vista del formulario de registro.
-        return view('signUp');
+        return view('auth.signUp');
     }
 
     /**
@@ -45,22 +45,31 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
 
         // Debug de los datos validados
         // dd('Datos validados:', $validated);
+        
+        // Crear usuario v1
+        // $usuario = Usuario::create([
+        //     'nombre' => Hash::make($validated['nombre']),
+        //     'email' => Hash::make($validated['email']),
+        //     'contraseña' => Hash::make($validated['password']),
+        //     // tipoUser, apodo y fechaCreacion se asignan automáticamente.
+        // ]);
+        
+        // Crear usuario v2.
+        $usuario = new Usuario();
+        $usuario->nombre = Hash::make($validated['nombre']);
+        $usuario->email = Hash::make($validated['email']);
+        $usuario->contraseña = Hash::make($validated['contraseña']);
+        $usuario->save();
 
-        // Crear usuario - solo los campos esenciales.
-        $usuario = Usuario::create([
-            'nombre' => Hash::make($validated['nombre']),
-            'email' => Hash::make($validated['email']),
-            'contraseña' => Hash::make($validated['password']),
-            // tipoUser, apodo y fechaCreacion se asignan automáticamente.
-        ]);
+
 
         // Debug de usuario creado (COMENTA esto cuando funcione)
         // dd('Usuario creado exitosamente:', $usuario->toArray());
 
-        // Iniciar sesión automáticamente después del registro.
+        // Iniciar sesión automáticamente después del registro. Hace falta el return en esta función? 
         Auth::login($usuario);
 
-        return redirect()->route('home.controller')->with('success', '¡Cuenta creada exitosamente!');
+        // return redirect()->route('home.controller')->with('success', '¡Cuenta creada exitosamente!');
     }
 
     /**
@@ -75,12 +84,11 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Usuario $usuario)
-    // {
-    //     // Vista del formulario de edición de perfil
-    //     return view('usuarios.edit', compact('usuario')); 
-
-    // }
+    public function edit(Usuario $usuario)
+    {
+        // Vista del formulario de edición de perfil
+        return view('usuarios.edit', compact('usuario')); 
+    }
 
     /**
      * Update the specified resource in storage.
@@ -94,12 +102,18 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
             'apodo' => 'nullable|string|max:255',
         ]);
 
-        
-        $usuario->update([
-            'nombre' => Hash::make($validated['nombre']),
-            'email' => Hash::make($validated['email']),
-            'apodo' => $validated['apodo'],
-        ]);
+        // Actualizar usuario v1. 
+        // $usuario->update([
+        //     'nombre' => Hash::make($validated['nombre']),
+        //     'email' => Hash::make($validated['email']),
+        //     'apodo' => $validated['apodo'],
+        // ]);
+
+        // Actualizar usuario v2.
+        $usuario->nombre = $request->input(Hash::make($validated['nombre']));
+        $usuario->email = $request->input(Hash::make($validated['email']));
+        $usuario->apodo = $request->input($validated['apodo']);
+        $usuario->save();
 
         return redirect()->route('usuarios.show', $usuario)->with('success', 'Perfil actualizado exitosamente!');
     }
@@ -123,7 +137,7 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
      */
     public function signIn()
     {
-        return view('signIn');
+        return view('auth.signIn');
     }
 
     /**
@@ -139,16 +153,37 @@ class UsuarioController extends Controller // Controlador para gestionar usuario
             'contraseña' => 'required|string'
         ]);
 
-        $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
+        $usuario = Usuario::where('email', $request->input(Hash::check($credentials['email'], $usuario->email)))->first();
 
-        // Verificar contraseña y autenticar.
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
             Auth::login($usuario, $request->remember);
             $request->session()->regenerate();
-            return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+            // return redirect()->route('home.controller', 'navbar.controller')->with('success', '¡Bienvenid@ de nuevo!');
+        } else {
+            return back()->withErrors([
+                'email' => 'Email incorrecto.', 
+                'contraseña' => 'Contraseña incorrecta.',
+            ]); //todo: mejorar mensaje de error.
         }
 
-        if ($usuario && Hash::check($request -> contraseña, $hashedValue))
+        // $usuarios = Usuario::all();
+        // $usuarioEncontrado = null;
+
+        // foreach ($usuarios as $usuario) {
+        //     if ($request->input(Hash::check($credentials['email'], $usuario ->email))) {
+        //         $usuarioEncontrado = $usuario;
+        //         break;
+        //     }
+        // }
+
+        // // Verificar contraseña y autenticar.
+        // if ($usuarioEncontrado && Hash::check($credentials['contraseña'], $usuarioEncontrado->contraseña)) {
+        //     Auth::login($usuarioEncontrado, $request->remember);
+        //     $request->session()->regenerate();
+        //     return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!');
+        // }
+
+        // if ($usuario && Hash::check($request -> contraseña, $hashedValue))
 
         return back()->withErrors([
             'email' => 'Email incorrecto.', 

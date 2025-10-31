@@ -28,6 +28,7 @@ Route::get('/login', [UsuarioController::class, 'login'])->name('login.controlle
 
 
 // Rutas dentro de la aplicación
+// Route::get('/navbar', [SiteController::class, 'navbar'])->name('navbar.controller');
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');

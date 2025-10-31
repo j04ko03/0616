@@ -7,7 +7,6 @@
 
 @section('content')
 <div class="contenedor-signin">
-    
     <div class="signin-logo-top">
         <img src="{{ url('/assets/logotipos/logoLetraSinFondo.png') }}" alt="OrgaTime" class="logo-top">
     </div>
