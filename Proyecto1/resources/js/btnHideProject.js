@@ -1,7 +1,7 @@
 const buttonPlus = document.getElementById('plus');
 const buttonLess = document.getElementById('less');
 const contenedorTareas = document.getElementById('contenedorTareasProyecto');
-const btnCerrar = document.getElementById('cerrarContenedor');
+const btnCerrar = document.getElementById('img');
 
 buttonPlus.addEventListener('click', () => {
     contenedorTareas.style.display = 'block';

@@ -113,7 +113,7 @@
 
                 </div>             
                 <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0;">
-                    <img src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
+                    <img id="img" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
                 </div>
             </div>
         </div>

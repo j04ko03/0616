@@ -38,12 +38,9 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        return view('perfil');
-    }
+        $usuario = Usuario::find(2);
 
-    public function proyectos()
-    {
-        return view('proyectos');
+        return view('perfil')-> with('usuario', $usuario);
     }
 
     public function crearProyecto()

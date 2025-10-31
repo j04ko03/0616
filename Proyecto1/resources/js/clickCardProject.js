@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
             //Buscamos el id del contenedor que muestra el proyecto específico
             const contenedorMuestra = document.getElementById('contenedorProyectoEspecifico');
             //Cojemos el id de la foto de cerrar para volver a Proyectos
-            const btnCerrar = document.getElementById('cerrarContenedor');
+            const contenedroCerrar = document.getElementById('cerrarContenedor');
+
+            const btnCerrar = document.getElementById('img');
 
             console.log(document.querySelectorAll('.cardProyectoId'));
             //Creamos un foreach para cada card existente en cardProyectoId y de este modo tener el objeto controlado
@@ -19,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log(data);
 
                     //Cambio estado de proyecto en el hidde
-                    btnCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
+                    contenedroCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
                     
                     const titulo = document.getElementById('tituloProyecto');
                     titulo.textContent = data.titulo;

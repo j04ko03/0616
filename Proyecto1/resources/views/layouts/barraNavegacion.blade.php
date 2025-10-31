@@ -28,7 +28,12 @@
             <div class="navbar-left"> 
                 <div class="nav-links">
                     <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
-                    <a href="{{ route('proyectos.controller') }}" class="nav-link">Projects</a>
+                    <a href="{{ route('crearProyecto.controller') }}" class="crear-proyecto">
+                    +
+                    <div class="popout">
+                        Crear nuevo proyecto
+                    </div>
+                    </a>
                 </div>
             </div>
 
