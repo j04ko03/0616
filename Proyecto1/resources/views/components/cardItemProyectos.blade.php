@@ -10,7 +10,7 @@
             $color = 'yellow';
             break;
         case 3:
-            $color = 'green';
+            $color = 'green ';
             break;
         default:
             $color = 'red';

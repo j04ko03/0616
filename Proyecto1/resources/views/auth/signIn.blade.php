@@ -1,4 +1,4 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPublic')
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
@@ -82,7 +82,5 @@
         </form>
     </div>
 </div>
-
-    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
     <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

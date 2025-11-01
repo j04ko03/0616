@@ -1,4 +1,4 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPrivado')
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">

@@ -49,6 +49,10 @@
         height: 30px; 
         padding-inline-start: 2%;
     }
+.password-textarea {
+    -webkit-text-security: disc;
+}
+
 .botonPersonalizado {
     height: fit-content;
     width: 150px;

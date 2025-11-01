@@ -1,4 +1,10 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPrivado')
+ @push('styles')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
+@endpush
 
 @section('content')
     <!--comentario-->
@@ -25,21 +31,21 @@
                             <div class="subContenedorDatosPerfil">
                                 <div class="ultimoContenedorDatosPerfil">
                                     <p style="width: fit-content; margin-right: 1%">Nombre completo: </p>
-                                    <p style="width: fit-content">Juán jiménez del rosario</p>
+                                    <p style="width: fit-content">{{ $usuario->nombre }}</p>
                                 </div>
                                 <div class="ultimoContenedorDatosPerfil">
                                     <p style="width: fit-content; margin-right: 1%">Apodo: </p>
-                                    <p style="width: fit-content">Juán</p>
+                                    <p style="width: fit-content">{{ $usuario->apodo }}</p>
                                 </div>
                             </div>
                             <div class="subContenedorDatosPerfil">
                                 <div class="ultimoContenedorDatosPerfil">
                                     <p style="width: fit-content; margin-right: 1%">Creación de cuenta: </p>
-                                    <p style="width: fit-content">00-00-0000</p>
+                                    <p style="width: fit-content">{{ $usuario->fechaCreacion }}</p>
                                 </div>
                                 <div class="ultimoContenedorDatosPerfil">
                                     <p style="width: fit-content; margin-right: 1%">Tipo de usuario: </p>
-                                    <p style="width: fit-content">User</p>
+                                    <p style="width: fit-content">{{ $usuario->tipoUser }}</p>
                                 </div>
                             </div>
 
@@ -96,21 +102,24 @@
                                 </div>
                                 <div style="margin: 5%;">
                                     <div style="height: 100%; display: flex; flex-direction: column; gap: 1rem;">
-                                        <div style="" class="flex1">
-                                            <p style="width: 40%;">Nombre completo</p>
-                                            <textarea class="campoTexto" id="nom" name="nom" placeholder="Escribe tu nombre..."></textarea>
-                                        </div>
-                                        <div style="" class="flex1">
-                                            <p style="width: 40%;">Apodo</p>
-                                            <textarea class="campoTexto" id="apodo" name="apodo" placeholder="Escribe tu apodo..."></textarea>
-                                        </div>
-                                        <div style="" class="flex1">
-                                            <p style="width: 40%;">Otro</p>
-                                            <textarea class="campoTexto" id="otro" name="otro" placeholder="Escribe tu otro..."></textarea>
-                                        </div>
-                                        <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
-                                            <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
-                                        </div>
+                                        <form action="" method="post">
+                                        @csrf
+                                            <div style="margin-bottom: 1%" class="flex1">
+                                                <p style="width: 40%;">Nombre completo</p>
+                                                <textarea class="campoTexto" id="nom" name="nom" placeholder="{{ $usuario->nombre }}"></textarea>
+                                            </div>
+                                            <div style="margin-bottom: 1%" class="flex1">
+                                                <p style="width: 40%;">Apodo</p>
+                                                <textarea class="campoTexto" id="apodo" name="apodo" placeholder="{{ $usuario->apodo }}"></textarea>
+                                            </div>
+                                            <div style="" class="flex1">
+                                                <p style="width: 40%;">Contraseña</p>
+                                                <textarea class="campoTexto password-textarea" id="contra" name="contra" placeholder="••••••••"></textarea>
+                                            </div>
+                                            <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
+                                                <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
