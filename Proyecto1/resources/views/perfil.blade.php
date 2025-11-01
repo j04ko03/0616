@@ -1,4 +1,10 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPrivado')
+ @push('styles')
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
+@endpush
 
 @section('content')
     <!--comentario-->

@@ -133,7 +133,7 @@ class UsuarioController extends Controller
             'contraseña' => 'required|string'
         ]);
 
-        // $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
+        $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
         // Verificar contraseña y autenticar.
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
@@ -142,7 +142,7 @@ class UsuarioController extends Controller
             return redirect()->route('home.controller')->with('success', '¡Bienvenid@ de nuevo!')->with('usuario', $usuario);
         }
 
-        if ($usuario && Hash::check($request -> contraseña, $hashedValue))
+        //if ($usuario && Hash::check($request -> contraseña, $hashedValue))
 
         return back()->withErrors([
             'email' => 'Email incorrecto.', 

@@ -27,6 +27,8 @@ Route::post('/register', [UsuarioController::class, 'registerProcess'])->name('u
 Route::get('/login', [UsuarioController::class, 'login'])->name('login.controller');
 
 
+
+
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
