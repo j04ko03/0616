@@ -26,25 +26,26 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('tasks', TareaController::class);
 
     // Ruta de recursos para usuarios (CRUD)
-    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('usuarios', UsuarioController::class);   
+});
 
     //Carga de Scripts
     Route::get('/js/{filename}', function ($filename) {
-        $path = resource_path("js/$filename");
+            $path = resource_path("js/$filename");
 
-        try{
-            if (!File::exists($path)) {
-            abort(404);
-        }
-        }catch (\Exception $e){
-            abort(404);
-            //console.log("Error al cargar el archivo: " . $e->getMessage() + "Error: " + $e->getCode());
-        }
-    
-        return response()->file($path, [
-            'Content-Type' => 'application/javascript'
-        ]);
-    });
+            try{
+                if (!File::exists($path)) {
+                abort(404);
+            }
+            }catch (\Exception $e){
+                abort(404);
+                //console.log("Error al cargar el archivo: " . $e->getMessage() + "Error: " + $e->getCode());
+            }
+        
+            return response()->file($path, [
+                'Content-Type' => 'application/javascript'
+            ]);
+        });
 
 
     //Carga de Scripts
@@ -109,8 +110,6 @@ Route::middleware(['auth'])->group(function () {
             'Content-Type' => $contentType
         ]);
     });
-});
-
 
 
 // Meter middleware('auth') en las rutas cuando se termine proyecto
