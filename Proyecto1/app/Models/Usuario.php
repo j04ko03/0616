@@ -20,7 +20,8 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     protected $fillable = [
         'nombre',
         'email', 
-        'contraseña'
+        'contraseña',
+        'fechaCreacion',
     ];
 
     // Valores por defecto

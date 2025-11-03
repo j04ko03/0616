@@ -88,6 +88,8 @@
 .textoBtns{
     width: 75%; 
     cursor: pointer;
+    display: block;
+    margin: auto;
 }
 
 @media (min-width: 0px) {

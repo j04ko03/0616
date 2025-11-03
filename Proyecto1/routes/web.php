@@ -41,6 +41,7 @@ Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controlle
 Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
 Route::resource('showProjects', ProyectosController::class); 
 Route::resource('tasks', TareaController::class);
+Route::get('/logout',[UsuarioController::class,'logout'])->name('logout.controller');
 
 // Ruta de recursos para usuarios (CRUD)
 Route::resource('usuarios', UsuarioController::class);

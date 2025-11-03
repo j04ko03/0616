@@ -14,7 +14,8 @@ class SiteController extends Controller
 {
     public function home()
     {
-        $usuario = Usuario::find(2);
+        //$usuario = Usuario::find(2);
+        $usuario = Auth::user();
 
         $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
                                ->take(6)
@@ -39,7 +40,7 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        return view('perfil')-> with('usuario', Usuario::find(2));
+        return view('perfil')-> with('usuario', Auth::user());
     }
 
     public function crearProyecto()
