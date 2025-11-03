@@ -51,6 +51,7 @@ class UsuarioController extends Controller
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
             'contraseña' => bcrypt($validated['password']),
+            'fechaCreacion' => now(),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
@@ -88,14 +89,25 @@ class UsuarioController extends Controller
     {
         // PROCESAR actualización de perfil.
         $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:Usuario,email,' . $usuario->id,
+            'nombre' => 'nullable|string|max:255',
+            'contraseña' => 'nullable|string|min:6|max:255',
             'apodo' => 'nullable|string|max:255',
         ]);
 
-        $usuario->update($validated);
+        //$usuario->update($validated);
+        foreach ($validated as $key => $value) {
+            if ($key === 'contraseña' && $value !== null) {
+                $usuario->$key = Hash::make($value);
+            } else {
+                if ($value !== null) {
+                    $usuario->$key = $value;
+                }
+            }
+        }
+        //  dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
 
-        return redirect()->route('usuarios.show', $usuario)->with('success', 'Perfil actualizado exitosamente!');
+        $usuario->save();
+        return redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
     }
 
     /**
@@ -155,6 +167,7 @@ class UsuarioController extends Controller
      */
     public function logout()
     {
+        //  dd(Auth::user()->id, );
         Auth::logout();
         return redirect()->route('signin.controller');
     }

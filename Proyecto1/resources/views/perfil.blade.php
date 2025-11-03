@@ -56,17 +56,17 @@
 
                 <div class="contenedorCardDatos">
                     <div class="botoneraPerfil">
-                        <div style="height: 25%; align-content: center; justify-items: center">
+                        <div style="height: 25%; align-content: center; justify-content: center">
                             <p id="btnGeneralData" class="card-cabecera textoBtns" style=" width: 75%; cursor: pointer;">
                                 Cambiar datos generales</p>
                         </div>
-                        <div style="height: 25%; align-content: center; justify-items: center">
-                            <p id="btnCloseSesion" class="card-cabecera textoBtns">Cerrar sesión</p>
+                        <div style="height: 25%; align-content: center; justify-content: center">
+                            <a href="{{ route('logout.controller') }}" id="btnCloseSesion" class="card-cabecera textoBtns">Cerrar sesión</a>
                         </div>
-                        <div style="height: 25%; align-content: center; justify-items: center">
+                        <div style="height: 25%; align-content: center; justify-content: center">
                             <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
                         </div>
-                        <div style="height: 25%; align-content: center; justify-items: center">
+                        <div style="height: 25%; align-content: center; justify-content: center">
                             <p id="btnIncidencias" class="card-cabecera textoBtns">Registrar incidencias</p>
                         </div>
                     </div>
@@ -102,22 +102,23 @@
                                 </div>
                                 <div style="margin: 5%;">
                                     <div style="height: 100%; display: flex; flex-direction: column; gap: 1rem;">
-                                        <form action="" method="post">
+                                        <form action="{{ route('usuarios.update', Auth::user()) }}" method="post">
                                         @csrf
+                                        @method('put')
                                             <div style="margin-bottom: 1%" class="flex1">
                                                 <p style="width: 40%;">Nombre completo</p>
-                                                <textarea class="campoTexto" id="nom" name="nom" placeholder="{{ $usuario->nombre }}"></textarea>
+                                                <textarea class="campoTexto" id="nombre" name="nombre" placeholder="{{ $usuario->nombre }}" value="{{ $usuario->nombre }}"></textarea>
                                             </div>
                                             <div style="margin-bottom: 1%" class="flex1">
                                                 <p style="width: 40%;">Apodo</p>
-                                                <textarea class="campoTexto" id="apodo" name="apodo" placeholder="{{ $usuario->apodo }}"></textarea>
+                                                <textarea class="campoTexto" id="apodo" name="apodo" placeholder="{{ $usuario->apodo }}" value="{{ $usuario->apodo }}"></textarea>
                                             </div>
                                             <div style="" class="flex1">
                                                 <p style="width: 40%;">Contraseña</p>
-                                                <textarea class="campoTexto password-textarea" id="contra" name="contra" placeholder="••••••••"></textarea>
+                                                <textarea class="campoTexto password-textarea" id="contraseña" name="contraseña" placeholder="••••••••" value="{{ $usuario->contraseña }}"></textarea>
                                             </div>
                                             <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
-                                                <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
+                                                <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Modificar</button>
                                             </div>
                                         </form>
                                     </div>
