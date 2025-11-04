@@ -15,7 +15,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
     Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
-    Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
+    Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
         // Rutas para crear tareas dentro de /project
         Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
         Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); 
@@ -23,14 +23,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::resource('showProjects', ProyectosController::class); 
     Route::resource('tasks', TareaController::class);
+    Route::get('/logout',[UsuarioController::class,'logout'])->name('logout.controller');
 
     // Ruta de recursos para usuarios (CRUD)
     Route::resource('usuarios', UsuarioController::class);   
 });
 
-Route::middleware(['auth', 'rol:0, 2'])->group(function () { // Implementación de la ruta del middleware de los roles según el tipoUser. Se permite el rol 0 y 2 que son de administrador y superusuario. 
+Route::middleware(['auth', 'rol:0, 1'])->group(function () { // Implementación de la ruta del middleware de los roles según el tipoUser. Se permite el rol 0 y 1 que son de administrador y superusuario. 
     Route::resource('usuarios', UsuarioController::class);  
     Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
+});
+
+Route::middleware(['auth', 'rol:0, 1, 2'])->group(function () { 
+    Route::resource('usuarios', UsuarioController::class);  
+    Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
 });
 
     //Carga de Scripts

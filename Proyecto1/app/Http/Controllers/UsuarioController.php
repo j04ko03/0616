@@ -104,7 +104,7 @@ class UsuarioController extends Controller
                 }
             }
         }
-        //  dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
+        // dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
 
         $usuario->save();
         return redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
@@ -149,7 +149,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
         // Verificar contraseña y autenticar.
-        if ($usuario ($credentials[]))
+        //if ($usuario ($credentials[]))
 
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
             Auth::login($usuario, $request->remember);
