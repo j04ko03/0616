@@ -151,7 +151,7 @@ label {
 .popout {       
   position: absolute;
   top: 120%;                 /* Debajo del enlace */
-  left: 50%;
+  left: 5%;
   transform: translateX(-50%);
   background-color: white;
   color: black;

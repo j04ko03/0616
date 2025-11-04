@@ -48,9 +48,11 @@ class SiteController extends Controller
         return view('crearProyecto');
     }
 
-    public function project()
+    public function project($idProyecto)
     {
-        return view('project');
+        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
+        dd($proyecto);
+        return view('project', compact('proyecto'));
     }
 
     public function crearTareas(){

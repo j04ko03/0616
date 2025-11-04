@@ -9,7 +9,7 @@
             <div class="nav-links">
                 <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                 <a href="{{ route('crearProyecto.controller') }}" class="crear-proyecto">
-                    +
+                    <img id="img" src="../storage/assets/icons/plus.png" alt="" style="width: 5%; height: fit-content; cursor: pointer;">
                     <div class="popout">
                         Crear nuevo proyecto
                     </div>

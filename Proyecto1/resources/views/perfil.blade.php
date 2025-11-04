@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
     <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tomarFoto.css') }}">
 @endpush
 
 @section('content')
@@ -16,11 +17,36 @@
 
                 <div class="contenedorCabeceraPerfil flex1">
 
-                    <div class="flex2" style="width: 33%; height: 100%;">
-                        <div class="contendorFoto   ">
+                    <div class="flex2" style="width: 33%; height: 100%; flex-wrap: wrap;">
+                        <div class="contendorFoto">
 
                         </div>
+                        <div id="upload" style="width: 80%; display: flex; justify-content: flex-end; align-items: center;">
+                            <a href="#" style="display: flex;">
+                                <img id="img" src="../storage/assets/icons/captura.png" alt="" style="width: 20px; cursor: pointer;">
+                            </a>
+                        </div>
+                        <!--TOMAR FOTO-->
+                        <div id="cameraModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+
+                                <!-- Vista previa de la cámara -->
+                                <video id="camera" autoplay playsinline></video>
+
+                                <!-- Botones -->
+                                <div class="buttons">
+                                    <button id="takePhoto">Tomar foto</button>
+                                    <input type="file" id="uploadFile" accept="image/png, image/jpeg">
+                                </div>
+
+                                <!-- Vista previa de la imagen tomada -->
+                                <canvas id="snapshot" style="display:none;"></canvas>
+                                <button id="savePhoto" style="display:none;">Usar esta foto</button>
+                            </div>
+                        </div>
                     </div>
+                    <!-- Prueba para tomar foto -->
                     <div style="width: 66%; height: 100%;">
                         <div style="height: 30%; align-content: center;">
                             <h1 class="h1">
@@ -135,4 +161,5 @@
     </div>  
 
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
+    <script src="{{ url('/js/tomaFoto.js') }}"></script>
 @endsection

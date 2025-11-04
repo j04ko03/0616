@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Auth;
  
 class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
     use HasFactory;
 
-    protected $table = 'Usuario'; 
+        protected $table = 'Usuario'; 
 
-    // Desactiva timestamps si tu tabla no tiene created_at y updated_at
-    public $timestamps = false;
+        // Desactiva timestamps si tu tabla no tiene created_at y updated_at
+        public $timestamps = false;
 
     // Masificacion de campos asignables
     protected $fillable = [
@@ -54,5 +56,25 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     public function grupos(): BelongsToMany
     {
         return $this->belongsToMany(Grupo::class, 'grupo_usuario', 'usuarioId', 'grupoId');
+    }
+
+    /**
+     * The tareas that belong to the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tareas(): BelongsToMany
+    {
+        return $this->belongsToMany(Tarea::class, 'usuario_tarea', 'idUsuario', 'idTarea');
+    }
+
+    /**
+     * Get all of the incidencias for the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incidencias(): HasMany
+    {
+        return $this->hasMany(Incidencia::class, 'idUsuario');
     }
 }

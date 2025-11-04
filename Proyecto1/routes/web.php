@@ -32,7 +32,7 @@ Route::get('/login', [UsuarioController::class, 'login'])->name('login.controlle
 // Rutas dentro de la aplicación
 Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
 Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
-Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
+Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
     // Rutas para crear tareas dentro de /project
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); 
