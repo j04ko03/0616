@@ -21,12 +21,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); 
     Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
-    Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
     Route::resource('showProjects', ProyectosController::class); 
     Route::resource('tasks', TareaController::class);
 
     // Ruta de recursos para usuarios (CRUD)
     Route::resource('usuarios', UsuarioController::class);   
+});
+
+Route::middleware(['auth', 'rol:0, 2'])->group(function () { // Implementación de la ruta del middleware de los roles según el tipoUser. Se permite el rol 0 y 2 que son de administrador y superusuario. 
+    Route::resource('usuarios', UsuarioController::class);  
+    Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
 });
 
     //Carga de Scripts

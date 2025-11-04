@@ -6,6 +6,9 @@
         </a>
 
         <div class="navbar-left">
+            @if (Auth::user()->tipoUser == 0 || Auth::user()->tipoUser == 2) 
+                <a href="{{ route('vistaGlobal.controller') }}" class="nav-link">Teams</a>
+            @endif
             <div class="nav-links">
                 <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
                 <a href="{{ route('crearProyecto.controller') }}" class="crear-proyecto">
