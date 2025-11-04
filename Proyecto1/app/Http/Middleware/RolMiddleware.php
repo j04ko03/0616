@@ -18,7 +18,7 @@ class RolMiddleware
     public function handle(Request $request, Closure $next, ...$rol): Response 
     {
         $usuario = Auth::user();
-        if (!$usuario || !in_array($usuario->tipoUser, $rols)) {
+        if (!$usuario || !in_array($usuario->tipoUser, $rol)) {
            $response = redirect('/home');
         }
         else {

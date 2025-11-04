@@ -15,7 +15,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
     Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
-    Route::get('/project', [SiteController::class, 'project'])->name('project.controller');
+    Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
         // Rutas para crear tareas dentro de /project
         Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
         Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); 
@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::resource('showProjects', ProyectosController::class); 
     Route::resource('tasks', TareaController::class);
+    Route::get('/logout',[UsuarioController::class,'logout'])->name('logout.controller');
 
     // Ruta de recursos para usuarios (CRUD)
     Route::resource('usuarios', UsuarioController::class);   
