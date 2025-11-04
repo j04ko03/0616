@@ -1,4 +1,4 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPrivado')
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
@@ -11,10 +11,13 @@
         <main>
             <div id="select-container">
                 <select name="projects" id="projects">
-                    <option value="Proyecto 1">Proyecto 1</option>
-                    <option value="Proyecto 2">Proyecto 2</option>
-                    <option value="Proyecto 3">Proyecto 3</option>
-                    <option value="Proyecto 4">Proyecto 4</option>
+                    @if ($projects)
+                        @foreach ($projects as $project)
+                            <option value="{{$project->id}}">{{ $project->titulo }}</option>
+                        @endforeach
+                    @else
+                        <option value="Sin proyectos asignados">Sin proyectos asignados</option>
+                    @endif
                 </select>
             </div>
             <div id="tab-container">
@@ -35,9 +38,9 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            @for ($i = 0; $i < 3; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                            @foreach ($tareas as $tarea)
+                                <x-taskItemProject titulo="{{ $tarea['titulo'] }}" descripcion="{{ $tarea['descripcion'] }}" responsable="{{ $tarea->responsable()->nombre }}"/>
+                            @endforeach
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -67,14 +70,9 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            <!-- Tareas -->
-                        </div>
-                        <button class="add-task">+ ADD TASK</button>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
-                        <div class="task-container">
-                            <!-- Tareas -->
+                            @for ($i = 0; $i < 8; $i++)
+                                <x-taskItemProject />
+                            @endfor
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -84,8 +82,6 @@
                             @for ($i = 0; $i < 6; $i++)
                                 <x-taskItemProject />
                             @endfor
-
-                            <!-- Tareas -->
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -95,8 +91,6 @@
                             @for ($i = 0; $i < 10; $i++)
                                 <x-taskItemProject />
                             @endfor
-
-                            <!-- Tareas -->
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -109,8 +103,6 @@
                             @for ($i = 0; $i < 5; $i++)
                                 <x-taskItemProject />
                             @endfor
-
-
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -120,8 +112,6 @@
                             @for ($i = 0; $i < 6; $i++)
                                 <x-taskItemProject />
                             @endfor
-
-
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -131,8 +121,6 @@
                             @for ($i = 0; $i < 4; $i++)
                                 <x-taskItemProject />
                             @endfor
-
-
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -142,28 +130,6 @@
                     @for ($i = 0; $i < 5; $i++)
                         <x-memberItem />
                     @endfor
-
-                    <div class="member">
-                        <div class="pfp">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
-                                alt="Profile picture">
-                        </div>
-                        <div>
-                            <span>
-                                <p>Nombre integrante</p>
-                                <button class="button-task">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                        <path
-                                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                                    </svg>
-                                </button>
-                            </span>
-                            <p>Rol</p>
-                            <p>correo@ejemplo.com</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </main>

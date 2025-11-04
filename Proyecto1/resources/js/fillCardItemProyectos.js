@@ -14,14 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 let tareaValidarCuenta = 0;
 
                 data.tareas.forEach(tarea => {
-                    switch(tarea.estado){
-                    case 0:
+                    switch(tarea.estadoId){
+                    case '1':
                         tareaPendienteCuenta++;
                         break;
-                    case 1:
+                    case '2':
                         tareaValidarCuenta++;
                         break;
-                    case 2:
+                    case '3':
                         tareaCompletasCuenta++;
                         break;
                     default:

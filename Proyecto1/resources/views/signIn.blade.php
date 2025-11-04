@@ -1,4 +1,4 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPublic')
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
@@ -28,7 +28,7 @@
             </div>
         @endif
 
-        <form action="{{ route('login.controller') }}" method="POST">
+        <form action="{{ route('login.controller') }}" method="GET">
             @csrf
             
             <div class="form-group">
@@ -40,9 +40,9 @@
                        value="{{ old('email') }}"
                        class="form-input"
                        required>
-                @error('email')
+                {{-- @error('email')
                     <span class="error-message">{{ $message }}</span>
-                @enderror
+                @enderror --}}
             </div>
 
 
@@ -50,7 +50,7 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="password-input-wrapper">
                     <input type="password"
-                        name="password"
+                        name="contraseña"
                         id="password"
                         placeholder="Crea una contraseña"
                         class="form-input password-input"
@@ -83,7 +83,5 @@
         </form>
     </div>
 </div>
-
-    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
     <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

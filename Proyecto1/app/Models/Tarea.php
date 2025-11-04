@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Tag;
 use App\Models\Proyectos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tarea extends Model
 {
@@ -20,5 +22,25 @@ class Tarea extends Model
     public function proyecto(): BelongsTo
     {
         return $this->belongsTo(Proyectos::class, 'proyectoId');
+    }
+
+    /**
+     * The tags that belong to the Tarea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'Tarea_Tag', 'tareaId', 'tagId');
+    }
+
+    /**
+     * Get the responsable that owns the Tarea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function responsable(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class, 'responsableId', 'id');
     }
 }
