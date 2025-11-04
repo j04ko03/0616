@@ -49,7 +49,10 @@ class SiteController extends Controller
 
     public function project()
     {
-        return view('project');
+        $usuario = Auth::user();
+        $projects = $usuario->proyectos()->get();
+
+        return view('project', compact('usuario', 'projects'));
     }
 
     public function crearTareas(){

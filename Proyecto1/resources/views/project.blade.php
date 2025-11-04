@@ -6,14 +6,18 @@
 @endpush
 
 @section('content')
+
     <body>
         <main>
             <div id="select-container">
                 <select name="projects" id="projects">
-                    <option value="Proyecto 1">Proyecto 1</option>
-                    <option value="Proyecto 2">Proyecto 2</option>
-                    <option value="Proyecto 3">Proyecto 3</option>
-                    <option value="Proyecto 4">Proyecto 4</option>
+                    @if ($projects)
+                        @foreach ($projects as $project)
+                            <option value="{{$project->id}}">{{ $project->titulo }}</option>
+                        @endforeach
+                    @else
+                        <option value="Sin proyectos asignados">Sin proyectos asignados</option>
+                    @endif
                 </select>
             </div>
             <div id="tab-container">
@@ -34,9 +38,9 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            @for ($i = 0; $i < 3; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                            @foreach ($tareas as $tarea)
+                                <x-taskItemProject titulo="{{ $tarea['titulo'] }}" descripcion="{{ $tarea['descripcion'] }}" responsable="{{ $tarea->responsable()->nombre }}"/>
+                            @endforeach
                         </div>
                         <button class="add-task">+ ADD TASK</button>
                     </div>
@@ -59,7 +63,7 @@
                         <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
-                
+
                 <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
                 <div class="tabs-content content-section-2">
                     <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
@@ -91,7 +95,7 @@
                         <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
-                
+
                 <div class="tabs-content content-section-3">
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
@@ -121,7 +125,7 @@
                         <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
-                
+
                 <div class="tabs-content content-section-4">
                     @for ($i = 0; $i < 5; $i++)
                         <x-memberItem />

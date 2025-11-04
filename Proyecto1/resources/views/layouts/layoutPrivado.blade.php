@@ -11,7 +11,7 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    @include('barraNavegacion', ['usuario' => $usuario])
+    @include('barraNavegacion')
     
     <!-- Contenido principal -->
     <main class="main-content">

@@ -2,7 +2,7 @@
 
 <div class="task-card">
     <span>
-        <p>Título Tarea</p>
+        <p>{{ $titulo }}</p>
         <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                 <path
@@ -16,10 +16,9 @@
         <p class="tags">TAG</p>
         <p class="tags">TAG</p>
     </span>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    </p>
+    <p>{{ $descripcion }}</p>
     <span>
-        <p>Responsable</p>
+        <p>{{ $responsable }}</p>
         <p>Fecha de entrega</p>
     </span>
 </div>

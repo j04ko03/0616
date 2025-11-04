@@ -33,4 +33,14 @@ class Tarea extends Model
     {
         return $this->belongsToMany(Tag::class, 'Tarea_Tag', 'tareaId', 'tagId');
     }
+
+    /**
+     * Get the responsable that owns the Tarea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function responsable(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class, 'responsableId', 'id');
+    }
 }
