@@ -21,7 +21,7 @@
         </div>
 
             <div class="navbar-right">
-                <span class="username" href="{{ route('perfil.controller') }}">{{ $usuario->nombre }}</span> <!--Auth::user() si usas autenticación-->
+                <span class="username" href="{{ route('perfil.controller') }}">{{ Auth::user()->apodo }}</span> 
                 <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
             </div>
     </div>

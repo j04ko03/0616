@@ -8,7 +8,8 @@
 @section('content')
     <main>
         <form action="project" method="POST">
-            <a id="quit-btn" href="http://localhost/0616/Proyecto1/public/home">X</a>
+        @csrf
+            <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
             <label for="titulo"></label>
             <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
                 maxlength="100">
@@ -23,7 +24,7 @@
                     <div class="form-group">
                         <label for="presupuesto">Presupuesto</label>
                         <br>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="10">
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
                     </div>
                     
                     <label for="documento" id="add-documento">
@@ -37,16 +38,7 @@
                 <div>               
                     <div>
                         <div id="textArea-objetivos">
-                            <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea. Haz clic para seleccionar cursos..." readonly></textarea>
-                            <div class="cursos-list">
-                                <div class="curso-group">Cursos Disponibles</div>
-                                <div class="curso-item" data-curso="Matemáticas Avanzadas">Matemáticas Avanzadas</div>
-                                <div class="curso-item" data-curso="Programación Web">Programación Web</div>
-                                <div class="curso-item" data-curso="Diseño Gráfico">Diseño Gráfico</div>
-                                <div class="curso-item" data-curso="Inglés Técnico">Inglés Técnico</div>
-                                <div class="curso-item" data-curso="Gestión de Proyectos">Gestión de Proyectos</div>
-                                <div class="curso-item" data-curso="Base de Datos">Base de Datos</div>
-                            </div>
+                            <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea"></textarea>
                         </div>
                     </div>
 
