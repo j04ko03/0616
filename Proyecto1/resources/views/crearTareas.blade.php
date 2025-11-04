@@ -1,8 +1,8 @@
 @extends('layouts.layoutPrivado')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url(path: '/css/crearTareas.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/crearTareas.css') }}">
 @endpush
 
 @section('content')
@@ -30,7 +30,7 @@
                     <label for="documento" id="add-documento">
                             <input type="file" name="documento" id="documento" multiple="true"
                                 accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .png, .jpg, .jpeg, .svg, .webp">
-                            <span>Añadir documentos <img src="../storage/assets/icons/upload.svg" alt="Upload button">
+                            <span>Añadir documentos <img src="{{ url('/storage/assets/icons/upload.svg') }}" alt="Upload button">
                             </span>
                         </label>
                     <ul id="selected-documents"></ul>
@@ -43,21 +43,21 @@
                     </div>
 
                     <div>
-                        <div>
+                        <div class="user-dropdown">
                             <button type="button" id="add-user-btn">Añadir usuario</button>
-                            <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
+                            <input type="text" class="user-search" placeholder="Buscar usuario...">
                             <div class="user-list">
                                 <div class="user-group">Grupos</div>
-                                <div class="user-item" data-user="Grupo 1">Grupo 1</div>
-                                <div class="user-item" data-user="Grupo 2">Grupo 2</div>
+                                <div class="user-item" data-user="Grupo 1" data-type="grupo">Grupo 1</div>
+                                <div class="user-item" data-user="Grupo 2" data-type="grupo">Grupo 2</div>
                                 <div class="user-group">Usuarios</div>
-                                <div class="user-item" data-user="Pepa">Pepa</div>
-                                <div class="user-item" data-user="Juanjo">Juanjo</div>
-                                <div class="user-item" data-user="María">María</div>
-                                <div class="user-item" data-user="Carlos">Carlos</div>
+                                <div class="user-item" data-user="Pepa" data-type="usuario">Pepa</div>
+                                <div class="user-item" data-user="Juanjo" data-type="usuario">Juanjo</div>
+                                <div class="user-item" data-user="María" data-type="usuario">María</div>
+                                <div class="user-item" data-user="Carlos" data-type="usuario">Carlos</div>
                             </div>
                         </div>
-                        <div id="tareas">
+                        <div id="usuarios-seleccionados">
                             <!-- Los usuarios añadidos aparecerán aquí -->
                         </div>
 
@@ -65,8 +65,90 @@
                     </div>
                 </div>
             </div>
-    </form>
+        </form>
     </main>
 
-    <script src="/js/tareas.js"></script>
+    <script>
+        // ✅ FUNCIONALIDAD PARA AÑADIR USUARIOS
+        document.addEventListener('DOMContentLoaded', function() {
+            const addUserBtn = document.getElementById('add-user-btn');
+            const userList = document.querySelector('.user-list');
+            const userSearch = document.querySelector('.user-search');
+            const usuariosSeleccionados = document.getElementById('usuarios-seleccionados');
+            const userItems = document.querySelectorAll('.user-item');
+
+            // Mostrar/ocultar lista al hacer clic en el botón
+            addUserBtn.addEventListener('click', function() {
+                userList.classList.toggle('show');
+                userSearch.style.display = userList.classList.contains('show') ? 'block' : 'none';
+                
+                if (userList.classList.contains('show')) {
+                    userSearch.focus();
+                }
+            });
+
+            // Filtrar usuarios al escribir en el buscador
+            userSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                userItems.forEach(item => {
+                    const userName = item.getAttribute('data-user').toLowerCase();
+                    if (userName.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Añadir usuario/grupo a la lista de seleccionados
+            userItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const userName = this.getAttribute('data-user');
+                    const userType = this.getAttribute('data-type');
+                    
+                    // Verificar si ya está seleccionado
+                    const yaSeleccionado = Array.from(usuariosSeleccionados.children).some(
+                        div => div.textContent.includes(userName)
+                    );
+                    
+                    if (!yaSeleccionado) {
+                        const usuarioDiv = document.createElement('div');
+                        usuarioDiv.className = 'usuario-seleccionado';
+                        usuarioDiv.innerHTML = `
+                            <span>${userName} (${userType})</span>
+                            <button type="button" class="remove-user">×</button>
+                        `;
+                        usuariosSeleccionados.appendChild(usuarioDiv);
+
+                        // Añadir funcionalidad para eliminar
+                        usuarioDiv.querySelector('.remove-user').addEventListener('click', function() {
+                            usuarioDiv.remove();
+                        });
+                    }
+
+                    // Ocultar lista después de seleccionar
+                    userList.classList.remove('show');
+                    userSearch.style.display = 'none';
+                    userSearch.value = '';
+                    
+                    // Mostrar todos los items de nuevo
+                    userItems.forEach(i => i.style.display = 'block');
+                });
+            });
+
+            // Ocultar lista al hacer clic fuera
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.user-dropdown')) {
+                    userList.classList.remove('show');
+                    userSearch.style.display = 'none';
+                    userSearch.value = '';
+                    userItems.forEach(i => i.style.display = 'block');
+                }
+            });
+
+            // Fecha mínima hoy
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha-limite').min = today;
+        });
+    </script>
 @endsection
