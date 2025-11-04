@@ -20,7 +20,8 @@ class SiteController extends Controller
     
     public function home()
     {
-        $usuario = Usuario::find(2);
+        //$usuario = Usuario::find(2);
+        $usuario = Auth::user();
 
         $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
                                ->take(6)
@@ -45,7 +46,7 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        return view('perfil')-> with('usuario', Usuario::find(2));
+        return view('perfil')-> with('usuario', Auth::user());
     }
 
     public function crearProyecto()
@@ -53,9 +54,11 @@ class SiteController extends Controller
         return view('crearProyecto');
     }
 
-    public function project()
+    public function project($idProyecto)
     {
-        return view('project');
+        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
+        dd($proyecto);
+        return view('project', compact('proyecto'));
     }
 
     public function crearTareas(){

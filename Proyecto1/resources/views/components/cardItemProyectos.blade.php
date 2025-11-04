@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-    <div class="card-titulo">
+    <div class="card-titulo" style="border: 1px solid black">
         <div>
             <h2 class="titulo">{{ $titulo }}</h2>
         </div>
@@ -47,8 +47,10 @@
             <p class="texto-gris">{{ $fechaEntrega }}</p>
         </div>
     </div>
-
-    <div class="card-tareas">
+    <div class="card-titulo" style="border: 1px solid black; width: 100%; height: 30px;  margin-top: 3px; display: flex; justify-content: end;">
+        <a class="verProyectoBtn" href="{{ route('project.controller', ['idProyecto' => ':id']) }}" style="color: blue;">Ver Proyecto</a>
+    </div>
+    <div class="card-tareas" style="border: 1px solid black">
         <div class="flex2">
             <div style="width: 40%;">
             <p>Tareas completadas:</p>

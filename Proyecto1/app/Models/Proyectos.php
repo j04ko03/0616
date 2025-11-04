@@ -9,6 +9,7 @@ use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Proyectos extends Model
 {
@@ -51,8 +52,8 @@ class Proyectos extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function estado(): HasMany
+    public function estado(): BelongsTo
     {
-        return $this->hasMany(Estado::class, 'id');
+        return $this->belongsTo(Estado::class, 'id');
     }
 }
