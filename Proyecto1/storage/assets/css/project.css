@@ -124,9 +124,7 @@ option:hover {
 }
 
 /*  KANBAN CONTAINER */
-.content-section-1,
-.content-section-2,
-.content-section-3 {
+.content-section-1 {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -213,8 +211,39 @@ option:hover {
     background-color: #24b22e;
 }
 
-/*  MEMBERS CONTAINER */
+/* PRODUCT & SPRINT BACKLOG */
+.backlog {
+    background-color: var(--color-white);
+    width: 100%;
+    margin: 0;
+}
 
+.task-backlog {
+    background-color: var(--color-white);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+    gap: 0;
+}
+
+.task-backlog:last-child {
+    border-bottom: 1px solid black;
+}
+
+.task-backlog span {
+    border: 1px solid black;
+    border-right: none;
+    border-bottom: none;
+    padding: 5px 5px;
+    flex: 1;
+    font-size: .85rem;
+}
+
+.task-backlog span:last-child {
+    border-right: 1px solid black;
+}
+
+/*  MEMBERS CONTAINER */
 
 .content-section-4 {
     display: grid;

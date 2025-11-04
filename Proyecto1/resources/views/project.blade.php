@@ -11,13 +11,7 @@
         <main>
             <div id="select-container">
                 <select name="projects" id="projects">
-                    @if ($projects)
-                        @foreach ($projects as $project)
-                            <option value="{{$project->id}}">{{ $project->titulo }}</option>
-                        @endforeach
-                    @else
-                        <option value="Sin proyectos asignados">Sin proyectos asignados</option>
-                    @endif
+
                 </select>
             </div>
             <div id="tab-container">
@@ -38,11 +32,8 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-                            @foreach ($tareas as $tarea)
-                                <x-taskItemProject titulo="{{ $tarea['titulo'] }}" descripcion="{{ $tarea['descripcion'] }}" responsable="{{ $tarea->responsable()->nombre }}"/>
-                            @endforeach
+
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -51,7 +42,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -60,69 +50,82 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
 
                 <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
                 <div class="tabs-content content-section-2">
                     <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
-                    <div class="kanban-task-container">
-                        <h3>TO DO</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 8; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                    <div class="backlog">
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 6; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>DONE</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 10; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
+                        </div>
                     </div>
                 </div>
 
                 <div class="tabs-content content-section-3">
-                    <div class="kanban-task-container">
-                        <h3>TO DO</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 5; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                    <div class="backlog">
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 6; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>DONE</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 4; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
+                        <div class="task-backlog">
+                            <span class="titulo-tarea">Titulo</span>
+                            <span class="descripcion-tarea">Descripcion</span>
+                            <span class="sprint-tarea">Sprint</span>
+                            <span class="tag-tarea">Tags</span>
+                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="estado-tarea">Estado</span>
+                        </div>
                     </div>
                 </div>
 
