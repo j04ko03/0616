@@ -5,22 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Auth;
+use Illuminate\Notifications\Notifiable;
  
 class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
-    protected $table = 'Usuario'; 
-
-    // Desactiva timestamps si tu tabla no tiene created_at y updated_at
+    protected $table = 'Usuario';
+    protected $primaryKey = 'id'; 
+    protected $autoIncrement = true;
+    protected $keyType = 'int';
     public $timestamps = false;
 
     // Masificacion de campos asignables
     protected $fillable = [
         'nombre',
         'email', 
-        'contraseña'
+        'contraseña',
+        'fechaCreacion',
     ];
 
     // Valores por defecto
@@ -54,4 +59,35 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     {
         return $this->belongsToMany(Grupo::class, 'grupo_usuario', 'usuarioId', 'grupoId');
     }
+
+    /**
+     * The tareas that belong to the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tareas(): BelongsToMany
+    {
+        return $this->belongsToMany(Tarea::class, 'usuario_tarea', 'idUsuario', 'idTarea');
+    }
+
+    /**
+     * Get all of the incidencias for the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function incidencias(): HasMany
+    {
+        return $this->hasMany(Incidencia::class, 'idUsuario');
+    }
+
+    /**
+     * The rol that belong to the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function rol(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class, 'tipoUser', 'id', 'id');
+    }
+    
 }

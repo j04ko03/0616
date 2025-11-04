@@ -58,7 +58,7 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <div class="password-input-wrapper">
                     <input type="password"
-                        name="password"
+                        name="contraseña"
                         id="password"
                         placeholder="Crea una contraseña"
                         class="form-input password-input"
@@ -77,12 +77,12 @@
                 <label for="password_confirmation" class="form-label">Confirmar contraseña</label>
                 <div class="password-input-wrapper">
                     <input type="password"
-                        name="password_confirmation"
+                        name="contraseña_confirmation"
                         id="password_confirmation"
                         placeholder="Repite tu contraseña"
                         class="form-input password-input">
                     <button type="button" class="password-toggle" id="passwordConfirmToggle">
-                        <span class="eye-icon">🙉</span>
+                        <span class="eye-icon">🙈</span>
                     </button>
                 </div>
             </div>

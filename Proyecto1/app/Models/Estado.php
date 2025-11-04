@@ -22,4 +22,14 @@ class Estado extends Model
     {
         return $this->hasMany(Proyectos::class, 'estadoId');
     }
+
+    /**
+     * Get all of the tareas for the Estado
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tareas(): HasMany
+    {
+        return $this->hasMany(Tarea::class, 'estadoId');
+    }
 }

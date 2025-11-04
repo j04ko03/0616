@@ -7,6 +7,7 @@ use App\Models\Proyectos;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tarea extends Model
 {
@@ -35,12 +36,32 @@ class Tarea extends Model
     }
 
     /**
-     * Get the responsable that owns the Tarea
+     * The usuarios that belong to the Tarea
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function responsable(): BelongsTo
+    public function usuarios(): BelongsToMany
     {
-        return $this->belongsTo(Usuario::class, 'responsableId', 'id');
+        return $this->belongsToMany(Usuario::class, 'usuario_tarea', 'idTarea', 'idUsuario');
+    }
+
+    /**
+     * Get all of the sprint for the Tarea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sprint(): BelongsTo
+    {
+        return $this->belongsTo(Sprint::class, 'id');
+    }
+
+    /**
+     * Get all of the estado for the Tarea
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function estado(): BelongsTo
+    {
+        return $this->belongsTo(Estado::class, 'id');
     }
 }

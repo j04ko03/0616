@@ -25,7 +25,7 @@ class UsuarioController extends Controller
     public function create()
     {
         // Vista del formulario de registro.
-        return view('signUp');
+        return view('auth.signUp');
     }
 
     /**
@@ -40,7 +40,7 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:Usuario',
-            'password' => 'required|string|min:8|confirmed',
+            'contraseña' => 'required|string|min:8|confirmed',
         ]);
 
         // Debug de los datos validados
@@ -50,7 +50,8 @@ class UsuarioController extends Controller
         $usuario = Usuario::create([
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
-            'contraseña' => bcrypt($validated['password']),
+            'contraseña' => bcrypt($validated['contraseña']),
+            'fechaCreacion' => now(),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
@@ -88,14 +89,25 @@ class UsuarioController extends Controller
     {
         // PROCESAR actualización de perfil.
         $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:Usuario,email,' . $usuario->id,
+            'nombre' => 'nullable|string|max:255',
+            'contraseña' => 'nullable|string|min:6|max:255',
             'apodo' => 'nullable|string|max:255',
         ]);
 
-        $usuario->update($validated);
+        //$usuario->update($validated);
+        foreach ($validated as $key => $value) {
+            if ($key === 'contraseña' && $value !== null) {
+                $usuario->$key = Hash::make($value);
+            } else {
+                if ($value !== null) {
+                    $usuario->$key = $value;
+                }
+            }
+        }
+        //  dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
 
-        return redirect()->route('usuarios.show', $usuario)->with('success', 'Perfil actualizado exitosamente!');
+        $usuario->save();
+        return redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
     }
 
     /**
@@ -117,7 +129,7 @@ class UsuarioController extends Controller
      */
     public function signIn()
     {
-        return view('signIn');
+        return view('auth.signIn');
     }
 
     /**
@@ -132,10 +144,13 @@ class UsuarioController extends Controller
             'email' => 'required|string|email',
             'contraseña' => 'required|string'
         ]);
+        
 
         $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
         // Verificar contraseña y autenticar.
+        //if ($usuario ($credentials[]))
+
         if ($usuario && Hash::check($credentials['contraseña'], $usuario->contraseña)) {
             Auth::login($usuario, $request->remember);
             $request->session()->regenerate();
@@ -155,6 +170,7 @@ class UsuarioController extends Controller
      */
     public function logout()
     {
+        //  dd(Auth::user()->id, );
         Auth::logout();
         return redirect()->route('signin.controller');
     }

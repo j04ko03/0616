@@ -11,7 +11,7 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    @include('barraNavegacion')
+    @include('barraNavegacion', ['usuario' => Auth::user()->apodo])
     
     <!-- Contenido principal -->
     <main class="main-content">

@@ -20,7 +20,7 @@
                         <input type="date" name="fecha-limite" id="fecha-limite" required min="">
 
                         <label for="presupuesto">Presupuesto</label>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="10">
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
 
                         <ul id="selected-documents"></ul>
                         <label for="documento" id="add-documento">
