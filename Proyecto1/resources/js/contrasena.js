@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordInput.addEventListener('input', function() {
             const password = this.value;
             
-            if (password.length >= 8) {
+            if (password.length > 7) {
                 passwordConfirmGroup.style.display = 'block';
                 setTimeout(() => {
                     passwordConfirmGroup.classList.add('show');
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 passwordConfirmGroup.classList.remove('show');
                 setTimeout(() => {
                     passwordConfirmGroup.style.display = 'none';
-                }, 300);
+                }, 10);
                 if (passwordConfirmInput) {
                     passwordConfirmInput.value = '';
                 }

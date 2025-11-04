@@ -112,9 +112,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
 
-// Meter middleware('auth') en las rutas cuando se termine proyecto
-
-
 // Rutas para sign in y sign up
 Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');
 Route::get('/signin', [UsuarioController::class, 'signIn'])->name('signin.controller');
