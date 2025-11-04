@@ -1,4 +1,4 @@
-@extends('layouts.barraNavegacion')
+@extends('layouts.layoutPublic')
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
@@ -7,7 +7,6 @@
 
 @section('content')
 <div class="contenedor-signin">
-    
     <div class="signin-logo-top">
         <img src="{{ url('/assets/logotipos/logoLetraSinFondo.png') }}" alt="OrgaTime" class="logo-top">
     </div>
@@ -83,7 +82,5 @@
         </form>
     </div>
 </div>
-
-    <script src="{{ url('/js/controladorBarraNavegacion.js') }}"></script>
     <script src="{{ url('/js/contrasena.js') }}"></script>
 @endsection

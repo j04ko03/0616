@@ -12,14 +12,20 @@ use Illuminate\Support\Facades\Hash;
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
 {
+
+    public function navbar()
+    {
+        return view('layouts.barraNavegacion');
+    }
+    
     public function home()
     {
-        //Carga de base de datos a objetos
-        $proyectosRecientes = Proyectos::orderBy('fechaModificacion', 'desc')
+        //$usuario = Usuario::find(2);
+        $usuario = Auth::user();
+
+        $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
                                ->take(6)
-                               ->get();
-       
-        $usuario = Usuario::find(2);
+                               ->get();        
 
         $proyectosTotal = $usuario->proyectos()
             ->with(['tareas.tags']) // carga tareas y tags dentro de cada tarea
@@ -34,17 +40,13 @@ class SiteController extends Controller
 
         return view('homePage')->with(['proyectosRecientes' => $proyectosRecientes,
                                                   'proyectosTotal'=> $proyectosTotal,
-                                                  'tareasAsignadas'=> $tareasAsignadas]);
+                                                  'tareasAsignadas'=> $tareasAsignadas,
+                                                  'usuario' => $usuario]);
     }
 
     public function perfil()
     {
-        return view('perfil');
-    }
-
-    public function proyectos()
-    {
-        return view('proyectos');
+        return view('perfil')-> with('usuario', Auth::user());
     }
 
     public function crearProyecto()
@@ -52,9 +54,11 @@ class SiteController extends Controller
         return view('crearProyecto');
     }
 
-    public function project()
+    public function project($idProyecto)
     {
-        return view('project');
+        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
+        dd($proyecto);
+        return view('project', compact('proyecto'));
     }
 
     public function crearTareas(){

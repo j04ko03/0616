@@ -10,7 +10,7 @@
             $color = 'yellow';
             break;
         case 3:
-            $color = 'green';
+            $color = 'green ';
             break;
         default:
             $color = 'red';
@@ -47,7 +47,9 @@
             <p class="texto-gris">{{ $fechaEntrega }}</p>
         </div>
     </div>
-
+    <div class="card-titulo" style="width: 100%; height: 30px;  margin-top: 3px; display: flex; justify-content: end;">
+        <a class="verProyectoBtn" href="{{ route('project.controller', ['idProyecto' => ':id']) }}" style="color: blue;">Ver Proyecto</a>
+    </div>
     <div class="card-tareas">
         <div class="flex2">
             <div style="width: 40%;">

@@ -1,25 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
-            //Cojemos el id del contenedor de todos los proyectos
+            //Cojemos el id del contenedor de todos los proyectos prueba
             const contenedorAllProyectos = document.getElementById('contenedorTodosProyectos');
             //Buscamos el id de la card a seleccionar
             const cards = document.querySelectorAll('.cardProyectoId');
             //Buscamos el id del contenedor que muestra el proyecto específico
             const contenedorMuestra = document.getElementById('contenedorProyectoEspecifico');
             //Cojemos el id de la foto de cerrar para volver a Proyectos
-            const btnCerrar = document.getElementById('cerrarContenedor');
+            const contenedroCerrar = document.getElementById('cerrarContenedor');
+
+            const btnCerrar = document.getElementById('imagen');
 
             console.log(document.querySelectorAll('.cardProyectoId'));
             //Creamos un foreach para cada card existente en cardProyectoId y de este modo tener el objeto controlado
             cards.forEach(card => {
-                    
+                const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
+                //Pasar id del proyecto por enlace
+                const btnVerProyecto = card.querySelector('.verProyectoBtn');
+                //btnVerProyecto.href = `http://localhost/0616/Proyecto1/public/project/${data.id}`;
+                btnVerProyecto.href = btnVerProyecto.href.replace(':id', data.id);
+                // Evitar propagación del click en enlaces internos gracias a seleccionar todos los <a>
+                const enlaces = card.querySelectorAll('a');
+                enlaces.forEach(enlace => {
+                    enlace.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                    });
+                });
+
                 //Por la card obtenida (objeto independiente) haremos un evento click
                 card.addEventListener('click', () => {
-                    const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
+                    //const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
+          
                     console.log('Card clicked');
                     console.log(data);
 
                     //Cambio estado de proyecto en el hidde
-                    btnCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
+                    contenedroCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
                     
                     const titulo = document.getElementById('tituloProyecto');
                     titulo.textContent = data.titulo;
@@ -90,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             //Abierto el contenedor del proyecto específico parra cerralo 
             btnCerrar.addEventListener('click', () => {
+                console.log/('img clc');
                 contenedorMuestra.classList.add('oculto');
                 contenedorAllProyectos.classList.remove('oculto');
             });
