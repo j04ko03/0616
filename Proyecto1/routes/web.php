@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function () {
     // CRUD de proyectos y tareas
     Route::resource('showProjects', ProyectosController::class);
     Route::resource('tasks', TareaController::class);
+    Route::get('/logout',[UsuarioController::class,'logout'])->name('logout.controller');
 
     // Rutas para editar perfil.
     Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
