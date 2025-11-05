@@ -52,7 +52,7 @@ class Tarea extends Model
      */
     public function sprint(): BelongsTo
     {
-        return $this->belongsTo(Sprint::class, 'id');
+        return $this->belongsTo(Sprint::class, 'idSprint');
     }
 
     /**
@@ -62,6 +62,6 @@ class Tarea extends Model
      */
     public function estado(): BelongsTo
     {
-        return $this->belongsTo(Estado::class, 'id');
+        return $this->belongsTo(Estado::class, 'estadoId');
     }
 }
