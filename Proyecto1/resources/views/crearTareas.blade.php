@@ -8,63 +8,76 @@
 @section('content')
     <main>
         <form action="project" method="POST">
-        @csrf
+            @csrf
             <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
             <label for="titulo"></label>
-            <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA..." required
-                maxlength="100">
+            <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA..." required maxlength="100">
             <div>
-                <div>
-                    <div>
-                        <label for="fecha-limite">Fecha límite</label>
-                        <input type="date" name="fechaEntrega" id="fechaEntrega" required min="">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="presupuesto">Presupuesto</label>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="00.00€" step="00.01">
-                    </div>
+                <div style="display: flex; flex-wrap: wrap; border: 1px solid green">
+                    <div style="border: 1px solid orange">
+                        <div class="form-group">
+                            <label for="fecha-limite">Fecha límite</label>
+                            <input type="date" name="fechaEntrega" id="fechaEntrega" required min=""
+                                style="width: 100%">
+                        </div>
 
-                    <div>
-                        <label>Responsable</label>
-                        <label id="labelId" data-id="{{ auth()->user()->id }}">{{ auth()->user()->nombre }}</label>
-                    </div>
+                        <div class="form-group">
+                            <label for="presupuesto">Presupuesto</label>
+                            <input type="number" name="presupuesto" id="presupuesto" placeholder="00.00€" step="00.01">
+                        </div>
 
-                    <div>
-                        <label for="estado">Estado:</label>
-                        <select id="estado" name="estado">
-                        <option value="1">Pendiente</option>
-                        <option value="2">En revisión</option>
-                        <option value="3">Completado</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="estado">Estado:</label>
+                            <select id="estado" name="estado" style="width: 100%">
+                                <option value="1">Pendiente</option>
+                                <option value="2">En revisión</option>
+                                <option value="3">Completado</option>
+                            </select>
+                        </div>
                     </div>
+                    <!--zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz-->
+                    <div style="border: 1px purple solid">
+                        <div class="form-group">
+                            <label for="sprint">Sprint:</label>
+                            <select id="sprint" name="sprint" style="width: 100%">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
 
-                    <div>
-                        <label for="sprint">Sprint:</label>
-                        <select id="sprint" name="sprint">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="tag">Tags:</label>
+                            <select id="tag" name="tag" style="width: 100%">
+                                <option value="1">tag1</option>
+                                <option value="2">tag2</option>
+                                <option value="3">tag3</option>
+                            </select>
+                        </div>
                     </div>
-                    
-                    <label for="documento" id="add-documento">
-                            <input type="file" name="documento" id="documento" multiple="true"
-                                accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .png, .jpg, .jpeg, .svg, .webp">
-                            <span>Añadir documentos <img src="{{ url('/storage/assets/icons/upload.svg') }}" alt="Upload button">
-                            </span>
-                        </label>
+                    <!--TODO ALMACENAR FICHEROS OPCIONAL BACKLOG-->
+                    <!--<label for="documento" id="add-documento">
+                                <input type="file" name="documento" id="documento" multiple="true"
+                                    accept=".pdf, .doc, .docx, .odt, .rtf, .txt, .png, .jpg, .jpeg, .svg, .webp">
+                                <span>Añadir documentos <img src="{{ url('/storage/assets/icons/upload.svg') }}" alt="Upload button">
+                                </span>
+                        </label>-->
+
                     <ul id="selected-documents"></ul>
                 </div>
-                <div>               
+                <div>
                     <div>
                         <div id="textArea-objetivos">
                             <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea"></textarea>
-                        </div> 
+                        </div>
                     </div>
 
                     <div>
                         <div class="user-dropdown">
+                            <div style="margin-bottom: 20px">
+                                <label>Responsable:</label>
+                                <span id="labelId" data-id="{{ auth()->user()->id }}">{{ auth()->user()->nombre }}</span>
+                            </div>
                             <button type="button" id="add-user-btn">Añadir usuario</button>
                             <input type="text" class="user-search" placeholder="Buscar usuario...">
                             <div class="user-list">
@@ -90,6 +103,11 @@
         </form>
     </main>
 
+    <script>
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("fechaEntrega").setAttribute("min", today);
+        document.getElementById("fechaEntrega").value = today;
+    </script>
     <script src="{{ url('/js/añadirUsuario.js') }}"></script>
     <script src="{{ url('/js/guardarTareaSinProyecto.js') }}"></script>
 @endsection

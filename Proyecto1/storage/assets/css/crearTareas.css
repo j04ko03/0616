@@ -168,7 +168,7 @@ input, textarea {
     width: 100%;
     height: 100%;
     min-height: 200px;
-    resize: vertical;
+    resize: none;
     border: 2px solid transparent;
     font-family: "Lato", sans-serif;
     font-size: 0.9rem;
@@ -389,6 +389,54 @@ input[type="submit"]:hover {
     color: white;
     border-radius: 50%;
 }
+
+/* SELECTS IGUAL QUE PRESUPUESTO */
+select {
+    border: 2px solid transparent;
+    color: #9ca3af;
+    width: 100%;
+    padding: 10px !important;
+    border-radius: 5px;
+    transition: all 400ms;
+    background-color: var(--color-background);
+    font-family: "Lato", sans-serif;
+    background-color: white;
+}
+
+/* EFECTO AL HACER FOCUS/HOVER COMO PRESUPUESTO */
+select:is(:hover, :active, :focus) {
+    outline: none;
+    box-shadow: none;
+    border: 2px solid var(--color-primary);
+}
+
+/* Contenedor principal de los inputs */
+#form-flex-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Escritorio: 4 columnas */
+    gap: 20px;
+    width: 100%;
+}
+
+/* ✅ En pantallas medianas → 2 columnas */
+@media (width < 1024px) {
+    #form-flex-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ✅ En pantallas pequeñas → 1 columna */
+@media (width < 600px) {
+    #form-flex-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Buena práctica: todos los .form-group ocupan su celda */
+.form-group {
+    width: 100%;
+}
+
 
 /* RESPONSIVE */
 @media (width < 768px) {
