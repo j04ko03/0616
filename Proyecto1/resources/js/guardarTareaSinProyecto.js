@@ -3,8 +3,10 @@ const fechaEntrega = document.getElementById('fechaEntrega');
 const presupuesto = document.getElementById('presupuesto');
 //Puedo obtener el user con auth o con id
 const estado = document.getElementById('estado');
+const sprint = document.getElementById('sprint');
 const addTareaFantasma = document.getElementById('addTareaFantasma');
 const textArea = document.getElementById('textArea');
+const responsableId = document.getElementById('labelId');
 
 //Vamos a crear una funcion para guardar las tareas en el local storage, pero antes debemos recuperar de local las tareas en caso de que existan
 addTareaFantasma.addEventListener("click", function(e){
@@ -24,7 +26,11 @@ addTareaFantasma.addEventListener("click", function(e){
         fechaEntrega: `${fechaEntrega.value} ${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}:${String(milisegundos).padStart(3,'0')}`,
         presupuesto: presupuesto.value,
         estado: estado.value,
-        descripcion: textArea.nodeValue
+        descripcion: textArea.value,
+        responsableId: responsableId.dataset.id,
+        isDeleted: 0,
+        idSprint: sprint.value,
+        proyectoId: 1
     };
 
     console.log(nuevaTarea);

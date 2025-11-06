@@ -27,7 +27,7 @@
 
                     <div>
                         <label>Responsable</label>
-                        <label>{{ auth()->user()->nombre }}</label>
+                        <label id="labelId" data-id="{{ auth()->user()->id }}">{{ auth()->user()->nombre }}</label>
                     </div>
 
                     <div>
@@ -39,7 +39,14 @@
                         </select>
                     </div>
 
-                    
+                    <div>
+                        <label for="sprint">Sprint:</label>
+                        <select id="sprint" name="sprint">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        </select>
+                    </div>
                     
                     <label for="documento" id="add-documento">
                             <input type="file" name="documento" id="documento" multiple="true"
