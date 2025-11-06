@@ -35,7 +35,6 @@
                             <button type="button" id="add-tareas-btn">Añadir tarea</button>
                         </a>
                         <div id="tareas">
-                            <p id="add-tareas-msg"></p>
                             <div class="tarea">TAREA <button class="remove-btn" type="button">X</button></div>
                             <div class="tarea">TAREA <button class="remove-btn" type="button">X</button></div>
                             <div class="tarea">TAREA <button class="remove-btn" type="button">X</button></div>
@@ -70,12 +69,10 @@
         const tareasContainer = document.querySelector("#tareas")
         const tarea = document.getElementsByClassName('tarea');
 
-        tareas.addEventListener("click", function(e) {
-
+        tareasContainer.addEventListener("click", function(e) {
             if (e.target.classList.contains("remove-btn")) {
                 e.target.closest(".tarea").remove();
             }
-
         })
     </script>
 @endsection

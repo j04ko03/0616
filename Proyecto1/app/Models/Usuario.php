@@ -30,7 +30,7 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
 
     // Valores por defecto
     protected $attributes = [
-        'tipoUser' => 1,
+        'tipoUser' => 2,
         'apodo' => null
     ];
 

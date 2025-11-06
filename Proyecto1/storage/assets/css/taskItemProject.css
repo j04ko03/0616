@@ -1,0 +1,42 @@
+.task-card {
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.task-card span:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-card > span:first-child > p {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.task-card > span:nth-child(4) {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #464646;
+}
+
+.tags-container {
+    display: flex;
+    gap: 5px;
+}
+
+.tags {
+    background-color: #d9d9d9;
+    color: #464646;
+    border-radius: 8px;
+    font-size: 0.6rem;
+    padding: 5px;
+    width: max-content;
+}

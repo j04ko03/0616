@@ -1,0 +1,50 @@
+.member {
+    display: grid;
+    grid-template-columns: 100px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    position: relative;
+}
+
+.member > div:nth-child(2) {
+    padding: 20px;
+    padding-left: 15px;
+}
+
+.member span:first-child {
+    display: flex;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.member span:first-child > p {
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.member span:first-child > button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.member p:last-child {
+    font-size: 0.8rem;
+    color: #464646;
+}
+
+.member img {
+    scale: 1;
+    width: 100%;
+    border-radius: 100px;
+    border: 1px solid black;
+}
+
+.pfp {
+    box-sizing: border-box;
+    padding: 15px;
+    padding-right: 0;
+}
