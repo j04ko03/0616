@@ -11,19 +11,35 @@
         @csrf
             <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
             <label for="titulo"></label>
-            <input type="text" name="titulo" id="titulo" placeholder="TITULO TAREA..." required
+            <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA..." required
                 maxlength="100">
             <div>
                 <div>
                     <div>
                         <label for="fecha-limite">Fecha límite</label>
-                        <input type="date" name="fecha-limite" id="fecha-limite" required min="">
+                        <input type="date" name="fechaEntrega" id="fechaEntrega" required min="">
                     </div>
                     
                     <div class="form-group">
                         <label for="presupuesto">Presupuesto</label>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="00.00€" step="00.01">
                     </div>
+
+                    <div>
+                        <label>Responsable</label>
+                        <label>{{ auth()->user()->nombre }}</label>
+                    </div>
+
+                    <div>
+                        <label for="estado">Estado:</label>
+                        <select id="estado" name="estado">
+                        <option value="1">Pendiente</option>
+                        <option value="2">En revisión</option>
+                        <option value="3">Completado</option>
+                        </select>
+                    </div>
+
+                    
                     
                     <label for="documento" id="add-documento">
                             <input type="file" name="documento" id="documento" multiple="true"
@@ -37,7 +53,7 @@
                     <div>
                         <div id="textArea-objetivos">
                             <textarea name="textArea" id="textArea" cols="30" rows="10" placeholder="Objetivos de la tarea"></textarea>
-                        </div>
+                        </div> 
                     </div>
 
                     <div>
@@ -59,7 +75,8 @@
                             <!-- Los usuarios añadidos aparecerán aquí -->
                         </div>
 
-                        <input type="submit" value="Añadir tarea" id="add-task-btn">
+                        <!--<input type="submit" value="Añadir tarea" id="addTareaFantasma">-->
+                        <button id="addTareaFantasma">Añadir</button>
                     </div>
                 </div>
             </div>
@@ -67,4 +84,5 @@
     </main>
 
     <script src="{{ url('/js/añadirUsuario.js') }}"></script>
+    <script src="{{ url('/js/guardarTareaSinProyecto.js') }}"></script>
 @endsection
