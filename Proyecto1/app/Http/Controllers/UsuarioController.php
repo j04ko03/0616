@@ -104,7 +104,7 @@ class UsuarioController extends Controller
                 }
             }
         }
-        //  dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
+        // dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
 
         $usuario->save();
         return redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
