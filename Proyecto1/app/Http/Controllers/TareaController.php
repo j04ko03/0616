@@ -57,7 +57,7 @@ class TareaController extends Controller
     public function edit(Tarea $tarea)
     {
         //NO se PUEDE HACER AUN YA QUE NO TENEMOS UNA PANTLLA PARA MODIFICAR TAREAS!!!!!!!!!!!!!!
-        return view('', compact('tarea'));
+        //return view('', compact('tarea'));
     }
 
     /**
@@ -85,6 +85,6 @@ class TareaController extends Controller
     {
         //Para borrar
         $tarea->delete();
-        return redirect()->route('tasks.index');
+        //return redirect()->route('tasks.index');
     }
 }
