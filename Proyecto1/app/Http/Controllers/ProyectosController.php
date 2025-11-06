@@ -31,7 +31,41 @@ class ProyectosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //TE PONGO EJEMPLO DE COMO USAR EL INPUT DE TAREAS QUE SE CREA EN JS A PARTIR DE LOCAL STORAGE
+        /*
+            // 1. Crear el proyecto
+            $project = Project::create([
+                'titulo' => $request->input('titulo'),
+                'fecha_limite' => $request->input('fecha-limite'),
+                'presupuesto' => $request->input('presupuesto'),
+            ]);
+
+            // 2. Recuperar las tareas del input hidden
+            $tareas = json_decode($request->input('tareas'), true);
+
+            // 3. Guardar cada tarea en la base de datos asociada al proyecto
+            if($tareas){
+                foreach($tareas as $tareaData){
+                    // Crear tarea asociada al proyecto
+                    $tarea = Tarea::create([
+                        'titulo' => $tareaData['titulo'] ?? '',
+                        'descripcion' => $tareaData['descripcion'] ?? '',
+                        'fecha_limite' => $tareaData['fechaLimite'] ?? null,
+                        'presupuesto' => $tareaData['presupuesto'] ?? null,
+                        'estado' => $tareaData['estado'] ?? 0,
+                        'project_id' => $project->id
+                    ]);
+
+                    //Asignar usuarios a la tarea (N:M)
+                    if(isset($tareaData['usuarios']) && count($tareaData['usuarios']) > 0){
+                        $tarea->usuarios()->sync($tareaData['usuarios']); // IDs de usuarios
+                    }
+                }
+            }
+
+            // 4. Redirigir o retornar respuesta
+            return redirect()->route('proyectos')->with('success', 'Proyecto y tareas creadas correctamente');
+        */
     }
 
     /**
