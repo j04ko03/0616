@@ -11,7 +11,10 @@
         <main>
             <div id="select-container">
                 <select name="projects" id="projects">
-
+                    @foreach ($projects as $project)
+                        <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
+                            {{ $project->titulo }}</option>
+                    @endforeach
                 </select>
             </div>
             <div id="tab-container">
@@ -20,11 +23,9 @@
                 <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
                 <button class="tabs-btn" data-tab="4">Integrantes</button>
                 <select name="sprints" id="sprints">
-                    <option value="sprint1">Sprint 1</option>
-                    <option value="sprint2">Sprint 2</option>
-                    <option value="sprint3">Sprint 3</option>
-                    <option value="sprint4">Sprint 4</option>
-                    <option value="sprint5">Sprint 5</option>
+                    @foreach ($sprints as $sprint)
+                        <option value="{{ $sprint->descripcion }}">{{ $sprint->descripcion }}</option>
+                    @endforeach
                 </select>
             </div>
             <div>
@@ -32,23 +33,34 @@
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
-
+                            @foreach ($proyecto->tareas as $tarea)
+                                @if ($tarea->estadoId == 1 && $tarea->responsableId == Auth::user()->id)
+                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
                         <div class="task-container">
-                            @for ($i = 0; $i < 2; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                            @foreach ($proyecto->tareas as $tarea)
+                                @if ($tarea->estadoId == 2 && $tarea->responsableId == Auth::user()->id)
+                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
                         <div class="task-container">
-                            @for ($i = 0; $i < 4; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                            @foreach ($proyecto->tareas as $tarea)
+                                @if ($tarea->estadoId == 3 && $tarea->responsableId == Auth::user()->id)
+                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -65,30 +77,9 @@
                             <span class="responsable-tarea">Nombre responsable</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
+                        @foreach ($proyecto->tareas as $tarea)
+                            <x-backlogItem titulo="{{ $tarea->titulo }}" descripcion=" {{ $tarea->descripcion }} " />
+                        @endforeach
                     </div>
                 </div>
 
@@ -102,34 +93,16 @@
                             <span class="responsable-tarea">Nombre responsable</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
+                        @foreach ($proyecto->tareas as $tarea)
+                            <x-backlogItem titulo="{{ $tarea->titulo }}" descripcion=" {{ $tarea->descripcion }} " />
+                        @endforeach
                     </div>
                 </div>
 
                 <div class="tabs-content content-section-4">
+                    @foreach ($proyecto->usuarios as $usuario)
+                        <x-memberItem nombre="{{ $usuario->nombre }}" email="{{ $usuario->email }}" />
+                    @endforeach
                     @for ($i = 0; $i < 5; $i++)
                         <x-memberItem />
                     @endfor

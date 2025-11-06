@@ -236,7 +236,7 @@ option:hover {
     border-bottom: none;
     padding: 5px 5px;
     flex: 1;
-    font-size: .85rem;
+    font-size: 0.85rem;
 }
 
 .task-backlog span:last-child {

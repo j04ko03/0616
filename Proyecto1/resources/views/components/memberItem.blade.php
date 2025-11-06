@@ -7,7 +7,7 @@
     </div>
     <div>
         <span>
-            <p>Nombre usuario</p>
+            <p>{{ $nombre }}</p>
             <button class="button-task">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -17,6 +17,6 @@
             </button>
         </span>
         <p>Rol</p>
-        <p>correo@ejemplo.com</p>
+        <p>{{ $email }}</p>
     </div>
 </div>
