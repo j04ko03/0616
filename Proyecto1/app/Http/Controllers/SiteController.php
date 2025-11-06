@@ -57,7 +57,7 @@ class SiteController extends Controller
     public function project($idProyecto)
     {
         $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
-        dd($proyecto);
+        // dd($proyecto);
         return view('project', compact('proyecto'));
     }
 

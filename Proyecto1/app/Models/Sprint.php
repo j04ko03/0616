@@ -18,6 +18,6 @@ class Sprint extends Model
      */
     public function tareas(): HasMany
     {
-        return $this->hasMany(Tarea::class, 'idSprint', 'local_key');
+        return $this->hasMany(Tarea::class, 'idSprint');
     }
 }
