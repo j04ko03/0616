@@ -131,6 +131,10 @@ option:hover {
     gap: 30px;
 }
 
+.filter-sprint {
+    display: none !important;
+}
+
 .kanban-task-container {
     box-sizing: border-box;
     display: flex;
@@ -212,22 +216,41 @@ option:hover {
 }
 
 /* PRODUCT & SPRINT BACKLOG */
+.content-section-2,
+.content-section-3 {
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
 .backlog {
     background-color: var(--color-white);
     width: 100%;
+    min-width: 800px;
     margin: 0;
+
+    border: 1px solid black;
 }
 
 .task-backlog {
     background-color: var(--color-white);
 
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1.5fr 2.5fr 1fr 1fr 2fr 2fr 1.5fr;
     gap: 0;
 }
 
-.task-backlog:last-child {
-    border-bottom: 1px solid black;
+.task-backlog:first-child {
+    background-color: #172a51;
+    color: var(--color-white);
+    text-align: center;
+}
+
+.task-backlog:first-child:hover {
+    background-color: #172a51;
+}
+
+.task-backlog:hover {
+    background-color: rgb(234, 234, 234);
 }
 
 .task-backlog span {
@@ -236,11 +259,29 @@ option:hover {
     border-bottom: none;
     padding: 5px 5px;
     flex: 1;
-    font-size: 0.85rem;
+    font-size: 1rem;
+    overflow-x: auto;
+
+    display: flex;
+    align-items: center;
 }
 
-.task-backlog span:last-child {
-    border-right: 1px solid black;
+.task-backlog:first-child span {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.task-backlog span:first-child {
+    border-left: none;
+}
+
+.tag-tarea {
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    display: flex;
+    gap: 2px;
 }
 
 /*  MEMBERS CONTAINER */
@@ -271,5 +312,9 @@ option:hover {
 @media (width < 400px) {
     main {
         padding: 10px;
+    }
+
+    .task-backlog span {
+        font-size: 0.7rem;
     }
 }

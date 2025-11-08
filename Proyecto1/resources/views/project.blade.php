@@ -24,7 +24,10 @@
                 <button class="tabs-btn" data-tab="4">Integrantes</button>
                 <select name="sprints" id="sprints">
                     @foreach ($sprints as $sprint)
-                        <option value="{{ $sprint->descripcion }}">{{ $sprint->descripcion }}</option>
+                        <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
+
+                            {{ $sprint->descripcion }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -34,9 +37,13 @@
                         <h3>TO DO</h3>
                         <div class="task-container">
                             @foreach ($proyecto->tareas as $tarea)
-                                @if ($tarea->estadoId == 1 && $tarea->responsableId == Auth::user()->id)
-                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @php
+                                    $asignados = $tarea->usuarios;
+                                @endphp
+                                @if ($tarea->estadoId == 1 && $tarea->usuarios->contains(Auth::user()->id))
+                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                        :responsable="$tarea->responsable->nombre" />
                                 @endif
                             @endforeach
                         </div>
@@ -45,9 +52,13 @@
                         <h3>IN PROGRESS</h3>
                         <div class="task-container">
                             @foreach ($proyecto->tareas as $tarea)
-                                @if ($tarea->estadoId == 2 && $tarea->responsableId == Auth::user()->id)
-                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @php
+                                    $asignados = $tarea->usuarios;
+                                @endphp
+                                @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
+                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                        :responsable="$tarea->responsable->nombre" />
                                 @endif
                             @endforeach
                         </div>
@@ -56,9 +67,13 @@
                         <h3>DONE</h3>
                         <div class="task-container">
                             @foreach ($proyecto->tareas as $tarea)
-                                @if ($tarea->estadoId == 3 && $tarea->responsableId == Auth::user()->id)
-                                    <x-taskItemProject titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }} " />
+                                @php
+                                    $asignados = $tarea->usuarios;
+                                @endphp
+                                @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
+                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                        :responsable="$tarea->responsable->nombre" />
                                 @endif
                             @endforeach
                         </div>
@@ -74,11 +89,17 @@
                             <span class="descripcion-tarea">Descripcion</span>
                             <span class="sprint-tarea">Sprint</span>
                             <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="responsable-tarea">Responsable</span>
+                            <span class="asignado-tarea">Asignado</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
                         @foreach ($proyecto->tareas as $tarea)
-                            <x-backlogItem titulo="{{ $tarea->titulo }}" descripcion=" {{ $tarea->descripcion }} " />
+                            @php
+                                $asignados = $tarea->usuarios;
+                            @endphp
+                            <x-backlogItem dataset="" :titulo="$tarea->titulo" class="" :descripcion="$tarea->descripcion"
+                                :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
+                                :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
                 </div>
@@ -90,11 +111,18 @@
                             <span class="descripcion-tarea">Descripcion</span>
                             <span class="sprint-tarea">Sprint</span>
                             <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Nombre responsable</span>
+                            <span class="responsable-tarea">Responsable</span>
+                            <span class="responsable-tarea">Asignado</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
                         @foreach ($proyecto->tareas as $tarea)
-                            <x-backlogItem titulo="{{ $tarea->titulo }}" descripcion=" {{ $tarea->descripcion }} " />
+                            @php
+                                $asignados = $tarea->usuarios;
+                            @endphp
+
+                            <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog" :descripcion="$tarea->descripcion"
+                                :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
+                                :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
                 </div>
@@ -103,9 +131,6 @@
                     @foreach ($proyecto->usuarios as $usuario)
                         <x-memberItem nombre="{{ $usuario->nombre }}" email="{{ $usuario->email }}" />
                     @endforeach
-                    @for ($i = 0; $i < 5; $i++)
-                        <x-memberItem />
-                    @endfor
                 </div>
             </div>
         </main>
@@ -117,6 +142,10 @@
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
 
     <script>
+        document.getElementById("projects").addEventListener("change", function(e) {
+            window.location = `${e.target.value}`
+        })
+
         const btnContainer = document.querySelector("#tab-container");
         const tabsBtn = document.querySelectorAll(".tabs-btn");
         const tabsContent = document.querySelectorAll(".tabs-content");
@@ -132,5 +161,29 @@
                 .querySelector(`.content-section-${clicked.dataset.tab}`)
                 .classList.add("content-active");
         });
+
+        const sprintDropdown = document.getElementById("sprints");
+        const tasksKanban = document.querySelectorAll(".task-card");
+        const tasksBacklog = document.querySelectorAll(".sprint-backlog");
+        const kanbanContainer = document.querySelector(".content-section-1");
+
+        sprintDropdown.addEventListener("change", function() {
+            filterTasks(tasksKanban);
+            filterTasks(tasksBacklog);
+        })
+        window.addEventListener("load", function() {
+            filterTasks(tasksKanban);
+            filterTasks(tasksBacklog);
+        })
+
+        function filterTasks(tasks) {
+            tasks.forEach(task => {
+                if (sprintDropdown.value !== task.dataset.sprint) {
+                    task.classList.add("filter-sprint");
+                } else {
+                    task.classList.remove("filter-sprint");
+                }
+            })
+        }
     </script>
 @endsection

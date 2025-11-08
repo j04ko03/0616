@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ url('/css/taskItemProject.css') }}">
 
-<div class="task-card">
+<div class="task-card filter-sprint" data-sprint="{{ $sprint }}">
     <span>
         <p>{{ $titulo }}</p>
         <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -11,11 +11,18 @@
         </button>
     </span>
     <span class="tags-container">
-        <p class="tags">TAG</p>
+        @if (!empty($tags) && $tags->count())
+            @foreach ($tags as $tag)
+                <p class="tags" style="background-color:{{ $tag->color }}">{{ $tag->descripcion }}</p>
+            @endforeach
+        @else
+            Sin tags
+        @endif
     </span>
     <p>{{ $descripcion }}</p>
     <span>
-        <p>Responsable</p>
+        <p>{{ $responsable }}
+        </p>
         <p>Fecha de entrega</p>
     </span>
 </div>
