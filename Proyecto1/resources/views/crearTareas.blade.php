@@ -30,9 +30,9 @@
                             <div class="form-group">
                                 <label for="estado">Estado:</label>
                                 <select id="estado" name="estado" style="width: 100%">
-                                    <option value="1">Pendiente</option>
-                                    <option value="2">En revisión</option>
-                                    <option value="3">Completado</option>
+                                    @foreach ($estados as $estado)
+                                        <option value="{{ $estado->id }}">{{ $estado->nombre }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -41,18 +41,18 @@
                                 <div class="form-group">
                                     <label for="sprint">Sprint:</label>
                                     <select id="sprint" name="sprint" style="width: 100%">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
+                                        @foreach ($sprints as $sprint)
+                                            <option value="{{ $sprint->id }}">{{ $sprint->descripcion }}</option>    
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="tag">Tags:</label>
                                     <select id="tag" name="tag" style="width: 100%">
-                                        <option value="1">tag1</option>
-                                        <option value="2">tag2</option>
-                                        <option value="3">tag3</option>
+                                        @foreach ($tags as $tag)
+                                            <option value="{{ $tag->id }}">{{ $tag->descripcion }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                         </div>
@@ -88,10 +88,11 @@
                                 <div class="user-item" data-user="Grupo 1" data-type="grupo">Grupo 1</div>
                                 <div class="user-item" data-user="Grupo 2" data-type="grupo">Grupo 2</div> --}}
                                 <div class="user-group">Usuarios</div>
-                                <div class="user-item" data-user="Pepa" data-type="usuario">Pepa</div>
-                                <div class="user-item" data-user="Juanjo" data-type="usuario">Juanjo</div>
-                                <div class="user-item" data-user="María" data-type="usuario">María</div>
-                                <div class="user-item" data-user="Carlos" data-type="usuario">Carlos</div>
+                                @foreach ($usuarios as $usuario)
+                                    @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
+                                        <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">{{ $usuario->nombre }}</div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
                         <div id="usuarios-seleccionados">

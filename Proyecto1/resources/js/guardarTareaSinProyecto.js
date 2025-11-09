@@ -20,6 +20,14 @@ addTareaFantasma.addEventListener("click", function(e){
     const segundos = now.getSeconds();   
     const milisegundos = now.getMilliseconds();
 
+    //Recogemos Usuarios de la lista de las tareas
+    const usuariosSeleccionadosArray = Array.from(document.querySelectorAll('#usuarios-seleccionados .usuario-seleccionado'))
+    .map(div => ({
+        id: div.dataset.id,
+        nombre: div.dataset.name,
+        tipo: div.dataset.tipo
+    }));
+
     //Creamos una tarea
     const nuevaTarea = {
         titulo: tituloTarea.value,
@@ -30,7 +38,8 @@ addTareaFantasma.addEventListener("click", function(e){
         responsableId: responsableId.dataset.id,
         isDeleted: 0,
         idSprint: sprint.value,
-        proyectoId: 1
+        proyectoId: 1,
+        usuariosAsignados: usuariosSeleccionadosArray
     };
 
     console.log(nuevaTarea);
