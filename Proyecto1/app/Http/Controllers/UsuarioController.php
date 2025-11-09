@@ -190,4 +190,12 @@ class UsuarioController extends Controller
     {
         return $this->store($request);
     }
+
+    public function listaUsuarios (Request $request)
+    {
+        $usuario = Usuario::whereHas('rol; 1, 2');
+
+        return redirect()->route('addTask.store')->with(usuario.index, $usuario);
+
+    }
 }
