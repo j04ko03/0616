@@ -94,7 +94,7 @@
                 
                 <div class="tabs-content content-section-3">
                     <div class="kanban-task-container">
-                        <h3>TO DO</h3>
+                        <h3 class="todo">TO DO</h3>
                         <div class="task-container">
                             @for ($i = 0; $i < 5; $i++)
                                 <x-taskItemProject />
@@ -103,7 +103,7 @@
                         <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
+                        <h3 class="progreso">IN PROGRESS</h3>
                         <div class="task-container">
                             @for ($i = 0; $i < 6; $i++)
                                 <x-taskItemProject />
@@ -112,7 +112,7 @@
                         <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
-                        <h3>DONE</h3>
+                        <h3 class="done">DONE</h3>
                         <div class="task-container">
                             @for ($i = 0; $i < 4; $i++)
                                 <x-taskItemProject />

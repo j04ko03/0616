@@ -193,9 +193,7 @@ class UsuarioController extends Controller
 
     public function listaUsuarios (Request $request)
     {
-        $usuario = Usuario::whereHas('rol; 1, 2');
-
-        return redirect()->route('addTask.store')->with(usuario.index, $usuario);
-
+        $usuario = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
+        return response()->json($usuarios);
     }
 }

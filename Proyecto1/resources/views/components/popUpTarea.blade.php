@@ -49,17 +49,9 @@
                             <button type="button" id="popup-add-user-btn">Añadir usuario</button>
                             <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
                             <div class="user-list">
-                                <div class="user-group">Grupos</div>
-                                <div class="user-item" data-user="Grupo 1">Grupo 1</div>
-                                <div class="user-item" data-user="Grupo 2">Grupo 2</div>
-                                <div class="user-group">Usuarios</div>
-                                <div class="user-item" data-user="Pepa">Pepa</div>
-                                <div class="user-item" data-user="Juanjo">Juanjo</div>
-                                <div class="user-item" data-user="María">María</div>
-                                <div class="user-item" data-user="Carlos">Carlos</div>
+                            <div id="popup-selected-users" class="selected-users-container"></div>
                             </div>
                         </div>
-                        <div id="popup-tareas"></div>
                     </div>
                     
                     <div class="submit-container">
@@ -72,3 +64,5 @@
         </form>
     </div>
 </div>
+
+<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
