@@ -1,14 +1,16 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
+use App\Models\User;
+use App\Models\Grupo;
 use App\Models\Tarea;
 use App\Models\Estado;
 use App\Models\Sprint;
-use App\Models\Tag;
 use App\Models\Usuario;
 use App\Models\Proyectos;
-use App\Models\Grupo;
-use App\Models\User;
+use App\Models\Solicitud;
+use App\Models\Incidencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -50,7 +52,8 @@ class SiteController extends Controller
 
     public function perfil()
     {
-        return view('perfil')-> with('usuario', Auth::user());
+        $solicitudes = Solicitud::with('usuario')->get();
+        return view('perfil', compact('solicitudes'))-> with('usuario', Auth::user());
     }
 
     public function crearProyecto()
@@ -75,7 +78,9 @@ class SiteController extends Controller
 
     public function vistaGlobal(){
         $grupos = Grupo::with('usuarios')->get();
+        //$incidencias = Incidencia::with('usuario')->get();
+        $solicitudes = Solicitud::with('usuario')->get();
         $usuarios = Usuario::all();
-        return view('vistaGlobal', compact('usuarios', 'grupos'));
+        return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes'));
     }
 }

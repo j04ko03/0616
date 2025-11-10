@@ -35,9 +35,9 @@
             </div>
             <div class="tabs-content content-section-2">
                 <!-- SOLICITUDES SUPERUSUARIO -->
-                @for ($i = 0; $i < 20; $i++)
-                    <x-suRequestItem />
-                @endfor
+                @foreach ($solicitudes as $solicitud)
+                    <x-suRequestItem usuarioId="{{ $solicitud->usuario['id'] }}" nombre="{{ $solicitud->usuario['nombre'] }}" correo="{{ $solicitud->usuario['email'] }}" :idSolicitud="$solicitud->id"/>
+                @endforeach
             </div>
             <div class="tabs-content content-section-3">
                 <!-- PROYECTOS -->
@@ -50,7 +50,7 @@
                     <div class="contenedorSecundario">
                         <h2>Grupos Creados</h2>
                     </div>
-                    <div class="contenedorScroll" style="width: 100%; height: 80%; border: 1px solid green; display: flex; flex-wrap: wrap; justify-content: space-between; align-content: space-around;">
+                    <div class="contenedorScroll" style="width: 100%; height: 80%; display: flex; flex-wrap: wrap; justify-content: space-between; align-content: space-around;">
                         @foreach ($grupos as $grupo)
                             <x-groupComponent descripcion="{{ $grupo['descripcion'] }}" :miembros="$grupo->usuarios" :grupoId="$grupo->id"/>
                         @endforeach
@@ -68,7 +68,7 @@
                     </div>
                     <form action="{{ route('grupos.store') }}" method="POST">
                         @csrf
-                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
+                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px;">
                             <!-- Campos para la creación de usuarios -->
                             <div class="subContenedorSinMargen" style="height: 70%;">
                                 <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
@@ -111,7 +111,7 @@
                     <form method="POST" id="formEditarGrupo">
                         @csrf
                         @method('PUT')
-                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
+                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px;">
                             
                             <input type="text" name="tituloGrupoEdit" id="tituloGrupoEdit" placeholder="Nombre del grupo" required maxlength="100">
                             
@@ -166,11 +166,11 @@
         const denyBtns = document.querySelectorAll(".deny");
         const acceptBtn = document.querySelectorAll(".accept");
 
-        denyBtns.forEach(btn => {
+        /*denyBtns.forEach(btn => {
             btn.addEventListener("click", function(e) {
                 const target = e.target.closest(".member").remove()
             })
-        })
+        })*/
     </script>
 
 

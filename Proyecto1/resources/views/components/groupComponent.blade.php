@@ -3,14 +3,7 @@
 @php
     // Obtener la primera letra de la descripción y convertirla a mayúscula
     $inicial = strtoupper(mb_substr($descripcion, 0, 1));
-    // Preparar los usuarios en JSON para el atributo data
-    /*$usuariosJson = $miembros->map(function($u){
-        return [
-            'id' => $u->id,
-            'nombre' => $u->nombre,
-            'tipoUser' => $u->tipoUser,
-        ];
-    });*/
+    
 @endphp
 
 <div class="grupoCard" data-id="{{ $grupoId }}" data-nombre="{{ $descripcion }}" data-usuarios='@json($miembros)' data-url="{{ route('grupos.update', $grupoId) }}">

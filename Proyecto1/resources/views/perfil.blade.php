@@ -89,9 +89,21 @@
                         <div style="height: 25%; align-content: center; justify-content: center">
                             <a href="{{ route('logout.controller') }}" id="btnCloseSesion" class="card-cabecera textoBtns">Cerrar sesión</a>
                         </div>
-                        <div style="height: 25%; align-content: center; justify-content: center">
-                            <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
-                        </div>
+                            @php
+                                $isSolicited = false;
+                                foreach($solicitudes as $solicitud){
+                                    if ($solicitud->usuario->id === Auth::user()->id) {
+                                        $isSolicited = true;
+                                    }
+                                }
+                            @endphp
+
+                            @if(Auth::user()->tipoUser === 1 || $isSolicited)
+                                    <div style="height: 25%; align-content: center; justify-content: center">
+                                        <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
+                                    </div>
+                            @endif
+                            
                         <div style="height: 25%; align-content: center; justify-content: center">
                             <p id="btnIncidencias" class="card-cabecera textoBtns">Registrar incidencias</p>
                         </div>

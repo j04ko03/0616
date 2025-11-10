@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProyectosController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\TareaController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\GrupoController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\TareaController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProyectosController;
+use App\Http\Controllers\SolicitudController;
 
 // Rutas sin middleware/auth.
 Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');
@@ -55,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
     // Ruta para hacer crud de grupos
     Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos.store');
     Route::resource('grupos', GrupoController::class);
+
+    Route::post('/solicitudes/{solicitude}', [SolicitudController::class, 'borrarSolicitudActualizarUser'])->name('solicitudes.borrarSolicitudActualizarUser');
+    Route::resource('solicitudes', SolicitudController::class);
 });
 
 //Carga de Scripts
