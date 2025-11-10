@@ -84,9 +84,6 @@
                             <button type="button" id="add-user-btn">Añadir usuario</button>
                             <input type="text" class="user-search" placeholder="Buscar usuario...">
                             <div class="user-list">
-                                {{-- <div class="user-group">Grupos</div>
-                                <div class="user-item" data-user="Grupo 1" data-type="grupo">Grupo 1</div>
-                                <div class="user-item" data-user="Grupo 2" data-type="grupo">Grupo 2</div> --}}
                                 <div class="user-group">Usuarios</div>
                                 @foreach ($usuarios as $usuario)
                                     @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
@@ -98,8 +95,7 @@
                         <div id="usuarios-seleccionados">
                             <!-- Los usuarios añadidos aparecerán aquí -->
                         </div>
-
-                        <!--<input type="submit" value="Añadir tarea" id="addTareaFantasma">-->
+                        
                         <button id="addTareaFantasma">Añadir</button>
                     </div>
                 </div>

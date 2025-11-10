@@ -3,6 +3,8 @@
 @push('styles')
     <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('/css/vistaGlobal.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/desplegableUsuarios.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/grupoItem.css') }}">
 @endpush
 
 @section('content')
@@ -27,9 +29,9 @@
             </form>
             <div class="tabs-content content-section-1 content-active">
                 <!-- USUARIOS -->
-                @for ($i = 0; $i < 20; $i++)
-                    <x-memberItem />
-                @endfor
+                @foreach ($usuarios as $usuario)
+                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}"/>
+                @endforeach
             </div>
             <div class="tabs-content content-section-2">
                 <!-- SOLICITUDES SUPERUSUARIO -->
@@ -44,7 +46,58 @@
             </div>
             <div class="tabs-content content-section-4">
                 <!-- GRUPOS -->
-                <p>4</p>
+                <div class="contenedorPrincipal">
+                    <div class="contenedorSecundario">
+                        <h2>Grupos Creados</h2>
+                    </div>
+                    <div class="contenedorScroll" style="width: 100%; height: 80%; border: 1px solid green; display: flex; flex-wrap: wrap; justify-content: space-between; align-content: space-around;">
+                        @foreach ($grupos as $grupo)
+                            <x-groupComponent descripcion="{{ $grupo['descripcion'] }}" :miembros="$grupo->usuarios"/>
+                        @endforeach
+                        <div class="grupoCard" style="width: 100px">
+                            <div class="grupoIcono">
+                                <span>+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenedor para crear grupos -->
+                <div class="contenedorPrincipal">
+                    <div class="contenedorSecundario">
+                        <h2>Creación de grupos</h2>
+                    </div>
+                    <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
+                        <!-- Campos para la creación de usuarios -->
+                        <div class="subContenedorSinMargen">
+                            <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
+                        </div>
+                        <div class="subContenedorSinMargen">
+                            <h3>Lista de usuarios a añadir</h3>
+                        </div>
+                        <div class="subContenedorSinMargen" style="height: 70%;">
+                            <div class="user-dropdown">
+                                <div class="contenedorBotonDesplegable ">
+                                    <button style="width: 100%" type="button" id="add-user-btn">Añadir usuario</button>
+                                </div>
+                                <input type="text" class="user-search" placeholder="Buscar usuario...">
+                                <div class="user-list">
+                                    <div class="user-group">Usuarios</div>
+                                    @foreach ($usuarios as $usuario)
+                                        @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
+                                            <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">{{ $usuario->nombre }}</div>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div id="usuarios-seleccionados">
+                            <!-- Los usuarios añadidos aparecerán aquí -->
+                            </div>
+                        </div>
+                        <div class="contenedorBotonFinal">
+                            <button type="button" id="crearGrupo">Crear Grupo</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -74,4 +127,7 @@
             })
         })
     </script>
+
+
+    <script src="{{ url('/js/añadirUsuario.js') }}"></script>
 @endsection

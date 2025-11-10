@@ -7,6 +7,7 @@ use App\Models\Sprint;
 use App\Models\Tag;
 use App\Models\Usuario;
 use App\Models\Proyectos;
+use App\Models\Grupo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,6 +74,8 @@ class SiteController extends Controller
     }
 
     public function vistaGlobal(){
-        return view('vistaGlobal');
+        $grupos = Grupo::with('usuarios')->get();
+        $usuarios = Usuario::all();
+        return view('vistaGlobal', compact('usuarios', 'grupos'));
     }
 }
