@@ -16,6 +16,14 @@
                             {{ $project->titulo }}</option>
                     @endforeach
                 </select>
+                <a href="{{ $proyecto->linkProyecto }}" target="_blank">{{ $proyecto->linkProyecto }}</a>
+                @php
+                    $user = Auth::user();
+                    $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+                @endphp
+                @if ($user && $userProject->pivot->rol === 'Administrador')
+                    <button id="update-project">Modificar proyecto</button>
+                @endif
             </div>
             <div id="tab-container">
                 <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
@@ -128,9 +136,36 @@
                 </div>
 
                 <div class="tabs-content content-section-4">
-                    @foreach ($proyecto->usuarios as $usuario)
-                        <x-memberItem nombre="{{ $usuario->nombre }}" email="{{ $usuario->email }}" />
-                    @endforeach
+                    <div id="integrantes">
+                        @php
+                            $user = Auth::user();
+                            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+                        @endphp
+                        @if ($user && $userProject->pivot->rol === 'Administrador')
+                            <div class="add-to-project-container">
+                                <button id="add-user" class="add-btn">Añadir miembro</button>
+                                <button id="add-group" class="add-btn">Añadir grupo</button>
+                            </div>
+                        @endif
+
+                        <div id="member-container">
+                            @php
+                                $user = Auth::user();
+                                $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+                            @endphp
+                            @if ($user && $userProject->pivot->rol === 'Administrador')
+                                @foreach ($proyecto->usuarios as $usuario)
+                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
+                                        email="{{ $usuario->email }}" style="auto" />
+                                @endforeach
+                            @else
+                                @foreach ($proyecto->usuarios as $usuario)
+                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
+                                        email="{{ $usuario->email }}" style="none" />
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
