@@ -66,37 +66,40 @@
                     <div class="contenedorSecundario">
                         <h2>Creación de grupos</h2>
                     </div>
-                    <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
-                        <!-- Campos para la creación de usuarios -->
-                        <div class="subContenedorSinMargen">
-                            <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
-                        </div>
-                        <div class="subContenedorSinMargen">
-                            <h3>Lista de usuarios a añadir</h3> 
-                        </div>
-                        <div class="subContenedorSinMargen" style="height: 70%;">
-                            <div class="user-dropdown">
-                                <div class="contenedorBotonDesplegable ">
-                                    <button style="width: 100%" type="button" id="add-user-btn">Añadir usuario</button>
+                    <form action="project" method="POST">
+                        @csrf
+                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
+                            <!-- Campos para la creación de usuarios -->
+                            <div class="subContenedorSinMargen">
+                                <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
+                            </div>
+                            <div class="subContenedorSinMargen">
+                                <h3>Lista de usuarios a añadir</h3> 
+                            </div>
+                            <div class="subContenedorSinMargen" style="height: 70%;">
+                                <div class="user-dropdown">
+                                    <div class="contenedorBotonDesplegable ">
+                                        <button style="width: 100%" type="button" id="add-user-btn">Añadir usuario</button>
+                                    </div>
+                                    <input type="text" class="user-search" placeholder="Buscar usuario...">
+                                    <div class="user-list">
+                                        <div class="user-group">Usuarios</div>
+                                        @foreach ($usuarios as $usuario)
+                                            @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
+                                                <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">{{ $usuario->nombre }}</div>
+                                            @endif
+                                        @endforeach
+                                    </div>
                                 </div>
-                                <input type="text" class="user-search" placeholder="Buscar usuario...">
-                                <div class="user-list">
-                                    <div class="user-group">Usuarios</div>
-                                    @foreach ($usuarios as $usuario)
-                                        @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
-                                            <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">{{ $usuario->nombre }}</div>
-                                        @endif
-                                    @endforeach
+                                <div id="usuarios-seleccionados">
+                                <!-- Los usuarios añadidos aparecerán aquí -->
                                 </div>
                             </div>
-                            <div id="usuarios-seleccionados">
-                            <!-- Los usuarios añadidos aparecerán aquí -->
+                            <div class="contenedorBotonFinal">
+                                <button type="button" id="crearGrupo">Crear Grupo</button>
                             </div>
                         </div>
-                        <div class="contenedorBotonFinal">
-                            <button type="button" id="crearGrupo">Crear Grupo</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
