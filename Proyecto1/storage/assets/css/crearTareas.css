@@ -1,6 +1,12 @@
+/* ===========================
+   IMPORTACIÓN DE FUENTES
+=========================== */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
+/* ===========================
+   BASE
+=========================== */
 body {
     background-color: var(--color-background);
     height: 90vh;
@@ -10,7 +16,9 @@ div, ul, li {
     font-size: 1rem;
 }
 
-/*    CREAR TAREA CONTAINER    */
+/* ===========================
+   CONTENEDOR PRINCIPAL
+=========================== */
 main {
     background-color: var(--color-background);
     display: flex;
@@ -22,45 +30,41 @@ main {
     width: 100%;
 }
 
+/* ===========================
+   FORMULARIO
+=========================== */
 form {
-    box-sizing: border-box;
-    padding: 20px;
-
-    border: 1px solid var(--color-dark);
-    border-radius: 10px;
-
-    height: auto;
-    min-height: 700px;
-    width: 100%;
-    max-width: 1200px;
-
-    margin: 40px auto 40px auto;
-
+    position: relative;
     display: flex;
     flex-direction: column;
     font-family: "Lato";
-
-    position: relative;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 40px auto;
+    border: 1px solid var(--color-dark);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 700px;
 }
 
+/* Botón salir */
 #quit-btn {
     position: absolute;
     top: 10px;
     right: 10px;
     width: 25px;
     height: 25px;
+    padding: 0;
     border-radius: 50%;
     background-color: var(--color-dark);
     color: var(--color-white);
-    font-size: 24px;
-    cursor: pointer;
+    font-size: 0.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    font-size: 0.8rem;
     text-decoration: none;
-
+    cursor: pointer;
     transition: all 400ms;
 }
 
@@ -68,45 +72,52 @@ form {
     background-color: #e4645b;
 }
 
+/* Estructura interna */
 form > div {
     flex: 1;
-    box-sizing: border-box;
-    margin-top: 40px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    height: 100%;
+    box-sizing: border-box;
+    margin-top: 40px;
 }
 
 form > div > div {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    height: 100%;
 }
 
-/* CORREGIDO: AMBOS LABELS SIN NEGRITA */
-form > div > div:first-child > label:first-child {
-    margin-top: 15px;
+/* Labels */
+form > div > div:first-child > label:first-child,
+form > div > div:first-child > .form-group label,
+.form-group label {
+    font-weight: 400;
     margin-bottom: 10px;
-    font-weight: 400; /* Cambiado de 600 a 400 */
+    display: block;
 }
 
-form > div > div:first-child > .form-group label {
-    margin-bottom: 10px;
-    font-weight: 400; /* Cambiado de 600 a 400 */
+/* ===========================
+   CAMPOS DE TEXTO
+=========================== */
+input, textarea, select {
+    box-sizing: border-box;
+    padding: 10px !important;
+    border-radius: 5px;
+    transition: all 400ms;
+    font-family: "Lato", sans-serif;
 }
 
+/* Título */
 #titulo {
     background: var(--color-background) !important;
-    font-size: 2rem;
     font-family: "Zilla Slab", serif;
+    font-size: 2rem;
     font-weight: 600;
-    border-bottom: 2px solid var(--color-primary);
     border: none;
+    border-bottom: 2px solid var(--color-primary);
     outline: none;
     box-shadow: none;
-
     transition: all 400ms;
 }
 
@@ -123,21 +134,12 @@ form > div > div:first-child > .form-group label {
     border-bottom: 2px solid var(--color-primary);
 }
 
-input, textarea {
-    box-sizing: border-box;
-    padding: 10px !important;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-
-    transition: all 400ms;
-}
-
-/* INPUTS DE FECHA Y PRESUPUESTO CON EL MISMO ANCHO QUE EN EL CSS SIMILAR */
+/* Campos específicos */
 #fecha-limite,
 #presupuesto {
-    border: 2px solid transparent;
-    color: #9ca3af;
     width: 100%;
+    color: #9ca3af;
+    border: 2px solid transparent;
 }
 
 #fecha-limite:is(:hover, :active, :focus),
@@ -147,18 +149,6 @@ input, textarea {
     border: 2px solid var(--color-primary);
 }
 
-.form-group {
-    margin-bottom: 40px;
-}
-
-/* CORREGIDO: LABEL SIN NEGRITA */
-.form-group label {
-    font-weight: 400; /* Cambiado de 600 a 400 */
-    margin-bottom: 5px;
-    display: block;
-}
-
-/* TEXTAREA OBJETIVOS */
 #textArea-objetivos {
     flex: 1;
     margin-bottom: 20px;
@@ -168,9 +158,8 @@ input, textarea {
     width: 100%;
     height: 100%;
     min-height: 200px;
-    resize: vertical;
+    resize: none;
     border: 2px solid transparent;
-    font-family: "Lato", sans-serif;
     font-size: 0.9rem;
 }
 
@@ -180,18 +169,33 @@ input, textarea {
     border: 2px solid var(--color-primary);
 }
 
-/* BOTONES */
+/* Selects */
+select {
+    width: 100%;
+    color: #9ca3af;
+    border: 2px solid transparent;
+    background-color: white;
+}
+
+select:is(:hover, :active, :focus) {
+    outline: none;
+    box-shadow: none;
+    border: 2px solid var(--color-primary);
+}
+
+/* ===========================
+   BOTONES
+=========================== */
 form button,
 input[type="submit"] {
     background: var(--color-primary);
     border: none;
     border-radius: 7px;
     padding: 10px 20px;
-    cursor: pointer;
-    width: max-content;
     font-family: "Lato", sans-serif;
     font-size: 0.9rem;
-
+    cursor: pointer;
+    width: max-content;
     transition: all 400ms;
 }
 
@@ -200,30 +204,27 @@ input[type="submit"]:hover {
     background-color: var(--color-primary-hover);
 }
 
-/* BOTÓN AÑADIR TAREA IGUAL AL DE AÑADIR PROYECTO */
 #add-task-btn {
     margin: auto 0 0 auto;
-    padding: 7px 25px !important; /* Mismo padding que el botón de proyecto */
+    padding: 7px 25px !important;
     font-weight: 600;
 }
 
-/* DOCUMENTOS */
+/* ===========================
+   DOCUMENTOS
+=========================== */
 #add-documento {
+    position: relative;
     box-sizing: border-box;
     cursor: pointer;
-
-    border-radius: 10px;
-    border: 2px solid var(--color-primary);
-
     width: 50%;
     min-width: 170px;
     max-width: 200px;
     height: 1rem;
-
     padding: 20px;
     margin-top: auto;
-    position: relative;
-
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
     transition: all 400ms;
 }
 
@@ -242,12 +243,12 @@ input[type="submit"]:hover {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
     font-size: 0.8rem;
+    width: 100%;
     white-space: nowrap;
 }
 
@@ -256,21 +257,22 @@ input[type="submit"]:hover {
 }
 
 #selected-documents {
-    font-style: italic;
     color: #636363;
-    max-height: 200px;
-    overflow: auto;
+    font-style: italic;
     list-style: inside;
+    max-height: 200px;
     overflow-y: auto;
-    scrollbar-width: thin;
     margin-top: 10px;
+    scrollbar-width: thin;
 }
 
 #selected-documents > li {
     font-size: 0.9rem;
 }
 
-/* DROPDOWN USUARIOS */
+/* ===========================
+   USUARIOS
+=========================== */
 .user-dropdown {
     position: relative;
     margin-bottom: 20px;
@@ -282,9 +284,9 @@ input[type="submit"]:hover {
     border: none;
     border-radius: 7px;
     padding: 10px 20px;
-    cursor: pointer;
     font-family: "Lato", sans-serif;
     font-size: 0.9rem;
+    cursor: pointer;
     transition: all 400ms;
 }
 
@@ -292,11 +294,11 @@ input[type="submit"]:hover {
     background-color: var(--color-primary-hover);
 }
 
+/* Dropdown */
 .user-search {
     display: none;
     width: 100%;
     margin-top: 5px;
-    margin-bottom: 0 !important;
 }
 
 .user-list {
@@ -305,13 +307,13 @@ input[type="submit"]:hover {
     top: 100%;
     left: 0;
     right: 0;
+    max-height: 200px;
     background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    max-height: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow-y: auto;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .user-list.show {
@@ -321,17 +323,17 @@ input[type="submit"]:hover {
 .user-group {
     padding: 8px 12px;
     background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
     font-weight: 600;
     font-size: 0.8rem;
     color: #666;
-    border-bottom: 1px solid #ddd;
 }
 
 .user-item {
     padding: 8px 12px;
-    cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
     font-size: 0.9rem;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
     transition: background-color 400ms;
 }
 
@@ -343,7 +345,7 @@ input[type="submit"]:hover {
     border-bottom: none;
 }
 
-/* USUARIOS SELECCIONADOS */
+/* Usuarios seleccionados */
 #usuarios-seleccionados {
     margin-top: 10px;
     display: flex;
@@ -359,9 +361,9 @@ input[type="submit"]:hover {
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background-color: var(--color-white);
     border: 1px solid #ddd;
     border-radius: 5px;
+    background-color: var(--color-white);
     font-size: 0.8rem;
 }
 
@@ -375,7 +377,6 @@ input[type="submit"]:hover {
     color: #636363;
     cursor: pointer;
     font-size: 1.2rem;
-    padding: 0;
     width: 20px;
     height: 20px;
     display: flex;
@@ -390,14 +391,50 @@ input[type="submit"]:hover {
     border-radius: 50%;
 }
 
-/* RESPONSIVE */
-@media (width < 768px) {
+/* ===========================
+   ESTRUCTURA DE GRIDS
+=========================== */
+#form-flex-group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.contenedorDesplegables {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+/* ===========================
+   MEDIA QUERIES
+=========================== */
+@media (max-width: 1024px) {
+    #form-flex-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .contenedorDesplegables {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #textArea {
+        min-height: 80px;
+        max-height: 140px;
+    }
+}
+
+@media (max-width: 768px) {
     main {
         padding: 0;
     }
 
     form {
-        margin: 10px 0 0 0;
+        margin: 10px 0 0;
         border: 0;
         width: 100%;
         height: 100%;
@@ -414,7 +451,7 @@ input[type="submit"]:hover {
     }
 
     #add-task-btn {
-        margin-top: 70px; /* Mismo margen superior que en el botón de proyecto */
+        margin-top: 70px;
         margin-bottom: 0;
         width: 100%;
     }
@@ -444,7 +481,13 @@ input[type="submit"]:hover {
     }
 }
 
-@media (width < 480px) {
+@media (max-width: 600px) {
+    #form-flex-group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
     form {
         padding: 15px;
     }

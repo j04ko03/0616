@@ -33,6 +33,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 item.addEventListener('click', function() {
                     const userName = this.getAttribute('data-user');
                     const userType = this.getAttribute('data-type');
+                    const userId = this.getAttribute('data-id');
+
+                    let tipoUsuario = "usuario";
+
+                    switch(userType){
+                        case "1":
+                            tipoUsuario = "Super Usuario"
+                            break;
+                        case "2":
+                            tipoUsuario = "Usuario normal"
+                            break;
+                        default:
+                            tipoUsuario = "Usuario normal"
+                            break;
+                    }
                     
                     // Verificar si ya está seleccionado
                     const yaSeleccionado = Array.from(usuariosSeleccionados.children).some(
@@ -42,8 +57,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!yaSeleccionado) {
                         const usuarioDiv = document.createElement('div');
                         usuarioDiv.className = 'usuario-seleccionado';
+
+                        usuarioDiv.dataset.id = userId;
+                        usuarioDiv.dataset.name = userName;
+                        usuarioDiv.dataset.tipo = userType;
+
                         usuarioDiv.innerHTML = `
-                            <span>${userName} (${userType})</span>
+                            <span>${userName} (${tipoUsuario})</span>
                             <button type="button" class="remove-user">×</button>
                         `;
                         usuariosSeleccionados.appendChild(usuarioDiv);

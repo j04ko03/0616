@@ -2,8 +2,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
+use App\Models\Estado;
+use App\Models\Sprint;
+use App\Models\Tag;
 use App\Models\Usuario;
 use App\Models\Proyectos;
+use App\Models\Grupo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,10 +66,16 @@ class SiteController extends Controller
     }
 
     public function crearTareas(){
-        return view('crearTareas');
+        $estados = Estado::all();
+        $sprints = Sprint::all();
+        $tags = Tag::all();
+        $usuarios = Usuario::all();
+        return view('crearTareas', compact('estados', 'sprints', 'tags', 'usuarios'));
     }
 
     public function vistaGlobal(){
-        return view('vistaGlobal');
+        $grupos = Grupo::with('usuarios')->get();
+        $usuarios = Usuario::all();
+        return view('vistaGlobal', compact('usuarios', 'grupos'));
     }
 }
