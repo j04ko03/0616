@@ -127,12 +127,16 @@ form > div > div:first-child > label:nth-child(3) {
 }
 
 #fecha-limite,
+#descripcion,
+#link,
 #presupuesto {
     border: 2px solid transparent;
     color: #9ca3af;
 }
 
 #fecha-limite:is(:hover, :active, :focus),
+#descripcion:is(:hover, :active, :focus),
+#link:is(:hover, :active, :focus),
 #presupuesto:is(:hover, :active, :focus) {
     outline: none;
     box-shadow: none;
