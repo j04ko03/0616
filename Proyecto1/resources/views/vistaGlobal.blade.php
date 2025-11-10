@@ -72,7 +72,7 @@
                             <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
                         </div>
                         <div class="subContenedorSinMargen">
-                            <h3>Lista de usuarios a añadir</h3>
+                            <h3>Lista de usuarios a añadir</h3> 
                         </div>
                         <div class="subContenedorSinMargen" style="height: 70%;">
                             <div class="user-dropdown">
