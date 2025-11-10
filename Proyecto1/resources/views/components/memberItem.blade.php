@@ -7,8 +7,8 @@
     </div>
     <div>
         <span>
-            <p>Nombre usuario</p>
-            <button class="button-task">
+            <p>{{ $nombre }}</p>
+            <button class="button-member" style="display:{{ $style }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                     <path
@@ -16,7 +16,7 @@
                 </svg>
             </button>
         </span>
-        <p>Rol</p>
-        <p>correo@ejemplo.com</p>
+        <p>{{ $rol }}</p>
+        <p>{{ $email }}</p>
     </div>
 </div>

@@ -11,6 +11,11 @@ class Sprint extends Model
     protected $table='Sprint';
     public $timestamps = false;
 
+    protected $fillable = [
+        'descripcion'
+    ];
+
+
     /**
      * Get all of the tareas for the Sprint
      *
