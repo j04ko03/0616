@@ -21,31 +21,49 @@
         </div>
 
         <div id="section-proyectos" class="contenedorPadreGrid contenedorScroll">
-            <div class="gridCards">
-                @foreach ($proyectosRecientes as $proyecto)
-                    <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}" />
-                @endforeach
-            </div>
+            @if($proyectosRecientes->isEmpty())
+                <div style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <h2 class="h2" style="color: grey">No hay proyectos Recientes</h2>
+                </div>
+            @else
+                <div class="gridCards">
+                    @foreach ($proyectosRecientes as $proyecto)
+                        <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}" />
+                    @endforeach
+                </div>
+            @endif
         </div>
 
         <!-- Queda oculto al cargar la página display: none; -->
         <div id="section-tareas" class="contenedorPadreGrid contenedorScroll oculto">
-            <div class="gridCards margenElementsGridTareas">
-                @foreach($tareasAsignadas as $tarea)
+            
+                @if ($tareasAsignadas->isEmpty())
+                    <div style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center;">
+                        <h2 class="h2" style="color: grey">No hay tareas Asignadas</h2>
+                    </div>
+                @else
+                    <div class="gridCards margenElementsGridTareas">
+                        @foreach($tareasAsignadas as $tarea)
                         <x-listItemTarea
                             titulo="{{ $tarea['titulo'] }}"
                             descripcion="{{ $tarea['descripcion'] }}"
                             :tag="$tarea['tags']"
                         />
-                        <!-- tags es la relación del modelo tareas, el metodo -->
-                @endforeach
-            </div>
+                        @endforeach
+                    </div>
+                @endif
+                
         </div>
 
         <!--pasamos objeto como JSON-->
         <h2 class="text-xl font-bold mb-2" style="margin-top: 2%; border-bottom: 1px solid #e5e7eb;">Proyectos</h2>
         <div class="alturaFija contenedorScroll" id="contenedorTodosProyectos">
-            <div class="gridCardsProyectos">
+            @if ($proyectosTotal->isEmpty())
+                <div style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <h2 class="h2" style="color: grey">No hay proyectos Asignadas</h2>
+                </div>
+            @else
+                <div class="gridCardsProyectos">
                 @foreach ($proyectosTotal as $proyectoT)
                     <x-cardItemProyectos class="cardProyectoId"
                         titulo="{{ $proyectoT['titulo'] }}" 
@@ -55,7 +73,8 @@
                         :data-proyecto="$proyectoT"
                     />
                 @endforeach
-            </div>
+                </div>
+            @endif
         </div>
 
         <div class="alturaFija oculto" id="contenedorProyectoEspecifico">
@@ -120,7 +139,7 @@
 
                 </div>             
                 <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0;">
-                    <img id="img" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
+                    <img id="imagen" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
                 </div>
             </div>
         </div>

@@ -8,8 +8,12 @@
         <div class="navbar-left">
             <div class="nav-links">
                 <a href="{{ route('home.controller') }}" class="nav-link">Dashboard</a>
+                @if (Auth::user()->tipoUser == 0 || Auth::user()->tipoUser == 1)
+                    <a href="{{ route('vistaGlobal.controller') }}" class="nav-link">Teams</a>
+                @endif
                 <a href="{{ route('crearProyecto.controller') }}" class="crear-proyecto">
-                    +
+                    <img id="img" src="../storage/assets/icons/plus.png" alt=""
+                        style="width: 5%; height: fit-content; cursor: pointer;">
                     <div class="popout">
                         Crear nuevo proyecto
                     </div>
@@ -17,9 +21,9 @@
             </div>
         </div>
 
-            <div class="navbar-right">
-                <span class="username" href="{{ route('perfil.controller') }}">{{ $usuario->nombre }}</span> <!--Auth::user() si usas autenticación-->
-                <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
-            </div>
+        <div class="navbar-right">
+            <span class="username">{{ Auth::user()->apodo }}</span> <!--Auth::user() si usas autenticación-->
+            <button onclick="window.location='{{ route('perfil.controller') }}'" class="settings-btn">⚙️</button>
+        </div>
     </div>
 </nav>

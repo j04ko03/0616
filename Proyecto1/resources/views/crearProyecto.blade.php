@@ -11,7 +11,8 @@
         <main>
 
             <form action="project" method="POST">
-                <a id="quit-btn" href="proyectos">X</a>
+                @csrf
+                <a id="cerrarCrearProyecto" href="proyectos">X</a>
                 <label for="titulo"></label>
                 <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO" required maxlength="100">
                 <div>
@@ -20,7 +21,7 @@
                         <input type="date" name="fecha-limite" id="fecha-limite" required min="">
 
                         <label for="presupuesto">Presupuesto</label>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="10">
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
 
                         <ul id="selected-documents"></ul>
                         <label for="documento" id="add-documento">
@@ -75,4 +76,7 @@
             }
         })
     </script>
+    <script src="{{ url('/js/recuperarTareaSinProyecto.js') }}"></script>
+
+    
 @endsection
