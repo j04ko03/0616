@@ -15,7 +15,7 @@
                 <a id="cerrarCrearProyecto" href="proyectos">X</a>
                 <label for="titulo"></label>
                 <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO" required maxlength="100">
-                <div> // hoasjfdjan
+                <div>
                     <div>
                         <label for="fecha-limite">Fecha límite</label>
                         <input type="date" name="fecha-limite" id="fecha-limite" required min="">

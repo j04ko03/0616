@@ -3,6 +3,8 @@
     <link rel="stylesheet" href="{{ url('/css/popUpTarea.css') }}">
 @endpush
 
+
+<form action="{{ route('addTask.store') }}" method="POST">
 <div class="popup-overlay" id="taskPopup" style="display: none;">
     <div class="popup-content">
         <form id="taskForm" method="POST" action="{{ route('addTask.store') }}" enctype="multipart/form-data">

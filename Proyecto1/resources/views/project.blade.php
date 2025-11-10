@@ -16,6 +16,9 @@
                     <option value="Proyecto 4">Proyecto 4</option>
                 </select>
             </div>
+            <div type="button" id="boton">
+                <a href="{{ route('component.popUpTareas') }}">Añadir tarea</a>
+            </div>
             <div id="tab-container">
                 <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
                 <button class="tabs-btn" data-tab="2">Product Backlog</button>
@@ -38,7 +41,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -47,7 +49,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -56,13 +57,10 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
                 
-                <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
                 <div class="tabs-content content-section-2">
-                    <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
                     <div class="kanban-task-container">
                         <h3>TO DO</h3>
                         <div class="task-container">
@@ -70,7 +68,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>IN PROGRESS</h3>
@@ -79,7 +76,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3>DONE</h3>
@@ -88,7 +84,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
                 
@@ -100,7 +95,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3 class="progreso">IN PROGRESS</h3>
@@ -109,7 +103,6 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                     <div class="kanban-task-container">
                         <h3 class="done">DONE</h3>
@@ -118,13 +111,12 @@
                                 <x-taskItemProject />
                             @endfor
                         </div>
-                        <button class="add-task">+ ADD TASK</button>
                     </div>
                 </div>
                 
                 <div class="tabs-content content-section-4">
                     @for ($i = 0; $i < 5; $i++)
-                        <x-memberItem />
+                        {{-- <x-memberItem /> --}}
                     @endfor
                 </div>
             </div>
