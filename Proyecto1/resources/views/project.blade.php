@@ -169,6 +169,49 @@
                 </div>
             </div>
         </main>
+
+        @php
+            $user = Auth::user();
+            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+        @endphp
+        @if ($user && $userProject->pivot->rol === 'Administrador')
+            <div id="popop-update-project">
+                <form action="{{ route('updateProject.controller') }}" method="POST">
+                    @method('patch')
+                    @csrf
+                    <button id="quit-btn" type="button">X</button>
+                    <label for="titulo"></label>
+                    <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required
+                        maxlength="100" value="{{ $proyecto->titulo }}">
+
+                    <div>
+                        <label for="fecha-limite">Fecha límite *</label>
+                        <input type="date" name="fecha-limite" id="fecha-limite" required min=""
+                            value="{{ $proyecto->fechaEntrega->format('Y-m-d') }}">
+
+                        <label for="link">Link del proyecto</label>
+                        <input type="url" name="link" id="link" value="{{ $proyecto->linkProyecto }}">
+
+                        <label for="descripcion">Descripción</label>
+                        <input type="text" name="descripcion" id="descripcion" maxlength="255"
+                            value="{{ $proyecto->descripcion }}">
+
+
+                        <label for="presupuesto">Presupuesto</label>
+                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01"
+                            value="{{ $proyecto->presupuesto }}">
+
+                        <div>
+
+                            <button type="button" id="delete-project">Eliminar proyecto</button>
+                            <input type="submit" value="Modificar proyecto" id="update-proyecto-btn">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        @endif
+
+
     </body>
 
     @component('components.popUpTarea')

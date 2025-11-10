@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
     Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
     Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller');
+    Route::patch('update-project', [ProyectosController::class, 'store'])->name('updateProject.controller');
+    Route::patch('delete-project', [ProyectosController::class, 'store'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
