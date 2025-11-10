@@ -11,7 +11,7 @@
     <div id="grid-container">
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Usuarios</button>
-            <button class="tabs-btn" data-tab="2">Solicitudes superUsuario (0)</button>
+            <button class="tabs-btn" data-tab="2">Solicitudes superUsuario ({{ count($solicitudes) }})</button>
             <button class="tabs-btn" data-tab="3">Proyectos</button>
             <button class="tabs-btn" data-tab="4">Grupos</button>
         </div>

@@ -41,6 +41,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
     Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
+
+    
+    Route::resource('solicitudes', SolicitudController::class);
 });
 
     // Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
@@ -58,7 +61,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('grupos', GrupoController::class);
 
     Route::post('/solicitudes/{solicitude}', [SolicitudController::class, 'borrarSolicitudActualizarUser'])->name('solicitudes.borrarSolicitudActualizarUser');
-    Route::resource('solicitudes', SolicitudController::class);
 });
 
 //Carga de Scripts

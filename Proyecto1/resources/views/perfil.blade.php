@@ -98,7 +98,7 @@
                                 }
                             @endphp
 
-                            @if(Auth::user()->tipoUser === 1 || $isSolicited)
+                            @if(Auth::user()->tipoUser === "2" && !$isSolicited)
                                     <div style="height: 25%; align-content: center; justify-content: center">
                                         <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
                                     </div>
@@ -121,14 +121,17 @@
                                 <div style="margin: 5%; height: 60%;">
                                     <p style="width: 100%;">Introducir password para solicitud de Super User.</p>
 
-                                    <div style="margin-top: 5%;">
-                                        <input type="password" id="clave" name="clave"
-                                            placeholder="Escribe tu contraseña">
-                                    </div>
+                                    <form action="{{ route('solicitudes.store') }}" method="POST" id="formSolicitud">
+                                        @csrf
+                                        <div style="margin-top: 5%;">
+                                            <input type="password" id="clave" name="clave"
+                                                placeholder="Escribe tu contraseña">
+                                        </div>
 
-                                    <div style="margin-top: 5%; display: flex; justify-content: end;">
-                                        <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
-                                    </div>
+                                        <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                            <button id="btnSolicitud" type="button" class="botonPersonalizado" style="margin-bottom: 5%">Solicitud</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -174,4 +177,5 @@
 
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
     <script src="{{ url('/js/tomaFoto.js') }}"></script>
+    <script src="{{ url('/js/controlPasswordSuper.js') }}"></script>
 @endsection

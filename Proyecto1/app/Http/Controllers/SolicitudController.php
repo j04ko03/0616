@@ -29,6 +29,17 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $request->validate([
+            'clave' => 'required|string',
+        ]);
+
+        $solicitud = new Solicitud();
+        $solicitud->descripcion = "Solicitud";
+        $solicitud->idUsuario = auth()->user()->id;
+
+        $solicitud.save();
+        return redirect()->route('perfil.controller')->with('success', 'Solicitud creada correctamente.');
     }
 
     /**
