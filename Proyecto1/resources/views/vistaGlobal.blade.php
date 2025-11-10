@@ -52,9 +52,9 @@
                     </div>
                     <div class="contenedorScroll" style="width: 100%; height: 80%; border: 1px solid green; display: flex; flex-wrap: wrap; justify-content: space-between; align-content: space-around;">
                         @foreach ($grupos as $grupo)
-                            <x-groupComponent descripcion="{{ $grupo['descripcion'] }}" :miembros="$grupo->usuarios"/>
+                            <x-groupComponent descripcion="{{ $grupo['descripcion'] }}" :miembros="$grupo->usuarios" :grupoId="$grupo->id"/>
                         @endforeach
-                        <div class="grupoCard" style="width: 100px">
+                        <div id="anadir" class="grupoCard" style="width: 100px">
                             <div class="grupoIcono">
                                 <span>+</span>
                             </div>
@@ -62,15 +62,15 @@
                     </div>
                 </div>
                 <!-- Contenedor para crear grupos -->
-                <div class="contenedorPrincipal">
+                <div class="contenedorPrincipal" id="crearGrupoContainer" style="display: block">
                     <div class="contenedorSecundario">
                         <h2>Creación de grupos</h2>
                     </div>
-                    <form action="project" method="POST">
+                    <form action="{{ route('grupos.store') }}" method="POST">
                         @csrf
                         <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
                             <!-- Campos para la creación de usuarios -->
-                            <div class="subContenedorSinMargen">
+                            <div class="subContenedorSinMargen" style="height: 70%;">
                                 <input type="text" name="tituloGrupo" id="tituloGrupo" placeholder="Nombre del título" required maxlength="100">
                             </div>
                             <div class="subContenedorSinMargen">
@@ -91,12 +91,54 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                <div id="usuarios-seleccionados">
+                                <div id="usuarios-seleccionados" style="min-height: 200px; height: auto;">
                                 <!-- Los usuarios añadidos aparecerán aquí -->
                                 </div>
+                                <div class="contenedorBotonFinal" style="margin-top: 20px">
+                                    <button type="submit" id="crearGrupo">Crear Grupo</button>
+                                </div>
                             </div>
-                            <div class="contenedorBotonFinal">
-                                <button type="button" id="crearGrupo">Crear Grupo</button>
+                            
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Contenedor para editar grupos -->
+                <div class="contenedorPrincipal" id="editarGrupoContainer" style="display: none">
+                    <div class="contenedorSecundario">
+                        <h2>Modificación de grupos</h2>
+                    </div>
+                    <form method="POST" id="formEditarGrupo">
+                        @csrf
+                        @method('PUT')
+                        <div style="width: 100%; height: 80%; display: flex; flex-direction: column; gap: 10px; border: 1px solid green">
+                            
+                            <input type="text" name="tituloGrupoEdit" id="tituloGrupoEdit" placeholder="Nombre del grupo" required maxlength="100">
+                            
+                            <div class="subContenedorSinMargen">
+                                <h3>Lista de usuarios a añadir</h3> 
+                            </div>
+                            <div class="subContenedorSinMargen" style="height: 70%;">
+                                <div class="user-dropdown">
+                                    <div class="contenedorBotonDesplegable">
+                                        <button style="width: 100%" type="button" id="add-user-btn-editar">Añadir usuario</button>
+                                    </div>
+                                    <input type="text" id="user-search-editar" placeholder="Buscar usuario...">
+                                    <div class="user-list" id="user-list-editar">
+                                        <div class="user-group">Usuarios</div>
+                                        @foreach ($usuarios as $usuario)
+                                            @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
+                                                <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">
+                                                    {{ $usuario->nombre }}
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div id="usuarios-seleccionados-editar" style="min-height:200px;"></div>
+                                <div class="contenedorBotonFinal" style="margin-top: 20px">
+                                    <button type="submit" id="modificarGrupo">Modificar Grupo</button>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -133,4 +175,6 @@
 
 
     <script src="{{ url('/js/añadirUsuario.js') }}"></script>
+    <script src="{{ url('/js/añadirUsuarioEdit.js') }}"></script>
+    <script src="{{ url('/js/rellenarListaUsuariosEditar.js') }}"></script>
 @endsection

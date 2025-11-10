@@ -4,6 +4,7 @@ use App\Http\Controllers\ProyectosController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\GrupoController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 
@@ -50,6 +51,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+    // Ruta para hacer crud de grupos
+    Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos.store');
+    Route::resource('grupos', GrupoController::class);
 });
 
 //Carga de Scripts

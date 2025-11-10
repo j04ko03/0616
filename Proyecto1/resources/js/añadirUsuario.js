@@ -66,6 +66,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             <span>${userName} (${tipoUsuario})</span>
                             <button type="button" class="remove-user">×</button>
                         `;
+
+                        // Crear input oculto
+                        const inputHidden = document.createElement('input');
+                        inputHidden.type = 'hidden';
+                        inputHidden.name = 'usuarios[]';
+                        inputHidden.value = userId;
+                        inputHidden.className = 'input-usuario-hidden';
+
+                        usuarioDiv.appendChild(inputHidden);
+
                         usuariosSeleccionados.appendChild(usuarioDiv);
 
                         // Añadir funcionalidad para eliminar
@@ -96,5 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Fecha mínima hoy
             const today = new Date().toISOString().split('T')[0];
-            document.getElementById('fecha-limite').min = today;
+            const fechaInput = document.getElementById('fecha-limite');
+            if (fechaInput) {
+                fechaInput.min = today;
+            }
         });
