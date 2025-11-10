@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="contenedorBotonFinal">
-                            <button type="button" id="crearGrupo">Crear Grupo</button>
+                            <button type="button" id="crearGrupo">Crear Grupo</button>   
                         </div>
                     </div>
                 </div>
