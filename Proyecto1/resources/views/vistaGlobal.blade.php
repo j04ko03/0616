@@ -14,6 +14,7 @@
             <button class="tabs-btn" data-tab="2">Solicitudes superUsuario ({{ count($solicitudes) }})</button>
             <button class="tabs-btn" data-tab="3">Proyectos</button>
             <button class="tabs-btn" data-tab="4">Grupos</button>
+            <button class="tabs-btn" data-tab="5">Incidencias ({{ count($incidencias) }})</button>
         </div>
         <div id="main-content">
             <form>
@@ -143,6 +144,11 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="tabs-content content-section-5" style="height: 100%;" class="contenedorScroll">
+                @foreach ($incidencias as $incidencia)
+                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}"/>
+                @endforeach
             </div>
         </div>
     </div>

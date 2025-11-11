@@ -78,9 +78,9 @@ class SiteController extends Controller
 
     public function vistaGlobal(){
         $grupos = Grupo::with('usuarios')->get();
-        //$incidencias = Incidencia::with('usuario')->get();
+        $incidencias = Incidencia::with('usuario')->get();
         $solicitudes = Solicitud::with('usuario')->get();
         $usuarios = Usuario::all();
-        return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes'));
+        return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias'));
     }
 }

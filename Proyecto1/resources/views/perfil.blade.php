@@ -167,12 +167,15 @@
                             </div>
                             <!-- INCIDENCIAS Perfil -->
                             <div id="crearIncidencias" class="oculto" style="width: 100%; height: 100%;">
-                                <div style="height: 70%">
-                                    <textarea class="campoTexto" style="height: 100%; width: 100%" placeholder="Introducir Incidencias en este campo." name="incidencia" id="incidencia"></textarea>
-                                </div>
-                                <div style="margin-top: 5%; display: flex; justify-content: flex-end; height: 15%">
-                                    <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Crear Incidencia</button>
-                                </div>
+                                <form action="{{ route('incidencias.store') }}" method="POST" style="height: 100%;">
+                                    @csrf
+                                    <div style="height: 70%">
+                                        <textarea class="campoTexto" style="height: 100%; width: 100%" placeholder="Introducir Incidencias en este campo." name="incidencia" id="incidencia"></textarea>
+                                    </div>
+                                    <div style="margin-top: 5%; display: flex; justify-content: flex-end; height: 15%">
+                                        <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Crear Incidencia</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 
