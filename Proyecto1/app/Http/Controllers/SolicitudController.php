@@ -38,7 +38,7 @@ class SolicitudController extends Controller
         $solicitud->descripcion = "Solicitud";
         $solicitud->idUsuario = auth()->user()->id;
 
-        $solicitud.save();
+        $solicitud->save();
         return redirect()->route('perfil.controller')->with('success', 'Solicitud creada correctamente.');
     }
 
