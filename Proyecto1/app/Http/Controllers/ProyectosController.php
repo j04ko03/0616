@@ -105,16 +105,24 @@ class ProyectosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Proyectos $proyectos)
+    public function update(Request $request, Proyectos $proyecto)
     {
-        //
+        $proyecto->titulo = $request->input("titulo");
+        $proyecto->fechaEntrega = Carbon::parse($request->input('fecha-limite'))->startOfDay();
+        $proyecto->linkProyecto = $request->input("link");
+        $proyecto->descripcion = $request->input("descripcion");
+        $proyecto->presupuesto = $request->input("presupuesto");
+
+        $proyecto->save();
+        return redirect()->route('project.controller', ['idProyecto' => $proyecto->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Proyectos $proyectos)
+    public function destroy(Proyectos $proyecto)
     {
-        //
+        $proyecto->isDeleted = true;
+        return view('home.controller');
     }
 }
