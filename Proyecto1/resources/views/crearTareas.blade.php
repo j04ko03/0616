@@ -9,7 +9,7 @@
     <main>
         <form action="project" method="POST">
             @csrf
-            <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
+            <a id="quit-btn" href="{{ route('crearProyecto.controller') }}">X</a>
             <label for="titulo"></label>
             <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA..." required maxlength="100">
             <div>
