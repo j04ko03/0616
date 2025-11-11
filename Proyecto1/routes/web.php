@@ -8,6 +8,7 @@ use App\Http\Controllers\TareaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectosController;
 use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\IncidenciaController;
 
 // Rutas sin middleware/auth.
 Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');
@@ -44,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
 
     
     Route::resource('solicitudes', SolicitudController::class);
+
+    Route::resource('incidencias', IncidenciaController::class);
 });
 
     // Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
