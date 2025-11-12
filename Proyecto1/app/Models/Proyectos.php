@@ -38,6 +38,17 @@ class Proyectos extends Model
     }
 
     /**
+     * Usuario administrador de proyecto
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function administrador()
+    {
+        return $this->belongsToMany(Usuario::class, 'usuario_proyecto', 'proyectoId', 'usuarioId')
+                    ->wherePivot('rol', 'Administrador');
+    }
+
+    /**
      * The grupos that belong to the Proyectos
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

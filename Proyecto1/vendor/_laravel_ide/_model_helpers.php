@@ -953,6 +953,8 @@ namespace App\Models {
      * @property-read int|null $usuarios_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tarea> $tareas
      * @property-read int|null $tareas_count
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Usuario> $administrador
+     * @property-read int|null $administrador_count
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Grupo> $grupos
      * @property-read int|null $grupos_count
      * @property-read \App\Models\Estado $estado
@@ -1269,7 +1271,13 @@ namespace App\Models {
     /**
      * App\Models\Solicitud
      *
+     * @property int $idUsuario
+     * @property string $descripcion
+     * @property int $id
      * @property-read \App\Models\Usuario $usuario
+     * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud whereDescripcion($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud whereIdusuario($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Solicitud>|Solicitud query()

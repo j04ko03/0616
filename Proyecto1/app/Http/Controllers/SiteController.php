@@ -34,7 +34,7 @@ class SiteController extends Controller
                                ->get();        
 
         $proyectosTotal = $usuario->proyectos()
-            ->with(['tareas.tags']) // carga tareas y tags dentro de cada tarea
+            ->with(['tareas.tags', 'administrador']) // carga tareas y tags dentro de cada tarea
             ->get();
 
         $tareasAsignadas = Tarea::with('tags') // Carga las etiquetas de cada tarea
