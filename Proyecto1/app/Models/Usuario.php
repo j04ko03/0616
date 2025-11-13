@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Solicitud;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Auth;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Auth;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Incidencia;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  
 class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
@@ -80,6 +83,16 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     public function incidencias(): HasMany
     {
         return $this->hasMany(Incidencia::class, 'idUsuario');
+    }
+
+    /**
+     * Get all of the solicitud for the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function solicitud(): HasMany
+    {
+        return $this->hasMany(Solicitud::class, 'idUsuario');
     }
 
     /**

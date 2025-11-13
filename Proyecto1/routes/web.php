@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProyectosController;
-use App\Http\Controllers\SiteController;
-use App\Http\Controllers\TareaController;
-use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\GrupoController;
+use App\Http\Controllers\TareaController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProyectosController;
+use App\Http\Controllers\SolicitudController;
+use App\Http\Controllers\IncidenciaController;
 
 // Rutas sin middleware/auth.
 Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');
@@ -45,6 +48,11 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
     Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
+
+    
+    Route::resource('solicitudes', SolicitudController::class);
+
+    Route::resource('incidencias', IncidenciaController::class);
 });
 
     // Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
@@ -56,6 +64,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
+
+    // Ruta para hacer crud de grupos
+    Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos.store');
+    Route::resource('grupos', GrupoController::class);
+
+    Route::post('/solicitudes/{solicitude}', [SolicitudController::class, 'borrarSolicitudActualizarUser'])->name('solicitudes.borrarSolicitudActualizarUser');
 });
 
 //Carga de Scripts
