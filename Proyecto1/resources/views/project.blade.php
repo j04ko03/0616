@@ -115,7 +115,7 @@
                 
                 <div class="tabs-content content-section-4">
                     @for ($i = 0; $i < 5; $i++)
-                        {{-- <x-memberItem /> --}}
+                        
                     @endfor
                 </div>
             </div>

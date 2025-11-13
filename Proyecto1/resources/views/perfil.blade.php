@@ -89,9 +89,21 @@
                         <div style="height: 25%; align-content: center; justify-content: center">
                             <a href="{{ route('logout.controller') }}" id="btnCloseSesion" class="card-cabecera textoBtns">Cerrar sesión</a>
                         </div>
-                        <div style="height: 25%; align-content: center; justify-content: center">
-                            <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
-                        </div>
+                            @php
+                                $isSolicited = false;
+                                foreach($solicitudes as $solicitud){
+                                    if ($solicitud->usuario->id === Auth::user()->id) {
+                                        $isSolicited = true;
+                                    }
+                                }
+                            @endphp
+
+                            @if(Auth::user()->tipoUser === "2" && !$isSolicited)
+                                    <div style="height: 25%; align-content: center; justify-content: center">
+                                        <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
+                                    </div>
+                            @endif
+                            
                         <div style="height: 25%; align-content: center; justify-content: center">
                             <p id="btnIncidencias" class="card-cabecera textoBtns">Registrar incidencias</p>
                         </div>
@@ -109,14 +121,17 @@
                                 <div style="margin: 5%; height: 60%;">
                                     <p style="width: 100%;">Introducir password para solicitud de Super User.</p>
 
-                                    <div style="margin-top: 5%;">
-                                        <input type="password" id="clave" name="clave"
-                                            placeholder="Escribe tu contraseña">
-                                    </div>
+                                    <form action="{{ route('solicitudes.store') }}" method="POST" id="formSolicitud">
+                                        @csrf
+                                        <div style="margin-top: 5%;">
+                                            <input type="password" id="clave" name="clave"
+                                                placeholder="Escribe tu contraseña">
+                                        </div>
 
-                                    <div style="margin-top: 5%; display: flex; justify-content: end;">
-                                        <button class="botonPersonalizado" style="margin-bottom: 5%">Ok</button>
-                                    </div>
+                                        <div style="margin-top: 5%; display: flex; justify-content: end;">
+                                            <button id="btnSolicitud" type="button" class="botonPersonalizado" style="margin-bottom: 5%">Solicitud</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
 
@@ -150,6 +165,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- INCIDENCIAS Perfil -->
+                            <div id="crearIncidencias" class="oculto" style="width: 100%; height: 100%;">
+                                <form action="{{ route('incidencias.store') }}" method="POST" style="height: 100%;">
+                                    @csrf
+                                    <div style="height: 70%">
+                                        <textarea class="campoTexto" style="height: 100%; width: 100%" placeholder="Introducir Incidencias en este campo." name="incidencia" id="incidencia"></textarea>
+                                    </div>
+                                    <div style="margin-top: 5%; display: flex; justify-content: flex-end; height: 15%">
+                                        <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Crear Incidencia</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
 
                     </div>
@@ -162,4 +189,5 @@
 
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
     <script src="{{ url('/js/tomaFoto.js') }}"></script>
+    <script src="{{ url('/js/controlPasswordSuper.js') }}"></script>
 @endsection

@@ -46,6 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const tipo = document.getElementById('tipoUsuario');
                     tipo.textContent = data.pivot.rol;
 
+                    const nombreAdmin = data.administrador && data.administrador.length > 0 ? data.administrador[0].nombre : 'Sin administrador';
+                    const administrador = document.getElementById('responsable');
+                    administrador.textContent = nombreAdmin;
+
                     const presupuesto = document.getElementById('presupuesto');
                     presupuesto.textContent = `Presupuesto: ${data.presupuesto}€`;
 

@@ -29,6 +29,15 @@ class IncidenciaController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'incidencia' => 'required|string|max:500'
+        ]);
+
+        $incidencia = new Incidencia();
+        $incidencia->descripcion = $validated['incidencia'];
+        $incidencia->idUsuario = auth()->user()->id;
+        $incidencia->save();
+        return redirect()->route('perfil.controller')->with('success', 'Incidencia creada correctamente.');
     }
 
     /**

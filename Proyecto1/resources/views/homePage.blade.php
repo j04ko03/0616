@@ -113,7 +113,7 @@
                             <p id="tipoUsuario">xxxxxx</p>
                         </div>
                         <div>
-                            <p>Responsable:</p>
+                            <p id="responsable">Responsable:</p>
                         </div>
                     </div>
 

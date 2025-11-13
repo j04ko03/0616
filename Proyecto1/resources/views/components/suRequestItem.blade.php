@@ -7,7 +7,7 @@
     </div>
     <div>
         <span>
-            <p>Nombre usuario</p>
+            <p>{{ $nombre }}</p>
             <button class="button-task">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
@@ -16,10 +16,17 @@
                 </svg>
             </button>
         </span>
-        <p>correo@ejemplo.com</p>
+        <p>{{ $correo }}</p>
         <div class="su-request">
-            <button class="deny">RECHAZAR</button>
-            <button class="accept">ACEPTAR</button>
+            <form action="{{ route('solicitudes.destroy', $idSolicitud) }}" method="POST">
+            @csrf
+            @method('DELETE')
+                <button type="submit" class="deny">RECHAZAR</button>
+            </form> 
+            <form action="{{ route('solicitudes.borrarSolicitudActualizarUser', $idSolicitud) }}" method="POST">
+            @csrf
+                <button class="accept">ACEPTAR</button>
+            </form>
         </div>
     </div>
 </div>

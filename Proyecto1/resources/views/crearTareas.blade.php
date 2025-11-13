@@ -9,7 +9,7 @@
     <main>
         <form action="project" method="POST">
             @csrf
-            <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
+            <a id="quit-btn" href="{{ route('crearProyecto.controller') }}">X</a>
             <label for="titulo"></label>
             <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA" required maxlength="100">
             
@@ -82,7 +82,7 @@
                                 <label>Responsable:</label>
                                 <span id="labelId" data-id="{{ auth()->user()->id }}">{{ auth()->user()->nombre }}</span>
                             </div>
-                            <button type="button" id="add-user-btn">Añadir usuario</button>
+                            <button type="button" class="btn" id="add-user-btn">Añadir usuario</button>
                             <input type="text" class="user-search" placeholder="Buscar usuario...">
                             <div class="user-list">
                                 <div class="user-group">Usuarios</div>
@@ -93,11 +93,11 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div id="usuarios-seleccionados">
+                        <div id="usuarios-seleccionados" style="margin-bottom: 10px" >
                             <!-- Los usuarios añadidos aparecerán aquí -->
                         </div>
                         
-                        <button id="addTareaFantasma">Añadir</button>
+                        <a id="addTareaFantasma" class="btn" href="{{ route('crearProyecto.controller') }}">Añadir</a>
                     </div>
                 </div>
             </div>
