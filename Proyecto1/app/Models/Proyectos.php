@@ -14,8 +14,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Proyectos extends Model
 {
     //
-    protected $table='Proyecto';
+    protected $table = 'Proyecto';
     public $timestamps = false;
+
+    protected $fillable = [
+        'titulo',
+        'fechaCreacion',
+        'fechaEntrega',
+        'estadoId',
+        'isDeleted',
+        'descripcion',
+        'presupuesto',
+        'linkProyecto'
+    ];
+
+    protected $casts = [
+        'fechaCreacion' => 'datetime',
+        'fechaEntrega' => 'datetime',
+        'estadoId' => 'integer',
+        'isDeleted' => 'boolean',
+        'presupuesto' => 'decimal:2',
+    ];
 
     /**
      * The usuarios that belong to the Proyectos

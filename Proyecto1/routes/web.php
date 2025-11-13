@@ -22,11 +22,17 @@ Route::middleware(['auth'])->group(function () {
     // Rutas de la web para todos los usuarios autenticados (0, 1, 2)
     Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
+
     Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
+    Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller');
+    Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
+    Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
+
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
     Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
+
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
 

@@ -21,7 +21,7 @@ class SiteController extends Controller
     {
         return view('layouts.barraNavegacion');
     }
-    
+
     public function home()
     {
         //$usuario = Usuario::find(2);
@@ -29,7 +29,7 @@ class SiteController extends Controller
 
         $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
                                ->take(6)
-                               ->get();        
+                               ->get();
 
         $proyectosTotal = $usuario->proyectos()
             ->with(['tareas.tags']) // carga tareas y tags dentro de cada tarea
@@ -60,9 +60,14 @@ class SiteController extends Controller
 
     public function project($idProyecto)
     {
+        $projects = Auth::user()->proyectos;
         $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
-        // dd($proyecto);
-        return view('project', compact('proyecto'));
+
+        $sprints = Sprint::whereHas('tareas', function ($query) use ($idProyecto) {
+            $query->where('proyectoId', $idProyecto);
+        })->get();
+
+        return view('project', compact('proyecto', 'projects', 'idProyecto', 'sprints'));
     }
 
     public function crearTareas(){

@@ -13,7 +13,7 @@ function mostrarLocal(){
     //Recorremos array para ponerlas
     tareasTemporales.forEach((tarea, indice) => {
         contenedorTareas.innerHTML += `
-             <div class="tarea">${tarea.titulo} <button class="borrarTarea" type="button" onclick="borrarTarea(${indice})">X</button></div>
+             <div class="tarea">${tarea.titulo} <button class="borrarTarea remove-btn" type="button" onclick="borrarTarea(${indice})">X</button></div>
         `;
     });
 }

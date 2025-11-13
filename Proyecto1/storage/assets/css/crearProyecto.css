@@ -127,12 +127,16 @@ form > div > div:first-child > label:nth-child(3) {
 }
 
 #fecha-limite,
+#descripcion,
+#link,
 #presupuesto {
     border: 2px solid transparent;
     color: #9ca3af;
 }
 
 #fecha-limite:is(:hover, :active, :focus),
+#descripcion:is(:hover, :active, :focus),
+#link:is(:hover, :active, :focus),
 #presupuesto:is(:hover, :active, :focus) {
     outline: none;
     box-shadow: none;
@@ -209,73 +213,6 @@ form > div > div:nth-child(2) > a {
     color: #fff;
 }
 
-#add-documento {
-    box-sizing: border-box;
-    cursor: pointer;
-
-    border-radius: 10px;
-    border: 2px solid var(--color-primary);
-
-    width: 50%;
-    min-width: 170px;
-    max-width: 200px;
-    height: 1rem;
-
-    padding: 20px;
-    margin-top: auto;
-    position: relative;
-
-    transition: all 400ms;
-}
-
-#add-documento:hover {
-    background: #efefef;
-}
-
-#add-documento > input {
-    opacity: 0;
-    width: 20px;
-    height: 20px;
-}
-
-#add-documento > p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    font-size: 0.8rem;
-
-    white-space: nowrap;
-}
-
-#add-documento img {
-    width: 1.2rem;
-}
-
-#selected-documents {
-    font-style: italic;
-    color: #636363;
-    max-height: 200px;
-    overflow: auto;
-
-    list-style: inside;
-    overflow-y: auto;
-    scrollbar-width: thin;
-}
-
-#selected-documents > li {
-    font-size: 1rem;
-}
-
-#add-proyecto-btn {
-    margin: auto 0 0 auto;
-    padding: 7px 25px !important;
-}
-
 @media (width < 600px) {
     main {
         padding: 0;
@@ -295,10 +232,5 @@ form > div > div:nth-child(2) > a {
     #add-proyecto-btn {
         margin-top: 70px;
         margin-bottom: 0;
-    }
-
-    #selected-documents {
-        height: 200px;
-        margin-bottom: 20px;
     }
 }

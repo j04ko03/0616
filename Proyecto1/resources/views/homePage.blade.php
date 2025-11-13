@@ -71,6 +71,7 @@
                         estado="{{ $proyectoT['estadoId'] }}"
                         fechaEntrega="{{ $proyectoT['fechaEntrega'] }}"
                         :data-proyecto="$proyectoT"
+                        :project="$proyectoT"
                     />
                 @endforeach
                 </div>

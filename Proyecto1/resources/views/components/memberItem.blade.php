@@ -1,22 +1,5 @@
 <link rel="stylesheet" href="{{ url('/css/memberItem.css') }}">
 
-@php
-    $tipoUser = 'Usuario'; // valor por defecto
-    switch ($tipo) {
-        case 0:
-            $tipoUser = 'SysAdmin';
-            break;
-        case 1:
-            $tipoUser = 'Super User';
-            break;
-        case 2:
-            $tipoUser = 'User';
-            break;
-        default:
-            $tipoUser = 'Usuario';
-    }
-@endphp 
-
 <div class="member">
     <div class="pfp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
@@ -25,7 +8,7 @@
     <div>
         <span>
             <p>{{ $nombre }}</p>
-            <button class="button-task">
+            <button class="button-member" style="display:{{ $style }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                     <path
@@ -33,7 +16,7 @@
                 </svg>
             </button>
         </span>
-        <p>{{ $tipoUser }}</p>
+        <p>{{ $rol }}</p>
         <p>{{ $email }}</p>
     </div>
 </div>
