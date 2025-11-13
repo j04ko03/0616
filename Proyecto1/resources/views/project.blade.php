@@ -17,8 +17,7 @@
                 </select>
             </div>
             <div type="button" id="boton">
-                <a href="{{ route('component.popUpTareas') }}">Añadir tarea</a>
-            </div>
+                <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
             <div id="tab-container">
                 <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
                 <button class="tabs-btn" data-tab="2">Product Backlog</button>
@@ -123,8 +122,7 @@
         </main>
     </body>
 
-    @component('components.popUpTarea')
-    @endcomponent
+    @include('components.popUpTarea')
 
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
 

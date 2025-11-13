@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
+    Route::resource('tareas', TareaController::class);
     Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');

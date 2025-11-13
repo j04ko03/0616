@@ -11,7 +11,8 @@
             @csrf
             <a id="quit-btn" href="{{ route('home.controller') }}">X</a>
             <label for="titulo"></label>
-            <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA..." required maxlength="100">
+            <input type="text" name="tituloTarea" id="tituloTarea" placeholder="TITULO TAREA" required maxlength="100">
+            
             <div>
                 <div style="display: flex; flex-wrap: wrap;">
                     <div class="contenedorDesplegables">

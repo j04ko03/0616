@@ -42,7 +42,7 @@ class TareaController extends Controller
         $tarea->idSprint = $request->input('idSprint');
         $tarea->fechaEntrega = $request->input('fechaEntrega');
         $tarea->save();
-        return redirect()->route('tasks.index');
+        // return redirect()->route('project.controller', ['idProyecto' => $request->input('proyectoId')]); TODO
     }
 
     /**
@@ -68,16 +68,16 @@ class TareaController extends Controller
     public function update(Request $request, Tarea $tarea)
     {
         //
-        $tarea->titulo = $request->input('titulo');
-        $tarea->descripcion = $request->input('descripcion');
-        $tarea->estado = $request->input('estado');
-        $tarea->proyectoId = $request->input('proyectoId');
-        $tarea->responsableId = $request->input('responsableId');
-        $tarea->isDeleted = $request->input('isDeleted');
-        $tarea->idSprint = $request->input('idSprint');
-        $tarea->fechaEntrega = $request->input('fechaEntrega');
-        $tarea->save();
-        return redirect()->route('/project/{idProyecto}');
+        // $tarea->titulo = $request->input('titulo');
+        // $tarea->descripcion = $request->input('descripcion');
+        // $tarea->estado = $request->input('estado');
+        // $tarea->proyectoId = $request->input('proyectoId');
+        // $tarea->responsableId = $request->input('responsableId');
+        // $tarea->isDeleted = $request->input('isDeleted');
+        // $tarea->idSprint = $request->input('idSprint');
+        // $tarea->fechaEntrega = $request->input('fechaEntrega');
+        // $tarea->save();
+        // return redirect()->route('/project/{idProyecto}');
     }
 
     /**
