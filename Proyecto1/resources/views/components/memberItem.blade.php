@@ -16,7 +16,7 @@
                 </svg>
             </button>
         </span>
-        <p>{{ $rol }}</p>
+        <p>Tipo:{{ $rol }}</p>
         <p>{{ $email }}</p>
     </div>
 </div>
