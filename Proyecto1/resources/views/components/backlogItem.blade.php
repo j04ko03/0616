@@ -22,5 +22,6 @@
             Sin asignar
         @endif
     </span>
+    <span class="fecha-entrega">{{ \Carbon\Carbon::parse($fechaEntrega)->format('Y-m-d') }}</span>
     <span class="estado-tarea">{{ $estado }}</span>
 </div>

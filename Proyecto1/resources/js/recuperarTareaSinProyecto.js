@@ -38,8 +38,8 @@ hacerPut.addEventListener("submit", function(e){
     const tareasInput = document.createElement("input");
     tareasInput.type = "hidden";
     tareasInput.name = "tareas";
-    tareasInput.value = JSON.stringify(tareasTemp);
-    form.appendChild(tareasInput);
+    tareasInput.value = JSON.stringify(tareasTemporales);
+    hacerPut.appendChild(tareasInput);
 
     localStorage.clear();
 })

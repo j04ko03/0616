@@ -48,7 +48,7 @@ class ProyectosController extends Controller
         $project = Proyectos::create([
             'titulo' => $request->input('titulo'),
             'fechaCreacion' => now(),
-            'fechaEntrega' => Carbon::parse($request->input('fecha-limite'))->startOfDay()->toDateTimeString(),
+            'fechaEntrega' => Carbon::parse($request->input('fecha-limite'))->startOfDay(),
             'estadoId' => 1,
             'isDeleted' => false,
             'descripcion' => $request->input('descripcion') ?? null,
@@ -60,7 +60,7 @@ class ProyectosController extends Controller
 
 
         // 2. Recuperar las tareas del input hidden
-        $tareas = json_decode($request->input('tareas'), true);
+        $tareas = json_decode($request->input('tareas'), associative: true);
 
         // 3. Guardar cada tarea en la base de datos asociada al proyecto
         if ($tareas) {
@@ -69,10 +69,12 @@ class ProyectosController extends Controller
                 $tarea = Tarea::create([
                     'titulo' => $tareaData['titulo'],
                     'descripcion' => $tareaData['descripcion'] ?? null,
-                    'fecha_limite' => $tareaData['fechaLimite'] ?? null,
-                    'presupuesto' => $tareaData['presupuesto'] ?? null,
-                    'estado' => $tareaData['estado'] ?? 0,
-                    'project_id' => $project->id
+                    'fechaEntrega' => $tareaData['fechaLimite'] ?? null,
+                    'estadoId' => $tareaData['estado'] ?? 1,
+                    'proyectoId' => $project->id,
+                    'responsableId' => 10,
+                    'isDeleted' => false,
+                    'idSprint' => 2
                 ]);
 
                 //Asignar usuarios a la tarea (N:M)
@@ -112,6 +114,7 @@ class ProyectosController extends Controller
         $proyecto->linkProyecto = $request->input("link");
         $proyecto->descripcion = $request->input("descripcion");
         $proyecto->presupuesto = $request->input("presupuesto");
+        $proyecto->estadoId = $request->input("estado");
 
         $proyecto->save();
         return redirect()->route('project.controller', ['idProyecto' => $proyecto->id]);
@@ -123,6 +126,8 @@ class ProyectosController extends Controller
     public function destroy(Proyectos $proyecto)
     {
         $proyecto->isDeleted = true;
-        return view('home.controller');
+        $proyecto->save();
+
+        return redirect()->route('home.controller');
     }
 }
