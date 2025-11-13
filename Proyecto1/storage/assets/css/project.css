@@ -20,6 +20,42 @@ main {
 }
 
 /*  SELECT PROYECTOS    */
+#select-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#select-container > a {
+    width: max-content;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    color: var(--color-link);
+    transition: all 400ms;
+}
+
+#select-container > a:hover {
+    color: var(--color-link-hover);
+}
+#select-container > * {
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+#update-project {
+    margin-left: auto;
+    background-color: var(--color-primary);
+    padding: 10px 20px;
+    max-width: 200px;
+    border-radius: 10px;
+
+    transition: all 400ms;
+}
+
+#update-project:hover {
+    background-color: var(--color-primary-hover);
+}
+
 select {
     background-color: var(--color-background);
     cursor: pointer;
@@ -124,13 +160,15 @@ option:hover {
 }
 
 /*  KANBAN CONTAINER */
-.content-section-1,
-.content-section-2,
-.content-section-3 {
+.content-section-1 {
     box-sizing: border-box;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
+}
+
+.filter-sprint {
+    display: none !important;
 }
 
 .kanban-task-container {
@@ -213,10 +251,108 @@ option:hover {
     background-color: #24b22e;
 }
 
+/* PRODUCT & SPRINT BACKLOG */
+.content-section-2,
+.content-section-3 {
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.backlog {
+    background-color: var(--color-white);
+    width: 100%;
+    min-width: 800px;
+    margin: 0;
+
+    border: 1px solid black;
+}
+
+.task-backlog {
+    background-color: var(--color-white);
+
+    display: grid;
+    grid-template-columns: 1.5fr 2.5fr 1fr 1fr 2fr 2fr 1.5fr;
+    gap: 0;
+
+    transition: all 300ms;
+}
+
+.task-backlog:first-child {
+    background-color: #172a51;
+    color: var(--color-white);
+    text-align: center;
+}
+
+.task-backlog:first-child:hover {
+    background-color: #172a51;
+}
+
+.task-backlog:hover {
+    background-color: rgb(252, 252, 252);
+}
+
+.task-backlog span {
+    border: 1px solid black;
+    border-right: none;
+    border-bottom: none;
+    padding: 5px 5px;
+    flex: 1;
+    font-size: 1rem;
+    overflow-x: auto;
+
+    display: flex;
+    align-items: center;
+
+    color: #323232;
+}
+
+.task-backlog:first-child span {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: var(--color-white);
+}
+
+.task-backlog span:first-child {
+    border-left: none;
+}
+
+.tag-tarea {
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    display: flex;
+    gap: 2px;
+}
+
 /*  MEMBERS CONTAINER */
 
+.integrantes {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
 
-.content-section-4 {
+.add-to-project-container {
+    display: flex;
+    gap: 10px;
+}
+
+.add-btn {
+    padding: 8px 25px;
+    color: var(--color-dark);
+    background-color: var(--color-primary);
+    border-radius: 10px;
+    transition: all 400ms;
+}
+
+.add-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+#member-container {
+    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1rem;
@@ -252,6 +388,197 @@ option:hover {
     position: relative;
 }
 
+/* UPDATE FORM PROJECT */
+form {
+    box-sizing: border-box;
+    padding: 20px;
+
+    border: 1px solid var(--color-dark);
+    border-radius: 10px;
+
+    height: auto;
+    width: 100%;
+    max-width: 800px;
+
+    display: flex;
+    flex-direction: column;
+    font-family: "Lato";
+
+    position: relative;
+}
+
+#quit-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 100%;
+}
+
+form > div input {
+    margin-bottom: 25px;
+}
+
+#titulo {
+    background: var(--color-background) !important;
+    font-size: 2rem;
+    font-family: "Lato", serif;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primary);
+
+    transition: all 400ms;
+}
+
+#titulo::selection {
+    background: var(--color-primary);
+}
+
+#titulo:hover,
+#titulo:focus,
+#titulo:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+input {
+    box-sizing: border-box;
+    padding: 10px !important;
+
+    transition: all 400ms;
+}
+
+form > div > label:first-child {
+    margin-top: 15px;
+}
+
+form > div > label:first-child,
+form > div > label:nth-child(3) {
+    margin-bottom: 10px;
+}
+
+#fecha-limite,
+#descripcion,
+#link,
+#presupuesto {
+    border: 2px solid transparent;
+    color: #9ca3af;
+}
+
+#fecha-limite:is(:hover, :active, :focus),
+#descripcion:is(:hover, :active, :focus),
+#link:is(:hover, :active, :focus),
+#presupuesto:is(:hover, :active, :focus) {
+    outline: none;
+    box-shadow: none;
+    border: 2px solid var(--color-primary);
+}
+
+form button,
+input[type="submit"] {
+    background: var(--color-primary);
+    border-radius: 7px;
+    padding: 5px 15px;
+    cursor: pointer;
+    width: max-content;
+
+    transition: all 400ms;
+}
+
+form button:hover,
+input[type="submit"]:hover {
+    background-color: var(--color-primary-hover);
+}
+
+form > div > div:nth-child(2) > a {
+    width: max-content;
+}
+
+/* UPDATE $ DELETE PROJECT BUTTON */
+#popup-update-project,
+#popup-delete-project-confirmation {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000b2;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#update-project-form {
+    background-color: var(--color-background);
+    border: 1px solid black;
+}
+
+form > div > div {
+    display: flex;
+    height: auto;
+    flex-wrap: wrap;
+}
+
+#delete-project {
+    background-color: rgb(209, 0, 0);
+    color: var(--color-white);
+    padding: 10px 20px;
+    margin-top: auto;
+}
+
+#update-proyecto-btn {
+    margin: auto 0 0 auto;
+    padding: 10px 20px;
+}
+
+/* DELETE PROJECT CONFIRMATION*/
+#form-delete-project {
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 400px;
+    text-align: center;
+    gap: 20px;
+}
+
+#form-delete-project span {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+#form-delete-project input,
+#form-delete-project button {
+    padding: 10px 20px;
+}
+
+#form-delete-project input {
+    color: var(--color-white);
+    background-color: #d42d20;
+}
 /* MEDIA QUERIES */
 @media (width < 700px) {
     #sprints {
@@ -259,10 +586,29 @@ option:hover {
         margin: 20px auto 0 0;
         height: 40px;
     }
+
+    form {
+        margin: 10px 0 0 0;
+        border: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    form > div {
+        grid-template-columns: 1fr;
+    }
 }
 
-@media (width < 400px) {
+@media (width < 450px) {
     main {
         padding: 10px;
+    }
+
+    .task-backlog span {
+        font-size: 0.7rem;
+    }
+
+    form > div > div {
+        font-size: 0.8rem;
     }
 }

@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Auth;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Auth;
+use Illuminate\Notifications\Notifiable;
+use App\Models\Incidencia;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  
@@ -96,9 +100,9 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function rol(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'tipoUser', 'id', 'id');
-    }
+    // public function rol(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Role::class, 'tipoUser', 'id', 'id');
+    // }
     
 }
