@@ -78,13 +78,13 @@ select,
     appearance: base-select;
 }
 
-select::picker-icon {
+#projects::picker-icon {
     font-size: 20px;
     rotate: 90deg;
     transition: all 400ms;
 }
 
-select:open::picker-icon {
+#projects:open::picker-icon {
     rotate: 0deg;
 }
 
@@ -271,7 +271,7 @@ option:hover {
     background-color: var(--color-white);
 
     display: grid;
-    grid-template-columns: 1.5fr 2.5fr 1fr 1fr 2fr 2fr 1.5fr;
+    grid-template-columns: 1.5fr 2.5fr 1fr 1fr 2fr 2fr 1fr 1fr;
     gap: 0;
 
     transition: all 300ms;
@@ -490,6 +490,23 @@ form > div > div:nth-child(2) > a {
     width: max-content;
 }
 
+form > div > div:first-child {
+    display: flex;
+    margin: 20px 0 25px 0;
+}
+
+form > div > div:first-child > label {
+    margin: auto 0 auto 0;
+}
+
+#estado {
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;
+    max-width: 150px;
+    margin: auto 0 auto 20px;
+}
+
 /* UPDATE $ DELETE PROJECT BUTTON */
 #popup-update-project,
 #popup-delete-project-confirmation {
@@ -557,6 +574,7 @@ form > div > div {
     color: var(--color-white);
     background-color: #d42d20;
 }
+
 /* MEDIA QUERIES */
 @media (width < 700px) {
     #sprints {

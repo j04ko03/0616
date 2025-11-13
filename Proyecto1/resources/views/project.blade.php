@@ -12,8 +12,10 @@
             <div id="select-container">
                 <select name="projects" id="projects">
                     @foreach ($projects as $project)
-                        <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
-                            {{ $project->titulo }}</option>
+                        @if ($project->isDeleted == false)
+                            <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
+                                {{ $project->titulo }}</option>
+                        @endif
                     @endforeach
                 </select>
                 <a href="{{ $proyecto->linkProyecto }}" target="_blank">{{ $proyecto->linkProyecto }}</a>
@@ -31,7 +33,7 @@
                 <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
                 <button class="tabs-btn" data-tab="4">Integrantes</button>
                 <select name="sprints" id="sprints">
-                    @foreach ($sprints as $sprint)
+                    @foreach ($proyecto->sprints as $sprint)
                         <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
 
                             {{ $sprint->descripcion }}
@@ -51,7 +53,7 @@
                                 @if ($tarea->estadoId == 1 && $tarea->usuarios->contains(Auth::user()->id))
                                     <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                         descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" />
+                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                                 @endif
                             @endforeach
                         </div>
@@ -66,7 +68,7 @@
                                 @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
                                     <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                         descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" />
+                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                                 @endif
                             @endforeach
                         </div>
@@ -81,7 +83,7 @@
                                 @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
                                     <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                         descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" />
+                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                                 @endif
                             @endforeach
                         </div>
@@ -99,6 +101,7 @@
                             <span class="tag-tarea">Tags</span>
                             <span class="responsable-tarea">Responsable</span>
                             <span class="asignado-tarea">Asignado</span>
+                            <span class="fecha-entrega">Fecha Entrega</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
                         @foreach ($proyecto->tareas as $tarea)
@@ -107,7 +110,7 @@
                             @endphp
                             <x-backlogItem dataset="" :titulo="$tarea->titulo" class="" :descripcion="$tarea->descripcion"
                                 :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
-                                :responsable="$tarea->responsable->nombre" />
+                                :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
                 </div>
@@ -121,6 +124,7 @@
                             <span class="tag-tarea">Tags</span>
                             <span class="responsable-tarea">Responsable</span>
                             <span class="responsable-tarea">Asignado</span>
+                            <span class="fecha-entrega">Fecha Entrega</span>
                             <span class="estado-tarea">Estado</span>
                         </div>
                         @foreach ($proyecto->tareas as $tarea)
@@ -130,7 +134,7 @@
 
                             <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog" :descripcion="$tarea->descripcion"
                                 :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
-                                :responsable="$tarea->responsable->nombre" />
+                                :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
                 </div>
@@ -186,6 +190,17 @@
                         maxlength="100" value="{{ $proyecto->titulo }}">
 
                     <div>
+                        <div>
+                            <label for="estado">Estado:</label>
+                            <select name="estado" id="estado">
+                                <option value="1" @if ($proyecto->estadoId == 1) selected @endif>Pendiente</option>
+                                <option value="2" @if ($proyecto->estadoId == 2) selected @endif>En revisión
+                                </option>
+                                <option value="3" @if ($proyecto->estadoId == 3) selected @endif>Completado
+                                </option>
+                            </select>
+                        </div>
+
                         <label for="fecha-limite">Fecha límite *</label>
                         <input type="date" name="fecha-limite" id="fecha-limite" required min=""
                             value="{{ $proyecto->fechaEntrega->format('Y-m-d') }}">

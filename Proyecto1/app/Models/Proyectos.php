@@ -36,6 +36,9 @@ class Proyectos extends Model
         'presupuesto' => 'decimal:2',
     ];
 
+    protected $dateFormat = 'Y-m-d\TH:i:s';
+
+
     /**
      * The usuarios that belong to the Proyectos
      *
@@ -69,10 +72,20 @@ class Proyectos extends Model
     /**
      * Get all of the estado for the Proyectos
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function estado(): BelongsTo
     {
         return $this->belongsTo(Estado::class, 'id');
+    }
+
+    /**
+     * The sprint that belong to the Proyectos
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function sprints(): BelongsToMany
+    {
+        return $this->belongsToMany(Sprint::class, 'proyecto_sprint', 'proyectoId', 'sprintId');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
@@ -25,8 +26,8 @@ class SiteController extends Controller
         $usuario = Auth::user();
 
         $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
-                               ->take(6)
-                               ->get();
+            ->take(6)
+            ->get();
 
         $proyectosTotal = $usuario->proyectos()
             ->with(['tareas.tags']) // carga tareas y tags dentro de cada tarea
@@ -39,15 +40,17 @@ class SiteController extends Controller
         //->pluck('id') --> Saca los IDs
         //Tarea::with('tags') --> Busca tareas con esos IDs de proyecto --> en tarea tener la relación de tags con belongsToMany
 
-        return view('homePage')->with(['proyectosRecientes' => $proyectosRecientes,
-                                                  'proyectosTotal'=> $proyectosTotal,
-                                                  'tareasAsignadas'=> $tareasAsignadas,
-                                                  'usuario' => $usuario]);
+        return view('homePage')->with([
+            'proyectosRecientes' => $proyectosRecientes,
+            'proyectosTotal' => $proyectosTotal,
+            'tareasAsignadas' => $tareasAsignadas,
+            'usuario' => $usuario
+        ]);
     }
 
     public function perfil()
     {
-        return view('perfil')-> with('usuario', Auth::user());
+        return view('perfil')->with('usuario', Auth::user());
     }
 
     public function crearProyecto()
@@ -58,20 +61,18 @@ class SiteController extends Controller
     public function project($idProyecto)
     {
         $projects = Auth::user()->proyectos;
-        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos')->findOrFail($idProyecto);
+        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
 
-        $sprints = Sprint::whereHas('tareas', function ($query) use ($idProyecto) {
-            $query->where('proyectoId', $idProyecto);
-        })->get();
-
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'sprints'));
+        return view('project', compact('proyecto', 'projects', 'idProyecto'));
     }
 
-    public function crearTareas(){
+    public function crearTareas()
+    {
         return view('crearTareas');
     }
 
-    public function vistaGlobal(){
+    public function vistaGlobal()
+    {
         return view('vistaGlobal');
     }
 }

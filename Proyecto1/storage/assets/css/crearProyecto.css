@@ -149,7 +149,7 @@ input[type="submit"] {
     border-radius: 7px;
     padding: 5px 15px;
     cursor: pointer;
-    width: max-content;
+    width: auto;
 
     transition: all 400ms;
 }
@@ -213,6 +213,14 @@ form > div > div:nth-child(2) > a {
     color: #fff;
 }
 
+#add-proyecto-btn {
+    margin: auto 0 0 auto;
+    padding: 15px 25px;
+    width: 100%;
+    max-width:200px;
+    min-width: 150px;
+}
+
 @media (width < 600px) {
     main {
         padding: 0;
@@ -230,7 +238,11 @@ form > div > div:nth-child(2) > a {
     }
 
     #add-proyecto-btn {
-        margin-top: 70px;
-        margin-bottom: 0;
+        margin-top: 20px;
+    }
+
+    #tareas {
+        max-height: 250px;
+        height: 250px;
     }
 }

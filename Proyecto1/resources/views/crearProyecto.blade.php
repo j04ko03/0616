@@ -10,7 +10,7 @@
     <body>
         <main>
 
-            <form action="{{ route('createProject.controller') }}" method="POST">
+            <form action="{{ route('createProject.controller') }}" method="POST" id="project">
                 @csrf
                 <a id="cerrarCrearProyecto" href="proyectos">X</a>
                 <label for="titulo"></label>

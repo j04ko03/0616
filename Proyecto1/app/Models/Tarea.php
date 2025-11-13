@@ -12,8 +12,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Tarea extends Model
 {
     //
-    protected $table='Tarea';
+    protected $table = 'Tarea';
     public $timestamps = false;
+
+    protected $fillable = [
+        'titulo',
+        'descripcion',
+        'estadoId',
+        'proyectoId',
+        'responsableId',
+        'isDeleted',
+        'idSprint',
+        'fechaEntrega'
+    ];
 
     /**
      * Get the proyecto that owns the Tarea

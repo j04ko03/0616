@@ -23,6 +23,6 @@
     <span>
         <p>{{ $responsable }}
         </p>
-        <p>Fecha de entrega</p>
+        <p>{{ \Carbon\Carbon::parse($fechaEntrega)->format('Y-m-d') }}</p>
     </span>
 </div>
