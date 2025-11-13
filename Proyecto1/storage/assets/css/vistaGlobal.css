@@ -129,7 +129,6 @@ svg {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border: 1px solid black
 }
 
 .contenedorSecundario{
@@ -137,8 +136,7 @@ svg {
     height: 10%;  
     display: flex; 
     align-items: center; 
-    justify-content: start;    
-    border: 1px solid green
+    justify-content: start; 
 }
 
 .subContenedorSinMargen{

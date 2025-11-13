@@ -56,5 +56,4 @@ addTareaFantasma.addEventListener("click", function(e){
     estado.value = "1";
 
     alert("Tarea guardada temporalmente. Ahora puedes volver al proyecto.");
-
 }); 

@@ -278,22 +278,6 @@ input[type="submit"]:hover {
     margin-bottom: 20px;
 }
 
-#add-user-btn {
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    border-radius: 7px;
-    padding: 10px 20px;
-    font-family: "Lato", sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 400ms;
-}
-
-#add-user-btn:hover {
-    background-color: var(--color-primary-hover);
-}
-
 /* Dropdown */
 .user-search {
     display: none;
@@ -389,6 +373,22 @@ input[type="submit"]:hover {
     background: #e4645b;
     color: white;
     border-radius: 50%;
+}
+
+.btn {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    font-family: "Lato", sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 400ms;
+}
+
+.btn:hover {
+    background-color: var(--color-primary-hover);
 }
 
 /* ===========================
