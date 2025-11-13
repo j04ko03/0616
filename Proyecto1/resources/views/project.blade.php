@@ -27,6 +27,8 @@
                     <button id="update-project">Modificar proyecto</button>
                 @endif
             </div>
+            <div type="button" id="boton">
+                <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
             <div id="tab-container">
                 <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
                 <button class="tabs-btn" data-tab="2">Product Backlog</button>
@@ -89,8 +91,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
+                
                 <div class="tabs-content content-section-2">
                     <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
                     <div class="backlog">
@@ -112,6 +113,22 @@
                                 :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
                                 :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
+                    </div>
+                    <div class="kanban-task-container">
+                        <h3>IN PROGRESS</h3>
+                        <div class="task-container">
+                            @for ($i = 0; $i < 6; $i++)
+                                <x-taskItemProject />
+                            @endfor
+                        </div>
+                    </div>
+                    <div class="kanban-task-container">
+                        <h3>DONE</h3>
+                        <div class="task-container">
+                            @for ($i = 0; $i < 10; $i++)
+                                <x-taskItemProject />
+                            @endfor
+                        </div>
                     </div>
                 </div>
 
@@ -137,37 +154,12 @@
                                 :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
-                </div>
-
-                <div class="tabs-content content-section-4">
-                    <div id="integrantes">
-                        @php
-                            $user = Auth::user();
-                            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-                        @endphp
-                        @if ($user && $userProject->pivot->rol === 'Administrador')
-                            <div class="add-to-project-container">
-                                <button id="add-user" class="add-btn">Añadir miembro</button>
-                                <button id="add-group" class="add-btn">Añadir grupo</button>
-                            </div>
-                        @endif
-
-                        <div id="member-container">
-                            @php
-                                $user = Auth::user();
-                                $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-                            @endphp
-                            @if ($user && $userProject->pivot->rol === 'Administrador')
-                                @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="auto" />
-                                @endforeach
-                            @else
-                                @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="none" />
-                                @endforeach
-                            @endif
+                    <div class="kanban-task-container">
+                        <h3 class="progreso">IN PROGRESS</h3>
+                        <div class="task-container">
+                            @for ($i = 0; $i < 6; $i++)
+                                <x-taskItemProject />
+                            @endfor
                         </div>
                     </div>
                 </div>
@@ -242,8 +234,7 @@
 
     </body>
 
-    @component('components.popUpTarea')
-    @endcomponent
+    @include('components.popUpTarea')
 
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
 

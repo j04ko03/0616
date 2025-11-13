@@ -14,6 +14,8 @@ class TareaController extends Controller
     public function index()
     {
         //
+        $tarea = Tarea::all();
+        return view ('tarea.index', compact('tarea'));
     }
 
     /**
@@ -40,7 +42,7 @@ class TareaController extends Controller
         $tarea->idSprint = $request->input('idSprint');
         $tarea->fechaEntrega = $request->input('fechaEntrega');
         $tarea->save();
-        //return redirect()->route('tasks.index');
+        // return redirect()->route('project.controller', ['idProyecto' => $request->input('proyectoId')]); TODO
     }
 
     /**
@@ -57,7 +59,7 @@ class TareaController extends Controller
     public function edit(Tarea $tarea)
     {
         //NO se PUEDE HACER AUN YA QUE NO TENEMOS UNA PANTLLA PARA MODIFICAR TAREAS!!!!!!!!!!!!!!
-        //return view('', compact('tarea'));
+        return view('components.popUpTarea', compact('tarea'));
     }
 
     /**
@@ -66,16 +68,16 @@ class TareaController extends Controller
     public function update(Request $request, Tarea $tarea)
     {
         //
-        $tarea->titulo = $request->input('titulo');
-        $tarea->descripcion = $request->input('descripcion');
-        $tarea->estado = $request->input('estado');
-        $tarea->proyectoId = $request->input('proyectoId');
-        $tarea->responsableId = $request->input('responsableId');
-        $tarea->isDeleted = $request->input('isDeleted');
-        $tarea->idSprint = $request->input('idSprint');
-        $tarea->fechaEntrega = $request->input('fechaEntrega');
-        $tarea->save();
-        //return redirect()->route('');
+        // $tarea->titulo = $request->input('titulo');
+        // $tarea->descripcion = $request->input('descripcion');
+        // $tarea->estado = $request->input('estado');
+        // $tarea->proyectoId = $request->input('proyectoId');
+        // $tarea->responsableId = $request->input('responsableId');
+        // $tarea->isDeleted = $request->input('isDeleted');
+        // $tarea->idSprint = $request->input('idSprint');
+        // $tarea->fechaEntrega = $request->input('fechaEntrega');
+        // $tarea->save();
+        // return redirect()->route('/project/{idProyecto}');
     }
 
     /**
@@ -85,6 +87,6 @@ class TareaController extends Controller
     {
         //Para borrar
         $tarea->delete();
-        //return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index');
     }
 }

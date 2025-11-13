@@ -190,4 +190,10 @@ class UsuarioController extends Controller
     {
         return $this->store($request);
     }
+
+    public function listaUsuarios (Request $request)
+    {
+        $usuario = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
+        return response()->json($usuarios);
+    }
 }

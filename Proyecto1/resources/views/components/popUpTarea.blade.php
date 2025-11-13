@@ -3,9 +3,12 @@
     <link rel="stylesheet" href="{{ url('/css/popUpTarea.css') }}">
 @endpush
 
+
+<form action="{{ route('addTask.store') }}" method="POST">
+    @csrf
 <div class="popup-overlay" id="taskPopup" style="display: none;">
     <div class="popup-content">
-        <form id="taskForm" method="POST" action="{{ route('addTask.store') }}" enctype="multipart/form-data">
+        <form id="taskForm" method="POST" action="{{ route('tareas.store') }}" enctype="multipart/form-data">
             @csrf
             <button type="button" class="popup-quit-btn" id="popupQuitBtn">X</button>
             
@@ -44,23 +47,22 @@
                         <textarea name="descripcion" id="popup-descripcion" cols="30" rows="10" placeholder="Descripción de la tarea..."></textarea>
                     </div>
 
-                    <div class="form-group">
                         <div class="user-dropdown">
-                            <button type="button" id="popup-add-user-btn">Añadir usuario</button>
-                            <input type="text" class="user-search" placeholder="Buscar usuario..." style="display: none;">
+                            <div style="margin-bottom: 20px">
+                                <label>Responsable:</label>
+                                <span id="labelId" data-id="{{ auth()->user()->id }}">{{ auth()->user()->nombre }}</span>
+                            </div>
+                            <button type="button" id="add-user-btn">Añadir usuario</button>
+                            <input type="text" class="user-search" placeholder="Buscar usuario...">
                             <div class="user-list">
-                                <div class="user-group">Grupos</div>
-                                <div class="user-item" data-user="Grupo 1">Grupo 1</div>
-                                <div class="user-item" data-user="Grupo 2">Grupo 2</div>
                                 <div class="user-group">Usuarios</div>
-                                <div class="user-item" data-user="Pepa">Pepa</div>
-                                <div class="user-item" data-user="Juanjo">Juanjo</div>
-                                <div class="user-item" data-user="María">María</div>
-                                <div class="user-item" data-user="Carlos">Carlos</div>
+                                @foreach ($usuarios as $usuario)
+                                    @if ($usuario->id != 1 && $usuario->id !== auth()->user()->id)
+                                        <div class="user-item" data-user="{{ $usuario->nombre }}" data-id="{{ $usuario->id }}" data-type="{{ $usuario->tipoUser }}">{{ $usuario->nombre }}</div>
+                                    @endif
+                                @endforeach
                             </div>
                         </div>
-                        <div id="popup-tareas"></div>
-                    </div>
                     
                     <div class="submit-container">
                         <input type="hidden" id="taskColumn" name="estado" value="0">
@@ -72,3 +74,7 @@
         </form>
     </div>
 </div>
+
+<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
+<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
+<script src="{{ url('/js/abrirPopUpTarea.js') }}"></script>
