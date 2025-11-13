@@ -10,15 +10,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Incidencia;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
- 
+
 class Usuario extends Auth // Extiende de Auth para funcionalidades de autenticación
 {
     use HasFactory, Notifiable;
 
     protected $table = 'Usuario';
-    protected $primaryKey = 'id'; 
+    protected $primaryKey = 'id';
     protected $autoIncrement = true;
     protected $keyType = 'int';
     public $timestamps = false;
@@ -26,7 +24,7 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     // Masificacion de campos asignables
     protected $fillable = [
         'nombre',
-        'email', 
+        'email',
         'contraseña',
         'fechaCreacion',
     ];
@@ -38,7 +36,7 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     ];
 
     // Asignar apodo automáticamente al crear usuario una vez el modelo se está creando (BOOT).
-    protected static function boot() 
+    protected static function boot()
     {
         parent::boot(); //Parent es la clase padre de la que hereda el modelo, en este caso Model.
 
@@ -94,6 +92,16 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     }
 
     /**
+     * Get all of the solicitud for the Usuario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function solicitud(): HasMany
+    {
+        return $this->hasMany(Solicitud::class, 'idUsuario');
+    }
+
+    /**
      * The rol that belong to the Usuario
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -102,5 +110,4 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
     // {
     //     return $this->belongsToMany(Role::class, 'tipoUser', 'id', 'id');
     // }
-    
 }
