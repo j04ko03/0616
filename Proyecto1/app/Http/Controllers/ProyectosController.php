@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyectos;
 use App\Models\Tarea;
+use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Container\Attributes\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ProyectosController extends Controller
@@ -129,5 +131,28 @@ class ProyectosController extends Controller
         $proyecto->save();
 
         return redirect()->route('home.controller');
+    }
+
+    public function addUser(Request $request, Proyectos $project)
+    {
+        $response = null;
+
+        $request->validate([
+            'email' => 'required|email|exists:Usuario,email',
+        ]);
+
+        $userEmail = $request->input("email");
+        $user = Usuario::where("email", $userEmail)->first();
+
+        if (!$user) {
+            $response = redirect()->back()->withErrors(["email" => "Usuario no encontrado"]);
+        }
+
+        if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
+            $project->usuarios()->attach($user->id, ["rol" => "Miembro"]);
+            $response = redirect()->route('project.controller', ['idProyecto' => $project->id])->with("succcess", "Usuario añadido al proyecto");
+        }
+
+        return $response;
     }
 }

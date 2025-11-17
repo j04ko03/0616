@@ -19,10 +19,6 @@
                     @endforeach
                 </select>
                 <a href="{{ $proyecto->linkProyecto }}" target="_blank">{{ $proyecto->linkProyecto }}</a>
-                @php
-                    $user = Auth::user();
-                    $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-                @endphp
                 @if ($user && $userProject->pivot->rol === 'Administrador')
                     <button id="update-project">Modificar proyecto</button>
                 @endif
@@ -64,9 +60,6 @@
                         <h3>IN PROGRESS</h3>
                         <div class="task-container">
                             @foreach ($proyecto->tareas as $tarea)
-                                @php
-                                    $asignados = $tarea->usuarios;
-                                @endphp
                                 @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
                                     <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                         descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
@@ -79,9 +72,6 @@
                         <h3>DONE</h3>
                         <div class="task-container">
                             @foreach ($proyecto->tareas as $tarea)
-                                @php
-                                    $asignados = $tarea->usuarios;
-                                @endphp
                                 @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
                                     <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                         descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
@@ -91,7 +81,8 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
                 <div class="tabs-content content-section-2">
                     <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
                     <div class="backlog">
@@ -154,24 +145,37 @@
                                 :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
-                    <div class="kanban-task-container">
-                        <h3 class="progreso">IN PROGRESS</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 6; $i++)
-                                <x-taskItemProject />
-                            @endfor
+                </div>
+
+                <div class="tabs-content content-section-4">
+                    <div id="integrantes">
+                        @if ($user && $userProject->pivot->rol === 'Administrador')
+                            <div class="add-to-project-container">
+                                <button id="add-user" class="add-btn">Añadir miembro</button>
+                                <button id="add-group" class="add-btn">Añadir grupo</button>
+                            </div>
+                        @endif
+
+                        <div id="member-container">
+                            @if ($user && $userProject->pivot->rol === 'Administrador')
+                                @foreach ($proyecto->usuarios as $usuario)
+                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
+                                        email="{{ $usuario->email }}" style="auto" />
+                                @endforeach
+                            @else
+                                @foreach ($proyecto->usuarios as $usuario)
+                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
+                                        email="{{ $usuario->email }}" style="none" />
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        @php
-            $user = Auth::user();
-            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-        @endphp
         @if ($user && $userProject->pivot->rol === 'Administrador')
-            <div id="popup-update-project">
+            <div id="popup-bg">
                 <form action="{{ route('updateProject.controller', $proyecto->id) }}" method="POST"
                     id="update-project-form">
                     @method('patch')
@@ -216,16 +220,25 @@
                         </div>
                     </div>
                 </form>
-            </div>
-            <div id="popup-delete-project-confirmation">
-                <form action="{{ route('deleteProject.controller', $proyecto->id) }}" method="POST"
-                    id="form-delete-project">
-                    @method('patch')
+                <div id="popup-delete-project-confirmation">
+                    <form action="{{ route('deleteProject.controller', $proyecto->id) }}" method="POST"
+                        id="form-delete-project">
+                        @method('patch')
+                        @csrf
+                        <p>¿Seguro que quiere eliminar este proyecto?</p>
+                        <span>
+                            <button type="button" id="cancel-delete-project-btn">No</button>
+                            <input type="submit" value="Eliminar">
+                        </span>
+                    </form>
+                </div>
+                <form action="{{ route('project.addUser', $proyecto->id) }}" method="POST" id="form-add-user">
                     @csrf
-                    <p>¿Seguro que quiere eliminar este proyecto?</p>
+                    <label for="email">Correo del usuario</label>
+                    <input type="email" name="email" id="user-email" required>
                     <span>
-                        <button type="button" id="cancel-delete-project-btn">No</button>
-                        <input type="submit" value="Eliminar">
+                        <button type="button" id="cancel-add-user-btn">Cancelar</button>
+                        <input type="submit" value="Añadir">
                     </span>
                 </form>
             </div>
@@ -287,41 +300,76 @@
         }
 
         // POP-UP UPDATE-DELETE PROJECT
-        const popupUpdateProject = document.getElementById("popup-update-project");
+        const popupBg = document.getElementById("popup-bg");
         const updateProjectBtn = document.getElementById("update-project");
         const popupQuitBtn = document.getElementById("quit-btn");
         const formUpdateProject = document.getElementById("update-project-form");
 
         updateProjectBtn.addEventListener("click", function() {
-            popupUpdateProject.style.display = "flex";
+            popupBg.style.display = "flex";
+            formUpdateProject.style.display = "flex"
         })
 
-        function quitPopup(e) {
-            popupUpdateProject.style.display = "none";
-        }
-        popupQuitBtn.addEventListener("click", (e) => quitPopup(e));
-        popupUpdateProject.addEventListener("click", (e) => quitPopup(e));
+        popupQuitBtn.addEventListener("click", function() {
+            formUpdateProject.style.display = "none";
+            popupBg.style.display = "none";
+        });
+
+        popupBg.addEventListener("click", function(e) {
+            e.stopPropagation();
+            formUpdateProject.style.display = "none";
+            popupDeleteProject.style.display = "none";
+            formAddUser.style.display = "none";
+            popupBg.style.display = "none";
+        });
 
         formUpdateProject.addEventListener("click", (e) => {
             e.stopPropagation();
         })
 
         // POP-UP DELETE PROJECT CONFIRMATION
+        const popupDeleteProject = document.getElementById("popup-delete-project-confirmation");
         const deleteProjectBtn = document.getElementById("delete-project");
-        const popupDeleteProjectConfirmation = document.getElementById("popup-delete-project-confirmation");
         const formDeleteProjectConfirmation = document.getElementById("form-delete-project");
         const cancelDeleteProjectBtnConfirmation = document.getElementById("cancel-delete-project-btn");
 
         deleteProjectBtn.addEventListener("click", function() {
-            popupDeleteProjectConfirmation.style.display = "flex";
+            popupDeleteProject.style.display = "flex";
+            formDeleteProjectConfirmation.style.display = "flex";
         })
 
         cancelDeleteProjectBtnConfirmation.addEventListener("click", function(e) {
-            popupDeleteProjectConfirmation.style.display = "none";
+            popupDeleteProject.style.display = "none";
+            formDeleteProjectConfirmation.style.display = "none";
+        })
+
+        popupDeleteProject.addEventListener("click", function(e) {
+            e.stopPropagation();
+            formDeleteProjectConfirmation.style.display = "none";
+            popupDeleteProject.style.display = "none";
         })
 
         formDeleteProjectConfirmation.addEventListener("click", function(e) {
             e.stopPropagation()
+        })
+
+        // ADD USER POP-UP
+        const formAddUser = document.getElementById("form-add-user");
+        const addUserBtn = document.getElementById("add-user");
+        const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
+
+        addUserBtn.addEventListener("click", function() {
+            popupBg.style.display = "flex";
+            formAddUser.style.display = "flex";
+        })
+
+        cancelAddUserBtn.addEventListener("click", function() {
+            popupBg.style.display = "none";
+            formAddUser.style.display = "none";
+        })
+
+        formAddUser.addEventListener("click", function(e) {
+            e.stopPropagation();
         })
     </script>
 @endsection

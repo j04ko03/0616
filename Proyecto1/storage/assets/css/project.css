@@ -530,7 +530,7 @@ form > div > div:first-child > label {
 }
 
 /* UPDATE $ DELETE PROJECT BUTTON */
-#popup-update-project,
+#popup-bg,
 #popup-delete-project-confirmation {
     position: fixed;
     top: 0;
@@ -549,6 +549,7 @@ form > div > div:first-child > label {
 #update-project-form {
     background-color: var(--color-background);
     border: 1px solid black;
+    display: none;
 }
 
 form > div > div {
@@ -572,7 +573,7 @@ form > div > div {
 /* DELETE PROJECT CONFIRMATION*/
 #form-delete-project {
     background-color: var(--color-background);
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
 
@@ -592,9 +593,33 @@ form > div > div {
     padding: 10px 20px;
 }
 
-#form-delete-project input {
+#form-delete-project input,
+#cancel-add-user-btn {
     color: var(--color-white);
     background-color: #d42d20;
+}
+
+/* FORM ADD USER*/
+#form-add-user {
+    background-color: var(--color-background);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 400px;
+    text-align: center;
+    gap: 20px;
+}
+
+#form-add-user > span {
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+}
+
+#form-add-user button,
+#form-add-user input {
+    padding: 10px 20px;
 }
 
 /* MEDIA QUERIES */

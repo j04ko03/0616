@@ -31,6 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
     Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
+    Route::post('/project/{project}/users', [ProyectosController::class, 'addUser'])->name('project.addUser');
 
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     // CRUD de proyectos y tareas
     Route::resource('showProjects', ProyectosController::class);
     Route::resource('tasks', TareaController::class);
-    Route::get('/logout',[UsuarioController::class,'logout'])->name('logout.controller');
+    Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
 
     // Rutas para editar perfil.
     Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
@@ -57,8 +58,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('incidencias', IncidenciaController::class);
 });
 
-    // Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
-    Route::middleware(['auth', 'rol:0,1'])->group(function () {
+// Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
+Route::middleware(['auth', 'rol:0,1'])->group(function () {
     Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
 
     // Rutas de administración de usuarios (solo SuperAdministrador (0)).
