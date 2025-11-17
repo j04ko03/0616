@@ -62,8 +62,10 @@ class SiteController extends Controller
     {
         $projects = Auth::user()->proyectos;
         $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
+        $user = Auth::user();
+        $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
 
-        return view('project', compact('proyecto', 'projects', 'idProyecto'));
+        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject'));
     }
 
     public function crearTareas()
