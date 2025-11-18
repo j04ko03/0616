@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UsuarioController extends Controller
 {
@@ -51,7 +52,7 @@ class UsuarioController extends Controller
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
             'contraseña' => bcrypt($validated['contraseña']),
-            'fechaCreacion' => now(),
+            'fechaCreacion' =>  now()->format('d-m-Y H:i:s'),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
@@ -79,7 +80,7 @@ class UsuarioController extends Controller
     public function edit(Usuario $usuario)
     {
         // Vista del formulario de edición de perfil
-        return view('usuarios.edit', compact('usuario')); 
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -139,12 +140,12 @@ class UsuarioController extends Controller
     {
 
         // Validar credenciales, intentar autenticar y redirigir.
-        
+
         $credentials = $request->validate([
             'email' => 'required|string|email',
             'contraseña' => 'required|string'
         ]);
-        
+
 
         $usuario = Usuario::where('email', $credentials['email'])->first(); // Buscar usuario por email.
 
@@ -160,7 +161,7 @@ class UsuarioController extends Controller
         //if ($usuario && Hash::check($request -> contraseña, $hashedValue))
 
         return back()->withErrors([
-            'email' => 'Email incorrecto.', 
+            'email' => 'Email incorrecto.',
             'contraseña' => 'Contraseña incorrecta.',
         ]);
     }
@@ -189,5 +190,11 @@ class UsuarioController extends Controller
     public function registerProcess(Request $request)
     {
         return $this->store($request);
+    }
+
+    public function listaUsuarios (Request $request)
+    {
+        $usuarios = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
+        return response()->json($usuarios);
     }
 }

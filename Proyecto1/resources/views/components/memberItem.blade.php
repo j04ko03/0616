@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ url('/css/memberItem.css') }}">
 
-<div class="member">
+<div class="member" data-id="{{ $id }}">
     <div class="pfp">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
             alt="Profile picture">
@@ -16,7 +16,12 @@
                 </svg>
             </button>
         </span>
-        <p>{{ $rol }}</p>
+        <p>Tipo: {{ $rol }}</p>
         <p>{{ $email }}</p>
     </div>
+
+    <span class="popup-edit-user" data-id="{{ $id }}">
+        <p>Hacer administrador</p>
+        <p>Eliminar usuario</p>
+    </span>
 </div>

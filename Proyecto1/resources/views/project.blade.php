@@ -23,6 +23,9 @@
                     <button id="update-project">Modificar proyecto</button>
                 @endif
             </div>
+            <div type="button" id="boton">
+                <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
+            </div>
             <div id="tab-container">
                 <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
                 <button class="tabs-btn" data-tab="2">Product Backlog</button>
@@ -104,7 +107,6 @@
                         @endforeach
                     </div>
                 </div>
-
                 <div class="tabs-content content-section-3">
                     <div class="backlog">
                         <div class="task-backlog">
@@ -141,8 +143,8 @@
                         <div id="member-container">
                             @if ($user && $userProject->pivot->rol === 'Administrador')
                                 @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="auto" />
+                                    <x-memberItem :id="$usuario->id" nombre="{{ $usuario->nombre }}"
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto" />
                                 @endforeach
                             @else
                                 @foreach ($proyecto->usuarios as $usuario)
@@ -153,7 +155,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </main>
 
         @if ($user && $userProject->pivot->rol === 'Administrador')
@@ -171,7 +172,8 @@
                         <div>
                             <label for="estado">Estado:</label>
                             <select name="estado" id="estado">
-                                <option value="1" @if ($proyecto->estadoId == 1) selected @endif>Pendiente</option>
+                                <option value="1" @if ($proyecto->estadoId == 1) selected @endif>Pendiente
+                                </option>
                                 <option value="2" @if ($proyecto->estadoId == 2) selected @endif>En revisión
                                 </option>
                                 <option value="3" @if ($proyecto->estadoId == 3) selected @endif>Completado
@@ -196,7 +198,6 @@
                             value="{{ $proyecto->presupuesto }}">
 
                         <div>
-
                             <button type="button" id="delete-project">Eliminar proyecto</button>
                             <input type="submit" value="Modificar proyecto" id="update-proyecto-btn">
                         </div>
@@ -233,6 +234,7 @@
     @endcomponent
 
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
+    <script src="{{ url('/js/memberItem.js') }}"></script>
 
     <script>
         // REDIRECT TO NEW URL WITH PROJECT ID
