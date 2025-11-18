@@ -12,26 +12,26 @@
     padding-left: 15px;
 }
 
-.member span:first-child {
+.member > div span:first-child {
     display: flex;
     font-size: 1.2rem;
     font-weight: 700;
 }
 
-.member span:first-child > p {
+.member > div span:first-child > p {
     max-width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.member span:first-child > button {
+.member > div > span:first-child > button {
     position: absolute;
     top: 15px;
     right: 10px;
 }
 
-.member p:last-child {
+.member > div > p:last-child {
     font-size: 0.8rem;
     color: #464646;
 }
@@ -47,4 +47,46 @@
     box-sizing: border-box;
     padding: 15px;
     padding-right: 0;
+}
+
+.popup-edit-user {
+    position: absolute;
+    background-color: var(--color-white);
+    top: 35px;
+    right: 10px;
+    left: 100px;
+    font-size: 0.75rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 5px 8px 8px;
+
+    display: none;
+}
+
+.popup-edit-user > p:nth-child(1) {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+
+    transition: all 400ms;
+}
+.popup-edit-user > p:nth-child(1):hover {
+    background-color: var(--color-background);
+}
+
+.popup-edit-user > p:nth-child(2) {
+    cursor: pointer;
+    border-radius: 0 0 9px 9px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(248, 58, 58);
+
+    transition: all 400ms;
+}
+.popup-edit-user > p:nth-child(2):hover {
+    background-color: rgb(199, 9, 9);
+}
+
+.display {
+    display: block;
 }

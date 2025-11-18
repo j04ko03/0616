@@ -86,6 +86,6 @@ class Proyectos extends Model
      */
     public function sprints(): BelongsToMany
     {
-        return $this->belongsToMany(Sprint::class, 'proyecto_sprint', 'proyectoId', 'sprintId');
+        return $this->belongsToMany(Sprint::class, 'proyecto_sprint', 'proyectoId', 'idSprint');
     }
 }

@@ -8,9 +8,9 @@
         <form id="taskForm" method="POST" action="{{ route('addTask.store') }}" enctype="multipart/form-data">
             @csrf
             <button type="button" class="popup-quit-btn" id="popupQuitBtn">X</button>
-            
+
             <input type="text" name="titulo" class="popup-title" placeholder="TITULO TAREA" required maxlength="100">
-            
+
             <div class="popup-form-grid">
                 <!-- Columna izquierda -->
                 <div class="popup-left-column">
@@ -19,13 +19,13 @@
                         <br>
                         <input type="date" name="fecha_limite" id="popup-fecha-limite" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="popup-presupuesto">Presupuesto</label>
                         <br>
                         <input type="number" name="presupuesto" id="popup-presupuesto" placeholder="€€€">
                     </div>
-                    
+
                     <div class="documents-section">
                         <label for="popup-documento" id="popup-add-documento">
                             <input type="file" name="documentos[]" id="popup-documento" multiple
@@ -59,9 +59,7 @@
                                 <div class="user-item" data-user="Carlos">Carlos</div>
                             </div>
                         </div>
-                        <div id="popup-tareas"></div>
-                    </div>
-                    
+
                     <div class="submit-container">
                         <input type="hidden" id="taskColumn" name="estado" value="0">
                         <input type="hidden" name="proyecto_id" value="1">
@@ -72,3 +70,7 @@
         </form>
     </div>
 </div>
+
+<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
+<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
+<script src="{{ url('/js/abrirPopUpTarea.js') }}"></script>
