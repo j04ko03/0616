@@ -36,6 +36,9 @@ class Usuario extends Auth // Extiende de Auth para funcionalidades de autentica
         'apodo' => null
     ];
 
+    protected $dateFormat = 'd-m-Y H:i:s';
+
+
     // Asignar apodo automáticamente al crear usuario una vez el modelo se está creando (BOOT).
     protected static function boot()
     {
