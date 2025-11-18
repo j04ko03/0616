@@ -18,15 +18,18 @@
                 <div class="contenedorCabeceraPerfil flex1">
 
                     <div class="flex2" style="width: 33%; height: 100%; flex-wrap: wrap;">
-                        <div class="contendorFoto">
+                        <div class="contendorFoto" id="contendorFoto">
 
                         </div>
                         <div id="upload" style="width: 80%; display: flex; justify-content: flex-end; align-items: center;">
                             <a href="#" style="display: flex;">
-                                <img id="img" src="../storage/assets/icons/captura.png" alt="" style="width: 20px; cursor: pointer;">
+                                <img id="imgTomar" src="../storage/assets/icons/captura.png" alt="" style="width: 20px; cursor: pointer; margin-right: 10%">
+                                <img id="imgUpload" src="../storage/assets/icons/capturar.png" alt="Subir foto" style="width: 20px; cursor: pointer;">
+                                <input type="file" id="uploadFile" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                                
                             </a>
                         </div>
-                        <!--TOMAR FOTO-->
+                        <!--TOMAR FOTO-->   
                         <div id="cameraModal" class="modal">
                             <div class="modal-content">
                                 <span class="close">&times;</span>
@@ -37,12 +40,10 @@
                                 <!-- Botones -->
                                 <div class="buttons">
                                     <button id="takePhoto">Tomar foto</button>
-                                    <input type="file" id="uploadFile" accept="image/png, image/jpeg">
                                 </div>
 
                                 <!-- Vista previa de la imagen tomada -->
                                 <canvas id="snapshot" style="display:none;"></canvas>
-                                <button id="savePhoto" style="display:none;">Usar esta foto</button>
                             </div>
                         </div>
                     </div>

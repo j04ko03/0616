@@ -51,7 +51,7 @@ class UsuarioController extends Controller
             'nombre' => $validated['nombre'],
             'email' => $validated['email'],
             'contraseña' => bcrypt($validated['contraseña']),
-            'fechaCreacion' => now(),
+            'fechaCreacion' => now()->format('Y-m-d H:i:s'),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
