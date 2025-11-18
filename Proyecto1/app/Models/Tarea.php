@@ -36,7 +36,7 @@ class Tarea extends Model
         return $this->belongsTo(Proyectos::class, 'proyectoId');
     }
 
-    /**
+    /** asdad
      * The tags that belong to the Tarea
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
