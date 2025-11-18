@@ -161,7 +161,7 @@ class UsuarioController extends Controller
         //if ($usuario && Hash::check($request -> contraseña, $hashedValue))
 
         return back()->withErrors([
-            'email' => 'Email incorrecto.',
+            'email' => 'Email incorrecto.', 
             'contraseña' => 'Contraseña incorrecta.',
         ]);
     }

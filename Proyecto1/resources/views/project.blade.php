@@ -106,22 +106,6 @@
                                 :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                         @endforeach
                     </div>
-                    <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 6; $i++)
-                                <x-taskItemProject />
-                            @endfor
-                        </div>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>DONE</h3>
-                        <div class="task-container">
-                            @for ($i = 0; $i < 10; $i++)
-                                <x-taskItemProject />
-                            @endfor
-                        </div>
-                    </div>
                 </div>
                 <div class="tabs-content content-section-3">
                     <div class="backlog">
