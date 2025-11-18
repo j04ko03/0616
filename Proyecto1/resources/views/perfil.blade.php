@@ -21,10 +21,10 @@
                         <div class="contendorFoto" id="contendorFoto">
                             @php
                                 use Illuminate\Support\Facades\Storage;
-                                $fotoPath = 'public/assets/fotosUser/' . $usuario->img;
+                                $fotoPath = 'assets/fotosUser/' . $usuario->img;
                             @endphp
 
-                            @if($usuario->img && Storage::exists($fotoPath))
+                            @if($usuario->img && Storage::disk('public')->exists($fotoPath))
                                 <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $usuario->img) }}" alt="Foto de usuario">                            
                             @else
                                 <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
