@@ -80,20 +80,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 const formData = new FormData();
                 formData.append('foto', blob, 'foto.png'); // nombre del archivo
 
-                fetch('/perfil/subir-foto', {
+                fetch(RUTA_SUBIR_FOTO, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                     },
                     body: formData
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if(data.success){
-                        console.log('Foto subida correctamente', data.ruta);
-                    } else {
-                        alert('Error al subir la foto');
+                .then(async res => {
+                // Si la respuesta NO es JSON → lanzo error manual
+                    const text = await res.text();
+
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error("Respuesta del servidor:", text);
+                        throw new Error("El servidor no devolvió JSON. Revisa la ruta o el controlador.");
                     }
+                })
+                .then(data => {
+                    if (data.success) {
+                        console.log("Foto subida correctamente");
+                        console.log("Ruta almacenada:", data.ruta);
+                    } else {
+                        alert("Error al subir la foto.");
+                    }
+                })
+                .catch(err => {
+                    console.error("ERROR FETCH:", err);
                 });
             });
     }

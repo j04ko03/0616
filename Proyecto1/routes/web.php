@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
+    Route::post('/perfil/subir-foto', [UsuarioController::class, 'subirFoto'])->name('perfil-subir-foto.controller');
 
     // CRUD de proyectos y tareas
     Route::resource('showProjects', ProyectosController::class);

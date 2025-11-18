@@ -19,7 +19,16 @@
 
                     <div class="flex2" style="width: 33%; height: 100%; flex-wrap: wrap;">
                         <div class="contendorFoto" id="contendorFoto">
+                            @php
+                                use Illuminate\Support\Facades\Storage;
+                                $fotoPath = 'public/assets/fotosUser/' . $usuario->img;
+                            @endphp
 
+                            @if($usuario->img && Storage::exists($fotoPath))
+                                <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $usuario->img) }}" alt="Foto de usuario">                            
+                            @else
+                                <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
+                            @endif
                         </div>
                         <div id="upload" style="width: 80%; display: flex; justify-content: flex-end; align-items: center;">
                             <a href="#" style="display: flex;">
@@ -191,4 +200,7 @@
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
     <script src="{{ url('/js/tomaFoto.js') }}"></script>
     <script src="{{ url('/js/controlPasswordSuper.js') }}"></script>
+    <script>
+        const RUTA_SUBIR_FOTO = "{{ url('/perfil/subir-foto') }}";
+    </script>
 @endsection
