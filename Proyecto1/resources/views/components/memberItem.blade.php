@@ -19,8 +19,16 @@
 
 <div class="member">
     <div class="pfp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png"
-            alt="Profile picture">
+        @php
+            use Illuminate\Support\Facades\Storage;
+            $fotoPath = 'assets/fotosUser/' . $img;
+        @endphp
+
+        @if($img && Storage::disk('public')->exists($fotoPath))
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario">                            
+        @else
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
+        @endif
     </div>
     <div>
         <span>
