@@ -44,7 +44,7 @@
             <h2 class="titulo">{{ $titulo }}</h2>
         </div>
         <div class="padding-right">
-            <p class="texto-gris">{{ $fechaEntrega }}</p>
+            <p class="texto-gris">{{ \Carbon\Carbon::parse($fechaEntrega)->format('d-m-Y') }}</p>
         </div>
     </div>
     <div class="card-titulo" style="width: 100%; height: 30px;  margin-top: 3px; display: flex; justify-content: end;">
