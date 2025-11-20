@@ -12,4 +12,22 @@ document.addEventListener('DOMContentLoaded', function() {
         titleElement.textContent = `OrgaTime - ${x}`;
     }
 
+    //parte de limpira local
+    const prev = document.referrer;
+    const current = window.location.href;
+
+    const rutasPermitidas = [
+        '/0616/Proyecto1/public/crear-proyecto',
+        '/0616/Proyecto1/public/tareas',
+    ];
+
+    function esRutaPermitida(url) {
+        return rutasPermitidas.some(ruta => url.includes(ruta));
+    }
+
+    if ((prev.includes('/0616/Proyecto1/public/crear-proyecto') || prev.includes('/0616/Proyecto1/public/tareas')) && !esRutaPermitida(current)) {
+        console.log("Limpiando local Storage");
+        localStorage.clear();
+    }
+
 });

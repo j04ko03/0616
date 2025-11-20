@@ -88,6 +88,7 @@ class SiteController extends Controller
         $incidencias = Incidencia::with('usuario')->get();
         $solicitudes = Solicitud::with('usuario')->get();
         $usuarios = Usuario::all();
-        return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias'));
+        $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
+        return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 }

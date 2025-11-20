@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnSolicitud.style.backgroundColor = "#ffffff";
             }
             btnIncidencias.style.backgroundColor = "#ffffff";
+            localStorage.clear();
+            console.log("Se limpia local Storage");
         });
         if(btnSolicitud){
             btnSolicitud.addEventListener('click', () => {

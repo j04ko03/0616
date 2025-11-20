@@ -60,6 +60,12 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "post-install-cmd": [
+            "@php artisan storage:link --ansi || true"
+        ],
+        "post-update-cmd": [
+            "@php artisan storage:link --ansi || true"
         ]
     },
     "extra": {
