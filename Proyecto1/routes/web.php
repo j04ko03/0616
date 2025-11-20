@@ -57,6 +57,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('solicitudes', SolicitudController::class);
 
     Route::resource('incidencias', IncidenciaController::class);
+
+    //Nuevas rutas ver tareas y proyectos
+    Route::get('/ver-proyecto/{idProyecto}', [SiteController::class, 'verProyecto'])->name('verProyecto.controller');
+    Route::get('/ver-tarea/{idTarea}', [SiteController::class, 'verTarea'])->name('verTarea.controller');
 });
 
 // Rutas solo para rolç SuperAdministrador y Administrador (0, 1).

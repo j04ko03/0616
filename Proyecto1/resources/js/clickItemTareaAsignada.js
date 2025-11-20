@@ -3,8 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => {
         card.addEventListener('click', () => {
-            const id = card.dataset.id;
-            console.log('Card clicked:' + id);
+            const tarea = JSON.parse(card.dataset.tarea);
+            const url = card.dataset.url;
+            console.log(url);
+            window.location.href = url;
         });
     });
 });

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ url('/css/cardItem.css') }}">
 
 <!--<div style="background-color: grey; width= 100%; height: 50px; border: 1px solid black">  -->
-    <div class="card-cabecera idTareaAsignada" data-id="{{ $id }}">
+    <div class="card-cabecera idTareaAsignada" data-id="{{ $id }}" data-tarea='@json($dataTarea)' data-url="{{ $dataUrl }}">
         <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; height: 100%; padding: 0 10px;">
             <div style="padding: 5px; cursor: pointer; word-wrap: break-word; overflow-wrap: break-word; max-width: 100%;">
             <p>{{ $titulo }}</p>
