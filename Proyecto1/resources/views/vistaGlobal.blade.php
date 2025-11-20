@@ -33,7 +33,7 @@
             <div class="tabs-content content-section-1 content-active">
                 <!-- USUARIOS -->
                 @foreach ($usuarios as $usuario)
-                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}" id="{{ $usuario['id'] }}"/>
+                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}" id="{{ $usuario['id'] }}" img="{{  $usuario['img'] }}"/>
                 @endforeach
             </div>
             <div class="tabs-content content-section-2">
@@ -51,6 +51,7 @@
                             estado="{{ $proyecto['estadoId'] }}"
                             fechaEntrega="{{ $proyecto['fechaEntrega'] }}"
                             :data-proyecto="$proyecto"
+                            :project="$proyecto"
                         />
                     @endforeach
             </div>
