@@ -4,11 +4,12 @@
     <div class="pfp">
         @php
             use Illuminate\Support\Facades\Storage;
+            $img = 'standarPerfil.png';
             $fotoPath = 'assets/fotosUser/' . $img;
         @endphp
 
-        @if($img && Storage::disk('public')->exists($fotoPath))
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario">                            
+        @if ($img && Storage::disk('public')->exists($fotoPath))
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario">
         @else
             <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
         @endif
@@ -16,20 +17,24 @@
     <div>
         <span>
             <p>{{ $nombre }}</p>
-            <button class="button-member" style="display:{{ $style }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                    <path
-                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-                </svg>
-            </button>
+            @if (Auth::user()->id != $id)
+                <button class="button-member" style="display:{{ $style }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path
+                            d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                    </svg>
+                </button>
+            @endif
         </span>
         <p>Tipo: {{ $rol }}</p>
         <p>{{ $email }}</p>
     </div>
 
-    <span class="popup-edit-user" data-id="{{ $id }}">
-        <p>Hacer administrador</p>
-        <p>Eliminar usuario</p>
-    </span>
+    @if (Auth::user()->id != $id)
+        <span class="popup-edit-user" data-id="{{ $id }}" data-nombre="{{ $nombre }}">
+            <p class="user-admin">Hacer administrador</p>
+            <p class="delete-user">Eliminar usuario</p>
+        </span>
+    @endif
 </div>

@@ -155,4 +155,8 @@ class ProyectosController extends Controller
 
         return $response;
     }
+
+    public function removeUser(Request $request, Proyectos $project) {
+
+    }
 }

@@ -148,8 +148,9 @@
                                 @endforeach
                             @else
                                 @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="none" />
+                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
+                                        img="standarPerfil.png" />
                                 @endforeach
                             @endif
                         </div>
@@ -224,6 +225,15 @@
                         <input type="submit" value="Añadir">
                     </span>
                 </form>
+                <form action="{{ route('project.removeUser', $proyecto->id) }}" method="post" id="delete-user-project">
+                    @method('delete')
+                    @csrf
+                    <p></p>
+                    <div>
+                        <button type="button">Cancelar</button>
+                        <button type="submit">Eliminar</button>
+                    </div>
+                </form>
             </div>
         @endif
 
@@ -232,8 +242,10 @@
 
     @include('components.popUpTarea')
 
+    <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
     <script src="{{ url('/js/memberItem.js') }}"></script>
+    <script src="{{ url('/js/filterSprintProject.js') }}"></script>
 
     <script>
         // REDIRECT TO NEW URL WITH PROJECT ID
@@ -241,62 +253,99 @@
             window.location = `${e.target.value}`
         })
 
-        // NAVIGATION BETWEEN TABS
-        const btnContainer = document.querySelector("#tab-container");
-        const tabsBtn = document.querySelectorAll(".tabs-btn");
-        const tabsContent = document.querySelectorAll(".tabs-content");
+        // ADD USER POP-UP
+        const popupBg = document.getElementById("popup-bg");
+        const formAddUser = document.getElementById("form-add-user");
+        const addUserBtn = document.getElementById("add-user");
+        const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
 
-        btnContainer.addEventListener("click", function(e) {
-            const clicked = e.target.closest(".tabs-btn");
-            if (!clicked) return;
-            tabsBtn.forEach((btn) => btn.classList.remove("btn-active"));
-            clicked.classList.add("btn-active");
-
-            tabsContent.forEach((tab) => tab.classList.remove("content-active"));
-            document
-                .querySelector(`.content-section-${clicked.dataset.tab}`)
-                .classList.add("content-active");
+        addUserBtn.addEventListener("click", function() {
+            popupBg.style.display = "flex";
+            formAddUser.style.display = "flex";
         });
 
-        // FILTER TASKS BY SPRINT
-        const sprintDropdown = document.getElementById("sprints");
-        const tasksKanban = document.querySelectorAll(".task-card");
-        const tasksBacklog = document.querySelectorAll(".sprint-backlog");
-        const kanbanContainer = document.querySelector(".content-section-1");
+        cancelAddUserBtn.addEventListener("click", function() {
+            popupBg.style.display = "none";
+            formAddUser.style.display = "none";
+        });
 
-        sprintDropdown.addEventListener("change", function() {
-            filterTasks(tasksKanban);
-            filterTasks(tasksBacklog);
-        })
-        window.addEventListener("load", function() {
-            filterTasks(tasksKanban);
-            filterTasks(tasksBacklog);
-        })
-
-        function filterTasks(tasks) {
-            tasks.forEach(task => {
-                if (sprintDropdown.value !== task.dataset.sprint) {
-                    task.classList.add("filter-sprint");
-                } else {
-                    task.classList.remove("filter-sprint");
-                }
-            })
-        }
+        formAddUser.addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
 
         // POP-UP UPDATE-DELETE PROJECT
-        const popupBg = document.getElementById("popup-bg");
         const updateProjectBtn = document.getElementById("update-project");
         const popupQuitBtn = document.getElementById("quit-btn");
         const formUpdateProject = document.getElementById("update-project-form");
 
         updateProjectBtn.addEventListener("click", function() {
             popupBg.style.display = "flex";
-            formUpdateProject.style.display = "flex"
-        })
+            formUpdateProject.style.display = "flex";
+        });
 
         popupQuitBtn.addEventListener("click", function() {
             formUpdateProject.style.display = "none";
             popupBg.style.display = "none";
+        });
+
+
+
+        formUpdateProject.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        // POP-UP DELETE PROJECT CONFIRMATION
+        const popupDeleteProject = document.getElementById(
+            "popup-delete-project-confirmation"
+        );
+        const deleteProjectBtn = document.getElementById("delete-project");
+        const formDeleteProjectConfirmation = document.getElementById(
+            "form-delete-project"
+        );
+        const cancelDeleteProjectBtnConfirmation = document.getElementById(
+            "cancel-delete-project-btn"
+        );
+
+        deleteProjectBtn.addEventListener("click", function() {
+            popupDeleteProject.style.display = "flex";
+            formDeleteProjectConfirmation.style.display = "flex";
+        });
+
+        cancelDeleteProjectBtnConfirmation.addEventListener("click", function(e) {
+            popupDeleteProject.style.display = "none";
+            formDeleteProjectConfirmation.style.display = "none";
+        });
+
+        popupDeleteProject.addEventListener("click", function(e) {
+            e.stopPropagation();
+            formDeleteProjectConfirmation.style.display = "none";
+            popupDeleteProject.style.display = "none";
+        });
+
+        formDeleteProjectConfirmation.addEventListener("click", function(e) {
+            e.stopPropagation();
+        });
+
+        // DELETE USER FROM PROJECT
+        const popupUserProject = document.querySelectorAll(".popup-edit-user");
+        const formDeleteUserProject = document.getElementById("delete-user-project");
+
+        popupUserProject.forEach((popupUser) => {
+            popupUser.addEventListener("click", function(e) {
+                let clicked = e.target.closest(".user-admin");
+                if (!clicked) {
+                    clicked = e.target.closest(".delete-user");
+                }
+
+                if (clicked.classList.contains("user-admin")) {
+                    popupBg.style.display = "flex";
+                } else {
+                    const message = formDeleteUserProject.querySelector("p");
+                    message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
+                    popupBg.style.display = "flex";
+                    formDeleteUserProject.style.display = "flex";
+                }
+            });
         });
 
         popupBg.addEventListener("click", function(e) {
@@ -305,55 +354,7 @@
             popupDeleteProject.style.display = "none";
             formAddUser.style.display = "none";
             popupBg.style.display = "none";
+            formDeleteUserProject.style.display = "none";
         });
-
-        formUpdateProject.addEventListener("click", (e) => {
-            e.stopPropagation();
-        })
-
-        // POP-UP DELETE PROJECT CONFIRMATION
-        const popupDeleteProject = document.getElementById("popup-delete-project-confirmation");
-        const deleteProjectBtn = document.getElementById("delete-project");
-        const formDeleteProjectConfirmation = document.getElementById("form-delete-project");
-        const cancelDeleteProjectBtnConfirmation = document.getElementById("cancel-delete-project-btn");
-
-        deleteProjectBtn.addEventListener("click", function() {
-            popupDeleteProject.style.display = "flex";
-            formDeleteProjectConfirmation.style.display = "flex";
-        })
-
-        cancelDeleteProjectBtnConfirmation.addEventListener("click", function(e) {
-            popupDeleteProject.style.display = "none";
-            formDeleteProjectConfirmation.style.display = "none";
-        })
-
-        popupDeleteProject.addEventListener("click", function(e) {
-            e.stopPropagation();
-            formDeleteProjectConfirmation.style.display = "none";
-            popupDeleteProject.style.display = "none";
-        })
-
-        formDeleteProjectConfirmation.addEventListener("click", function(e) {
-            e.stopPropagation()
-        })
-
-        // ADD USER POP-UP
-        const formAddUser = document.getElementById("form-add-user");
-        const addUserBtn = document.getElementById("add-user");
-        const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
-
-        addUserBtn.addEventListener("click", function() {
-            popupBg.style.display = "flex";
-            formAddUser.style.display = "flex";
-        })
-
-        cancelAddUserBtn.addEventListener("click", function() {
-            popupBg.style.display = "none";
-            formAddUser.style.display = "none";
-        })
-
-        formAddUser.addEventListener("click", function(e) {
-            e.stopPropagation();
-        })
     </script>
 @endsection

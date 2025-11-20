@@ -622,6 +622,29 @@ form > div > div {
     padding: 10px 20px;
 }
 
+/* DELETE USER FROM PROJECT */
+#delete-user-project {
+    display: none;
+    gap: 20px;
+    flex-direction: column;
+    max-width: 400px;
+    background-color: var(--color-background);
+    color: var(--color-dark);
+    text-align: center;
+}
+
+#delete-user-project > div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+#delete-user-project > div > button:last-child {
+    background-color: #d42d20;
+    color: var(--color-white);
+}
+
 /* MEDIA QUERIES */
 @media (width < 700px) {
     #sprints {
