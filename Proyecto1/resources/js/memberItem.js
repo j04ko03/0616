@@ -7,6 +7,9 @@ btnOptions.forEach((btn) => {
         const memberClicked = e.currentTarget.closest(".member");
 
         const popupUser = Array.from(popupOptionsUser).filter((user) => {
+            if (user.dataset.id !== memberClicked.dataset.id) {
+                user.classList.remove("display");
+            }
             return user.dataset.id === memberClicked.dataset.id;
         })[0];
 
