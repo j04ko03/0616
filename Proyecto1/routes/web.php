@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
-    Route::resource('tareas', TareaController::class);
+    Route::resource('tareas', TareaController::class); // Tiene el edit y update
     Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
@@ -58,7 +58,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('incidencias', IncidenciaController::class);
 });
 
-// Rutas solo para rolç SuperAdministrador y Administrador (0, 1).
+// Rutas solo para rol SuperAdministrador y Administrador (0, 1).
 Route::middleware(['auth', 'rol:0,1'])->group(function () {
     Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
 
