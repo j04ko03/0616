@@ -31,7 +31,7 @@
             <div class="tabs-content content-section-1 content-active">
                 <!-- USUARIOS -->
                 @foreach ($usuarios as $usuario)
-                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}"/>
+                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}" id="{{ $usuario['id'] }}"/>
                 @endforeach
             </div>
             <div class="tabs-content content-section-2">
