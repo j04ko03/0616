@@ -92,8 +92,11 @@ class UsuarioController extends Controller
         // PROCESAR actualización de perfil.
         $validated = $request->validate([
             'nombre' => 'nullable|string|max:255',
-            'contraseña' => 'nullable|string|min:6|max:255',
+            'contraseña' => 'nullable|string|min:8|max:255',
             'apodo' => 'nullable|string|max:255',
+        ],[
+            'contraseña.min'          => 'Debes introducir almenos 8 carácteres',
+            'contraseña.confirmed'    => 'Las contraseñas no coinciden'
         ]);
 
         //$usuario->update($validated);

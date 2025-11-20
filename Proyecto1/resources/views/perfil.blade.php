@@ -167,6 +167,13 @@
                                             <div style="" class="flex1">
                                                 <p style="width: 40%;">Contraseña</p>
                                                 <textarea class="campoTexto password-textarea" id="contraseña" name="contraseña" placeholder="••••••••" value="{{ $usuario->contraseña }}"></textarea>
+                                                
+                                            </div>
+                                            <div class="flex1">
+                                                <p style="width: 40%;"></p>
+                                                @error('contraseña')
+                                                    <div class="alert">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
                                                 <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Modificar</button>

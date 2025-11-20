@@ -17,7 +17,7 @@
     }
 @endphp 
 
-
+ 
 
 <div class="card-contenedor cardProyectoId" data-proyecto='@json($dataProyecto)'>
     <div class="card-interior">
