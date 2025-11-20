@@ -18,15 +18,27 @@
                 <div class="contenedorCabeceraPerfil flex1">
 
                     <div class="flex2" style="width: 33%; height: 100%; flex-wrap: wrap;">
-                        <div class="contendorFoto">
+                        <div class="contendorFoto" id="contendorFoto">
+                            @php
+                                use Illuminate\Support\Facades\Storage;
+                                $fotoPath = 'assets/fotosUser/' . $usuario->img;
+                            @endphp
 
+                            @if($usuario->img && Storage::disk('public')->exists($fotoPath))
+                                <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $usuario->img) }}" alt="Foto de usuario">                            
+                            @else
+                                <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
+                            @endif
                         </div>
                         <div id="upload" style="width: 80%; display: flex; justify-content: flex-end; align-items: center;">
                             <a href="#" style="display: flex;">
-                                <img id="img" src="../storage/assets/icons/captura.png" alt="" style="width: 20px; cursor: pointer;">
+                                <img id="imgTomar" src="../storage/assets/icons/captura.png" alt="" style="width: 20px; cursor: pointer; margin-right: 10%">
+                                <img id="imgUpload" src="../storage/assets/icons/capturar.png" alt="Subir foto" style="width: 20px; cursor: pointer;">
+                                <input type="file" id="uploadFile" accept="image/png, image/jpeg, image/jpg" style="display: none;">
+                                
                             </a>
                         </div>
-                        <!--TOMAR FOTO-->
+                        <!--TOMAR FOTO-->   
                         <div id="cameraModal" class="modal">
                             <div class="modal-content">
                                 <span class="close">&times;</span>
@@ -37,12 +49,10 @@
                                 <!-- Botones -->
                                 <div class="buttons">
                                     <button id="takePhoto">Tomar foto</button>
-                                    <input type="file" id="uploadFile" accept="image/png, image/jpeg">
                                 </div>
 
                                 <!-- Vista previa de la imagen tomada -->
                                 <canvas id="snapshot" style="display:none;"></canvas>
-                                <button id="savePhoto" style="display:none;">Usar esta foto</button>
                             </div>
                         </div>
                     </div>
@@ -157,6 +167,13 @@
                                             <div style="" class="flex1">
                                                 <p style="width: 40%;">Contraseña</p>
                                                 <textarea class="campoTexto password-textarea" id="contraseña" name="contraseña" placeholder="••••••••" value="{{ $usuario->contraseña }}"></textarea>
+                                                
+                                            </div>
+                                            <div class="flex1">
+                                                <p style="width: 40%;"></p>
+                                                @error('contraseña')
+                                                    <div class="alert">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div style="margin-top: 5%; display: flex; justify-content: flex-end;">
                                                 <button type="submit" class="botonPersonalizado" style="margin-bottom: 5%">Modificar</button>
@@ -190,4 +207,7 @@
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
     <script src="{{ url('/js/tomaFoto.js') }}"></script>
     <script src="{{ url('/js/controlPasswordSuper.js') }}"></script>
+    <script>
+        const RUTA_SUBIR_FOTO = "{{ url('/perfil/subir-foto') }}";
+    </script>
 @endsection

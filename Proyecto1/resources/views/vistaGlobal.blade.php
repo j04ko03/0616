@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="{{ url('/css/vistaGlobal.css') }}">
     <link rel="stylesheet" href="{{ url('/css/desplegableUsuarios.css') }}">
     <link rel="stylesheet" href="{{ url('/css/grupoItem.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
 @endpush
 
 @section('content')
@@ -12,7 +14,7 @@
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Usuarios</button>
             <button class="tabs-btn" data-tab="2">Solicitudes superUsuario ({{ count($solicitudes) }})</button>
-            <button class="tabs-btn" data-tab="3">Proyectos</button>
+            <button class="tabs-btn" data-tab="3">Proyectos ({{ count($proyectos) }})</button>
             <button class="tabs-btn" data-tab="4">Grupos</button>
             <button class="tabs-btn" data-tab="5">Incidencias ({{ count($incidencias) }})</button>
         </div>
@@ -31,7 +33,7 @@
             <div class="tabs-content content-section-1 content-active">
                 <!-- USUARIOS -->
                 @foreach ($usuarios as $usuario)
-                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}"/>
+                    <x-memberItem nombre="{{ $usuario['nombre'] }}" email="{{ $usuario['email'] }}" tipo="{{ $usuario['tipoUser'] }}" style="auto" rol="{{ $usuario['tipoUser'] }}" id="{{ $usuario['id'] }}" img="{{  $usuario['img'] }}"/>
                 @endforeach
             </div>
             <div class="tabs-content content-section-2">
@@ -42,8 +44,16 @@
             </div>
             <div class="tabs-content content-section-3">
                 <!-- PROYECTOS -->
-                <p>3</p>
-
+                    @foreach ($proyectos as $proyecto)
+                        <x-cardItemProyectos class="cardProyectoId" style="width: 25% !important" 
+                            titulo="{{ $proyecto['titulo'] }}" 
+                            descripcion="{{ $proyecto['descripcion'] }}"
+                            estado="{{ $proyecto['estadoId'] }}"
+                            fechaEntrega="{{ $proyecto['fechaEntrega'] }}"
+                            :data-proyecto="$proyecto"
+                            :project="$proyecto"
+                        />
+                    @endforeach
             </div>
             <div class="tabs-content content-section-4">
                 <!-- GRUPOS -->
@@ -160,13 +170,30 @@
         btnContainer.addEventListener("click", function(e) {
             const clicked = e.target.closest(".tabs-btn");
             if (!clicked) return;
+
             tabsBtn.forEach((btn) => btn.classList.remove("btn-active"));
             clicked.classList.add("btn-active");
 
             tabsContent.forEach((tab) => tab.classList.remove("content-active"));
-            document
-                .querySelector(`.content-section-${clicked.dataset.tab}`)
-                .classList.add("content-active");
+            const activeTab = document.querySelector(`.content-section-${clicked.dataset.tab}`);
+            activeTab.classList.add("content-active");
+
+            // Aplica grid solo a la sección 3, limpia las demás
+            const tab3 = document.querySelector('.content-section-3');
+            if (clicked.dataset.tab === "3" && tab3) {
+                tab3.style.display = "grid";
+                tab3.style.gridTemplateColumns = "repeat(auto-fit, minmax(350px, 1fr))";
+                tab3.style.gridGap = "10px";
+                tab3.style.width = "100%";
+                tab3.style.height = "auto";
+            } else if (tab3) {
+                // Limpiar estilos si no es la pestaña 3
+                tab3.style.display = "";
+                tab3.style.gridTemplateColumns = "";
+                tab3.style.gridGap = "";
+                tab3.style.width = "";
+                tab3.style.height = "";
+            }
         });
 
         const denyBtns = document.querySelectorAll(".deny");

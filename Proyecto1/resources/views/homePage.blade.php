@@ -28,7 +28,7 @@
             @else
                 <div class="gridCards">
                     @foreach ($proyectosRecientes as $proyecto)
-                        <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}" />
+                        <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}"/>
                     @endforeach
                 </div>
             @endif
@@ -47,6 +47,7 @@
                         <x-listItemTarea
                             titulo="{{ $tarea['titulo'] }}"
                             descripcion="{{ $tarea['descripcion'] }}"
+                            id="{{ $tarea['id'] }}"
                             :tag="$tarea['tags']"
                         />
                         @endforeach
@@ -149,5 +150,7 @@
     <script src="{{ url('/js/btnHome.js') }}"></script>
     <script src="{{ url('/js/btnHideProject.js') }}"></script>
     <script src="{{ url('/js/clickCardProject.js') }}"></script>
+    <script src="{{ url('/js/clickItemProyectoReciente.js') }}"></script>
+    <script src="{{ url('/js/clickItemTareaAsignada.js') }}"></script>
 
 @endsection

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use function Laravel\Prompts\error;
 
 class UsuarioController extends Controller
 {
@@ -53,6 +55,7 @@ class UsuarioController extends Controller
             'email' => $validated['email'],
             'contraseña' => bcrypt($validated['contraseña']),
             'fechaCreacion' =>  now()->format('d-m-Y H:i:s'),
+            'fechaCreacion' => now()->format('Y-m-d H:i:s'),
             // tipoUser, apodo y fechaCreacion se asignan automáticamente.
         ]);
 
@@ -91,8 +94,11 @@ class UsuarioController extends Controller
         // PROCESAR actualización de perfil.
         $validated = $request->validate([
             'nombre' => 'nullable|string|max:255',
-            'contraseña' => 'nullable|string|min:6|max:255',
+            'contraseña' => 'nullable|string|min:8|max:255',
             'apodo' => 'nullable|string|max:255',
+        ],[
+            'contraseña.min'          => 'Debes introducir almenos 8 carácteres',
+            'contraseña.confirmed'    => 'Las contraseñas no coinciden'
         ]);
 
         //$usuario->update($validated);
@@ -197,4 +203,43 @@ class UsuarioController extends Controller
         $usuarios = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
         return response()->json($usuarios);
     }
+
+
+    //Funcion para guardar fotografias
+    public function subirFoto(Request $request) {
+        if (!$request->hasFile('foto')) {
+            return response()->json(['success' => false, 'mensaje' => 'No se recibió imagen']);
+        }
+
+        $foto = $request->file('foto');
+
+        // Crear carpeta si no existe
+        $path = storage_path('app/public/assets/fotosUser/');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $usuari = Auth::user();
+
+        // Nombre único
+        //$nombreArchivo = 'foto_' . time() . '.' . $foto->getClientOriginalExtension();
+        $nombreArchivo = 'foto_' . $usuari->nombre . '.' . $foto->getClientOriginalExtension();
+
+        // Guardar en storage/app/public/assets/fotosUser
+        $foto->move($path, $nombreArchivo);
+
+        //Guardar usuario update de foto
+        try{
+            $usuari->img = $nombreArchivo;
+            $usuari->save();
+        }catch(Exception $e){
+            echo("error: " . $e);
+        }
+
+        return response()->json([
+            'success' => true,
+            'ruta' => '/storage/assets/fotosUser/' . $nombreArchivo
+        ]);
+    }
+
 }

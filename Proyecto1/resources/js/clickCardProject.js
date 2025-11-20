@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { 
             //Cojemos el id del contenedor de todos los proyectos prueba
             const contenedorAllProyectos = document.getElementById('contenedorTodosProyectos');
             //Buscamos el id de la card a seleccionar
