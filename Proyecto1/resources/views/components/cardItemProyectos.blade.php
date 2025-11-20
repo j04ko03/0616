@@ -17,7 +17,8 @@
     }
 @endphp 
 
-<div class="card-contenedor cardProyectoId" data-proyecto='@json($dataProyecto)'>
+
+<div class="card-contenedor cardProyectoId" data-id="{{ $project->id }}" data-proyecto='@json($dataProyecto)'>
     <div class="card-interior">
         <div class="card-cabecera">
             <div style="display: flex; justify-content: center">
