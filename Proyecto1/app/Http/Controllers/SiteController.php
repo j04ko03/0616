@@ -72,7 +72,9 @@ class SiteController extends Controller
         $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
         $usuarios = $proyecto->usuarios;
 
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios'));
+        $img = $user->img;
+
+        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
     }
 
     public function crearTareas(){
