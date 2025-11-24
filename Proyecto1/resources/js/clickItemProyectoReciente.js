@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
         pro.addEventListener('click', () => {
             const proyecto = JSON.parse(pro.dataset.projecte);
             console.log(proyecto);
-            window.location.href = `/ver-proyecto/${proyecto.id}`;
+            const url = pro.dataset.url;
+            console.log("----------------------------------------------------" . url);
+            //window.location.href = url;
         });
     });
 }); 
