@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
         pro.addEventListener('click', () => {
             const proyecto = JSON.parse(pro.dataset.projecte);
             console.log(proyecto);
-            const url = pro.dataset.url;
-            console.log("----------------------------------------------------" . url);
-            //window.location.href = url;
+            const idProyecto = proyecto.id;
+            const url = `/project/${idProyecto}`;
+            console.log('Redirecting to:', url);
+            window.location.href = "/0616/Proyecto1/public" + url;
         });
     });
 }); 
