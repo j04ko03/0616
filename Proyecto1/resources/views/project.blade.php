@@ -344,6 +344,16 @@
                     message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
                     popupBg.style.display = "flex";
                     formDeleteUserProject.style.display = "flex";
+
+                    const userId = document.querySelector("#user_id");
+
+                    if (userId) {
+                        userId.value = popupUser.dataset.id
+                    } else {
+                        const hiddenInput =
+                            `<input type="hidden" name="user_id" id="user_id" value="${popupUser.dataset.id}">`
+                        formDeleteUserProject.insertAdjacentHTML("beforeend", hiddenInput);
+                    }
                 }
             });
         });

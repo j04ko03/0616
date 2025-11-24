@@ -157,6 +157,14 @@ class ProyectosController extends Controller
     }
 
     public function removeUser(Request $request, Proyectos $project) {
+        $request->validate([
+            'user_id' => 'required|exists:Usuario,id'
+        ]);
 
+        $userId = $request->user_id;
+
+        $project->usuarios()->detach($userId);
+
+        return redirect()->back()->with('success', 'Usuario eliminado del proyecto correctamente');
     }
 }
