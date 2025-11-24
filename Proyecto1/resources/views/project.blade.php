@@ -234,6 +234,16 @@
                         <button type="submit">Eliminar</button>
                     </div>
                 </form>
+                <form action="{{ route('project.updateUserAdmin', $proyecto->id) }}" method="patch"
+                    id="update-user-admin">
+                    @method('patch')
+                    @csrf
+                    <p></p>
+                    <div>
+                        <button type="button">Cancelar</button>
+                        <button type="submit">Aceptar</button>
+                    </div>
+                </form>
             </div>
         @endif
 
@@ -329,16 +339,21 @@
         // DELETE USER FROM PROJECT
         const popupUserProject = document.querySelectorAll(".popup-edit-user");
         const formDeleteUserProject = document.getElementById("delete-user-project");
+        const formUpdateUserAdmin = document.getElementById("update-user-admin")
 
         popupUserProject.forEach((popupUser) => {
             popupUser.addEventListener("click", function(e) {
                 let clicked = e.target.closest(".user-admin");
-                if (!clicked) {
-                    clicked = e.target.closest(".delete-user");
-                }
 
                 if (clicked.classList.contains("user-admin")) {
                     popupBg.style.display = "flex";
+
+                    const message = formUpdateUserAdmin.querySelector("p");
+                    message.textContent = `¿Seguro que quiere hacer administrador a ${popupUser.dataset.nombre}?`;
+                    popupBg.style.display = "flex";
+                    formUpdateUserAdmin.style.display = "flex";
+
+                    
                 } else {
                     const message = formDeleteUserProject.querySelector("p");
                     message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;

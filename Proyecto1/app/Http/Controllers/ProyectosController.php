@@ -161,6 +161,11 @@ class ProyectosController extends Controller
             'user_id' => 'required|exists:Usuario,id'
         ]);
 
+        $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
+        if (!$authUserRole || $authUserRole->pivot->rol !== 'Administrador') {
+            return redirect()->back()->with('error', 'No tienes permisos para eliminar usuarios');
+        }
+
         $userId = $request->user_id;
 
         $project->usuarios()->detach($userId);
