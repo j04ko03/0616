@@ -27,7 +27,7 @@ main {
 }
 
 #select-container > a {
-    width: max-content;
+    max-width: fit-content;
     margin-top: auto;
     margin-bottom: auto;
 

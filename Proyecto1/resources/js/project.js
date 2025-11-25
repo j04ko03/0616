@@ -23,6 +23,9 @@ formAddUser.addEventListener("click", function (e) {
     e.stopPropagation();
 });
 
+// ADD GROUP POP-UP
+
+
 // POP-UP UPDATE-DELETE PROJECT
 const updateProjectBtn = document.getElementById("update-project");
 const popupQuitBtn = document.getElementById("quit-btn");

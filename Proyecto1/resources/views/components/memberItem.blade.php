@@ -34,7 +34,9 @@
 
     @if (Auth::user()->id != $id)
         <span class="popup-edit-user" data-id="{{ $id }}" data-nombre="{{ $nombre }}">
-            <p class="user-admin">Hacer administrador</p>
+            @if ($rol !== 'Administrador')
+                <p class="user-admin">Hacer administrador</p>
+            @endif
             <p class="delete-user">Eliminar usuario</p>
         </span>
     @endif
