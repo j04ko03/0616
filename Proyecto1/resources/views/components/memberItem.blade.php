@@ -4,7 +4,6 @@
     <div class="pfp">
         @php
             use Illuminate\Support\Facades\Storage;
-            $img = 'standarPerfil.png';
             $fotoPath = 'assets/fotosUser/' . $img;
         @endphp
 
