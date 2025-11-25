@@ -160,14 +160,14 @@ class ProyectosController extends Controller
     //Funcion para guardar fotografias
     public function subirFotoPro(Request $request) {
         info('Archivo recibido:', ['foto' => $request->file('foto'), 'idProyecto' => $request->idProyecto]);
-        
+
         if (!$request->hasFile('foto')) {
             return response()->json(['success' => false, 'mensaje' => 'No se recibió imagen']);
         }
 
         $foto = $request->file('foto');
         $idProyecto = $request->idProyecto;
-        
+
         // Crear carpeta si no existe
         $path = storage_path('app/public/assets/fotosPro/');
         if (!file_exists($path)) {
@@ -200,7 +200,7 @@ class ProyectosController extends Controller
 
     public function removeUser(Request $request, Proyectos $project) {
         $request->validate([
-            'user_id' => 'required|exists:Usuario,id'
+            'user_id_delete' => 'required|exists:Usuario,id'
         ]);
 
         $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
@@ -208,14 +208,35 @@ class ProyectosController extends Controller
             return redirect()->back()->with('error', 'No tienes permisos para eliminar usuarios');
         }
 
-        $userId = $request->user_id;
+        $userId = $request->user_id_delete;
 
         $project->usuarios()->detach($userId);
 
         return redirect()->back()->with('success', 'Usuario eliminado del proyecto correctamente');
     }
 
-    public function makeAdmin(Request $request, Proyectos $project) {
-        
+    public function updateUserAdmin(Request $request, Proyectos $project) {
+        $request->validate([
+            'user_id_admin' => 'required|exists:Usuario,id'
+        ]);
+
+        $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
+        if (!$authUserRole || $authUserRole->pivot->rol !== 'Administrador') {
+            return redirect()->back()->with('error', 'No tienes permisos para modificar roles de usuarios');
+        }
+
+        $userId = $request->user_id_admin;
+
+        $userInProject = $project->usuarios()->where('usuarioId', $userId)->first();
+
+        if ($userInProject->pivot->rol === 'Administrador') {
+            return redirect()->back()->with('info', 'El usuario ya es administrador');
+        }
+
+        $project->usuarios()->updateExistingPivot($userId, [
+            'rol' => 'Administrador'
+        ]);
+
+        return redirect()->back()->with('success', 'Usuario promovido a administrador correctamente');
     }
 }

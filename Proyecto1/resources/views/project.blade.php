@@ -233,7 +233,7 @@
                         <button type="submit">Eliminar</button>
                     </div>
                 </form>
-                <form action="{{ route('project.updateUserAdmin', $proyecto->id) }}" method="patch"
+                <form action="{{ route('project.updateUserAdmin', $proyecto->id) }}" method="post"
                     id="update-user-admin">
                     @method('patch')
                     @csrf

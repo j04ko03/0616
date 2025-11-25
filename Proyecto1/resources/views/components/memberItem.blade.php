@@ -7,10 +7,12 @@
             $fotoPath = 'assets/fotosUser/' . $img;
         @endphp
 
-        @if($img && Storage::disk('public')->exists($fotoPath))
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario" style="width: 100%; height: 100%; object-fit: contain;">                            
+        @if ($img && Storage::disk('public')->exists($fotoPath))
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario"
+                style="width: 100%; height: 100%; object-fit: contain;">
         @else
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto" style="width: 100%; height: 100%; object-fit: contain;">
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto"
+                style="width: 100%; height: 100%; object-fit: contain;">
         @endif
     </div>
     <div>
