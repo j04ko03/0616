@@ -12,7 +12,7 @@
 
             <form action="{{ route('createProject.controller') }}" method="POST" id="project">
                 @csrf
-                <a id="cerrarCrearProyecto" href="proyectos">X</a>
+                <a id="cerrarCrearProyecto" href="{{ route('home.controller') }}">X</a>
                 <label for="titulo"></label>
                 <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required maxlength="100">
                 <div>
@@ -58,4 +58,5 @@
         })
     </script>
     <script src="{{ url('/js/recuperarTareaSinProyecto.js') }}"></script>
+     <script src="{{ url('/js/noPerderinputsProyecto.js') }}"></script>
 @endsection
