@@ -172,4 +172,8 @@ class ProyectosController extends Controller
 
         return redirect()->back()->with('success', 'Usuario eliminado del proyecto correctamente');
     }
+
+    public function makeAdmin(Request $request, Proyectos $project) {
+        
+    }
 }
