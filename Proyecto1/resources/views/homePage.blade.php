@@ -154,5 +154,9 @@
     <script src="{{ url('/js/clickCardProject.js') }}"></script>
     <script src="{{ url('/js/clickItemProyectoReciente.js') }}"></script>
     <script src="{{ url('/js/clickItemTareaAsignada.js') }}"></script>
+    <script>
+        const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
+    </script>
+    <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
 
 @endsection

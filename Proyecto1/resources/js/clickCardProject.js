@@ -27,9 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 //Por la card obtenida (objeto independiente) haremos un evento click
-                card.addEventListener('click', () => {
+                card.addEventListener('click', (e) => {
                     //const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
-          
+                    e.stopPropagation()
+
                     console.log('Card clicked');
                     console.log(data);
 
