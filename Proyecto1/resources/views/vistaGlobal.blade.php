@@ -157,7 +157,7 @@
             </div>
             <div class="tabs-content content-section-5" style="height: 100%;" class="contenedorScroll">
                 @foreach ($incidencias as $incidencia)
-                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}"/>
+                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}" id="{{ $incidencia->id }}"/>
                 @endforeach
             </div>
         </div>
@@ -214,4 +214,5 @@
         const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
     </script>
     <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
+    <script src="{{ url('/js/clickIncidencia.js') }}"></script>
 @endsection
