@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         //imagenProyecto.src = srcOriginal + '?t=' + new Date().getTime(); // añade timestamp para forzar recarga
                         window.location.reload();
                         console.log("Página recargada para actualizar imagen.");
-                    }, 3000);
+                    }, 2000);
 
                 } else {
                     alert("Error al subir la foto: " + data.mensaje);

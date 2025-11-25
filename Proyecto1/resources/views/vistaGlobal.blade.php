@@ -210,4 +210,8 @@
     <script src="{{ url('/js/añadirUsuario.js') }}"></script>
     <script src="{{ url('/js/añadirUsuarioEdit.js') }}"></script>
     <script src="{{ url('/js/rellenarListaUsuariosEditar.js') }}"></script>
+    <script>
+        const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
+    </script>
+    <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
 @endsection

@@ -24,7 +24,7 @@
             <div style="display: flex; justify-content: center">
                 <div class="contenedorFotoProyecto" style="max-height: 90px; width: 90px; 
                 display: flex; flex-wrap: wrap; justify-content: space-between; align-content: end; 
-                align-items: center; border: 1px solid blue; width: 100%; height: %; border: 1px solid red; justify-items: end; position: relative;">
+                align-items: center; width: 100%; justify-items: end; position: relative;">
                     <!-- Imagen del proyecto -->
                     <img src="{{ $project->img ? asset('storage/assets/fotosPro/' . $project->img) : asset('storage/assets/fotosPro/proyectodefault.jpg') }}" alt="Imagen Proyecto" class="imagen-proyecto">
 
