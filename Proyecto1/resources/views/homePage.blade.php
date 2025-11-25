@@ -141,8 +141,8 @@
                             @endforeach
                     </div>
 
-                </div>             
-                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0;">
+                </div>           
+                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0; border: 1px solid red;">
                     <img id="imagen" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
                 </div>
             </div>

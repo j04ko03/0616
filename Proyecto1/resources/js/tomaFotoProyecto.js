@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cuando el usuario selecciona una foto
         uploadFile.addEventListener('change', e => {
+            e.stopPropagation();
             const file = e.target.files[0];
             if (!file) return;
 
