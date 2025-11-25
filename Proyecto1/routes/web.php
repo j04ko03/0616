@@ -26,12 +26,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [SiteController::class, 'home'])->name('home.controller');
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 
+    // Rutas project
     Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
     Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller');
     Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
     Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
     Route::post('/project/{project}/users', [ProyectosController::class, 'addUser'])->name('project.addUser');
+    Route::delete('/project/{project}/users', [ProyectosController::class, 'removeUser'])->name('project.removeUser');
+    Route::patch('/project/{project}/users', [ProyectosController::class, 'updateUserAdmin'])->name('project.updateUserAdmin');
 
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
@@ -54,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
 
-    
+
     Route::resource('solicitudes', SolicitudController::class);
 
     Route::resource('incidencias', IncidenciaController::class);
