@@ -17,23 +17,25 @@
     }
 @endphp 
 
-<div class="card-contenedor cardProyectoId" data-proyecto='@json($dataProyecto)'>
+
+<div class="card-contenedor cardProyectoId" data-id="{{ $project->id }}" data-proyecto='@json($dataProyecto)'>
     <div class="card-interior">
         <div class="card-cabecera">
             <div style="display: flex; justify-content: center">
-                <div style="height: 90px; width: 90px; 
-                display: flex; flex-wrap: wrap; justify-content: space-between; 
-                align-items: center;">
-                    <!-- Iconos -->
-                    <div style="flex: 1; margin: 0.5px; align-items: center">
-                        <img src="../storage/assets/icons/NOajustes.svg" alt="" style="width: 100%; height: 100%;">
-                    </div>
-                    <div style="flex: 1; margin: 0.5px; margin: 0 5px; align-items: center">
-                        <img src="../storage/assets/icons/NOhome.svg" alt="" style="width: 100%; height: 100%;">
-                    </div>
-                    <div style="flex: 1; margin: 0.5px; margin: 0 5px; align-items: center">
-                        <img src="../storage/assets/icons/NOReports.svg" alt="" style="width: 100%; height: 100%;">
-                    </div>
+                <div class="contenedorFotoProyecto" style="max-height: 90px; width: 90px; 
+                display: flex; flex-wrap: wrap; justify-content: space-between; align-content: end; 
+                align-items: center; width: 100%; justify-items: end; position: relative;">
+                    <!-- Imagen del proyecto -->
+                    <img src="{{ $project->img ? asset('storage/assets/fotosPro/' . $project->img) : asset('storage/assets/fotosPro/proyectodefault.jpg') }}" alt="Imagen Proyecto" class="imagen-proyecto">
+
+                    <!-- Icono de captura -->
+                    <img src="../storage/assets/icons/capturar.png" 
+                        class="capturaProyecto" 
+                        alt="Capturar" 
+                        style="position: absolute; top: 5px; right: 5px; width: 30px; height: 30px; cursor: pointer; z-index: 10;">
+                        
+                    <!-- Input oculto -->
+                    <input type="file" class="subirArchivo" accept="image/png, image/jpeg, image/jpg" style="display: none;">
                 </div>
             </div>
         </div>
@@ -83,3 +85,4 @@
 </div>
 
 <script src="{{ url('/js/fillCardItemProyectos.js') }}"></script>
+

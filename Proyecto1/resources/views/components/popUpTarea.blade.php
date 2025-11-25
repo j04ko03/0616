@@ -76,5 +76,4 @@
 </div>
 
 <script src="{{ url('/js/mostarUsuarios.js') }}"></script>
-<script src="{{ url('/js/mostarUsuarios.js') }}"></script>
 <script src="{{ url('/js/abrirPopUpTarea.js') }}"></script>

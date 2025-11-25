@@ -28,7 +28,7 @@
             @else
                 <div class="gridCards">
                     @foreach ($proyectosRecientes as $proyecto)
-                        <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}"/>
+                        <x-cardItemReciente titulo="{{ $proyecto['titulo'] }}" descripcion="{{ $proyecto['descripcion'] }}" :project="$proyecto" :data-projecte="$proyecto"/>
                     @endforeach
                 </div>
             @endif
@@ -49,6 +49,8 @@
                             descripcion="{{ $tarea['descripcion'] }}"
                             id="{{ $tarea['id'] }}"
                             :tag="$tarea['tags']"
+                            :data-tarea="$tarea"
+                            :data-url="route('verTarea.controller', $tarea->id)"
                         />
                         @endforeach
                     </div>
@@ -139,8 +141,8 @@
                             @endforeach
                     </div>
 
-                </div>             
-                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0;">
+                </div>           
+                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0; border: 1px solid red;">
                     <img id="imagen" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
                 </div>
             </div>
@@ -152,5 +154,9 @@
     <script src="{{ url('/js/clickCardProject.js') }}"></script>
     <script src="{{ url('/js/clickItemProyectoReciente.js') }}"></script>
     <script src="{{ url('/js/clickItemTareaAsignada.js') }}"></script>
+    <script>
+        const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
+    </script>
+    <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
 
 @endsection

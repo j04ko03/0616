@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
     Route::post('/perfil/subir-foto', [UsuarioController::class, 'subirFoto'])->name('perfil-subir-foto.controller');
+    Route::post('/proyecto/subir-foto', [ProyectosController::class, 'subirFotoPro'])->name('proyecto-subir-foto.controller');
     Route::get('/usuarios/lista', [UsuarioController::class, 'listaUsuarios'])->name('usuarios.lista');
 
     // CRUD de proyectos y tareas
@@ -57,6 +58,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('solicitudes', SolicitudController::class);
 
     Route::resource('incidencias', IncidenciaController::class);
+
+    //Nuevas rutas ver tareas y proyectos
+    Route::get('/ver-proyecto/{idProyecto}', [SiteController::class, 'verProyecto'])->name('verProyecto.controller');
+    Route::get('/ver-tarea/{idTarea}', [SiteController::class, 'verTarea'])->name('verTarea.controller');
 });
 
 // Rutas solo para rol SuperAdministrador y Administrador (0, 1).

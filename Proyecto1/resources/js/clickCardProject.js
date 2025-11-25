@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 //Por la card obtenida (objeto independiente) haremos un evento click
-                card.addEventListener('click', () => {
+                card.addEventListener('click', (e) => {
                     //const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
-          
+                    e.stopPropagation()
+
                     console.log('Card clicked');
                     console.log(data);
 
                     //Cambio estado de proyecto en el hidde
+                    console.log('Fetching project details for ID:', data.estadoId);
                     contenedroCerrar.style.backgroundColor = administrarColorProyecto(data.estadoId);
                     
                     const titulo = document.getElementById('tituloProyecto');
@@ -91,13 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
             function administrarColorProyecto(color){
                 let colorDevuelto;
                 switch(color){
-                    case "1":
+                    case 1:
                         colorDevuelto = "red";
                         break;
-                    case "2":
+                    case 2:
                         colorDevuelto = "yellow";
                         break;
-                    case "3":
+                    case 3:
                         colorDevuelto = "green";
                         break;
                     default:

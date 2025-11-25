@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Container\Attributes\DB;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class ProyectosController extends Controller
 {
@@ -155,4 +156,45 @@ class ProyectosController extends Controller
 
         return $response;
     }
+
+    //Funcion para guardar fotografias
+    public function subirFotoPro(Request $request) {
+        info('Archivo recibido:', ['foto' => $request->file('foto'), 'idProyecto' => $request->idProyecto]);
+        
+        if (!$request->hasFile('foto')) {
+            return response()->json(['success' => false, 'mensaje' => 'No se recibió imagen']);
+        }
+
+        $foto = $request->file('foto');
+        $idProyecto = $request->idProyecto;
+        
+        // Crear carpeta si no existe
+        $path = storage_path('app/public/assets/fotosPro/');
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $proyectoA = Proyectos::find($idProyecto);
+
+        // Nombre único
+        //$nombreArchivo = 'foto_' . time() . '.' . $foto->getClientOriginalExtension();
+        $nombreArchivo = 'foto_' . $proyectoA->nombre . $idProyecto . '.' . $foto->getClientOriginalExtension();
+
+        // Guardar en storage/app/public/assets/fotosUser
+        $foto->move($path, $nombreArchivo);
+
+        //Guardar usuario update de foto
+        try{
+            $proyectoA->img = $nombreArchivo;
+            $proyectoA->save();
+        }catch(Exception $e){
+            echo("error: " . $e);
+        }
+
+        return response()->json([
+            'success' => true,
+            'ruta' => '/storage/assets/fotosPro/' . $nombreArchivo
+        ]);
+    }
+
 }

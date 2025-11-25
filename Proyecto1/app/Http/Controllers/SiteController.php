@@ -72,7 +72,9 @@ class SiteController extends Controller
         $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
         $usuarios = $proyecto->usuarios;
 
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios'));
+        $img = $user->img;
+
+        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
     }
 
     public function crearTareas(){
@@ -91,4 +93,18 @@ class SiteController extends Controller
         $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
+
+    public function verTarea($id)
+    {
+        $tarea = Tarea::findOrFail($id);
+        $usuarios = Usuario::all();
+        return view('components.popUpTarea', compact('tarea', 'usuarios'));
+    }
+
+        public function verProyecto($id)
+    {
+        $proyecto = Proyectos::findOrFail($id);
+        return view('#', compact('proyecto'));
+    }
+
 }

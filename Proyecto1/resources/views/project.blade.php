@@ -144,12 +144,12 @@
                             @if ($user && $userProject->pivot->rol === 'Administrador')
                                 @foreach ($proyecto->usuarios as $usuario)
                                     <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
-                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto" />
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto" img="{{ $img }}" />
                                 @endforeach
                             @else
                                 @foreach ($proyecto->usuarios as $usuario)
                                     <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="none" />
+                                        email="{{ $usuario->email }}" style="none" img="{{ $img }}"/>
                                 @endforeach
                             @endif
                         </div>

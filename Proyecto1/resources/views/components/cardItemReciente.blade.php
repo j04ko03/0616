@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="{{ url('/css/cardItem.css') }}">
 
-@props(['titulo', 'descripcion' => '', 'type' => '0'])
+@props(['titulo', 'descripcion' => '', 'type' => '0', 'dataProjecte' => null])
+
 
 <!--<div class="bg-white shadow-md rounded-xl p-4 hover:shadow-lg transition cursor-pointer">-->
-<div class="card-cabecera">
+<div class="cardProjectCabecera card-cabecera" data-projecte='@json($dataProjecte)'> 
     @if ($type === "1")
         <h2 class="titulo" style="margin-left: 3%">{{ $titulo }}</h2>
         <p class="texto-cortado">{{ $descripcion }}</p>

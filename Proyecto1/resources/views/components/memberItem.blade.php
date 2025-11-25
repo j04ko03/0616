@@ -8,9 +8,9 @@
         @endphp
 
         @if($img && Storage::disk('public')->exists($fotoPath))
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario">                            
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario" style="width: 100%; height: 100%; object-fit: contain;">                            
         @else
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto">
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto" style="width: 100%; height: 100%; object-fit: contain;">
         @endif
     </div>
     <div>
