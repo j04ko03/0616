@@ -27,8 +27,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/proyectos', [SiteController::class, 'proyectos'])->name('proyectos.controller');
 
     // Rutas project
-    Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller');
-    Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller');
+    Route::get('/crear-proyecto', [SiteController::class, 'crearProyecto'])->name('crearProyecto.controller'); // Formulario para crear proyecto
+    Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller'); // Guardar proyecto
     Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
     Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
@@ -36,10 +36,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/project/{project}/users', [ProyectosController::class, 'removeUser'])->name('project.removeUser');
     Route::patch('/project/{project}/users', [ProyectosController::class, 'updateUserAdmin'])->name('project.updateUserAdmin');
 
-    Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
-    Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
-    Route::resource('tareas', TareaController::class); // Tiene el edit y update
-    Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
+    Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller'); // Formulario para añadir tarea
+    Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); // Guardar tarea
+    Route::resource('tareas', TareaController::class); // Tiene el edit y update // Formulario para editar tarea y guardar cambios
+    Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller'); // Vista de todas las tareas
 
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
@@ -49,7 +49,7 @@ Route::middleware(['auth'])->group(function () {
 
     // CRUD de proyectos y tareas
     Route::resource('showProjects', ProyectosController::class);
-    Route::resource('tasks', TareaController::class);
+    Route::resource('tasks', TareaController::class); // Tiene el edit y update // Formulario para editar tarea y guardar cambios
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');
 
     // Rutas para editar perfil.
@@ -64,14 +64,14 @@ Route::middleware(['auth'])->group(function () {
 
     //Nuevas rutas ver tareas y proyectos
     Route::get('/ver-proyecto/{idProyecto}', [SiteController::class, 'verProyecto'])->name('verProyecto.controller');
-    Route::get('/ver-tarea/{idTarea}', [SiteController::class, 'verTarea'])->name('verTarea.controller');
+    Route::get('/ver-tarea/{idTarea}', [SiteController::class, 'verTarea'])->name('verTarea.controller'); // Vista de una tarea en concreto 
 });
 
 // Rutas solo para rol SuperAdministrador y Administrador (0, 1).
-Route::middleware(['auth', 'rol:0,1'])->group(function () {
+Route::middleware(['auth', 'rol: 0, 1'])->group(function () {
     Route::get('/vista-global', [SiteController::class, 'vistaGlobal'])->name('vistaGlobal.controller');
 
-    // Rutas de administración de usuarios (solo SuperAdministrador (0)).
+    // Rutas de administración de usuarios (solo SuperAdministrador (0)).                                                               // TODO: Hacer middleware para solo SuperAdministrador
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
@@ -81,6 +81,7 @@ Route::middleware(['auth', 'rol:0,1'])->group(function () {
     Route::post('/grupos', [GrupoController::class, 'store'])->name('grupos.store');
     Route::resource('grupos', GrupoController::class);
 
+    // Ruta para borrar solicitud y actualizar usuario
     Route::post('/solicitudes/{solicitude}', [SolicitudController::class, 'borrarSolicitudActualizarUser'])->name('solicitudes.borrarSolicitudActualizarUser');
 });
 

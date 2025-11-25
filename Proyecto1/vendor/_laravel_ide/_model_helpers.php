@@ -939,6 +939,7 @@ namespace App\Models {
     /**
      * App\Models\Proyectos
      *
+     * @property string|null $img
      * @property int|null $idSprint
      * @property string|null $linkProyecto
      * @property decimal:2|null $presupuesto
@@ -972,6 +973,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos wherePresupuesto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereLinkproyecto($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereIdsprint($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos whereImg($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Proyectos>|Proyectos query()
@@ -2207,6 +2209,7 @@ namespace App\Models {
     /**
      * App\Models\Tarea
      *
+     * @property string|null $fechaModificacion
      * @property string|null $fechaEntrega
      * @property int|null $idSprint
      * @property mixed $isDeleted
@@ -2233,6 +2236,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereIsdeleted($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereIdsprint($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereFechaentrega($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea whereFechamodificacion($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<Tarea>|Tarea query()
