@@ -246,11 +246,16 @@
             </div>
         @endif
 
+        {{-- POPUP CON EL CRUD DE TAREAS --}}
+        <x-task-popup :proyecto="$proyecto" />
+
 
     </body>
 
     @include('components.popUpTarea')
 
+    
+    <script src="{{ url('/js/taskPopup.js') }}"></script>  {{-- Script con abrir, cerrar, update del popup de tareas --}}
     <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
     <script src="{{ url('/js/memberItem.js') }}"></script>
