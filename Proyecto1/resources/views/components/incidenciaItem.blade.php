@@ -10,6 +10,12 @@
         </div>
     </div>
     <div style="width: 10%; height: 10%;">
-        <img id="papelera" class="papelera" src="../storage/assets/icons/papelera.png" alt="foto papelera" style="width: 25%; object-fit: contain">
+        <form action="{{ route('incidencias.destroy', $id) }}" method="POST" class="delete-incidencia-form">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="papelera" style="background:none; border:none; cursor:pointer;">
+                <img src="../storage/assets/icons/papelera.png" alt="foto papelera" style="width: 25%; object-fit: contain;">
+            </button>
+        </form>
     </div>
  </div>

@@ -69,6 +69,8 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-        //
+        $incidencia->delete();
+
+        return redirect()->route('vistaGlobal.controller');
     }
 }

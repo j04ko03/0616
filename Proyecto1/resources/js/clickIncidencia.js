@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Eliminar incidencia con ID:', incidenciaId);
             
-        });
+        }); 
     });
 
 });

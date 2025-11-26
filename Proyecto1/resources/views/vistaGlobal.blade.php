@@ -157,7 +157,7 @@
             </div>
             <div class="tabs-content content-section-5" style="height: 100%;" class="contenedorScroll">
                 @foreach ($incidencias as $incidencia)
-                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}" id="{{ $incidencia->id }}"/>
+                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}" id="{{ $incidencia->idIncidencia }}"/>
                 @endforeach
             </div>
         </div>
