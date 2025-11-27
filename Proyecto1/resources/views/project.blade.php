@@ -7,8 +7,7 @@
 
 @section('content')
 
-    <body>
-        <main>
+    <div style="height: 850px; border: 1px solid red">
             <div id="select-container">
                 <select name="projects" id="projects">
                     @foreach ($projects as $project)
@@ -157,7 +156,7 @@
                         </div>
                     </div>
                 </div>
-        </main>
+        
 
         @if ($user && $userProject->pivot->rol === 'Administrador')
             <div id="popup-bg">
@@ -249,7 +248,7 @@
         @endif
 
 
-    </body>
+        </div>
 
     @include('components.popUpTarea')
 

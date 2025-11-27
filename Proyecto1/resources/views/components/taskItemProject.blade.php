@@ -1,8 +1,5 @@
 <link rel="stylesheet" href="{{ url('/css/taskItemProject.css') }}">
 
-@php
- @dd($sprint);   
-@endphp
 
 
 <div class="task-card filter-sprint" data-sprint="{{ $sprint }}">
