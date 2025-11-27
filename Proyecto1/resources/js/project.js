@@ -25,7 +25,6 @@ formAddUser.addEventListener("click", function (e) {
 
 // ADD GROUP POP-UP
 
-
 // POP-UP UPDATE-DELETE PROJECT
 const updateProjectBtn = document.getElementById("update-project");
 const popupQuitBtn = document.getElementById("quit-btn");
@@ -125,6 +124,19 @@ popupUserProject.forEach((popupUser) => {
             }
         }
     });
+});
+
+const cancelBtnUpdateUser = document.getElementById("cancel-update-user-admin");
+const cancelBtnRemoveUser = document.getElementById("cancel-remove-user");
+
+cancelBtnUpdateUser.addEventListener("click", function () {
+    formUpdateUserAdmin.style.display = "none";
+    popupBg.style.display = "none";
+});
+
+cancelBtnRemoveUser.addEventListener("click", function () {
+    formDeleteUserProject.style.display = "none";
+    popupBg.style.display = "none";
 });
 
 formDeleteUserProject.addEventListener("click", function (e) {

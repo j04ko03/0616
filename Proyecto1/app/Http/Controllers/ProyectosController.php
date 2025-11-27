@@ -75,7 +75,7 @@ class ProyectosController extends Controller
                     'fechaEntrega' => $tareaData['fechaLimite'] ?? null,
                     'estadoId' => $tareaData['estado'] ?? 1,
                     'proyectoId' => $project->id,
-                    'responsableId' => 10,
+                    'responsableId' => Auth::id(),
                     'isDeleted' => false,
                     'idSprint' => 2
                 ]);

@@ -144,12 +144,14 @@
                             @if ($user && $userProject->pivot->rol === 'Administrador')
                                 @foreach ($proyecto->usuarios as $usuario)
                                     <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
-                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto" img="{{ $img }}" />
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto"
+                                        img="{{ $img }}" />
                                 @endforeach
                             @else
                                 @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="none" img="{{ $img }}"/>
+                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
+                                        img="{{ $img }}" />
                                 @endforeach
                             @endif
                         </div>
@@ -229,7 +231,7 @@
                     @csrf
                     <p></p>
                     <div>
-                        <button type="button">Cancelar</button>
+                        <button type="button" id="cancel-remove-user">Cancelar</button>
                         <button type="submit">Eliminar</button>
                     </div>
                 </form>
@@ -239,7 +241,7 @@
                     @csrf
                     <p></p>
                     <div>
-                        <button type="button">Cancelar</button>
+                        <button type="button" id="cancel-update-user-admin">Cancelar</button>
                         <button type="submit">Aceptar</button>
                     </div>
                 </form>
