@@ -110,7 +110,7 @@
                             @endphp
                             
                             
-                            @if(Auth::user()->tipoUser === "2" || !$isSolicited)
+                            @if(Auth::user()->tipoUser === 2 && !$isSolicited)
                                     <div style="height: 25%; align-content: center; justify-content: center">
                                         <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
                                     </div>
