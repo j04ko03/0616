@@ -77,7 +77,7 @@ class GrupoController extends Controller
         ]);
         $grupo->descripcion = $request->tituloGrupoEdit;
         $grupo->save();
-
+        
         // Actualizar usuarios asociados
         $grupo->usuarios()->sync($request->usuarios ?? []);  //Usamos el sync para que no de error. Esto hace que reemplaza todas las relaciones actuales con las que pases. Como podemos borrar usuarios es lo mas util
         return redirect()->route('vistaGlobal.controller')->with('success', 'Grupo modificado correctamente.');
