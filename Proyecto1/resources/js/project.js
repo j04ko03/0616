@@ -1,3 +1,7 @@
+// MINIMUM TODAY
+const today = new Date().toISOString().split("T")[0];
+document.querySelector("#fecha-limite").min = today;
+
 // REDIRECT TO NEW URL WITH PROJECT ID
 document.getElementById("projects").addEventListener("change", function (e) {
     window.location = `${e.target.value}`;
