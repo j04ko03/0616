@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="{{ url('/css/taskItemProject.css') }}">
 
 @php
- @dd($sprint);   
+//  @dd($sprint);   
 @endphp
 
 

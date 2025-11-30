@@ -144,12 +144,14 @@
                             @if ($user && $userProject->pivot->rol === 'Administrador')
                                 @foreach ($proyecto->usuarios as $usuario)
                                     <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
-                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto" img="{{ $img }}" />
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto"
+                                        img="{{ $img }}" />
                                 @endforeach
                             @else
                                 @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
-                                        email="{{ $usuario->email }}" style="none" img="{{ $img }}"/>
+                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
+                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
+                                        img="{{ $img }}" />
                                 @endforeach
                             @endif
                         </div>
@@ -252,13 +254,26 @@
 
     </body>
 
-    @include('components.popUpTarea')
+    @include('components.popUpTarea', ['proyecto' => $proyecto, 'tarea' => $tareaSeleccionada ?? null])
 
+
+    @if (isset($tareaSeleccionada) && $tareaSeleccionada !== null)
+        <script>
+            // Abrir popup automáticamente si hay tarea seleccionada
+            document.addEventListener('DOMContentLoaded', function() {
+                const popup = document.getElementById('taskPopup');
+                if (popup) {
+                    popup.style.display = 'flex';
+                }
+            });
+        </script>
+    @endif
     
-    <script src="{{ url('/js/taskPopup.js') }}"></script>  {{-- Script con abrir, cerrar, update del popup de tareas --}}
+    <script src="{{ url('/js/taskPopup.js') }}"></script> {{-- Script con abrir, cerrar, update del popup de tareas --}}
     <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
     <script src="{{ url('/js/popUpTarea.js') }}"></script>
     <script src="{{ url('/js/memberItem.js') }}"></script>
     <script src="{{ url('/js/filterSprintProject.js') }}"></script>
     <script src="{{ url('/js/project.js') }}"></script>
+
 @endsection

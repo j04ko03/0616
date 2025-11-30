@@ -1,20 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Tag;
-use App\Models\User;
-use App\Models\Grupo;
-use App\Models\Tarea;
 use App\Models\Estado;
-use App\Models\Sprint;
-use App\Models\Usuario;
+use App\Models\Grupo;
+use App\Models\Incidencia;
 use App\Models\Proyectos;
 use App\Models\Solicitud;
-use App\Models\Incidencia;
-use Illuminate\Http\Request;
+use App\Models\Sprint;
+use App\Models\Tag;
+use App\Models\Tarea;
+use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
@@ -47,9 +44,9 @@ class SiteController extends Controller
 
         return view('homePage')->with([
             'proyectosRecientes' => $proyectosRecientes,
-            'proyectosTotal' => $proyectosTotal,
-            'tareasAsignadas' => $tareasAsignadas,
-            'usuario' => $usuario
+            'proyectosTotal'     => $proyectosTotal,
+            'tareasAsignadas'    => $tareasAsignadas,
+            'usuario'            => $usuario,
         ]);
     }
 
@@ -66,42 +63,61 @@ class SiteController extends Controller
 
     public function project($idProyecto)
     {
-        $projects = Auth::user()->proyectos;
-        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
-        $user = Auth::user();
+        $projects    = Auth::user()->proyectos;
+        $proyecto    = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
+        $user        = Auth::user();
         $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-        $usuarios = $proyecto->usuarios;
+        $usuarios    = $proyecto->usuarios;
+        $img         = $user->img;
 
-        $img = $user->img;
-
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
+        $tareaId = request()->route('tareaId');
+        $tareaSeleccionada = null;
+    if ($tareaId) {
+        $tareaSeleccionada = Tarea::with(['usuarios', 'tags', 'estado', 'responsable', 'sprint'])
+            ->where('id', $tareaId)
+            ->where('proyectoId', $idProyecto)
+            ->firstOrFail();
     }
 
-    public function crearTareas(){
-        $estados = Estado::all();
-        $sprints = Sprint::all();
-        $tags = Tag::all();
+        return view('project', compact(
+            'proyecto',
+            'projects',
+            'idProyecto',
+            'user',
+            'userProject',
+            'usuarios',
+            'img',
+            'tareaSeleccionada' 
+        ));
+    }
+
+    public function crearTareas()
+    {
+        $estados  = Estado::all();
+        $sprints  = Sprint::all();
+        $tags     = Tag::all();
         $usuarios = Usuario::all();
         return view('crearTareas', compact('estados', 'sprints', 'tags', 'usuarios'));
     }
 
-    public function vistaGlobal(){
-        $grupos = Grupo::with('usuarios')->get();
+    public function vistaGlobal()
+    {
+        $grupos      = Grupo::with('usuarios')->get();
         $incidencias = Incidencia::with('usuario')->get();
         $solicitudes = Solicitud::with('usuario')->get();
-        $usuarios = Usuario::all();
-        $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
+        $usuarios    = Usuario::all();
+        $proyectos   = Proyectos::with(['tareas.tags', 'administrador'])->get();
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
     public function verTarea($id)
     {
-        $tarea = Tarea::findOrFail($id);
+        $tarea    = Tarea::findOrFail($id);
         $usuarios = Usuario::all();
         return view('components.popUpTarea', compact('tarea', 'usuarios'));
     }
 
-        public function verProyecto($id)
+    public function verProyecto($id)
     {
         $proyecto = Proyectos::findOrFail($id);
         return view('#', compact('proyecto'));
