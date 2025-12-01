@@ -9,12 +9,14 @@ use App\Models\Tarea;
 use App\Models\Estado;
 use App\Models\Sprint;
 use App\Models\Usuario;
+use App\Clases\Utilitat;
 use App\Models\Proyectos;
 use App\Models\Solicitud;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
 
 //Se usan los nombres de los archivos blade.php tal como están en resources/views
 class SiteController extends Controller
@@ -27,23 +29,25 @@ class SiteController extends Controller
 
     public function home()
     {
-        //$usuario = Usuario::find(2);
-        $usuario = Auth::user();
+        
+        try{
+            $usuario = Auth::user();
 
-        $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
-            ->take(6)
-            ->get();
+            $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
+                ->take(6)
+                ->get();
 
-        $proyectosTotal = $usuario->proyectos()
-            ->with(['tareas.tags', 'administrador']) // carga tareas y tags dentro de cada tarea
-            ->get();
+            $proyectosTotal = $usuario->proyectos()
+                ->with(['tareas.tags', 'administrador']) // carga tareas y tags dentro de cada tarea
+                ->get();
 
-        $tareasAsignadas = Tarea::with('tags') // Carga las etiquetas de cada tarea
-            ->whereIn('proyectoid', $usuario->proyectos->pluck('id'))
-            ->get();
-        //$usuario->proyectos --> Obtiene sus proyectos --> en Usuario tener la relacion de proyectos con belongsToMany
-        //->pluck('id') --> Saca los IDs
-        //Tarea::with('tags') --> Busca tareas con esos IDs de proyecto --> en tarea tener la relación de tags con belongsToMany
+            $tareasAsignadas = Tarea::with('tags') // Carga las etiquetas de cada tarea
+                ->whereIn('proyectoid', $usuario->proyectos->pluck('id'))//->pluck('id') --> Saca los I
+                ->get();
+            session()->flash('error', '$missatge');
+        }catch (QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+        }
 
         return view('homePage')->with([
             'proyectosRecientes' => $proyectosRecientes,
