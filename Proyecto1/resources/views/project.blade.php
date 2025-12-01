@@ -6,158 +6,174 @@
 @endpush
 
 @section('content')
+    @if (session('success'))
+        <div class="alert-project alert-project-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <body>
-        <main>
-            <div id="select-container">
-                <select name="projects" id="projects">
-                    @foreach ($projects as $project)
-                        @if ($project->isDeleted == false)
-                            <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
-                                {{ $project->titulo }}</option>
-                        @endif
-                    @endforeach
-                </select>
-                <a href="{{ $proyecto->linkProyecto }}" target="_blank">{{ $proyecto->linkProyecto }}</a>
-                @if ($user && $userProject->pivot->rol === 'Administrador')
-                    <button id="update-project">Modificar proyecto</button>
-                @endif
-            </div>
-            <div type="button" id="boton">
-                <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
-            </div>
-            <div id="tab-container">
-                <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
-                <button class="tabs-btn" data-tab="2">Product Backlog</button>
-                <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
-                <button class="tabs-btn" data-tab="4">Integrantes</button>
-                <select name="sprints" id="sprints">
-                    @foreach ($proyecto->sprints as $sprint)
-                        <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
+    @if (session('error'))
+        <div class="alert-project alert-project-error">
+            {{ session('error') }}
+        </div>
+    @endif
 
-                            {{ $sprint->descripcion }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <div class="tabs-content content-section-1 content-active">
-                    <div class="kanban-task-container">
-                        <h3>TO DO</h3>
-                        <div class="task-container">
-                            @foreach ($proyecto->tareas as $tarea)
-                                @php
-                                    $asignados = $tarea->usuarios;
-                                @endphp
-                                @if ($tarea->estadoId == 1 && $tarea->usuarios->contains(Auth::user()->id))
-                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>IN PROGRESS</h3>
-                        <div class="task-container">
-                            @foreach ($proyecto->tareas as $tarea)
-                                @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
-                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="kanban-task-container">
-                        <h3>DONE</h3>
-                        <div class="task-container">
-                            @foreach ($proyecto->tareas as $tarea)
-                                @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
-                                    <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
-                                        descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
-                                        :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+    @if (session('info'))
+        <div class="alert-project alert-project-info">
+            {{ session('info') }}
+        </div>
+    @endif
 
-                <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
-                <div class="tabs-content content-section-2">
-                    <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
-                    <div class="backlog">
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Responsable</span>
-                            <span class="asignado-tarea">Asignado</span>
-                            <span class="fecha-entrega">Fecha Entrega</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
+    <div id="main">
+        <div id="select-container">
+            <select name="projects" id="projects">
+                @foreach ($projects as $project)
+                    @if ($project->isDeleted == false)
+                        <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
+                            {{ $project->titulo }}</option>
+                    @endif
+                @endforeach
+            </select>
+            <a href="{{ $proyecto->linkProyecto }}" target="_blank">{{ $proyecto->linkProyecto }}</a>
+            @if ($user && $userProject->pivot->rol === 'Administrador')
+                <button id="update-project">Modificar proyecto</button>
+            @endif
+        </div>
+        <div type="button" id="boton">
+            <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
+        </div>
+        <div id="tab-container">
+            <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
+            <button class="tabs-btn" data-tab="2">Product Backlog</button>
+            <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
+            <button class="tabs-btn" data-tab="4">Integrantes</button>
+            <select name="sprints" id="sprints">
+                @foreach ($proyecto->sprints as $sprint)
+                    <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
+
+                        {{ $sprint->descripcion }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+        <div>
+            <div class="tabs-content content-section-1 content-active">
+                <div class="kanban-task-container">
+                    <h3>TO DO</h3>
+                    <div class="task-container">
                         @foreach ($proyecto->tareas as $tarea)
                             @php
                                 $asignados = $tarea->usuarios;
                             @endphp
-                            <x-backlogItem dataset="" :titulo="$tarea->titulo" class="" :descripcion="$tarea->descripcion"
-                                :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
-                                :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
-                        @endforeach
-                    </div>
-                </div>
-                <div class="tabs-content content-section-3">
-                    <div class="backlog">
-                        <div class="task-backlog">
-                            <span class="titulo-tarea">Titulo</span>
-                            <span class="descripcion-tarea">Descripcion</span>
-                            <span class="sprint-tarea">Sprint</span>
-                            <span class="tag-tarea">Tags</span>
-                            <span class="responsable-tarea">Responsable</span>
-                            <span class="responsable-tarea">Asignado</span>
-                            <span class="fecha-entrega">Fecha Entrega</span>
-                            <span class="estado-tarea">Estado</span>
-                        </div>
-                        @foreach ($proyecto->tareas as $tarea)
-                            @php
-                                $asignados = $tarea->usuarios;
-                            @endphp
-
-                            <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog" :descripcion="$tarea->descripcion"
-                                :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
-                                :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="tabs-content content-section-4">
-                    <div id="integrantes">
-                        @if ($user && $userProject->pivot->rol === 'Administrador')
-                            <div class="add-to-project-container">
-                                <button id="add-user" class="add-btn">Añadir miembro</button>
-                                <button id="add-group" class="add-btn">Añadir grupo</button>
-                            </div>
-                        @endif
-
-                        <div id="member-container">
-                            @if ($user && $userProject->pivot->rol === 'Administrador')
-                                @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
-                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto"
-                                        img="{{ $img }}" />
-                                @endforeach
-                            @else
-                                @foreach ($proyecto->usuarios as $usuario)
-                                    <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
-                                        rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
-                                        img="{{ $img }}" />
-                                @endforeach
+                            @if ($tarea->estadoId == 1 && $tarea->usuarios->contains(Auth::user()->id))
+                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                    descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                    :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                             @endif
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-        </main>
+                <div class="kanban-task-container">
+                    <h3>IN PROGRESS</h3>
+                    <div class="task-container">
+                        @foreach ($proyecto->tareas as $tarea)
+                            @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
+                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                    descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                    :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+                <div class="kanban-task-container">
+                    <h3>DONE</h3>
+                    <div class="task-container">
+                        @foreach ($proyecto->tareas as $tarea)
+                            @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
+                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                                    descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
+                                    :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+
+            <!-- Las otras secciones (2, 3, 4) mantienen el mismo contenido pero con botones corregidos -->
+            <div class="tabs-content content-section-2">
+                <!-- Contenido de Product Backlog (similar estructura pero con botones corregidos) -->
+                <div class="backlog">
+                    <div class="task-backlog">
+                        <span class="titulo-tarea">Titulo</span>
+                        <span class="descripcion-tarea">Descripcion</span>
+                        <span class="sprint-tarea">Sprint</span>
+                        <span class="tag-tarea">Tags</span>
+                        <span class="responsable-tarea">Responsable</span>
+                        <span class="asignado-tarea">Asignado</span>
+                        <span class="fecha-entrega">Fecha Entrega</span>
+                        <span class="estado-tarea">Estado</span>
+                    </div>
+                    @foreach ($proyecto->tareas as $tarea)
+                        @php
+                            $asignados = $tarea->usuarios;
+                        @endphp
+                        <x-backlogItem dataset="" :titulo="$tarea->titulo" class="" :descripcion="$tarea->descripcion"
+                            :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags" :fechaEntrega="$tarea->fechaEntrega"
+                            :responsable="$tarea->responsable->nombre" />
+                    @endforeach
+                </div>
+            </div>
+            <div class="tabs-content content-section-3">
+                <div class="backlog">
+                    <div class="task-backlog">
+                        <span class="titulo-tarea">Titulo</span>
+                        <span class="descripcion-tarea">Descripcion</span>
+                        <span class="sprint-tarea">Sprint</span>
+                        <span class="tag-tarea">Tags</span>
+                        <span class="responsable-tarea">Responsable</span>
+                        <span class="responsable-tarea">Asignado</span>
+                        <span class="fecha-entrega">Fecha Entrega</span>
+                        <span class="estado-tarea">Estado</span>
+                    </div>
+                    @foreach ($proyecto->tareas as $tarea)
+                        @php
+                            $asignados = $tarea->usuarios;
+                        @endphp
+
+                        <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog" :descripcion="$tarea->descripcion"
+                            :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags" :fechaEntrega="$tarea->fechaEntrega"
+                            :responsable="$tarea->responsable->nombre" />
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="tabs-content content-section-4">
+                <div id="integrantes">
+                    @if ($user && $userProject->pivot->rol === 'Administrador')
+                        <div class="add-to-project-container">
+                            <button id="add-user" class="add-btn">Añadir miembro</button>
+                            <button id="add-group" class="add-btn">Añadir grupo</button>
+                        </div>
+                    @endif
+
+                    <div id="member-container">
+                        @if ($user && $userProject->pivot->rol === 'Administrador')
+                            @foreach ($proyecto->usuarios as $usuario)
+                                <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
+                                    rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto"
+                                    img="{{ $img }}" />
+                            @endforeach
+                        @else
+                            @foreach ($proyecto->usuarios as $usuario)
+                                <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
+                                    rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
+                                    img="{{ $img }}" />
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @if ($user && $userProject->pivot->rol === 'Administrador')
             <div id="popup-bg">
@@ -248,14 +264,11 @@
             </div>
         @endif
 
+        @include('components.popUpTarea')
 
-    </body>
-
-    @include('components.popUpTarea')
-
-    <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
-    <script src="{{ url('/js/popUpTarea.js') }}"></script>
-    <script src="{{ url('/js/memberItem.js') }}"></script>
-    <script src="{{ url('/js/filterSprintProject.js') }}"></script>
-    <script src="{{ url('/js/project.js') }}"></script>
-@endsection
+        <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
+        <script src="{{ url('/js/popUpTarea.js') }}"></script>
+        <script src="{{ url('/js/memberItem.js') }}"></script>
+        <script src="{{ url('/js/filterSprintProject.js') }}"></script>
+        <script src="{{ url('/js/project.js') }}"></script>
+    @endsection

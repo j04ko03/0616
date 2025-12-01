@@ -15,8 +15,10 @@ main {
     background-color: var(--color-background);
 }
 
+#main,
 main {
     padding: 20px;
+    min-height: calc(100vh - 50px);
 }
 
 /*  SELECT PROYECTOS    */
@@ -199,7 +201,8 @@ option:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 800px;
+    min-height: 300px;
+    max-height: 700px;
     overflow-y: auto;
     scrollbar-width: thin;
 }
@@ -666,8 +669,66 @@ form > div > div {
     background-color: #d42d20;
     color: var(--color-white);
 }
+
+/* MENSAJES */
+.alert-project {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+    min-height: 50px;
+    max-height: 100px;
+    color: var(--color-white);
+    border: none;
+    border-radius: 10px;
+    z-index: 100;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: notification 4s forwards;
+}
+
+.alert-project-success {
+    background-color: #24b22e;
+}
+
+.alert-project-error {
+    background-color: #d42d20;
+}
+
+.alert-project-info {
+    background-color: #ffb900;
+}
+
+@keyframes notification {
+    30% {
+        opacity: 1;
+        transform: translate(-50%, 30px);
+    }
+
+    65% {
+        opacity: 1;
+        transform: translate(-50%, 30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50px);
+    }
+}
+
 /* MEDIA QUERIES */
 @media (width < 700px) {
+    main,
+    #main {
+        padding: 10px;
+    }
+
     #sprints {
         min-width: 100%;
         margin: 20px auto 0 0;
@@ -687,8 +748,9 @@ form > div > div {
 }
 
 @media (width < 450px) {
-    main {
-        padding: 10px;
+    main,
+    #main {
+        padding: 5px;
     }
 
     .task-backlog span {

@@ -120,7 +120,7 @@ class ProyectosController extends Controller
         $proyecto->estadoId = $request->input("estado");
 
         $proyecto->save();
-        return redirect()->route('project.controller', ['idProyecto' => $proyecto->id]);
+        return redirect()->back()->with('success', 'Proyecto modificado correctamente');
     }
 
     /**
@@ -146,12 +146,14 @@ class ProyectosController extends Controller
         $user = Usuario::where("email", $userEmail)->first();
 
         if (!$user) {
-            $response = redirect()->back()->withErrors(["email" => "Usuario no encontrado"]);
+            $response = redirect()->back()->with('error', 'Usuario no encontrado');
         }
 
         if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
             $project->usuarios()->attach($user->id, ["rol" => "Miembro"]);
-            $response = redirect()->route('project.controller', ['idProyecto' => $project->id])->with("succcess", "Usuario añadido al proyecto");
+            $response = redirect()->back()->with("succcess", "Usuario añadido al proyecto");
+        } else {
+            $response = redirect()->back()->with('info', 'El usuario ya está en el proyecto');
         }
 
         return $response;
