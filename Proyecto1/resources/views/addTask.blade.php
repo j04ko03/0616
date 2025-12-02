@@ -3,9 +3,6 @@
 @endpush
 
 @section('content')
-
-    <body>
-        <main>
             <div id="select-container">
                 <select name="projects" id="projects">
                     <option value="Proyecto 1">Proyecto 1</option>
@@ -41,7 +38,6 @@
                 </div>
                 <!-- resto de tus secciones... -->
             </div>
-        </main>
 
         <!-- POPUP PARA AÑADIR TAREA -->
         <div class="popup-overlay" id="taskPopup">
@@ -98,5 +94,4 @@
                 </form>
             </div>
         </div>
-    </body>
 @endsection

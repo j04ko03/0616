@@ -34,6 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
                 tareasPendientes.textContent = tareaPendienteCuenta;
 
             });
-
-           
         });
