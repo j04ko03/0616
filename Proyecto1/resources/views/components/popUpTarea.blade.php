@@ -4,8 +4,7 @@
 @endpush
 
 
-<form action="{{ route('addTask.store') }}" method="POST">
-    @csrf
+
 <div class="popup-overlay" id="taskPopup" style="display: none;">
     <div class="popup-content">
         <form id="taskForm" method="POST" action="{{ route('tareas.store') }}" enctype="multipart/form-data">

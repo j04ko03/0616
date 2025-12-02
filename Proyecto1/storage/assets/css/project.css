@@ -15,8 +15,10 @@ main {
     background-color: var(--color-background);
 }
 
+#main,
 main {
     padding: 20px;
+    min-height: calc(100vh - 50px);
 }
 
 /*  SELECT PROYECTOS    */
@@ -199,7 +201,8 @@ option:hover {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 800px;
+    min-height: 300px;
+    max-height: 700px;
     overflow-y: auto;
     scrollbar-width: thin;
 }
@@ -577,7 +580,7 @@ form > div > div {
     flex-direction: column;
     justify-content: center;
 
-    max-width: 400px;
+    max-width: 350px;
     text-align: center;
     gap: 20px;
 }
@@ -594,31 +597,36 @@ form > div > div {
 }
 
 #form-delete-project input,
-#cancel-add-user-btn {
+#cancel-add-user-btn,
+#cancel-add-grp-btn {
     color: var(--color-white);
     background-color: #d42d20;
 }
 
 /* FORM ADD USER*/
-#form-add-user {
+#form-add-user,
+#add-grp-form {
     background-color: var(--color-background);
     display: none;
     flex-direction: column;
     justify-content: center;
 
-    max-width: 400px;
+    max-width: 350px;
     text-align: center;
     gap: 20px;
 }
 
-#form-add-user > span {
+#form-add-user > span,
+#add-grp-form > span {
     margin: 0 auto;
     display: flex;
     gap: 20px;
 }
 
 #form-add-user button,
-#form-add-user input {
+#form-add-user input,
+#add-grp-form button,
+#add-grp-form input {
     padding: 10px 20px;
 }
 
@@ -627,7 +635,7 @@ form > div > div {
     display: none;
     gap: 20px;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 350px;
     background-color: var(--color-background);
     color: var(--color-dark);
     text-align: center;
@@ -649,7 +657,7 @@ form > div > div {
     display: none;
     gap: 20px;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 350px;
     background-color: var(--color-background);
     color: var(--color-dark);
     text-align: center;
@@ -666,29 +674,95 @@ form > div > div {
     background-color: #d42d20;
     color: var(--color-white);
 }
+
+/* TOAST NOTIFICATION */
+.alert-project {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    max-width: 350px;
+    width: 100%;
+    min-height: 50px;
+    max-height: 100px;
+    color: var(--color-white);
+    border: none;
+    border-radius: 10px;
+    z-index: 100;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    animation: notification 3s forwards;
+}
+
+.alert-project-success {
+    background-color: #24b22e;
+}
+
+.alert-project-error {
+    background-color: #d42d20;
+}
+
+.alert-project-info {
+    background-color: #ffb900;
+}
+
+@keyframes notification {
+    25% {
+        opacity: 1;
+        transform: translate(-50%, 30px);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate(-50%, 30px);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -30px);
+    }
+}
+
 /* MEDIA QUERIES */
 @media (width < 700px) {
+    main,
+    #main {
+        padding: 10px;
+    }
+
     #sprints {
         min-width: 100%;
         margin: 20px auto 0 0;
         height: 40px;
     }
 
-    form {
+    #update-project-form {
         margin: 10px 0 0 0;
+        padding-top: 80px;
         border: 0;
         width: 100%;
         height: 100%;
     }
 
-    form > div {
+    #update-project-form > div {
         grid-template-columns: 1fr;
+    }
+
+    #quit-btn {
+        position: absolute;
+        top: 60px;
+        right: 10px;
     }
 }
 
 @media (width < 450px) {
-    main {
-        padding: 10px;
+    main,
+    #main {
+        padding: 5px;
     }
 
     .task-backlog span {

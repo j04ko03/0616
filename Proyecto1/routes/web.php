@@ -32,9 +32,14 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
     Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
     Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
+
     Route::post('/project/{project}/users', [ProyectosController::class, 'addUser'])->name('project.addUser');
     Route::delete('/project/{project}/users', [ProyectosController::class, 'removeUser'])->name('project.removeUser');
     Route::patch('/project/{project}/users', [ProyectosController::class, 'updateUserAdmin'])->name('project.updateUserAdmin');
+
+    Route::post('/project/{project}/groups', [ProyectosController::class, 'addGroup'])->name('project.addGroup');
+    Route::delete('/project/{project}/groups', [ProyectosController::class, 'deleteGroup'])->name('project.deleteGroup');
+    //----------------------------------------------------
 
     Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
     Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
