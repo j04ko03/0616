@@ -261,6 +261,15 @@
                         <button type="submit">Aceptar</button>
                     </div>
                 </form>
+                <form action="{{ route('project.addGroup', $proyecto->id) }}" method="POST" id="add-grp-form">
+                    @csrf
+                    <label for="group-name">Nombre del grupo</label>
+                    <input type="text" name="group-name" id="group-name" required>
+                    <span>
+                        <button type="button" id="cancel-add-grp-btn">Cancelar</button>
+                        <input type="submit" value="Añadir">
+                    </span>
+                </form>
             </div>
         @endif
 

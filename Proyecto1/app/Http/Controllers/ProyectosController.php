@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grupo;
 use App\Models\Proyectos;
 use App\Models\Tarea;
 use App\Models\Usuario;
@@ -240,5 +241,38 @@ class ProyectosController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Usuario promovido a administrador correctamente');
+    }
+
+    public function addGroup(Request $request, Proyectos $project) {
+        $request->validate([
+            'group-name' => 'required|exists:Grupo,descripcion'
+        ]);
+
+        $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
+        if (!$authUserRole || $authUserRole->pivot->rol !== 'Administrador') {
+            return redirect()->back()->with('error', 'No tienes permisos para añadir grupos');
+        }
+
+        $group = Grupo::where('descripcion', $request->input('group-name'))->first();
+
+        if (!$group) {
+            return redirect()->back()->with('error', 'Grupo no encontrado');
+        }
+
+        $users = $group->usuarios;
+
+        if ($users->isEmpty()) {
+            return redirect()->back()->with('info', 'El grupo no tiene miembros');
+        }
+
+        foreach($users as $user) {
+            if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
+                $project->usuarios()->syncWithoutDetaching([
+                    $user->id => ['rol' => 'Miembro']
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Grupo añadido correctamente');
     }
 }

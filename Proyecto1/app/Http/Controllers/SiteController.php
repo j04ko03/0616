@@ -70,6 +70,11 @@ class SiteController extends Controller
         $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
         $user = Auth::user();
         $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+
+        if (!$userProject) {
+            return redirect()->route('home.controller')->with('error', 'No tienes acceso a este proyecto');
+        }
+
         $usuarios = $proyecto->usuarios;
 
         $img = $user->img;
