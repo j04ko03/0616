@@ -259,7 +259,7 @@
         <x-task-popup :proyecto="$proyecto" />
 
 
-    @include('components.popUpTarea', ['proyecto' => $proyecto, 'tarea' => $tareaSeleccionada ?? null])
+    @include('components.task-popup', ['proyecto' => $proyecto, 'tarea' => $tareaSeleccionada ?? null])
 
 
     @if (isset($tareaSeleccionada) && $tareaSeleccionada !== null)
