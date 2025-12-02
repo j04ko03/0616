@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
         card.addEventListener('click', () => {
             const tarea = JSON.parse(card.dataset.tarea);
             const url = card.dataset.url;
-            console.log(url);
+            console.log('URL de redirección:', url);
+            console.log('Tarea data:', tarea);
             window.location.href = url;
         });
     });

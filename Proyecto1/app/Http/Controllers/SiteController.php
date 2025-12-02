@@ -63,6 +63,11 @@ class SiteController extends Controller
 
     public function project($idProyecto)
     {
+
+            $tareaId = request()->query('tareaId');
+    
+    \Log::info("Project llamado con idProyecto: " . $idProyecto . " y tareaId (query): " . ($tareaId ?? 'NULL'));
+
         $projects    = Auth::user()->proyectos;
         $proyecto    = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
         $user        = Auth::user();
@@ -70,25 +75,43 @@ class SiteController extends Controller
         $usuarios    = $proyecto->usuarios;
         $img         = $user->img;
 
-        $tareaId = request()->route('tareaId');
-        $tareaSeleccionada = null;
+        $tareaId           = request()->route('tareaId');
+        // $tareaSeleccionada = null;
+        // if ($tareaId) {
+        //     $tareaSeleccionada = Tarea::with(['usuarios', 'tags', 'estado', 'responsable', 'sprint'])
+        //         ->where('id', $tareaId)
+        //         ->where('proyectoId', $idProyecto)
+        //         ->firstOrFail();
+        // }
+
+        // return view('project', compact(
+        //     'proyecto',
+        //     'projects',
+        //     'idProyecto',
+        //     'user',
+        //     'userProject',
+        //     'usuarios',
+        //     'img',
+        //     'tareaSeleccionada'
+        // ));
+            $tareaSeleccionada = null;
     if ($tareaId) {
         $tareaSeleccionada = Tarea::with(['usuarios', 'tags', 'estado', 'responsable', 'sprint'])
             ->where('id', $tareaId)
             ->where('proyectoId', $idProyecto)
-            ->firstOrFail();
+            ->first();
     }
 
-        return view('project', compact(
-            'proyecto',
-            'projects',
-            'idProyecto',
-            'user',
-            'userProject',
-            'usuarios',
-            'img',
-            'tareaSeleccionada' 
-        ));
+    return view('project', compact(
+        'proyecto',
+        'projects',
+        'idProyecto',
+        'user',
+        'userProject',
+        'usuarios',
+        'img',
+        'tareaSeleccionada'
+    ));
     }
 
     public function crearTareas()
@@ -110,12 +133,15 @@ class SiteController extends Controller
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
-    public function verTarea($id)
-    {
-        $tarea    = Tarea::findOrFail($id);
-        $usuarios = Usuario::all();
-        return view('components.popUpTarea', compact('tarea', 'usuarios'));
-    }
+public function verTarea($id)
+{
+    $tarea = Tarea::with(['proyecto', 'usuarios', 'tags', 'estado', 'responsable', 'sprint'])->findOrFail($id);
+    
+    // Usar parámetros de consulta en lugar de parámetros de ruta
+    return redirect()->route('project.controller', [
+        'idProyecto' => $tarea->proyectoId
+    ]) . '?tareaId=' . $tarea->id;
+}
 
     public function verProyecto($id)
     {
