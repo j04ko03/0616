@@ -22,6 +22,15 @@
     @stack('scripts')
 
     <script src="js/rutasMostrar.js"></script>
+    <script>
+        // Esperar 5 segundos (5000 ms) y ocultar el contenedor de errores
+        setTimeout(() => {
+            const errores = document.querySelector('#errores'); // asumiendo que tu include tiene un id="errores"
+            if(errores){
+                errores.style.display = 'none';
+            }
+        }, 5000);
+    </script>
     
 </body>
 </html>

@@ -10,7 +10,12 @@
 @endpush
 
 @section('content')
+
+    
     <div id="grid-container">
+        <div id="errores">
+            @include('errores')
+        </div>
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Usuarios</button>
             <button class="tabs-btn" data-tab="2">Solicitudes superUsuario ({{ count($solicitudes) }})</button>

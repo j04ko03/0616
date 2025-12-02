@@ -6,6 +6,9 @@
 @endpush
 
 @section('content')
+    <div id="errores">
+        @include('errores')
+    </div>
     <main>
         <form action="project" method="POST">
             @csrf

@@ -4,6 +4,9 @@
 
 @section('content')
 
+    <div id="errores">
+        @include('errores')
+    </div>
     <body>
         <main>
             <div id="select-container">

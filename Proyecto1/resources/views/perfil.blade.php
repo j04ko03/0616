@@ -8,6 +8,10 @@
 @endpush
 
 @section('content')
+    
+    <div id="errores">
+        @include('errores')
+    </div>
     <!--comentario-->
     <div class="container" style="height: 800px;">
 
