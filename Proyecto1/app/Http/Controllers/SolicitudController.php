@@ -38,8 +38,17 @@ class SolicitudController extends Controller
         $solicitud->descripcion = "Solicitud";
         $solicitud->idUsuario = auth()->user()->id;
 
-        $solicitud->save();
-        return redirect()->route('perfil.controller')->with('success', 'Solicitud creada correctamente.');
+        try{
+            $solicitud->save();
+            session()->flash('success', 'Se guardado correctamente los datos');
+            $response = redirect()->route('perfil.controller')->with('success', 'Solicitud creada correctamente.');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se hacreado los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+
+        return $response;
     }
 
     /**
@@ -73,8 +82,17 @@ class SolicitudController extends Controller
     public function destroy(Solicitud $solicitude)
     {
         //
-        $solicitude->delete();
-        return redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente.');
+        try{
+            $solicitude->delete();
+            session()->flash('success', 'Se borra correctamente solicitud' . ' - ' . $solicitude.id);
+            $response = redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente.');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+
+        return $response;
     }
 
     /**
@@ -87,8 +105,17 @@ class SolicitudController extends Controller
         $user->tipoUser = 1;
         $user->save();
 
-        $solicitude->delete();
+        try{
+            $solicitude->delete();
+            session()->flash('success', 'Se borra correctamente la solicitud ' . ' - ' . $solicitude.id);
+            $response =  redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente y Usuario Update');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han borrado los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+
+        return $response;
         
-        return redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente y Usuario Update');
     }
 }
