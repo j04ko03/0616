@@ -18,8 +18,17 @@ class UsuarioController extends Controller
     public function index()
     {
         // Listar todos los usuarios (para la vista de admin).
-        $usuarios = Usuario::all(); // Obtener todos los usuarios (all()).
-        return view('usuarios.index', compact('usuarios')); // Pasar usuarios a la vista.
+        try{
+            $usuarios = Usuario::all(); // Obtener todos los usuarios (all()).
+            session()->flash('success', 'Se pasan correctamente los datos');
+            $response = view('usuarios.index', compact('usuarios')); 
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+         // Pasar usuarios a la vista.
+        return $response;
     }
 
     /**
@@ -39,33 +48,42 @@ class UsuarioController extends Controller
 
         // Se valida la entrada, se crea el usuario, se autentica y se redirige.
 
+        try{
         // Registro de nuevo usuario.
-        $validated = $request->validate([
-            'nombre' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:Usuario',
-            'contraseña' => 'required|string|min:8|confirmed',
-        ]);
+            $validated = $request->validate([
+                'nombre' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:Usuario',
+                'contraseña' => 'required|string|min:8|confirmed',
+            ]);
 
-        // Debug de los datos validados
-        // dd('Datos validados:', $validated);
+            // Debug de los datos validados
+            // dd('Datos validados:', $validated);
 
-        // Crear usuario - solo los campos esenciales.
-        $usuario = Usuario::create([
-            'nombre' => $validated['nombre'],
-            'email' => $validated['email'],
-            'contraseña' => bcrypt($validated['contraseña']),
-            'fechaCreacion' =>  now()->format('d-m-Y H:i:s'),
-            'fechaCreacion' => now()->format('Y-m-d H:i:s'),
-            // tipoUser, apodo y fechaCreacion se asignan automáticamente.
-        ]);
+            // Crear usuario - solo los campos esenciales.
+            $usuario = Usuario::create([
+                'nombre' => $validated['nombre'],
+                'email' => $validated['email'],
+                'contraseña' => bcrypt($validated['contraseña']),
+                'fechaCreacion' =>  now()->format('d-m-Y H:i:s'),
+                'fechaCreacion' => now()->format('Y-m-d H:i:s'),
+                // tipoUser, apodo y fechaCreacion se asignan automáticamente.
+            ]);
+            // Debug de usuario creado (COMENTA esto cuando funcione)
+            // dd('Usuario creado exitosamente:', $usuario->toArray());
 
-        // Debug de usuario creado (COMENTA esto cuando funcione)
-        // dd('Usuario creado exitosamente:', $usuario->toArray());
+            // Iniciar sesión automáticamente después del registro.
+            Auth::login($usuario);
 
-        // Iniciar sesión automáticamente después del registro.
-        Auth::login($usuario);
+            session()->flash('success', 'Se ha creado el usuario correctamente');
+            $response = redirect()->route('home.controller')->with('success', '¡Cuenta creada exitosamente!');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se ha creado el usuario' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+        
 
-        return redirect()->route('home.controller')->with('success', '¡Cuenta creada exitosamente!');
+        return $response;
     }
 
     /**
@@ -91,30 +109,38 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        // PROCESAR actualización de perfil.
-        $validated = $request->validate([
-            'nombre' => 'nullable|string|max:255',
-            'contraseña' => 'nullable|string|min:8|max:255',
-            'apodo' => 'nullable|string|max:255',
-        ],[
-            'contraseña.min'          => 'Debes introducir almenos 8 carácteres',
-            'contraseña.confirmed'    => 'Las contraseñas no coinciden'
-        ]);
+        try{
+            // PROCESAR actualización de perfil.
+            $validated = $request->validate([
+                'nombre' => 'nullable|string|max:255',
+                'contraseña' => 'nullable|string|min:8|max:255',
+                'apodo' => 'nullable|string|max:255',
+            ],[
+                'contraseña.min'          => 'Debes introducir almenos 8 carácteres',
+                'contraseña.confirmed'    => 'Las contraseñas no coinciden'
+            ]);
 
-        //$usuario->update($validated);
-        foreach ($validated as $key => $value) {
-            if ($key === 'contraseña' && $value !== null) {
-                $usuario->$key = Hash::make($value);
-            } else {
-                if ($value !== null) {
-                    $usuario->$key = $value;
+            //$usuario->update($validated);
+            foreach ($validated as $key => $value) {
+                if ($key === 'contraseña' && $value !== null) {
+                    $usuario->$key = Hash::make($value);
+                } else {
+                    if ($value !== null) {
+                        $usuario->$key = $value;
+                    }
                 }
             }
-        }
-        // dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
+            // dd($usuario->nombre, $usuario->apodo, $usuario->contraseña);
 
-        $usuario->save();
-        return redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
+            $usuario->save();
+            session()->flash('success', 'Se modifican correctamente los datos');
+            $response = redirect()->route('perfil.controller')->with(['success','Perfil actualizado exitosamente!', 'usuario' => Auth::user()]);
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han modificado los datos' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+        return $response;
     }
 
     /**
@@ -122,9 +148,17 @@ class UsuarioController extends Controller
      */
     public function destroy(Usuario $usuario)
     {
-        // Eliminar usuario.
-        $usuario->delete();
-        return redirect()->route('vistaGlobal.controller')->with('success', 'Cuenta eliminada exitosamente!');
+        try{
+            // Eliminar usuario.
+            $usuario->delete();
+            session()->flash('success', 'Se pasan correctamente los datos');
+            $response = redirect()->route('vistaGlobal.controller')->with('success', 'Cuenta eliminada exitosamente!');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+        return $response;
     }
 
     // =============================================
