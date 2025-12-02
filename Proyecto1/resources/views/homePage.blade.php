@@ -9,6 +9,9 @@
 
 @section('content')
 
+    <div id="errores">
+        @include('errores')
+    </div>
     <h1 class="h1" style="margin-left: 3.5%; margin-top: 1%;">DASHBOARD</h1>
     <div class="container mx-auto p-4">
         <div class="contenedorBtnsPrincipales">
@@ -159,4 +162,13 @@
     </script>
     <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
 
+    <script>
+        // Esperar 5 segundos (5000 ms) y ocultar el contenedor de errores
+        setTimeout(() => {
+            const errores = document.querySelector('#errores'); // asumiendo que tu include tiene un id="errores"
+            if(errores){
+                errores.style.display = 'none';
+            }
+        }, 5000);
+    </script>
 @endsection

@@ -44,9 +44,10 @@ class SiteController extends Controller
             $tareasAsignadas = Tarea::with('tags') // Carga las etiquetas de cada tarea
                 ->whereIn('proyectoid', $usuario->proyectos->pluck('id'))//->pluck('id') --> Saca los I
                 ->get();
-            session()->flash('error', '$missatge');
+            session()->flash('success', 'Es passen correctament les variables usuario, proyectosRecientes, proyectosTotal, TareasAsignadas');
         }catch (QueryException $e){
             $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No es poden obtenir les dades indicades' . ' - ' . $missatge);
         }
 
         return view('homePage')->with([
@@ -59,7 +60,13 @@ class SiteController extends Controller
 
     public function perfil()
     {
+        try{
         $solicitudes = Solicitud::with('usuario')->get();
+        session()->flash('success', 'Es passen correctament les solicitudes');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido las solicitudes' . ' - ' . $missatge);
+        }
         return view('perfil', compact('solicitudes'))->with('usuario', Auth::user());
     }
 
@@ -70,14 +77,18 @@ class SiteController extends Controller
 
     public function project($idProyecto)
     {
-        $projects = Auth::user()->proyectos;
-        $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
-        $user = Auth::user();
-        $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-        $usuarios = $proyecto->usuarios;
-
-        $img = $user->img;
-
+        try{
+            $projects = Auth::user()->proyectos;
+            $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
+            $user = Auth::user();
+            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+            $usuarios = $proyecto->usuarios;
+            $img = $user->img;
+            session()->flash('success', 'Se pasan corectamente los datos de proyectos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos solicitados' . ' - ' . $missatge);
+        }
         return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
     }
 
