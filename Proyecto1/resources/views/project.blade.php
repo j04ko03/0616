@@ -6,6 +6,16 @@
 @endpush
 
 @section('content')
+    <!-- DEBUG: Verificar si llega la tarea seleccionada -->
+    @if(isset($tareaSeleccionada) && $tareaSeleccionada !== null)
+        <script>
+            console.log("Tarea seleccionada recibida:", {{ $tareaSeleccionada->id }});
+        </script>
+    @else
+        <script>
+            console.log("No hay tarea seleccionada");
+        </script>
+    @endif
 
     <body>
         <main>

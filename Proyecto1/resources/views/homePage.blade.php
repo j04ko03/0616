@@ -36,7 +36,6 @@
 
         <!-- Queda oculto al cargar la página display: none; -->
         <div id="section-tareas" class="contenedorPadreGrid contenedorScroll oculto">
-            
                 @if ($tareasAsignadas->isEmpty())
                     <div style="width: 100%; height: 200px; display: flex; align-items: center; justify-content: center;">
                         <h2 class="h2" style="color: grey">No hay tareas Asignadas</h2>
