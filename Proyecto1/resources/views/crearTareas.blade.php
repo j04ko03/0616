@@ -6,7 +6,6 @@
 @endpush
 
 @section('content')
-    <main>
         <form action="project" method="POST">
             @csrf
             <a id="quit-btn" href="{{ route('crearProyecto.controller') }}">X</a>
@@ -102,7 +101,6 @@
                 </div>
             </div>
         </form>
-    </main>
 
     <script>
         const today = new Date().toISOString().split('T')[0];

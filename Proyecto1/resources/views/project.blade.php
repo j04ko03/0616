@@ -17,8 +17,6 @@
         </script>
     @endif
 
-    <body>
-        <main>
             <div id="select-container">
                 <select name="projects" id="projects">
                     @foreach ($projects as $project)
@@ -167,7 +165,6 @@
                         </div>
                     </div>
                 </div>
-        </main>
 
         @if ($user && $userProject->pivot->rol === 'Administrador')
             <div id="popup-bg">
@@ -262,9 +259,7 @@
         <x-task-popup :proyecto="$proyecto" />
 
 
-    </body>
-
-    @include('components.popUpTarea', ['proyecto' => $proyecto, 'tarea' => $tareaSeleccionada ?? null])
+    @include('components.task-popup', ['proyecto' => $proyecto, 'tarea' => $tareaSeleccionada ?? null])
 
 
     @if (isset($tareaSeleccionada) && $tareaSeleccionada !== null)

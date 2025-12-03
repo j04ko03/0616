@@ -6,10 +6,6 @@
 @endpush
 
 @section('content')
-
-    <body>
-        <main>
-
             <form action="{{ route('createProject.controller') }}" method="POST" id="project">
                 @csrf
                 <a id="cerrarCrearProyecto" href="proyectos">X</a>
@@ -41,8 +37,6 @@
                     </div>
                 </div>
             </form>
-        </main>
-    </body>
     <script>
         const today = new Date().toISOString().split("T")[0];
         document.querySelector("#fecha-limite").min = today;

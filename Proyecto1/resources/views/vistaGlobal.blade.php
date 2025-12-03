@@ -214,4 +214,6 @@
         const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
     </script>
     <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
+    <script src="{{ url('/js/filtroBusqueda.js') }}"></script>
+
 @endsection
