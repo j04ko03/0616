@@ -8,6 +8,10 @@
 @endpush
 
 @section('content')
+    
+    <div id="errores">
+        @include('errores')
+    </div>
     <!--comentario-->
     <div class="container" style="height: 800px;">
 
@@ -102,13 +106,15 @@
                             @php
                                 $isSolicited = false;
                                 foreach($solicitudes as $solicitud){
-                                    if ($solicitud->usuario->id === Auth::user()->id) {
+                                    if ($solicitud['idUsuario']=== Auth::user()->id) {
                                         $isSolicited = true;
                                     }
+                                    
                                 }
                             @endphp
-
-                            @if(Auth::user()->tipoUser === "2" && !$isSolicited)
+                            
+                            
+                            @if(Auth::user()->tipoUser === 2 && !$isSolicited)
                                     <div style="height: 25%; align-content: center; justify-content: center">
                                         <p id="btnSuperUser" class="card-cabecera textoBtns">Solicitar ser super usuario</p>
                                     </div>

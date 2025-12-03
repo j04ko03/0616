@@ -3,6 +3,12 @@
 @endpush
 
 @section('content')
+
+    <div id="errores">
+        @include('errores')
+    </div>
+    <body>
+        <main>
             <div id="select-container">
                 <select name="projects" id="projects">
                     <option value="Proyecto 1">Proyecto 1</option>

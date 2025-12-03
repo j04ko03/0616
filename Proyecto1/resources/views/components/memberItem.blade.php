@@ -7,10 +7,12 @@
             $fotoPath = 'assets/fotosUser/' . $img;
         @endphp
 
-        @if($img && Storage::disk('public')->exists($fotoPath))
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario" style="width: 100%; height: 100%; object-fit: contain;">                            
+        @if ($img && Storage::disk('public')->exists($fotoPath))
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/' . $img) }}" alt="Foto de usuario"
+                style="width: 100%; height: 100%; object-fit: contain;">
         @else
-            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto" style="width: 100%; height: 100%; object-fit: contain;">
+            <img id="fotoPerfil" src="{{ asset('storage/assets/fotosUser/standarPerfil.png') }}" alt="Foto por defecto"
+                style="width: 100%; height: 100%; object-fit: contain;">
         @endif
     </div>
     <div>
@@ -32,7 +34,9 @@
 
     @if (Auth::user()->id != $id)
         <span class="popup-edit-user" data-id="{{ $id }}" data-nombre="{{ $nombre }}">
-            <p class="user-admin">Hacer administrador</p>
+            @if ($rol !== 'Administrador')
+                <p class="user-admin">Hacer administrador</p>
+            @endif
             <p class="delete-user">Eliminar usuario</p>
         </span>
     @endif

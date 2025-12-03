@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Clases\Utilitat;
 use App\Models\Incidencia;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class IncidenciaController extends Controller
 {
@@ -29,15 +31,23 @@ class IncidenciaController extends Controller
     public function store(Request $request)
     {
         //
-        $validated = $request->validate([
-            'incidencia' => 'required|string|max:500'
-        ]);
+        try{
+            $validated = $request->validate([
+                'incidencia' => 'required|string|max:500'
+            ]);
 
-        $incidencia = new Incidencia();
-        $incidencia->descripcion = $validated['incidencia'];
-        $incidencia->idUsuario = auth()->user()->id;
-        $incidencia->save();
-        return redirect()->route('perfil.controller')->with('success', 'Incidencia creada correctamente.');
+            $incidencia = new Incidencia();
+            $incidencia->descripcion = $validated['incidencia'];
+            $incidencia->idUsuario = auth()->user()->id;
+            $incidencia->save();
+            session()->flash('success', 'Se guardan correctamente los datos');
+            $response = redirect()->route('perfil.controller')->with('success', 'Incidencia creada correctamente.');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han guardado los datos' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+        return $response;
     }
 
     /**
@@ -69,6 +79,15 @@ class IncidenciaController extends Controller
      */
     public function destroy(Incidencia $incidencia)
     {
-        //
+        try{
+            $incidencia->delete();
+            session()->flash('success', 'Se eliminan correctamente los datos');
+            $response = redirect()->route('vistaGlobal.controller');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han eliminado los datos' . ' - ' . $missatge);
+            $response = $response = redirect()->back();
+        }
+        return response;
     }
 }

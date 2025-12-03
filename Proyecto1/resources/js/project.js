@@ -1,3 +1,10 @@
+// MINIMUM TODAY
+const today = new Date().toISOString().split("T")[0];
+const inputDateProject = document.querySelector("#fecha-limite");
+if (inputDateProject) {
+    inputDateProject.min = today;
+}
+
 // REDIRECT TO NEW URL WITH PROJECT ID
 document.getElementById("projects").addEventListener("change", function (e) {
     window.location = `${e.target.value}`;
@@ -22,6 +29,8 @@ cancelAddUserBtn.addEventListener("click", function () {
 formAddUser.addEventListener("click", function (e) {
     e.stopPropagation();
 });
+
+// ADD GROUP POP-UP
 
 // POP-UP UPDATE-DELETE PROJECT
 const updateProjectBtn = document.getElementById("update-project");
@@ -81,27 +90,40 @@ const formUpdateUserAdmin = document.getElementById("update-user-admin");
 
 popupUserProject.forEach((popupUser) => {
     popupUser.addEventListener("click", function (e) {
-        let clicked = e.target.closest(".user-admin");
+        const clickedUpdate = e.target.closest(".user-admin");
+        const clickedDelete = e.target.closest(".delete-user");
 
-        if (clicked.classList.contains("user-admin")) {
+        if (clickedUpdate) {
             popupBg.style.display = "flex";
 
             const message = formUpdateUserAdmin.querySelector("p");
             message.textContent = `¿Seguro que quiere hacer administrador a ${popupUser.dataset.nombre}?`;
             popupBg.style.display = "flex";
             formUpdateUserAdmin.style.display = "flex";
-        } else {
+
+            const userId = document.querySelector("#user_id_admin");
+
+            if (userId) {
+                userId.value = popupUser.dataset.id;
+            } else {
+                const hiddenInput = `<input type="hidden" name="user_id_admin" id="user_id_admin" value="${popupUser.dataset.id}">`;
+                formUpdateUserAdmin.insertAdjacentHTML(
+                    "beforeend",
+                    hiddenInput
+                );
+            }
+        } else if (clickedDelete) {
             const message = formDeleteUserProject.querySelector("p");
             message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
             popupBg.style.display = "flex";
             formDeleteUserProject.style.display = "flex";
 
-            const userId = document.querySelector("#user_id");
+            const userId = document.querySelector("#user_id_delete");
 
             if (userId) {
                 userId.value = popupUser.dataset.id;
             } else {
-                const hiddenInput = `<input type="hidden" name="user_id" id="user_id" value="${popupUser.dataset.id}">`;
+                const hiddenInput = `<input type="hidden" name="user_id_delete" id="user_id_delete" value="${popupUser.dataset.id}">`;
                 formDeleteUserProject.insertAdjacentHTML(
                     "beforeend",
                     hiddenInput
@@ -111,7 +133,44 @@ popupUserProject.forEach((popupUser) => {
     });
 });
 
-// UPDATE USER TO ADMIN
+const cancelBtnUpdateUser = document.getElementById("cancel-update-user-admin");
+const cancelBtnRemoveUser = document.getElementById("cancel-remove-user");
+
+cancelBtnUpdateUser.addEventListener("click", function () {
+    formUpdateUserAdmin.style.display = "none";
+    popupBg.style.display = "none";
+});
+
+cancelBtnRemoveUser.addEventListener("click", function () {
+    formDeleteUserProject.style.display = "none";
+    popupBg.style.display = "none";
+});
+
+formDeleteUserProject.addEventListener("click", function (e) {
+    e.stopPropagation();
+});
+formUpdateUserAdmin.addEventListener("click", function (e) {
+    e.stopPropagation();
+});
+
+// ADD GROUP
+const cancelAddGrpBtn = document.getElementById("cancel-add-grp-btn");
+const formAddGrp = document.getElementById("add-grp-form");
+const addGrpBtn = document.getElementById("add-group");
+
+addGrpBtn.addEventListener("click", function () {
+    popupBg.style.display = "flex";
+    formAddGrp.style.display = "flex";
+});
+
+cancelAddGrpBtn.addEventListener("click", function () {
+    popupBg.style.display = "none";
+    formAddGrp.style.display = "none";
+});
+
+formAddGrp.addEventListener("click", function (e) {
+    e.stopPropagation();
+});
 
 // GLOBAL BACKGROUND
 popupBg.addEventListener("click", function (e) {
@@ -122,4 +181,5 @@ popupBg.addEventListener("click", function (e) {
     popupBg.style.display = "none";
     formDeleteUserProject.style.display = "none";
     formUpdateUserAdmin.style.display = "none";
+    formAddGrp.style.display = "none";
 });

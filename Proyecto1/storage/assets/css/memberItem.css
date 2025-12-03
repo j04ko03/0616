@@ -59,31 +59,33 @@
     border-radius: 10px;
     border: 1px solid black;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 5px 8px 8px;
+    background-color: rgb(248, 58, 58);
 
     display: none;
 }
 
-.popup-edit-user > p:nth-child(1) {
+.user-admin {
     cursor: pointer;
     padding: 10px;
     border-radius: 10px 10px 0 0;
+    background-color: var(--color-white);
 
     transition: all 400ms;
 }
-.popup-edit-user > p:nth-child(1):hover {
+.user-admin:hover {
     background-color: var(--color-background);
 }
 
-.popup-edit-user > p:nth-child(2) {
+.delete-user {
     cursor: pointer;
-    border-radius: 0 0 9px 9px;
+    border-radius: 9px;
     padding: 10px;
     color: white;
     background-color: rgb(248, 58, 58);
 
     transition: all 400ms;
 }
-.popup-edit-user > p:nth-child(2):hover {
+.delete-user:hover {
     background-color: rgb(199, 9, 9);
 }
 

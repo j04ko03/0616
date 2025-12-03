@@ -9,6 +9,9 @@
 
 @section('content')
 
+    <div id="errores">
+        @include('errores')
+    </div>
     <h1 class="h1" style="margin-left: 3.5%; margin-top: 1%;">DASHBOARD</h1>
     <div class="container mx-auto p-4">
         <div class="contenedorBtnsPrincipales">
@@ -141,7 +144,7 @@
                     </div>
 
                 </div>           
-                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0; border: 1px solid red;">
+                <div id="cerrarContenedor" style="height: 100%; width: 3%; display: flex; justify-content: center; padding-top: 0.5%; border-radius: 0 0.75rem 0.75rem 0;">
                     <img id="imagen" src="../storage/assets/icons/cerrar.png" alt="" style="width: 85%; height: fit-content; cursor: pointer;">
                 </div>
             </div>
@@ -158,4 +161,5 @@
     </script>
     <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
 
+    
 @endsection

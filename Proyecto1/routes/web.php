@@ -37,10 +37,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/project/{project}/users', [ProyectosController::class, 'removeUser'])->name('project.removeUser');
     Route::patch('/project/{project}/users', [ProyectosController::class, 'updateUserAdmin'])->name('project.updateUserAdmin');
 
-    Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller'); // Formulario para añadir tarea
-    Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store'); // Guardar tarea
-    Route::resource('tareas', TareaController::class); // Tiene el edit y update // Formulario para editar tarea y guardar cambios
-    Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller'); // Vista de todas las tareas
+    Route::post('/project/{project}/groups', [ProyectosController::class, 'addGroup'])->name('project.addGroup');
+    Route::delete('/project/{project}/groups', [ProyectosController::class, 'deleteGroup'])->name('project.deleteGroup');
+    //----------------------------------------------------
+
+    Route::get('/addTask', [SiteController::class, 'addTask'])->name('addTask.controller');
+    Route::post('/addTask', [SiteController::class, 'storeTask'])->name('addTask.store');
+    Route::resource('tareas', TareaController::class);
+    Route::get('/tareas', [SiteController::class, 'crearTareas'])->name('tareas.controller');
 
     Route::get('/perfil', [SiteController::class, 'perfil'])->name('perfil.controller');
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout.controller');

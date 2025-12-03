@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grupo;
 use App\Models\Proyectos;
 use App\Models\Tarea;
 use App\Models\Usuario;
@@ -75,7 +76,7 @@ class ProyectosController extends Controller
                     'fechaEntrega' => $tareaData['fechaLimite'] ?? null,
                     'estadoId' => $tareaData['estado'] ?? 1,
                     'proyectoId' => $project->id,
-                    'responsableId' => 10,
+                    'responsableId' => Auth::id(),
                     'isDeleted' => false,
                     'idSprint' => 2
                 ]);
@@ -120,7 +121,7 @@ class ProyectosController extends Controller
         $proyecto->estadoId = $request->input("estado");
 
         $proyecto->save();
-        return redirect()->route('project.controller', ['idProyecto' => $proyecto->id]);
+        return redirect()->back()->with('success', 'Proyecto modificado correctamente');
     }
 
     /**
@@ -146,12 +147,14 @@ class ProyectosController extends Controller
         $user = Usuario::where("email", $userEmail)->first();
 
         if (!$user) {
-            $response = redirect()->back()->withErrors(["email" => "Usuario no encontrado"]);
+            $response = redirect()->back()->with('error', 'Usuario no encontrado');
         }
 
         if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
             $project->usuarios()->attach($user->id, ["rol" => "Miembro"]);
-            $response = redirect()->route('project.controller', ['idProyecto' => $project->id])->with("succcess", "Usuario añadido al proyecto");
+            $response = redirect()->back()->with("succcess", "Usuario añadido al proyecto");
+        } else {
+            $response = redirect()->back()->with('info', 'El usuario ya está en el proyecto');
         }
 
         return $response;
@@ -160,14 +163,14 @@ class ProyectosController extends Controller
     //Funcion para guardar fotografias
     public function subirFotoPro(Request $request) {
         info('Archivo recibido:', ['foto' => $request->file('foto'), 'idProyecto' => $request->idProyecto]);
-        
+
         if (!$request->hasFile('foto')) {
             return response()->json(['success' => false, 'mensaje' => 'No se recibió imagen']);
         }
 
         $foto = $request->file('foto');
         $idProyecto = $request->idProyecto;
-        
+
         // Crear carpeta si no existe
         $path = storage_path('app/public/assets/fotosPro/');
         if (!file_exists($path)) {
@@ -200,7 +203,7 @@ class ProyectosController extends Controller
 
     public function removeUser(Request $request, Proyectos $project) {
         $request->validate([
-            'user_id' => 'required|exists:Usuario,id'
+            'user_id_delete' => 'required|exists:Usuario,id'
         ]);
 
         $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
@@ -208,14 +211,68 @@ class ProyectosController extends Controller
             return redirect()->back()->with('error', 'No tienes permisos para eliminar usuarios');
         }
 
-        $userId = $request->user_id;
+        $userId = $request->user_id_delete;
 
         $project->usuarios()->detach($userId);
 
         return redirect()->back()->with('success', 'Usuario eliminado del proyecto correctamente');
     }
 
-    public function makeAdmin(Request $request, Proyectos $project) {
-        
+    public function updateUserAdmin(Request $request, Proyectos $project) {
+        $request->validate([
+            'user_id_admin' => 'required|exists:Usuario,id'
+        ]);
+
+        $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
+        if (!$authUserRole || $authUserRole->pivot->rol !== 'Administrador') {
+            return redirect()->back()->with('error', 'No tienes permisos para modificar roles de usuarios');
+        }
+
+        $userId = $request->user_id_admin;
+
+        $userInProject = $project->usuarios()->where('usuarioId', $userId)->first();
+
+        if ($userInProject->pivot->rol === 'Administrador') {
+            return redirect()->back()->with('info', 'El usuario ya es administrador');
+        }
+
+        $project->usuarios()->updateExistingPivot($userId, [
+            'rol' => 'Administrador'
+        ]);
+
+        return redirect()->back()->with('success', 'Usuario promovido a administrador correctamente');
+    }
+
+    public function addGroup(Request $request, Proyectos $project) {
+        $request->validate([
+            'group-name' => 'required|exists:Grupo,descripcion'
+        ]);
+
+        $authUserRole = $project->usuarios()->where('usuarioId', Auth::id())->first();
+        if (!$authUserRole || $authUserRole->pivot->rol !== 'Administrador') {
+            return redirect()->back()->with('error', 'No tienes permisos para añadir grupos');
+        }
+
+        $group = Grupo::where('descripcion', $request->input('group-name'))->first();
+
+        if (!$group) {
+            return redirect()->back()->with('error', 'Grupo no encontrado');
+        }
+
+        $users = $group->usuarios;
+
+        if ($users->isEmpty()) {
+            return redirect()->back()->with('info', 'El grupo no tiene miembros');
+        }
+
+        foreach($users as $user) {
+            if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
+                $project->usuarios()->syncWithoutDetaching([
+                    $user->id => ['rol' => 'Miembro']
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Grupo añadido correctamente');
     }
 }

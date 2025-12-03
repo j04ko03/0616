@@ -2,6 +2,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tarea;
+use App\Clases\Utilitat;
+use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 
 class TareaController extends Controller
@@ -11,6 +15,19 @@ class TareaController extends Controller
      */
     public function index()
     {
+        //
+        try{
+            $tarea = Tarea::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+            $response = view ('tarea.index', compact('tarea'));
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+
+        return $response;
+        
         $tarea = Tarea::all();
         return view('tarea.index', compact('tarea'));
     }
@@ -53,6 +70,15 @@ class TareaController extends Controller
         $tarea->responsableId = $request->input('responsableId');
         $tarea->idSprint = $request->input('idSprint');
         $tarea->fechaEntrega = $request->input('fechaEntrega');
+        
+        try{
+            $tarea->save();
+            session()->flash('success', 'Se han borrado los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han borrrado los datos' . ' - ' . $missatge);
+        }
+        // return redirect()->route('project.controller', ['idProyecto' => $request->input('proyectoId')]); TODO
         $tarea->isDeleted = false;
         $tarea->save();
 
@@ -143,6 +169,18 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
+        //Para borrar
+        try{
+            $tarea->delete();
+            session()->flash('success', 'Se pasan correctamente los datos');
+            $response = redirect()->route('tasks.index');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+        
+        return $response;
         // Guardo en una variable la id del proyecto para redirigir después de eliminar la tarea.
         $proyectoId = $tarea->proyectoId;
         

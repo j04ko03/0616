@@ -10,7 +10,12 @@
 @endpush
 
 @section('content')
+
+    
     <div id="grid-container">
+        <div id="errores">
+            @include('errores')
+        </div>
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Usuarios</button>
             <button class="tabs-btn" data-tab="2">Solicitudes superUsuario ({{ count($solicitudes) }})</button>
@@ -157,7 +162,7 @@
             </div>
             <div class="tabs-content content-section-5" style="height: 100%;" class="contenedorScroll">
                 @foreach ($incidencias as $incidencia)
-                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}"/>
+                    <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}" id="{{ $incidencia->idIncidencia }}"/>
                 @endforeach
             </div>
         </div>
@@ -216,4 +221,5 @@
     <script src="{{ url('/js/tomaFotoProyecto.js') }}"></script>
     <script src="{{ url('/js/filtroBusqueda.js') }}"></script>
 
+    <script src="{{ url('/js/clickIncidencia.js') }}"></script>
 @endsection
