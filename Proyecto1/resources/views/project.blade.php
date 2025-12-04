@@ -48,7 +48,7 @@
             <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
             <button class="tabs-btn" data-tab="4">Integrantes</button>
             <select name="sprints" id="sprints">
-                @foreach ($proyecto->sprints as $sprint)
+                @foreach ($sprints as $sprint)
                     <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
 
                         {{ $sprint->descripcion }}

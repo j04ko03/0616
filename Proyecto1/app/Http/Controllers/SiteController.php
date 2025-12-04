@@ -29,7 +29,7 @@ class SiteController extends Controller
 
     public function home()
     {
-        
+
         try{
             $usuario = Auth::user();
 
@@ -84,12 +84,12 @@ class SiteController extends Controller
             $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
             $usuarios = $proyecto->usuarios;
             $img = $user->img;
-            session()->flash('success', 'Se pasan corectamente los datos de proyectos');
+            $sprints = Sprint::all();
         }catch(QueryException $e){
             $missatge = Utilitat::errorMessage($e);
             session()->flash('error', 'No se han obtenido los datos solicitados' . ' - ' . $missatge);
         }
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
+        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img', 'sprints'));
     }
 
     public function crearTareas(){
