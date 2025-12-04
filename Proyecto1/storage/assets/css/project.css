@@ -728,6 +728,12 @@ form > div > div {
 }
 
 /* MEDIA QUERIES */
+@media (width < 1000px) {
+    .task-backlog span {
+        font-size: 0.8rem;
+    }
+}
+
 @media (width < 700px) {
     main,
     #main {
@@ -750,6 +756,10 @@ form > div > div {
 
     #update-project-form > div {
         grid-template-columns: 1fr;
+    }
+
+    .task-backlog span {
+        font-size: 0.8rem;
     }
 
     #quit-btn {
