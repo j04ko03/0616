@@ -250,7 +250,8 @@ class UsuarioController extends Controller
 
 
     //Funcion para guardar fotografias
-    public function subirFoto(Request $request) {
+    public function subirFoto(Request $request) 
+    {
         if (!$request->hasFile('foto')) {
             return response()->json(['success' => false, 'mensaje' => 'No se recibió imagen']);
         }
@@ -261,7 +262,7 @@ class UsuarioController extends Controller
         $path = storage_path('app/public/assets/fotosUser/');
         if (!file_exists($path)) {
             mkdir($path, 0777, true);
-        }
+        } 
 
         $usuari = Auth::user();
 

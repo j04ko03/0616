@@ -1,15 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Models\Estado;
-use App\Models\Grupo;
-use App\Models\Incidencia;
-use App\Models\Proyectos;
-use App\Models\Solicitud;
-use App\Models\Sprint;
 use App\Models\Tag;
-use App\Models\Tarea;
 use App\Models\User;
+use App\Models\Grupo;
+use App\Models\Tarea;
+use App\Models\Estado;
+use App\Models\Sprint;
 use App\Models\Usuario;
 use App\Clases\Utilitat;
 use App\Models\Proyectos;
@@ -54,9 +52,9 @@ class SiteController extends Controller
 
         return view('homePage')->with([
             'proyectosRecientes' => $proyectosRecientes,
-            'proyectosTotal'     => $proyectosTotal,
-            'tareasAsignadas'    => $tareasAsignadas,
-            'usuario'            => $usuario,
+            'proyectosTotal' => $proyectosTotal,
+            'tareasAsignadas' => $tareasAsignadas,
+            'usuario' => $usuario
         ]);
     }
 
@@ -136,7 +134,7 @@ class SiteController extends Controller
         return view('components.popUpTarea', compact('tarea', 'usuarios'));
     }
 
-    public function verProyecto($id)
+        public function verProyecto($id)
     {
         $proyecto = Proyectos::findOrFail($id);
         return view('#', compact('proyecto'));
