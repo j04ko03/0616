@@ -3,9 +3,11 @@
 @push('styles')
     <link rel="stylesheet" href="{{ url(path: '/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('/css/crearProyecto.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 @section('content')
+    @include('errores2')  
     <div id="main">
 
         <form action="{{ route('createProject.controller') }}" method="POST" id="project">
