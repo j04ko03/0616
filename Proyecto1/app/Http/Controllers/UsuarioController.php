@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
 use Exception;
+use Carbon\Carbon;
+use App\Models\Usuario;
+use App\Clases\Utilitat;
 use Illuminate\Http\Request;
+use function Laravel\Prompts\error;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
-use function Laravel\Prompts\error;
+use Illuminate\Database\QueryException;
 
 class UsuarioController extends Controller
 {
@@ -234,8 +236,16 @@ class UsuarioController extends Controller
 
     public function listaUsuarios (Request $request)
     {
-        $usuarios = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
-        return response()->json($usuarios);
+        try{
+            $usuarios = Usuario::whereIn('tipUser', [1, 2])->select('nombre')->get();
+            session()->flash('success', 'Se pasan correctamente los datos');
+            $response = response()->json($usuarios);
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+            $response = redirect()->back();
+        }
+        return $response;
     }
 
 

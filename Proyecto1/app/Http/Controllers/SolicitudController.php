@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Clases\Utilitat;
 use App\Models\Solicitud;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class SolicitudController extends Controller
 {

@@ -93,26 +93,44 @@ class SiteController extends Controller
     }
 
     public function crearTareas(){
-        $estados = Estado::all();
-        $sprints = Sprint::all();
-        $tags = Tag::all();
-        $usuarios = Usuario::all();
+        try{
+            $estados = Estado::all();
+            $sprints = Sprint::all();
+            $tags = Tag::all();
+            $usuarios = Usuario::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
         return view('crearTareas', compact('estados', 'sprints', 'tags', 'usuarios'));
     }
 
     public function vistaGlobal(){
-        $grupos = Grupo::with('usuarios')->get();
-        $incidencias = Incidencia::with('usuario')->get();
-        $solicitudes = Solicitud::with('usuario')->get();
-        $usuarios = Usuario::all();
-        $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
+        try{
+            $grupos = Grupo::with('usuarios')->get();
+            $incidencias = Incidencia::with('usuario')->get();
+            $solicitudes = Solicitud::with('usuario')->get();
+            $usuarios = Usuario::all();
+            $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
     public function verTarea($id)
     {
-        $tarea = Tarea::findOrFail($id);
-        $usuarios = Usuario::all();
+        try{
+            $tarea = Tarea::findOrFail($id);
+            $usuarios = Usuario::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
         return view('components.popUpTarea', compact('tarea', 'usuarios'));
     }
 
