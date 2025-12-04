@@ -5,10 +5,12 @@
     <link rel="stylesheet" href="{{ asset('css/cardItem.css') }}">
     <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tomarFoto.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/popUp.css') }}">
 @endpush
 
 @section('content')
-    
+    @include('components.popUp')    
+
     <div id="errores">
         @include('errores')
     </div>
@@ -213,6 +215,7 @@
     <script src="{{ url('/js/btnsPerfil.js') }}"></script>
     <script src="{{ url('/js/tomaFoto.js') }}"></script>
     <script src="{{ url('/js/controlPasswordSuper.js') }}"></script>
+    <script src="{{ asset('js/nuevoPopUp.js') }}"></script>
     <script>
         const RUTA_SUBIR_FOTO = "{{ url('/perfil/subir-foto') }}";
     </script>
