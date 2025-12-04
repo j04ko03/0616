@@ -273,11 +273,15 @@
             </div>
         @endif
 
-        @include('components.popUpTarea')
+@include('components.task-popup', [
+    'proyecto' => $proyecto, 
+    'tarea' => $tareaToEdit ?? null
+])
 
         <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
         <script src="{{ url('/js/popUpTarea.js') }}"></script>
         <script src="{{ url('/js/memberItem.js') }}"></script>
         <script src="{{ url('/js/filterSprintProject.js') }}"></script>
         <script src="{{ url('/js/project.js') }}"></script>
+        
     @endsection

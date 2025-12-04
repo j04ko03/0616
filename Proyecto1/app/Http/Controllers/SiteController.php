@@ -75,22 +75,65 @@ class SiteController extends Controller
         return view('crearProyecto');
     }
 
-    public function project($idProyecto)
-    {
-        try{
-            $projects = Auth::user()->proyectos;
-            $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
-            $user = Auth::user();
-            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-            $usuarios = $proyecto->usuarios;
-            $img = $user->img;
-            session()->flash('success', 'Se pasan corectamente los datos de proyectos');
-        }catch(QueryException $e){
-            $missatge = Utilitat::errorMessage($e);
-            session()->flash('error', 'No se han obtenido los datos solicitados' . ' - ' . $missatge);
+public function project($idProyecto, $tareaId = null)
+{
+    try{
+        $user = Auth::user();
+        $projects = $user->proyectos;
+        
+        $proyecto = Proyectos::with('tareas.usuarios', 'tareas.responsable', 'tareas.tags', 'estado', 'usuarios', 'grupos', 'sprints')
+            ->findOrFail($idProyecto);
+        
+        // Verificar que el usuario pertenece al proyecto
+        $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+        
+        if (!$userProject) {
+            return redirect()->route('home.controller')
+                ->with('error', 'No tienes acceso a este proyecto');
         }
-        return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
+        
+        $usuarios = $proyecto->usuarios;
+        $img = $user->img;
+        
+        // Cargar la tarea si se proporciona tareaId
+        $tareaToEdit = null;
+        if ($tareaId) {
+            $tareaToEdit = Tarea::with(['responsable', 'usuarios', 'tags', 'estado', 'sprint'])
+                ->find($tareaId);
+            
+            // Verificar que la tarea existe y pertenece al proyecto
+            if (!$tareaToEdit) {
+                return redirect()->route('project.controller', $idProyecto)
+                    ->with('error', 'La tarea no existe');
+            }
+            
+            if ($tareaToEdit->proyectoId != $idProyecto) {
+                return redirect()->route('project.controller', $idProyecto)
+                    ->with('error', 'La tarea no pertenece a este proyecto');
+            }
+            
+            // Verificar que el usuario tiene acceso a esta tarea
+            $tieneAcceso = $tareaToEdit->usuarios->contains($user->id) || $tareaToEdit->responsableId === $user->id;
+            
+            if (!$tieneAcceso) {
+                return redirect()->route('project.controller', $idProyecto)
+                    ->with('error', 'No tienes acceso a esta tarea');
+            }
+        }
+        
+        session()->flash('success', 'Se pasan correctamente los datos de proyectos');
+        
+    }catch(QueryException $e){
+        $missatge = Utilitat::errorMessage($e);
+        return redirect()->route('home.controller')
+            ->with('error', 'No se han obtenido los datos solicitados: ' . $missatge);
+    } catch(\Exception $e) {
+        return redirect()->route('home.controller')
+            ->with('error', 'Error inesperado: ' . $e->getMessage());
     }
+    
+    return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img', 'tareaToEdit'));
+}
 
     public function crearTareas(){
         try{
@@ -121,18 +164,37 @@ class SiteController extends Controller
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
-    public function verTarea($id)
-    {
-        try{
-            $tarea = Tarea::findOrFail($id);
-            $usuarios = Usuario::all();
-            session()->flash('success', 'Se pasan correctamente los datos');
-        }catch(QueryException $e){
-            $missatge = Utilitat::errorMessage($e);
-            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+public function verTarea($idTarea)
+{
+    try{
+        $tarea = Tarea::with(['proyecto', 'responsable', 'usuarios', 'tags', 'estado', 'sprint'])
+            ->findOrFail($idTarea);
+        
+        $user = Auth::user();
+        
+        // Verificar que el usuario tiene acceso a esta tarea
+        $tieneAcceso = $tarea->usuarios->contains($user->id) || $tarea->responsableId === $user->id;
+        
+        if (!$tieneAcceso) {
+            return redirect()->route('home.controller')
+                ->with('error', 'No tienes acceso a esta tarea');
         }
-        return view('components.popUpTarea', compact('tarea', 'usuarios'));
+        
+        // Redirigir al proyecto con la tarea seleccionada
+        return redirect()->route('project.controller.with.task', [
+            'idProyecto' => $tarea->proyectoId,
+            'tareaId' => $tarea->id
+        ]);
+        
+    }catch(QueryException $e){
+        $missatge = Utilitat::errorMessage($e);
+        return redirect()->route('home.controller')
+            ->with('error', 'No se han obtenido los datos: ' . $missatge);
+    } catch(\Exception $e) {
+        return redirect()->route('home.controller')
+            ->with('error', 'Error al cargar la tarea: ' . $e->getMessage());
     }
+}
 
         public function verProyecto($id)
     {

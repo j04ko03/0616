@@ -19,7 +19,7 @@
     $tags = \App\Models\Tag::all();
 @endphp
 
-<div id="taskPopup" class="popup-bg-task" style="display: none;">
+<div id="taskPopup" class="popup-bg-task" style="display: {{ $isEdit ? 'flex' : 'none' }};">
     <form action="{{ $action }}" method="POST" id="task-form" class="task-popup-form">
         @method($method)
         @csrf
@@ -121,14 +121,12 @@
             <div class="form-group-task">
                 <label for="responsableId">Responsable *</label>
                 @if($isEdit)
-                    {{-- Si es edición, mostrar el responsable como texto (no editable) --}}
                     <input type="text" 
                            value="{{ $tarea->responsable->nombre }}" 
                            readonly 
                            class="readonly-field">
                     <input type="hidden" name="responsableId" value="{{ $tarea->responsableId }}">
                 @else
-                    {{-- Si es creación, el responsable es el usuario actual --}}
                     <input type="text" 
                            value="{{ Auth::user()->nombre }}" 
                            readonly 

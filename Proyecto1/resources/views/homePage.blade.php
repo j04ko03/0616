@@ -46,14 +46,14 @@
                 @else
                     <div class="gridCards margenElementsGridTareas">
                         @foreach($tareasAsignadas as $tarea)
-                        <x-listItemTarea
-                            titulo="{{ $tarea['titulo'] }}"
-                            descripcion="{{ $tarea['descripcion'] }}"
-                            id="{{ $tarea['id'] }}"
-                            :tag="$tarea['tags']"
-                            :data-tarea="$tarea"
-                            :data-url="route('verTarea.controller', $tarea->id)"
-                        />
+<x-listItemTarea
+    titulo="{{ $tarea['titulo'] }}"
+    descripcion="{{ $tarea['descripcion'] }}"
+    id="{{ $tarea['id'] }}"
+    :tag="$tarea['tags']"
+    :data-tarea="$tarea"
+    :data-url="route('verTarea.controller', $tarea->id)"
+/>
                         @endforeach
                     </div>
                 @endif
@@ -155,7 +155,7 @@
     <script src="{{ url('/js/btnHideProject.js') }}"></script>
     <script src="{{ url('/js/clickCardProject.js') }}"></script>
     <script src="{{ url('/js/clickItemProyectoReciente.js') }}"></script>
-    <script src="{{ url('/js/clickItemTareaAsignada.js') }}"></script>
+    <script defer src="{{ url('/js/clickItemTareaAsignada.js') }}"></script>
     <script>
         const RUTA_SUBIR_FOTO_PRO = "{{ route('proyecto-subir-foto.controller') }}";
     </script>

@@ -1,3 +1,12 @@
+@props([
+    'titulo',
+    'descripcion' => '',
+    'id',
+    'tag' => [],
+    'dataTarea',
+    'dataUrl'
+])
+
 <link rel="stylesheet" href="{{ url('/css/cardItem.css') }}">
 
 <!--<div style="background-color: grey; width= 100%; height: 50px; border: 1px solid black">  -->
