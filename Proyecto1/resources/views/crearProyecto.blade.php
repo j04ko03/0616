@@ -6,43 +6,40 @@
 @endpush
 
 @section('content')
+    <div id="main">
 
-    <body>
-        <main>
-
-            <form action="{{ route('createProject.controller') }}" method="POST" id="project">
-                @csrf
-                <a id="cerrarCrearProyecto" href="{{ route('home.controller') }}">X</a>
-                <label for="titulo"></label>
-                <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required maxlength="100">
+        <form action="{{ route('createProject.controller') }}" method="POST" id="project">
+            @csrf
+            <a id="cerrarCrearProyecto" href="{{ route('home.controller') }}">X</a>
+            <label for="titulo"></label>
+            <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required maxlength="100">
+            <div>
                 <div>
-                    <div>
-                        <label for="fecha-limite">Fecha límite *</label>
-                        <input type="date" name="fecha-limite" id="fecha-limite" required min="">
+                    <label for="fecha-limite">Fecha límite *</label>
+                    <input type="date" name="fecha-limite" id="fecha-limite" required min="">
 
-                        <label for="link">Link del proyecto</label>
-                        <input type="url" name="link" id="link">
+                    <label for="link">Link del proyecto</label>
+                    <input type="url" name="link" id="link">
 
-                        <label for="descripcion">Descripción</label>
-                        <input type="text" name="descripcion" id="descripcion" maxlength="255">
+                    <label for="descripcion">Descripción</label>
+                    <input type="text" name="descripcion" id="descripcion" maxlength="255">
 
 
-                        <label for="presupuesto">Presupuesto</label>
-                        <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
+                    <label for="presupuesto">Presupuesto</label>
+                    <input type="number" name="presupuesto" id="presupuesto" placeholder="€€€" step="00.01">
 
-                    </div>
-                    <div>
-                        <a href="{{ route('tareas.controller') }}">
-                            <button type="button" id="add-tareas-btn">Añadir tarea</button>
-                        </a>
-                        <div id="tareas">
-                        </div>
-                        <input type="submit" value="Añadir proyecto" id="add-proyecto-btn">
-                    </div>
                 </div>
-            </form>
-        </main>
-    </body>
+                <div>
+                    <a href="{{ route('tareas.controller') }}">
+                        <button type="button" id="add-tareas-btn">Añadir tarea</button>
+                    </a>
+                    <div id="tareas">
+                    </div>
+                    <input type="submit" value="Añadir proyecto" id="add-proyecto-btn">
+                </div>
+            </div>
+        </form>
+    </div>
     <script>
         const today = new Date().toISOString().split("T")[0];
         document.querySelector("#fecha-limite").min = today;
@@ -58,5 +55,5 @@
         })
     </script>
     <script src="{{ url('/js/recuperarTareaSinProyecto.js') }}"></script>
-     <script src="{{ url('/js/noPerderinputsProyecto.js') }}"></script>
+    <script src="{{ url('/js/noPerderinputsProyecto.js') }}"></script>
 @endsection

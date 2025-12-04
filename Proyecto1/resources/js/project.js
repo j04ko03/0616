@@ -1,3 +1,10 @@
+// MINIMUM TODAY
+const today = new Date().toISOString().split("T")[0];
+const inputDateProject = document.querySelector("#fecha-limite");
+if (inputDateProject) {
+    inputDateProject.min = today;
+}
+
 // REDIRECT TO NEW URL WITH PROJECT ID
 document.getElementById("projects").addEventListener("change", function (e) {
     window.location = `${e.target.value}`;
@@ -146,6 +153,25 @@ formUpdateUserAdmin.addEventListener("click", function (e) {
     e.stopPropagation();
 });
 
+// ADD GROUP
+const cancelAddGrpBtn = document.getElementById("cancel-add-grp-btn");
+const formAddGrp = document.getElementById("add-grp-form");
+const addGrpBtn = document.getElementById("add-group");
+
+addGrpBtn.addEventListener("click", function () {
+    popupBg.style.display = "flex";
+    formAddGrp.style.display = "flex";
+});
+
+cancelAddGrpBtn.addEventListener("click", function () {
+    popupBg.style.display = "none";
+    formAddGrp.style.display = "none";
+});
+
+formAddGrp.addEventListener("click", function (e) {
+    e.stopPropagation();
+});
+
 // GLOBAL BACKGROUND
 popupBg.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -155,4 +181,5 @@ popupBg.addEventListener("click", function (e) {
     popupBg.style.display = "none";
     formDeleteUserProject.style.display = "none";
     formUpdateUserAdmin.style.display = "none";
+    formAddGrp.style.display = "none";
 });
