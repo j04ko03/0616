@@ -94,46 +94,47 @@ class SiteController extends Controller
         return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img'));
     }
 
-    return view('project', compact(
-        'proyecto',
-        'projects',
-        'idProyecto',
-        'user',
-        'userProject',
-        'usuarios',
-        'img',
-        'tareaSeleccionada'
-    ));
-    }
-
-    public function crearTareas()
-    {
-        $estados  = Estado::all();
-        $sprints  = Sprint::all();
-        $tags     = Tag::all();
-        $usuarios = Usuario::all();
+    public function crearTareas(){
+        try{
+            $estados = Estado::all();
+            $sprints = Sprint::all();
+            $tags = Tag::all();
+            $usuarios = Usuario::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
         return view('crearTareas', compact('estados', 'sprints', 'tags', 'usuarios'));
     }
 
-    public function vistaGlobal()
-    {
-        $grupos      = Grupo::with('usuarios')->get();
-        $incidencias = Incidencia::with('usuario')->get();
-        $solicitudes = Solicitud::with('usuario')->get();
-        $usuarios    = Usuario::all();
-        $proyectos   = Proyectos::with(['tareas.tags', 'administrador'])->get();
+    public function vistaGlobal(){
+        try{
+            $grupos = Grupo::with('usuarios')->get();
+            $incidencias = Incidencia::with('usuario')->get();
+            $solicitudes = Solicitud::with('usuario')->get();
+            $usuarios = Usuario::all();
+            $proyectos = Proyectos::with(['tareas.tags', 'administrador'])->get();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
-public function verTarea($id)
-{
-    $tarea = Tarea::with(['proyecto', 'usuarios', 'tags', 'estado', 'responsable', 'sprint'])->findOrFail($id);
-    
-    // Usar parámetros de consulta en lugar de parámetros de ruta
-    return redirect()->route('project.controller', [
-        'idProyecto' => $tarea->proyectoId
-    ]) . '?tareaId=' . $tarea->id;
-}
+    public function verTarea($id)
+    {
+        try{
+            $tarea = Tarea::findOrFail($id);
+            $usuarios = Usuario::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
+        }
+        return view('components.popUpTarea', compact('tarea', 'usuarios'));
+    }
 
     public function verProyecto($id)
     {
