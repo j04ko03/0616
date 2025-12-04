@@ -3,9 +3,12 @@
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('/css/project.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 @section('content')
+    @include('errores2')  
+
     @if (session('success'))
         <div class="alert-project alert-project-success">
             {{ session('success') }}
