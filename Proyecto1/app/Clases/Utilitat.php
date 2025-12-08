@@ -1,8 +1,22 @@
 <?php
 
 namespace App\Clases;
-
+/**
+ * Clase de utilidades para gestionar y traducir errores SQL Server / MySQL.
+ *
+ * Proporciona mensajes legibles al usuario final cuando se producen errores 
+ * durante operaciones CRUD.
+ *
+ * @package App\Clases
+ */
 class Utilitat{
+    /**
+     * errorMessage es una función que acoge los errores de sql server/mysql por parámetro y devuelve 
+     * en formato string que error es, de este modo esl usuario puede entender que pasa al hacer el CRUD
+     * @param mixed $e Escepción devuelta por el sistema
+     * @return string mensaje de error listo para mostrar al usuario
+     * @author josep <jguius2021@cepnet.net>
+     */
     public static function errorMessage($e){
         if (!empty($e->errorInfo[1])) {
             switch ($e->errorInfo[1]) {

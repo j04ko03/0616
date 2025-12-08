@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+/**
+*@package App\Http\Controllers
+*/
 
 use App\Models\Grupo;
 use Illuminate\Http\Request;
@@ -25,6 +28,13 @@ class GrupoController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * Unción en el controlador de grupos donde guardamos un grupo y los usuarios que llegaun en un 
+     * array. Primero guarda el grupo y luego mediante un attach guarda los datos en la tabla intermedia.
+     * @param Request $request Nombre del grupo y array de usuarios
+     * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
+     * @author josep <jguius2021@cepnet.net>
      */
     public function store(Request $request)
     {
@@ -67,6 +77,15 @@ class GrupoController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    /**
+     * Función que recibe por parámetro el nuevo array de usuarios y el grupo
+     * Guarda los nuevos datos de grupo
+     * Con el sync, hace que reemplaza todas las relaciones actuales con las que pases. Como podemos borrar usuarios
+     * @param Request $request Array de usuarios
+     * @param Grupo $grupo id de grupo (Grupo)
+     * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function update(Request $request, Grupo $grupo)
     {
         // 
@@ -85,6 +104,12 @@ class GrupoController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     */
+    /**
+     * Borra el grupo seleccionado. Borra los usuarios en ese grupo con el detach()
+     * @param Grupo $grupo id de grupo (Grupo)
+     * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
+     * @author josep <jguius2021@cepnet.net>
      */
     public function destroy(Grupo $grupo)
     {
