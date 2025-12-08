@@ -1124,7 +1124,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -1161,9 +1161,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_borrarSolicitudActualizarUser">borrarSolicitudActualizarUser()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a>    </span>
 </dt>
-<dd>Update user and then delete object</dd>
+<dd>Funciós que al aceptar la solicitud de usuario, actualiza el usuario y luego borra la solicitud</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_create">create()</a>
@@ -1175,9 +1175,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_destroy">destroy()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a>    </span>
 </dt>
-<dd>Remove the specified resource from storage.</dd>
+<dd>Función para borrar las solicitudes</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_edit">edit()</a>
@@ -1203,9 +1203,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_store">store()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a>    </span>
 </dt>
-<dd>Store a newly created resource in storage.</dd>
+<dd>Esta función crea una solicitud de S.U.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-SolicitudController.html#method_update">update()</a>
@@ -1242,15 +1242,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">103</span>
+    <span class="phpdocumentor-element-found-in__line">127</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Update user and then delete object</p>
+        <p class="phpdocumentor-summary">Funciós que al aceptar la solicitud de usuario, actualiza el usuario y luego borra la solicitud</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">borrarSolicitudActualizarUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Solicitud.html"><abbr title="\App\Models\Solicitud">Solicitud</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$solicitude</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">borrarSolicitudActualizarUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Solicitud.html"><abbr title="\App\Models\Solicitud">Solicitud</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$solicitude</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1263,15 +1263,51 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Solicitud.html"><abbr title="\App\Models\Solicitud">Solicitud</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Solicitud con usuario</p>
+</section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Http-Controllers-SolicitudController.html#method_borrarSolicitudActualizarUser#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Illuminate-Database-QueryException.html"><abbr title="\Illuminate\Database\QueryException">QueryException</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>En caso de error hace uso de la clase de Utilitat para devolver el error.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>josep <a href="mailto:jguius2021@cepnet.net">jguius2021@cepnet.net</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirecciona a vista Global.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1287,7 +1323,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -1322,15 +1358,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">101</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Remove the specified resource from storage.</p>
+        <p class="phpdocumentor-summary">Función para borrar las solicitudes</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">destroy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Solicitud.html"><abbr title="\App\Models\Solicitud">Solicitud</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$solicitude</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">destroy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Solicitud.html"><abbr title="\App\Models\Solicitud">Solicitud</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$solicitude</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1348,10 +1384,44 @@
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Http-Controllers-SolicitudController.html#method_destroy#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Illuminate-Database-QueryException.html"><abbr title="\Illuminate\Database\QueryException">QueryException</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>En caso de error hace uso de la clase de Utilitat para devolver el error.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>josep <a href="mailto:jguius2021@cepnet.net">jguius2021@cepnet.net</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirecciona a Vista Global.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1367,7 +1437,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">77</span>
 
     </aside>
 
@@ -1412,7 +1482,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -1447,7 +1517,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">59</span>
+    <span class="phpdocumentor-element-found-in__line">69</span>
 
     </aside>
 
@@ -1492,15 +1562,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Store a newly created resource in storage.</p>
+        <p class="phpdocumentor-summary">Esta función crea una solicitud de S.U.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">store</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">store</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1513,15 +1583,51 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Devuelve la clave para poder hacer la solicitud. En caso de ser correcta.</p>
+</section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Http-Controllers-SolicitudController.html#method_store#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Illuminate-Database-QueryException.html"><abbr title="\Illuminate\Database\QueryException">QueryException</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>En caso de error hace uso de la clase de Utilitat para devolver el error.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>josep <a href="mailto:jguius2021@cepnet.net">jguius2021@cepnet.net</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Devuelve al usuario a Perfil.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1537,7 +1643,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/SolicitudController.php"><a href="files/app-http-controllers-solicitudcontroller.html"><abbr title="app/Http/Controllers/SolicitudController.php">SolicitudController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">75</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
     </aside>
 

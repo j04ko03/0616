@@ -1124,7 +1124,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">10</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
@@ -1168,9 +1168,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-IncidenciaController.html#method_destroy">destroy()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a>    </span>
 </dt>
-<dd>Remove the specified resource from storage.</dd>
+<dd>Función que se encarga de borrar Incidencias.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-IncidenciaController.html#method_edit">edit()</a>
@@ -1196,9 +1196,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-IncidenciaController.html#method_store">store()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: <a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a>    </span>
 </dt>
-<dd>Store a newly created resource in storage.</dd>
+<dd>Función que guarda las incidencias del proyecto.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/App-Http-Controllers-IncidenciaController.html#method_update">update()</a>
@@ -1235,7 +1235,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
@@ -1270,15 +1270,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">80</span>
+    <span class="phpdocumentor-element-found-in__line">97</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Remove the specified resource from storage.</p>
+        <p class="phpdocumentor-summary">Función que se encarga de borrar Incidencias.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">destroy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Incidencia.html"><abbr title="\App\Models\Incidencia">Incidencia</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$incidencia</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">destroy</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Incidencia.html"><abbr title="\App\Models\Incidencia">Incidencia</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$incidencia</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1291,15 +1291,51 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/App-Models-Incidencia.html"><abbr title="\App\Models\Incidencia">Incidencia</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Recibe la incidencia por parámetro.</p>
+</section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Http-Controllers-IncidenciaController.html#method_destroy#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Illuminate-Database-QueryException.html"><abbr title="\Illuminate\Database\QueryException">QueryException</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>En caso de error hace uso de la clase de Utilitat para devolver el error.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>josep <a href="mailto:jguius2021@cepnet.net">jguius2021@cepnet.net</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirecciona devuelta hacia VistaGlobal.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1315,7 +1351,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">74</span>
 
     </aside>
 
@@ -1360,7 +1396,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -1395,7 +1431,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">66</span>
 
     </aside>
 
@@ -1440,15 +1476,15 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Store a newly created resource in storage.</p>
+        <p class="phpdocumentor-summary">Función que guarda las incidencias del proyecto.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">store</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">store</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -1461,15 +1497,51 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Illuminate-Http-Request.html"><abbr title="\Illuminate\Http\Request">Request</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"><p>Recibe la incidencia como string.</p>
+</section>
+
             </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/App-Http-Controllers-IncidenciaController.html#method_store#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><a href="classes/Illuminate-Database-QueryException.html"><abbr title="\Illuminate\Database\QueryException">QueryException</abbr></a></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>En caso de error hace uso de la clase de Utilitat para devolver el error.</p>
+</section>
+
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">author</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>josep <a href="mailto:jguius2021@cepnet.net">jguius2021@cepnet.net</a></p>
+</section>
+
+                                    </dd>
+                                            </dl>
 
     
 
-    
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Illuminate-Http-RedirectResponse.html"><abbr title="\Illuminate\Http\RedirectResponse">RedirectResponse</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Redirecciona otra vez hacia Perfil.</p>
+</section>
+
+            </section>
+
 </article>
                     <article
         class="phpdocumentor-element
@@ -1485,7 +1557,7 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="app/Http/Controllers/IncidenciaController.php"><a href="files/app-http-controllers-incidenciacontroller.html"><abbr title="app/Http/Controllers/IncidenciaController.php">IncidenciaController.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">72</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
     </aside>
 

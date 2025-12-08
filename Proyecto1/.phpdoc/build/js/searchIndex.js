@@ -8,7 +8,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Clases\\Utilitat\u003A\u003AerrorMessage\u0028\u0029",
             "name": "errorMessage",
-            "summary": "errorMessage\u0020es\u0020una\u0020funci\u00F3n\u0020que\u0020acoge\u0020los\u0020errores\u0020de\u0020sqdl\u0020server\/mysql\u0020por\u0020par\u00E1metro\u0020y\u0020devuelve\nen\u0020formato\u0020string\u0020que\u0020error\u0020es,\u0020de\u0020este\u0020modo\u0020esl\u0020usuario\u0020puede\u0020entender\u0020que\u0020pasa\u0020al\u0020hacer\u0020el\u0020CRUD",
+            "summary": "errorMessage\u0020es\u0020una\u0020funci\u00F3n\u0020que\u0020acoge\u0020los\u0020errores\u0020de\u0020sql\u0020server\/mysql\u0020por\u0020par\u00E1metro\u0020y\u0020devuelve\nen\u0020formato\u0020string\u0020que\u0020error\u0020es,\u0020de\u0020este\u0020modo\u0020esl\u0020usuario\u0020puede\u0020entender\u0020que\u0020pasa\u0020al\u0020hacer\u0020el\u0020CRUD",
             "url": "classes/App-Clases-Utilitat.html#method_errorMessage"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\Controller",
@@ -73,7 +73,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GrupoController\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
+            "summary": "Unci\u00F3n\u0020en\u0020el\u0020controlador\u0020de\u0020grupos\u0020donde\u0020guardamos\u0020un\u0020grupo\u0020y\u0020los\u0020usuarios\u0020que\u0020llegaun\u0020en\u0020un\narray.\u0020Primero\u0020guarda\u0020el\u0020grupo\u0020y\u0020luego\u0020mediante\u0020un\u0020attach\u0020guarda\u0020los\u0020datos\u0020en\u0020la\u0020tabla\u0020intermedia.",
             "url": "classes/App-Http-Controllers-GrupoController.html#method_store"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GrupoController\u003A\u003Ashow\u0028\u0029",
@@ -88,12 +88,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GrupoController\u003A\u003Aupdate\u0028\u0029",
             "name": "update",
-            "summary": "Update\u0020the\u0020specified\u0020resource\u0020in\u0020storage.",
+            "summary": "Funci\u00F3n\u0020que\u0020recibe\u0020por\u0020par\u00E1metro\u0020el\u0020nuevo\u0020array\u0020de\u0020usuarios\u0020y\u0020el\u0020grupo\nGuarda\u0020los\u0020nuevos\u0020datos\u0020de\u0020grupo\nCon\u0020el\u0020sync,\u0020hace\u0020que\u0020reemplaza\u0020todas\u0020las\u0020relaciones\u0020actuales\u0020con\u0020las\u0020que\u0020pases.\u0020Como\u0020podemos\u0020borrar\u0020usuarios",
             "url": "classes/App-Http-Controllers-GrupoController.html#method_update"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\GrupoController\u003A\u003Adestroy\u0028\u0029",
             "name": "destroy",
-            "summary": "Remove\u0020the\u0020specified\u0020resource\u0020from\u0020storage.",
+            "summary": "Borra\u0020el\u0020grupo\u0020seleccionado.\u0020Borra\u0020los\u0020usuarios\u0020en\u0020ese\u0020grupo\u0020con\u0020el\u0020detach\u0028\u0029",
             "url": "classes/App-Http-Controllers-GrupoController.html#method_destroy"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IncidenciaController",
@@ -113,7 +113,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IncidenciaController\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
+            "summary": "Funci\u00F3n\u0020que\u0020guarda\u0020las\u0020incidencias\u0020del\u0020proyecto.",
             "url": "classes/App-Http-Controllers-IncidenciaController.html#method_store"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IncidenciaController\u003A\u003Ashow\u0028\u0029",
@@ -133,7 +133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\IncidenciaController\u003A\u003Adestroy\u0028\u0029",
             "name": "destroy",
-            "summary": "Remove\u0020the\u0020specified\u0020resource\u0020from\u0020storage.",
+            "summary": "Funci\u00F3n\u0020que\u0020se\u0020encarga\u0020de\u0020borrar\u0020Incidencias.",
             "url": "classes/App-Http-Controllers-IncidenciaController.html#method_destroy"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\ProyectosController",
@@ -213,12 +213,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003Ahome\u0028\u0029",
             "name": "home",
-            "summary": "",
+            "summary": "Funci\u00F3n\u0020que\u0020se\u0020encarga\u0020de\u0020cargar\u0020los\u0020datos\u0020necesarios\u0020para\u0020acceder\u0020al\u0020DashBoard\u0020de\u0020la\u0020app.",
             "url": "classes/App-Http-Controllers-SiteController.html#method_home"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003Aperfil\u0028\u0029",
             "name": "perfil",
-            "summary": "",
+            "summary": "Funci\u00F3n\u0020para\u0020acceder\u0020a\u0020la\u0020ruta\u0020de\u0020perfil",
             "url": "classes/App-Http-Controllers-SiteController.html#method_perfil"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003AcrearProyecto\u0028\u0029",
@@ -233,22 +233,22 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003AcrearTareas\u0028\u0029",
             "name": "crearTareas",
-            "summary": "",
+            "summary": "Funci\u00F3\u0020para\u0020acceder\u0020a\u0020la\u0020vista\u0020para\u0020crear\u0020tareas.",
             "url": "classes/App-Http-Controllers-SiteController.html#method_crearTareas"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003AvistaGlobal\u0028\u0029",
             "name": "vistaGlobal",
-            "summary": "",
+            "summary": "Funci\u00F3n\u0020para\u0020acceder\u0020a\u0020la\u0020Vista\u0020Global.\u0020Funci\u00F3n\u0020que\u0020tendr\u00E1\u0020S.U\u0020y\u0020S.A",
             "url": "classes/App-Http-Controllers-SiteController.html#method_vistaGlobal"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003AverTarea\u0028\u0029",
             "name": "verTarea",
-            "summary": "",
+            "summary": "Funci\u00F3n\u0020para\u0020acceder\u0020a\u0020la\u0020Vista\u0020de\u0020la\u0020tarea\u0020para\u0020poder\u0020modificarla.",
             "url": "classes/App-Http-Controllers-SiteController.html#method_verTarea"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SiteController\u003A\u003AverProyecto\u0028\u0029",
             "name": "verProyecto",
-            "summary": "",
+            "summary": "Funci\u00F3n\u0020para\u0020acceder\u0020a\u0020un\u0020proyecto\u0020clicacble\u0020del\u0020home.",
             "url": "classes/App-Http-Controllers-SiteController.html#method_verProyecto"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SolicitudController",
@@ -268,7 +268,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SolicitudController\u003A\u003Astore\u0028\u0029",
             "name": "store",
-            "summary": "Store\u0020a\u0020newly\u0020created\u0020resource\u0020in\u0020storage.",
+            "summary": "Esta\u0020funci\u00F3n\u0020crea\u0020una\u0020solicitud\u0020de\u0020S.U.",
             "url": "classes/App-Http-Controllers-SolicitudController.html#method_store"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SolicitudController\u003A\u003Ashow\u0028\u0029",
@@ -288,12 +288,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SolicitudController\u003A\u003Adestroy\u0028\u0029",
             "name": "destroy",
-            "summary": "Remove\u0020the\u0020specified\u0020resource\u0020from\u0020storage.",
+            "summary": "Funci\u00F3n\u0020para\u0020borrar\u0020las\u0020solicitudes",
             "url": "classes/App-Http-Controllers-SolicitudController.html#method_destroy"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SolicitudController\u003A\u003AborrarSolicitudActualizarUser\u0028\u0029",
             "name": "borrarSolicitudActualizarUser",
-            "summary": "Update\u0020user\u0020and\u0020then\u0020delete\u0020object",
+            "summary": "Funci\u00F3s\u0020que\u0020al\u0020aceptar\u0020la\u0020solicitud\u0020de\u0020usuario,\u0020actualiza\u0020el\u0020usuario\u0020y\u0020luego\u0020borra\u0020la\u0020solicitud",
             "url": "classes/App-Http-Controllers-SolicitudController.html#method_borrarSolicitudActualizarUser"
         },                {
             "fqsen": "\\App\\Http\\Controllers\\SprintController",
