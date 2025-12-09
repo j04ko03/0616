@@ -10,9 +10,6 @@
 @section('content')
 
     @include('errores2')  
-    <!--<div id="errores">
-        @include('errores')
-    </div>-->
     <h1 class="h1" style="margin-left: 3.5%; margin-top: 1%;">DASHBOARD</h1>
     <div class="container mx-auto p-4">
         <div class="contenedorBtnsPrincipales">
