@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 abstract class Controller
 {
-    //
+    //No hace falta comentar esto, pero crea el enlace en el servidor se tiene que probar
     public function crearLink()
     {
         $exitCode = Artisan::call('storage:link');
