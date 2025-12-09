@@ -674,7 +674,7 @@ form > div > div {
     background-color: #d42d20;
     color: var(--color-white);
 }
-
+ 
 /* TOAST NOTIFICATION */
 .alert-project {
     position: absolute;

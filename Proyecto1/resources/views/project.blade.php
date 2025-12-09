@@ -6,6 +6,7 @@
 @endpush
 
 @section('content')
+
     @if (session('success'))
         <div class="alert-project alert-project-success">
             {{ session('success') }}

@@ -3,12 +3,14 @@
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
     <link rel="stylesheet" href="{{ url('/css/crearTareas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 @section('content')
-    <div id="errores">
+    @include('errores2')  
+    <!--<div id="errores">
         @include('errores')
-    </div>
+    </div>-->
     <main>
         <form action="project" method="POST">
             @csrf
