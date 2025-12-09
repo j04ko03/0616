@@ -21,5 +21,6 @@ abstract class Controller
         }
 
         return view('auth.signIn');
-    }
+    }   
+    //
 }
