@@ -9,11 +9,12 @@
 @endpush
 
 @section('content')
+    @include('errores2')    
     @include('components.popUp')    
 
-    <div id="errores">
+    <!--<div id="errores">
         @include('errores')
-    </div>
+    </div>-->
     <!--comentario-->
     <div class="container" style="height: 800px;">
 

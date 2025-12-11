@@ -6,6 +6,7 @@
 @endpush
 
 @section('content')
+
     @if (session('success'))
         <div class="alert-project alert-project-success">
             {{ session('success') }}
@@ -48,7 +49,7 @@
             <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
             <button class="tabs-btn" data-tab="4">Integrantes</button>
             <select name="sprints" id="sprints">
-                @foreach ($proyecto->sprints as $sprint)
+                @foreach ($sprints as $sprint)
                     <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
 
                         {{ $sprint->descripcion }}
@@ -161,13 +162,13 @@
                             @foreach ($proyecto->usuarios as $usuario)
                                 <x-memberItem id="{{ $usuario->id }}" nombre="{{ $usuario->nombre }}"
                                     rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="auto"
-                                    img="{{ $img }}" />
+                                    img="{{ $usuario->img }}" />
                             @endforeach
                         @else
                             @foreach ($proyecto->usuarios as $usuario)
                                 <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
                                     rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
-                                    img="{{ $img }}" />
+                                    img="{{ $usuario->img }}" />
                             @endforeach
                         @endif
                     </div>

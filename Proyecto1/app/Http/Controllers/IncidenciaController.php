@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+/**
+*@package App\Http\Controllers
+*/
 
 use App\Clases\Utilitat;
 use App\Models\Incidencia;
@@ -27,6 +30,13 @@ class IncidenciaController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * Función que guarda las incidencias del proyecto.
+     * @param Request $request Recibe la incidencia como string.
+     * @return \Illuminate\Http\RedirectResponse Redirecciona otra vez hacia Perfil.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
      */
     public function store(Request $request)
     {
@@ -77,6 +87,13 @@ class IncidenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    /**
+     * Función que se encarga de borrar Incidencias.
+     * @param Incidencia $incidencia Recibe la incidencia por parámetro.
+     * @return \Illuminate\Http\RedirectResponse Redirecciona devuelta hacia VistaGlobal.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function destroy(Incidencia $incidencia)
     {
         try{
@@ -88,6 +105,6 @@ class IncidenciaController extends Controller
             session()->flash('error', 'No se han eliminado los datos' . ' - ' . $missatge);
             $response = $response = redirect()->back();
         }
-        return response;
+        return $response;
     }
 }

@@ -7,8 +7,12 @@ use App\Http\Controllers\GrupoController;
 use App\Http\Controllers\TareaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProyectosController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\IncidenciaController;
+
+//Crear storagelink en server - Ejecutar en el server una VEZ solo la primera vez
+Route::get('/storage-link', [Controller::class, 'crearLink']);
 
 // Rutas sin middleware/auth.
 Route::get('/signup', [UsuarioController::class, 'create'])->name('signup.controller');

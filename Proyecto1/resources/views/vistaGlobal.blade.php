@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="{{ url('/css/grupoItem.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/perfilBlade.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 @section('content')
-
-    <div id="errores">
+    @include('errores2')  
+    <!--<div id="errores">
         @include('errores')
-    </div>
+    </div>-->
     <div id="grid-container">
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Usuarios</button>

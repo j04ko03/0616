@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+/**
+*@package App\Http\Controllers
+*/
 
 use App\Models\Tag;
 use App\Models\User;
@@ -27,9 +30,19 @@ class SiteController extends Controller
         return view('layouts.barraNavegacion');
     }
 
+    /**
+     * Función que se encarga de cargar los datos necesarios para acceder al DashBoard de la app.
+     * @usuario Toma el usuario loggeado en esta sesión.
+     * @proyectosRecientes Coge los primeros 6 proyectos por orden de fechaModificación del usuario.
+     * @proyectosTotal Coge los proyectos que tiene el usuario.
+     * @tareasAsignadas Coge las tareas que están asignadas al usuario.
+     * @return \Illuminate\Contracts\View\View Devuelve la vista del home junto a las variables comentadas anteriormente.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error de bd.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function home()
     {
-        
+
         try{
             $usuario = Auth::user();
 
@@ -58,6 +71,14 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * Función para acceder a la ruta de perfil
+     * @solicitudes Solicitudes que tiene el usuario.
+     * @usuario Usuario loggeado.
+     * @return \Illuminate\Contracts\View\View Devuelve la vista de perfil con las variables comentadas anteriormente.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error de BD.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function perfil()
     {
         try{
@@ -75,21 +96,19 @@ class SiteController extends Controller
         return view('crearProyecto');
     }
 
-public function project($idProyecto, $tareaId = null)
-{
-    try{
-        $user = Auth::user();
-        $projects = $user->proyectos;
-        
-        $proyecto = Proyectos::with('tareas.usuarios', 'tareas.responsable', 'tareas.tags', 'estado', 'usuarios', 'grupos', 'sprints')
-            ->findOrFail($idProyecto);
-        
-        // Verificar que el usuario pertenece al proyecto
-        $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
-        
-        if (!$userProject) {
-            return redirect()->route('home.controller')
-                ->with('error', 'No tienes acceso a este proyecto');
+    public function project($idProyecto)
+    {
+        try{
+            $projects = Auth::user()->proyectos;
+            $proyecto = Proyectos::with('tareas', 'estado', 'usuarios', 'grupos', 'sprints')->findOrFail($idProyecto);
+            $user = Auth::user();
+            $userProject = $proyecto->usuarios->firstWhere('id', $user->id);
+            $usuarios = $proyecto->usuarios;
+            $img = $user->img;
+            $sprints = Sprint::all();
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos solicitados' . ' - ' . $missatge);
         }
         
         $usuarios = $proyecto->usuarios;
@@ -135,6 +154,16 @@ public function project($idProyecto, $tareaId = null)
     return view('project', compact('proyecto', 'projects', 'idProyecto', 'user', 'userProject', 'usuarios', 'img', 'tareaToEdit'));
 }
 
+    /**
+     * Funció para acceder a la vista para crear tareas.
+     * @estados Lista de todos los estados.
+     * @sprints Lista de todos los sprints.
+     * @tags Lista de todos los tags.
+     * @usuarios Lista de todos los usuarios.
+     * @return \Illuminate\Contracts\View\View Devuelve la vista de crearTareas con las variables comentadas.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error de BD.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function crearTareas(){
         try{
             $estados = Estado::all();
@@ -149,6 +178,17 @@ public function project($idProyecto, $tareaId = null)
         return view('crearTareas', compact('estados', 'sprints', 'tags', 'usuarios'));
     }
 
+    /**
+     * Función para acceder a la Vista Global. Función que tendrá S.U y S.A
+     * @grupos Lista de los grupos con sus usuarios respectivos.
+     * @incidencias Lista de las incidencias con sus usuarios respectivos.
+     * @solicitudes Lista de las solicitudes de Super User con sus usuarios respectivos.
+     * @usuarios Lista de todos los usuarios de la BD.
+     * @proyectos Lista de los proyectos de la BD con sus tags (lista) y su adminiistrador (usuario)
+     * @return \Illuminate\Contracts\View\View Devuelve la vista de vistaGlobal con las variables comentadas.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function vistaGlobal(){
         try{
             $grupos = Grupo::with('usuarios')->get();
@@ -164,20 +204,24 @@ public function project($idProyecto, $tareaId = null)
         return view('vistaGlobal', compact('usuarios', 'grupos', 'solicitudes', 'incidencias', 'proyectos'));
     }
 
-public function verTarea($idTarea)
-{
-    try{
-        $tarea = Tarea::with(['proyecto', 'responsable', 'usuarios', 'tags', 'estado', 'sprint'])
-            ->findOrFail($idTarea);
-        
-        $user = Auth::user();
-        
-        // Verificar que el usuario tiene acceso a esta tarea
-        $tieneAcceso = $tarea->usuarios->contains($user->id) || $tarea->responsableId === $user->id;
-        
-        if (!$tieneAcceso) {
-            return redirect()->route('home.controller')
-                ->with('error', 'No tienes acceso a esta tarea');
+    /**
+     * Función para acceder a la Vista de la tarea para poder modificarla.
+     * @param mixed $id Tarea a buscar y mostrar.
+     * @tarea Tarea buscada por el id.
+     * @usuarios Lista de todos los usuarios.
+     * @return \Illuminate\Contracts\View\View Devuelve la vista popUpTarea con las variables comentadas.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
+     */
+    public function verTarea($id)
+    {
+        try{
+            $tarea = Tarea::findOrFail($id);
+            $usuarios = Usuario::all();
+            session()->flash('success', 'Se pasan correctamente los datos');
+        }catch(QueryException $e){
+            $missatge = Utilitat::errorMessage($e);
+            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
         }
         
         // Redirigir al proyecto con la tarea seleccionada
@@ -196,7 +240,14 @@ public function verTarea($idTarea)
     }
 }
 
-        public function verProyecto($id)
+    /**
+     * Función para acceder a un proyecto clicacble del home.
+     * @param mixed $id id de proyecto a buscar.
+     * @proyecto Proyecto obtenido por el @id
+     * @return \Illuminate\Contracts\View\View Devuelve la vista de projects.
+     * @author josep <jguius2021@cepnet.net>
+     */
+    public function verProyecto($id)
     {
         $proyecto = Proyectos::findOrFail($id);
         return view('#', compact('proyecto'));

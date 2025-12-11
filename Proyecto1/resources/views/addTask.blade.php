@@ -1,12 +1,14 @@
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/addTask.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/homePageBlade.css') }}">
 @endpush
 
 @section('content')
 
-    <div id="errores">
+    @include('errores2')  
+    <!--<div id="errores">
         @include('errores')
-    </div>
+    </div>-->
     <body>
         <main>
             <div id="select-container">

@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+/**
+*@package App\Http\Controllers
+*/
 
 use App\Clases\Utilitat;
 use App\Models\Solicitud;
@@ -27,6 +30,13 @@ class SolicitudController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     */
+    /**
+     * Esta función crea una solicitud de S.U.
+     * @param Request $request Devuelve la clave para poder hacer la solicitud. En caso de ser correcta. 
+     * @return \Illuminate\Http\RedirectResponse Devuelve al usuario a Perfil.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
      */
     public function store(Request $request)
     {
@@ -81,6 +91,13 @@ class SolicitudController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    /**
+     * Función para borrar las solicitudes
+     * @param Solicitud $solicitude
+     * @return \Illuminate\Http\RedirectResponse Redirecciona a Vista Global.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
+     */
     public function destroy(Solicitud $solicitude)
     {
         //
@@ -99,6 +116,13 @@ class SolicitudController extends Controller
 
     /**
      * Update user and then delete object
+     */
+    /**
+     * Funciós que al aceptar la solicitud de usuario, actualiza el usuario y luego borra la solicitud
+     * @param Solicitud $solicitude Solicitud con usuario
+     * @return \Illuminate\Http\RedirectResponse Redirecciona a vista Global.
+     * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
+     * @author josep <jguius2021@cepnet.net>
      */
     public function borrarSolicitudActualizarUser(Solicitud $solicitude)
     {
