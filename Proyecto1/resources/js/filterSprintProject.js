@@ -15,7 +15,16 @@ window.addEventListener("load", function () {
 
 function filterTasks(tasks) {
     tasks.forEach((task) => {
-        if (sprintDropdown.value !== task.dataset.sprint) {
+        if (sprintDropdown.value === "all" || sprintDropdown.value === "") {
+            task.classList.remove("filter-sprint");
+        } else if (sprintDropdown.value === "no-sprint") {
+            // Show only tasks with no sprint (empty dataset.sprint)
+            if (!task.dataset.sprint || task.dataset.sprint === "") {
+                task.classList.remove("filter-sprint");
+            } else {
+                task.classList.add("filter-sprint");
+            }
+        } else if (sprintDropdown.value != task.dataset.sprint) {
             task.classList.add("filter-sprint");
         } else {
             task.classList.remove("filter-sprint");

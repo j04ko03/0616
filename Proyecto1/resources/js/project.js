@@ -1,185 +1,233 @@
 // MINIMUM TODAY
-const today = new Date().toISOString().split("T")[0];
+const todayProject = new Date().toISOString().split("T")[0];
 const inputDateProject = document.querySelector("#fecha-limite");
 if (inputDateProject) {
-    inputDateProject.min = today;
+    inputDateProject.min = todayProject;
 }
 
 // REDIRECT TO NEW URL WITH PROJECT ID
-document.getElementById("projects").addEventListener("change", function (e) {
-    window.location = `${e.target.value}`;
-});
+const projectsSelect = document.getElementById("projects");
+if (projectsSelect) {
+    projectsSelect.addEventListener("change", function (e) {
+        window.location = `${e.target.value}`;
+    });
+}
+
+// GLOBAL POPUP ELEMENTS
+const popupBg = document.getElementById("popup-bg");
 
 // ADD USER POP-UP
-const popupBg = document.getElementById("popup-bg");
 const formAddUser = document.getElementById("form-add-user");
 const addUserBtn = document.getElementById("add-user");
 const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
 
-addUserBtn.addEventListener("click", function () {
-    popupBg.style.display = "flex";
-    formAddUser.style.display = "flex";
-});
+if (addUserBtn) {
+    addUserBtn.addEventListener("click", function () {
+        if (popupBg && formAddUser) {
+            popupBg.style.display = "flex";
+            formAddUser.style.display = "flex";
+        }
+    });
+}
 
-cancelAddUserBtn.addEventListener("click", function () {
-    popupBg.style.display = "none";
-    formAddUser.style.display = "none";
-});
+if (cancelAddUserBtn) {
+    cancelAddUserBtn.addEventListener("click", function () {
+        if (popupBg && formAddUser) {
+            popupBg.style.display = "none";
+            formAddUser.style.display = "none";
+        }
+    });
+}
 
-formAddUser.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
-
-// ADD GROUP POP-UP
+if (formAddUser) {
+    formAddUser.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
 
 // POP-UP UPDATE-DELETE PROJECT
 const updateProjectBtn = document.getElementById("update-project");
 const popupQuitBtn = document.getElementById("quit-btn");
 const formUpdateProject = document.getElementById("update-project-form");
 
-updateProjectBtn.addEventListener("click", function () {
-    popupBg.style.display = "flex";
-    formUpdateProject.style.display = "flex";
-});
+if (updateProjectBtn) {
+    updateProjectBtn.addEventListener("click", function () {
+        if (popupBg && formUpdateProject) {
+            popupBg.style.display = "flex";
+            formUpdateProject.style.display = "flex";
+        }
+    });
+}
 
-popupQuitBtn.addEventListener("click", function () {
-    formUpdateProject.style.display = "none";
-    popupBg.style.display = "none";
-});
+if (popupQuitBtn) {
+    popupQuitBtn.addEventListener("click", function () {
+        if (popupBg && formUpdateProject) {
+            formUpdateProject.style.display = "none";
+            popupBg.style.display = "none";
+        }
+    });
+}
 
-formUpdateProject.addEventListener("click", (e) => {
-    e.stopPropagation();
-});
+if (formUpdateProject) {
+    formUpdateProject.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
 
 // POP-UP DELETE PROJECT CONFIRMATION
-const popupDeleteProject = document.getElementById(
-    "popup-delete-project-confirmation"
-);
+const popupDeleteProject = document.getElementById("popup-delete-project-confirmation");
 const deleteProjectBtn = document.getElementById("delete-project");
-const formDeleteProjectConfirmation = document.getElementById(
-    "form-delete-project"
-);
-const cancelDeleteProjectBtnConfirmation = document.getElementById(
-    "cancel-delete-project-btn"
-);
+const formDeleteProjectConfirmation = document.getElementById("form-delete-project");
+const cancelDeleteProjectBtnConfirmation = document.getElementById("cancel-delete-project-btn");
 
-deleteProjectBtn.addEventListener("click", function () {
-    popupDeleteProject.style.display = "flex";
-    formDeleteProjectConfirmation.style.display = "flex";
-});
+if (deleteProjectBtn) {
+    deleteProjectBtn.addEventListener("click", function () {
+        if (popupDeleteProject && formDeleteProjectConfirmation) {
+            popupDeleteProject.style.display = "flex";
+            formDeleteProjectConfirmation.style.display = "flex";
+        }
+    });
+}
 
-cancelDeleteProjectBtnConfirmation.addEventListener("click", function (e) {
-    popupDeleteProject.style.display = "none";
-    formDeleteProjectConfirmation.style.display = "none";
-});
+if (cancelDeleteProjectBtnConfirmation) {
+    cancelDeleteProjectBtnConfirmation.addEventListener("click", function (e) {
+        if (popupDeleteProject && formDeleteProjectConfirmation) {
+            popupDeleteProject.style.display = "none";
+            formDeleteProjectConfirmation.style.display = "none";
+        }
+    });
+}
 
-popupDeleteProject.addEventListener("click", function (e) {
-    e.stopPropagation();
-    formDeleteProjectConfirmation.style.display = "none";
-    popupDeleteProject.style.display = "none";
-});
+if (popupDeleteProject) {
+    popupDeleteProject.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (formDeleteProjectConfirmation) {
+            formDeleteProjectConfirmation.style.display = "none";
+        }
+        popupDeleteProject.style.display = "none";
+    });
+}
 
-formDeleteProjectConfirmation.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
+if (formDeleteProjectConfirmation) {
+    formDeleteProjectConfirmation.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
 
 // DELETE AND UPDATE USER FROM PROJECT
 const popupUserProject = document.querySelectorAll(".popup-edit-user");
 const formDeleteUserProject = document.getElementById("delete-user-project");
 const formUpdateUserAdmin = document.getElementById("update-user-admin");
 
-popupUserProject.forEach((popupUser) => {
-    popupUser.addEventListener("click", function (e) {
-        const clickedUpdate = e.target.closest(".user-admin");
-        const clickedDelete = e.target.closest(".delete-user");
+if (popupUserProject.length > 0) {
+    popupUserProject.forEach((popupUser) => {
+        popupUser.addEventListener("click", function (e) {
+            const clickedUpdate = e.target.closest(".user-admin");
+            const clickedDelete = e.target.closest(".delete-user");
 
-        if (clickedUpdate) {
-            popupBg.style.display = "flex";
+            if (clickedUpdate && popupBg && formUpdateUserAdmin) {
+                const message = formUpdateUserAdmin.querySelector("p");
+                if (message) message.textContent = `¿Seguro que quiere hacer administrador a ${popupUser.dataset.nombre}?`;
+                popupBg.style.display = "flex";
+                formUpdateUserAdmin.style.display = "flex";
 
-            const message = formUpdateUserAdmin.querySelector("p");
-            message.textContent = `¿Seguro que quiere hacer administrador a ${popupUser.dataset.nombre}?`;
-            popupBg.style.display = "flex";
-            formUpdateUserAdmin.style.display = "flex";
+                const userId = document.querySelector("#user_id_admin");
+                if (userId) {
+                    userId.value = popupUser.dataset.id;
+                } else {
+                    const hiddenInput = `<input type="hidden" name="user_id_admin" id="user_id_admin" value="${popupUser.dataset.id}">`;
+                    formUpdateUserAdmin.insertAdjacentHTML("beforeend", hiddenInput);
+                }
+            } else if (clickedDelete && popupBg && formDeleteUserProject) {
+                const message = formDeleteUserProject.querySelector("p");
+                if (message) message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
+                popupBg.style.display = "flex";
+                formDeleteUserProject.style.display = "flex";
 
-            const userId = document.querySelector("#user_id_admin");
-
-            if (userId) {
-                userId.value = popupUser.dataset.id;
-            } else {
-                const hiddenInput = `<input type="hidden" name="user_id_admin" id="user_id_admin" value="${popupUser.dataset.id}">`;
-                formUpdateUserAdmin.insertAdjacentHTML(
-                    "beforeend",
-                    hiddenInput
-                );
+                const userId = document.querySelector("#user_id_delete");
+                if (userId) {
+                    userId.value = popupUser.dataset.id;
+                } else {
+                    const hiddenInput = `<input type="hidden" name="user_id_delete" id="user_id_delete" value="${popupUser.dataset.id}">`;
+                    formDeleteUserProject.insertAdjacentHTML("beforeend", hiddenInput);
+                }
             }
-        } else if (clickedDelete) {
-            const message = formDeleteUserProject.querySelector("p");
-            message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
-            popupBg.style.display = "flex";
-            formDeleteUserProject.style.display = "flex";
-
-            const userId = document.querySelector("#user_id_delete");
-
-            if (userId) {
-                userId.value = popupUser.dataset.id;
-            } else {
-                const hiddenInput = `<input type="hidden" name="user_id_delete" id="user_id_delete" value="${popupUser.dataset.id}">`;
-                formDeleteUserProject.insertAdjacentHTML(
-                    "beforeend",
-                    hiddenInput
-                );
-            }
-        }
+        });
     });
-});
+}
 
 const cancelBtnUpdateUser = document.getElementById("cancel-update-user-admin");
 const cancelBtnRemoveUser = document.getElementById("cancel-remove-user");
 
-cancelBtnUpdateUser.addEventListener("click", function () {
-    formUpdateUserAdmin.style.display = "none";
-    popupBg.style.display = "none";
-});
+if (cancelBtnUpdateUser) {
+    cancelBtnUpdateUser.addEventListener("click", function () {
+        if (formUpdateUserAdmin && popupBg) {
+            formUpdateUserAdmin.style.display = "none";
+            popupBg.style.display = "none";
+        }
+    });
+}
 
-cancelBtnRemoveUser.addEventListener("click", function () {
-    formDeleteUserProject.style.display = "none";
-    popupBg.style.display = "none";
-});
+if (cancelBtnRemoveUser) {
+    cancelBtnRemoveUser.addEventListener("click", function () {
+        if (formDeleteUserProject && popupBg) {
+            formDeleteUserProject.style.display = "none";
+            popupBg.style.display = "none";
+        }
+    });
+}
 
-formDeleteUserProject.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
-formUpdateUserAdmin.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
+if (formDeleteUserProject) {
+    formDeleteUserProject.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
+
+if (formUpdateUserAdmin) {
+    formUpdateUserAdmin.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
 
 // ADD GROUP
 const cancelAddGrpBtn = document.getElementById("cancel-add-grp-btn");
 const formAddGrp = document.getElementById("add-grp-form");
 const addGrpBtn = document.getElementById("add-group");
 
-addGrpBtn.addEventListener("click", function () {
-    popupBg.style.display = "flex";
-    formAddGrp.style.display = "flex";
-});
+if (addGrpBtn) {
+    addGrpBtn.addEventListener("click", function () {
+        if (popupBg && formAddGrp) {
+            popupBg.style.display = "flex";
+            formAddGrp.style.display = "flex";
+        }
+    });
+}
 
-cancelAddGrpBtn.addEventListener("click", function () {
-    popupBg.style.display = "none";
-    formAddGrp.style.display = "none";
-});
+if (cancelAddGrpBtn) {
+    cancelAddGrpBtn.addEventListener("click", function () {
+        if (popupBg && formAddGrp) {
+            popupBg.style.display = "none";
+            formAddGrp.style.display = "none";
+        }
+    });
+}
 
-formAddGrp.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
+if (formAddGrp) {
+    formAddGrp.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}
 
 // GLOBAL BACKGROUND
-popupBg.addEventListener("click", function (e) {
-    e.stopPropagation();
-    formUpdateProject.style.display = "none";
-    popupDeleteProject.style.display = "none";
-    formAddUser.style.display = "none";
-    popupBg.style.display = "none";
-    formDeleteUserProject.style.display = "none";
-    formUpdateUserAdmin.style.display = "none";
-    formAddGrp.style.display = "none";
-});
+if (popupBg) {
+    popupBg.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (formUpdateProject) formUpdateProject.style.display = "none";
+        if (popupDeleteProject) popupDeleteProject.style.display = "none";
+        if (formAddUser) formAddUser.style.display = "none";
+        popupBg.style.display = "none";
+        if (formDeleteUserProject) formDeleteUserProject.style.display = "none";
+        if (formUpdateUserAdmin) formUpdateUserAdmin.style.display = "none";
+        if (formAddGrp) formAddGrp.style.display = "none";
+    });
+}

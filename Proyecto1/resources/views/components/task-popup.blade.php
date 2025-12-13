@@ -15,7 +15,7 @@
     
     // Obtener todos los estados, sprints y tags disponibles
     $estados = \App\Models\Estado::all();
-    $sprints = $proyecto->sprints;
+    $sprints = $sprints ?? $proyecto->sprints;
     $tags = \App\Models\Tag::all();
 @endphp
 
@@ -77,10 +77,12 @@
                         <select name="idSprint" id="idSprint">
                             <option value="">Sin sprint</option>
                             @foreach ($sprints as $sprint)
-                                <option value="{{ $sprint->id }}" 
-                                        {{ old('idSprint', $tarea?->idSprint) == $sprint->id ? 'selected' : '' }}>
-                                    {{ $sprint->descripcion }}
-                                </option>
+                                @if ($sprint->descripcion !== 'No Sprint')
+                                    <option value="{{ $sprint->id }}" 
+                                            {{ old('idSprint', $tarea?->idSprint) == $sprint->id ? 'selected' : '' }}>
+                                        {{ $sprint->descripcion }}
+                                    </option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

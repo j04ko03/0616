@@ -6,7 +6,7 @@ const quitTaskBtn = document.getElementById("quit-task-btn");
 const deleteTaskBtn = document.getElementById("delete-task-btn");
 const formDeleteTask = document.getElementById("form-delete-task");
 const cancelDeleteTaskBtn = document.getElementById("cancel-delete-task-btn");
-const addTaskBtn = document.getElementById("boton");
+const addTaskBtn = document.getElementById("add-task-btn");
 
 // Configurar fecha mínima como hoy
 const today = new Date().toISOString().split("T")[0];
@@ -86,7 +86,7 @@ function closeTaskPopup() {
     if (formDeleteTask) {
         formDeleteTask.style.display = "none";
     }
-    
+
     // Limpiar la URL para quitar el tareaId si existe
     const url = window.location.href;
     if (url.includes('/project/')) {
@@ -101,9 +101,18 @@ function closeTaskPopup() {
 }
 
 // ABRIR POPUP PARA EDITAR TAREA (desde otros scripts)
+// ABRIR POPUP PARA EDITAR TAREA (desde otros scripts)
 window.openTaskPopup = function (tareaId = null) {
     if (tareaId) {
-        console.log("Editando tarea:", tareaId);
+        // Redirigir al controlador usando la ruta generada por Blade (reemplazando el placeholder)
+        if (window.verTareaRoute) {
+            window.location.href = window.verTareaRoute.replace('PLACEHOLDER', tareaId);
+        } else {
+            // Fallback por si acaso
+            window.location.href = `/ver-tarea/${tareaId}`;
+        }
+    } else {
+        // Si no hay ID (caso raro, o crear nueva desde otro sitio), solo abrir popup
+        taskPopupBg.style.display = "flex";
     }
-    taskPopupBg.style.display = "flex";
 };

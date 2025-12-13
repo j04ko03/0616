@@ -1,8 +1,9 @@
+@props(['sprint', 'titulo', 'descripcion', 'asignados', 'tags', 'responsable', 'fechaEntrega', 'id'])
+
 <link rel="stylesheet" href="{{ url('/css/taskItemProject.css') }}">
 
 
-
-<div class="task-card filter-sprint" data-sprint="{{ $sprint }}">
+<div class="task-card filter-sprint" data-sprint="{{ $sprint }}" onclick="openTaskPopup('{{ $id }}')">
     <span>
         <p>{{ $titulo }}</p>
         <button class="button-task"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

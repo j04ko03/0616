@@ -28,7 +28,7 @@ main {
     gap: 20px;
 }
 
-#select-container > a {
+#select-container>a {
     max-width: fit-content;
     margin-top: auto;
     margin-bottom: auto;
@@ -37,24 +37,39 @@ main {
     transition: all 400ms;
 }
 
-#select-container > a:hover {
+#select-container>a:hover {
     color: var(--color-link-hover);
 }
-#select-container > * {
+
+#select-container>* {
     flex: 1 1 auto;
     min-width: 200px;
 }
-#update-project {
-    margin-left: auto;
+
+#update-project,
+#add-task-btn {
     background-color: var(--color-primary);
     padding: 10px 20px;
     max-width: 200px;
     border-radius: 10px;
+    border: none;
+    color: var(--color-dark);
+    font-size: 1rem;
+    cursor: pointer;
 
     transition: all 400ms;
 }
 
-#update-project:hover {
+#update-project {
+    margin-left: auto;
+}
+
+#add-task-btn {
+    margin-left: 10px;
+}
+
+#update-project:hover,
+#add-task-btn:hover {
     background-color: var(--color-primary-hover);
 }
 
@@ -376,7 +391,8 @@ option:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: none; /* Inicialmente oculto */
+    display: none;
+    /* Inicialmente oculto */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -428,14 +444,14 @@ form {
     font-size: 0.8rem;
 }
 
-form > div {
+form>div {
     display: flex;
     flex-direction: column;
     padding: 10px;
     height: 100%;
 }
 
-form > div input {
+form>div input {
     margin-bottom: 25px;
 }
 
@@ -469,12 +485,12 @@ input {
     transition: all 400ms;
 }
 
-form > div > label:first-child {
+form>div>label:first-child {
     margin-top: 15px;
 }
 
-form > div > label:first-child,
-form > div > label:nth-child(3) {
+form>div>label:first-child,
+form>div>label:nth-child(3) {
     margin-bottom: 10px;
 }
 
@@ -511,16 +527,16 @@ input[type="submit"]:hover {
     background-color: var(--color-primary-hover);
 }
 
-form > div > div:nth-child(2) > a {
+form>div>div:nth-child(2)>a {
     width: max-content;
 }
 
-form > div > div:first-child {
+form>div>div:first-child {
     display: flex;
     margin: 20px 0 25px 0;
 }
 
-form > div > div:first-child > label {
+form>div>div:first-child>label {
     margin: auto 0 auto 0;
 }
 
@@ -543,19 +559,29 @@ form > div > div:first-child > label {
     width: 100%;
     height: 100%;
     background-color: #000000b2;
+    z-index: 2000;
 
     display: none;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
+    padding: 20px;
 }
 
 #update-project-form {
     background-color: var(--color-background);
-    border: 1px solid black;
+    border: 1px solid var(--color-dark);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
     display: none;
 }
 
-form > div > div {
+form>div>div {
     display: flex;
     height: auto;
     flex-wrap: wrap;
@@ -616,8 +642,8 @@ form > div > div {
     gap: 20px;
 }
 
-#form-add-user > span,
-#add-grp-form > span {
+#form-add-user>span,
+#add-grp-form>span {
     margin: 0 auto;
     display: flex;
     gap: 20px;
@@ -641,14 +667,14 @@ form > div > div {
     text-align: center;
 }
 
-#delete-user-project > div {
+#delete-user-project>div {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
 }
 
-#delete-user-project > div > button:last-child {
+#delete-user-project>div>button:last-child {
     background-color: #d42d20;
     color: var(--color-white);
 }
@@ -663,18 +689,18 @@ form > div > div {
     text-align: center;
 }
 
-#update-user-admin > div {
+#update-user-admin>div {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
 }
 
-#update-user-admin > div > button:first-child {
+#update-user-admin>div>button:first-child {
     background-color: #d42d20;
     color: var(--color-white);
 }
- 
+
 /* TOAST NOTIFICATION */
 .alert-project {
     position: absolute;
@@ -829,15 +855,21 @@ form > div > div {
     border-radius: 5px;
     color: #9ca3af;
     transition: all 400ms;
-    font-family: "Lato";
+    font-family: 'Lato';
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group-task input:focus,
 .form-group-task select:focus,
-.form-group-task textarea:focus {
+.form-group-task textarea:focus,
+.form-group-task input:hover,
+.form-group-task select:hover,
+.form-group-task textarea:hover {
     outline: none;
     border: 2px solid var(--color-primary);
     color: var(--color-dark);
+    box-shadow: none;
 }
 
 .form-group-task textarea {
@@ -988,6 +1020,7 @@ form > div > div {
 }
 
 @media (width < 700px) {
+
     main,
     #main {
         padding: 10px;
@@ -996,20 +1029,20 @@ form > div > div {
     .task-form-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .task-popup-form {
         max-width: 95%;
         padding: 15px;
     }
-    
+
     #titulo-tarea {
         font-size: 1.5rem;
     }
-    
+
     .task-form-actions {
         flex-direction: column;
     }
-    
+
     .btn-submit-task,
     .btn-delete-task {
         width: 100%;
@@ -1020,15 +1053,15 @@ form > div > div {
     .popup-bg-task {
         padding: 10px;
     }
-    
+
     .task-popup-form {
         padding: 10px;
     }
-    
+
     #titulo-tarea {
         font-size: 1.2rem;
     }
-    
+
     .form-group-task label {
         font-size: 0.9rem;
     }
@@ -1049,7 +1082,7 @@ form > div > div {
         height: 100%;
     }
 
-    #update-project-form > div {
+    #update-project-form>div {
         grid-template-columns: 1fr;
     }
 
@@ -1065,6 +1098,7 @@ form > div > div {
 }
 
 @media (width < 450px) {
+
     main,
     #main {
         padding: 5px;
@@ -1074,7 +1108,56 @@ form > div > div {
         font-size: 0.7rem;
     }
 
-    form > div > div {
+    form>div>div {
         font-size: 0.8rem;
     }
+}
+
+.filter-sprint {
+    display: none !important;
+}
+
+#add-task-btn {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 400ms;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Lato';
+}
+
+#add-task-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* FIX: Header alignment overrides */
+#select-container button {
+    margin-left: 10px !important;
+}
+
+#select-container button:first-of-type {
+    margin-left: auto !important;
+}
+
+/* FIX: Styles for Add/Edit Member Forms (Unified) */
+#form-add-user,
+#delete-user-project,
+#update-user-admin,
+#add-grp-form {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-dark);
+    border-radius: 10px;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    margin: auto;
+    box-sizing: border-box;
 }

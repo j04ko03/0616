@@ -2,7 +2,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ url('/css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url('/css/project.css') }}">
+    <link rel="stylesheet" href="{{ url('/css/project.css?v=3') }}">
 @endpush
 
 @section('content')
@@ -27,11 +27,12 @@
 
     <div id="main">
         <div id="select-container">
-            <select name="projects" id="projects">
+            <select name="projects" id="projects" onchange="window.location.href=this.value">
                 @foreach ($projects as $project)
                     @if ($project->isDeleted == false)
                         <option value="{{ $project->id }}" @if ($project->id == $idProyecto) selected @endif>
-                            {{ $project->titulo }}</option>
+                            {{ $project->titulo }}
+                        </option>
                     @endif
                 @endforeach
             </select>
@@ -39,21 +40,23 @@
             @if ($user && $userProject->pivot->rol === 'Administrador')
                 <button id="update-project">Modificar proyecto</button>
             @endif
+            <button id="add-task-btn">Añadir tarea</button>
         </div>
-        <div type="button" id="boton">
-            <a href="#" onclick="document.getElementById('taskPopup').style.display = 'flex'">Añadir tarea</a>
-        </div>
+
         <div id="tab-container">
             <button class="tabs-btn btn-active" data-tab="1">Kanban</button>
             <button class="tabs-btn" data-tab="2">Product Backlog</button>
             <button class="tabs-btn" data-tab="3">Sprint Backlog</button>
             <button class="tabs-btn" data-tab="4">Integrantes</button>
             <select name="sprints" id="sprints">
+                <option value="all" selected>Todas las tareas</option>
+                <option value="no-sprint">Sin sprint</option>
                 @foreach ($sprints as $sprint)
-                    <option value="{{ $sprint->id }}" @if ($loop->index == 0) selected @endif>
-
-                        {{ $sprint->descripcion }}
-                    </option>
+                    @if ($sprint->descripcion !== 'No Sprint')
+                        <option value="{{ $sprint->id }}">
+                            {{ $sprint->descripcion }}
+                        </option>
+                    @endif
                 @endforeach
             </select>
         </div>
@@ -66,8 +69,8 @@
                             @php
                                 $asignados = $tarea->usuarios;
                             @endphp
-                            @if ($tarea->estadoId == 1 && $tarea->usuarios->contains(Auth::user()->id))
-                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                            @if ($tarea->estadoId == 1)
+                                <x-taskItemProject :id="$tarea->id" :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                     descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
                                     :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                             @endif
@@ -78,8 +81,8 @@
                     <h3>IN PROGRESS</h3>
                     <div class="task-container">
                         @foreach ($proyecto->tareas as $tarea)
-                            @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
-                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                            @if ($tarea->estadoId == 2)
+                                <x-taskItemProject :id="$tarea->id" :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                     descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
                                     :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                             @endif
@@ -90,8 +93,8 @@
                     <h3>DONE</h3>
                     <div class="task-container">
                         @foreach ($proyecto->tareas as $tarea)
-                            @if ($tarea->estadoId == 2 && $tarea->usuarios->contains(Auth::user()->id))
-                                <x-taskItemProject :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
+                            @if ($tarea->estadoId == 3)
+                                <x-taskItemProject :id="$tarea->id" :sprint="$tarea->idSprint" titulo="{{ $tarea->titulo }}"
                                     descripcion=" {{ $tarea->descripcion }}" :asignados="$tarea->usuarios" :tags="$tarea->tags"
                                     :responsable="$tarea->responsable->nombre" :fechaEntrega="$tarea->fechaEntrega" />
                             @endif
@@ -119,7 +122,8 @@
                             $asignados = $tarea->usuarios;
                         @endphp
                         <x-backlogItem dataset="" :titulo="$tarea->titulo" class="" :descripcion="$tarea->descripcion"
-                            :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags" :fechaEntrega="$tarea->fechaEntrega"
+                            :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios"
+                            :estado="$tarea->estado->nombre" :tags="$tarea->tags" :fechaEntrega="$tarea->fechaEntrega"
                             :responsable="$tarea->responsable->nombre" />
                     @endforeach
                 </div>
@@ -141,9 +145,10 @@
                             $asignados = $tarea->usuarios;
                         @endphp
 
-                        <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog" :descripcion="$tarea->descripcion"
-                            :sprint="$tarea->sprint?->descripcion" :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags" :fechaEntrega="$tarea->fechaEntrega"
-                            :responsable="$tarea->responsable->nombre" />
+                        <x-backlogItem :dataset="$tarea->idSprint" :titulo="$tarea->titulo" class="sprint-backlog"
+                            :descripcion="$tarea->descripcion" :sprint="$tarea->sprint?->descripcion"
+                            :asignados="$tarea->usuarios" :estado="$tarea->estado->nombre" :tags="$tarea->tags"
+                            :fechaEntrega="$tarea->fechaEntrega" :responsable="$tarea->responsable->nombre" />
                     @endforeach
                 </div>
             </div>
@@ -166,9 +171,8 @@
                             @endforeach
                         @else
                             @foreach ($proyecto->usuarios as $usuario)
-                                <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}"
-                                    rol="{{ $usuario->pivot->rol }}" email="{{ $usuario->email }}" style="none"
-                                    img="{{ $usuario->img }}" />
+                                <x-memberItem id="{{ null }}" nombre="{{ $usuario->nombre }}" rol="{{ $usuario->pivot->rol }}"
+                                    email="{{ $usuario->email }}" style="none" img="{{ $usuario->img }}" />
                             @endforeach
                         @endif
                     </div>
@@ -178,14 +182,13 @@
 
         @if ($user && $userProject->pivot->rol === 'Administrador')
             <div id="popup-bg">
-                <form action="{{ route('updateProject.controller', $proyecto->id) }}" method="POST"
-                    id="update-project-form">
+                <form action="{{ route('updateProject.controller', $proyecto->id) }}" method="POST" id="update-project-form">
                     @method('patch')
                     @csrf
                     <button id="quit-btn" type="button">X</button>
                     <label for="titulo"></label>
-                    <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required
-                        maxlength="100" value="{{ $proyecto->titulo }}">
+                    <input type="text" name="titulo" id="titulo" placeholder="AÑADIR TÍTULO *" required maxlength="100"
+                        value="{{ $proyecto->titulo }}">
 
                     <div>
                         <div>
@@ -252,8 +255,7 @@
                         <button type="submit">Eliminar</button>
                     </div>
                 </form>
-                <form action="{{ route('project.updateUserAdmin', $proyecto->id) }}" method="post"
-                    id="update-user-admin">
+                <form action="{{ route('project.updateUserAdmin', $proyecto->id) }}" method="post" id="update-user-admin">
                     @method('patch')
                     @csrf
                     <p></p>
@@ -274,15 +276,20 @@
             </div>
         @endif
 
-@include('components.task-popup', [
-    'proyecto' => $proyecto, 
-    'tarea' => $tareaToEdit ?? null
-])
+        @include('components.task-popup', [
+            'proyecto' => $proyecto,
+            'tarea' => $tareaToEdit ?? null,
+            'sprints' => $sprints
+        ])
+
+        <script>
+            window.verTareaRoute = "{{ route('verTarea.controller', ['idTarea' => 'PLACEHOLDER']) }}";
+        </script>
 
         <script src="{{ url('/js/projectTabNavigation.js') }}"></script>
-        <script src="{{ url('/js/popUpTarea.js') }}"></script>
-        <script src="{{ url('/js/memberItem.js') }}"></script>
-        <script src="{{ url('/js/filterSprintProject.js') }}"></script>
-        <script src="{{ url('/js/project.js') }}"></script>
-        
-    @endsection
+        <script src="{{ url('/js/popUpTarea.js?v=3') }}"></script>
+            <script src="{{ url('/js/memberItem.js') }}"></script>
+                <script src="{{ url('/js/filterSprintProject.js') }}"></script>
+            <script src="{{ url('/js/project.js?v=3') }}"></script>
+
+@endsection

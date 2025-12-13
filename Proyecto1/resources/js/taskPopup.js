@@ -38,11 +38,14 @@ if (quitTaskBtn) {
 }
 
 // CERRAR POPUP AL HACER CLICK EN EL FONDO
-taskPopupBg.addEventListener("click", function (e) {
-    if (e.target === taskPopupBg) {
-        closeTaskPopup();
-    }
-});
+// CERRAR POPUP AL HACER CLICK EN EL FONDO
+if (taskPopupBg) {
+    taskPopupBg.addEventListener("click", function (e) {
+        if (e.target === taskPopupBg) {
+            closeTaskPopup();
+        }
+    });
+}
 
 // EVITAR QUE EL CLICK EN EL FORMULARIO CIERRE EL POPUP
 if (taskForm) {

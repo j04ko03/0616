@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('create-project', [ProyectosController::class, 'store'])->name('createProject.controller'); // Guardar proyecto
     Route::patch('/update-project/{proyecto}', [ProyectosController::class, 'update'])->name('updateProject.controller');
     Route::patch('/delete-project/{proyecto}', [ProyectosController::class, 'destroy'])->name('deleteProject.controller');
-    Route::get('/project/{idProyecto}', [SiteController::class, 'project'])->name('project.controller');
+
     Route::get('/project/{idProyecto}/{tareaId?}', [SiteController::class, 'project'])->name('project.controller'); // Ruta para acceder a la tarea de adentro de un proyecto
     Route::post('/project/{project}/users', [ProyectosController::class, 'addUser'])->name('project.addUser');
     Route::delete('/project/{project}/users', [ProyectosController::class, 'removeUser'])->name('project.removeUser');
@@ -99,7 +99,7 @@ Route::get('/js/{filename}', function ($filename) {
     $path = resource_path("js/$filename");
 
     try {
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             abort(404);
         }
     } catch (\Exception $e) {
@@ -112,30 +112,14 @@ Route::get('/js/{filename}', function ($filename) {
     ]);
 });
 
-//Carga de Scripts
-Route::get('/js/{filename}', function ($filename) {
-    $path = resource_path("js/$filename");
 
-    try {
-        if (! File::exists($path)) {
-            abort(404);
-        }
-    } catch (\Exception $e) {
-        abort(404);
-        //console.log("Error al cargar el archivo: " . $e->getMessage() + "Error: " + $e->getCode());
-    }
-
-    return response()->file($path, [
-        'Content-Type' => 'application/javascript',
-    ]);
-});
 
 //Cargas de CSS
 Route::get('/css/{filename}', function ($filename) {
     $path = storage_path("assets/css/$filename");
 
     try {
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             abort(404);
         }
     } catch (\Exception $e) {
@@ -152,20 +136,20 @@ Route::get('/assets/logotipos/{filename}', function ($filename) {
     $path = storage_path("assets/logotipos/$filename");
 
     try {
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             abort(404);
         }
     } catch (\Exception $e) {
         abort(404);
     }
 
-    $extension   = pathinfo($filename, PATHINFO_EXTENSION);
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $contentType = match ($extension) {
-        'png'   => 'image/png',
+        'png' => 'image/png',
         'jpg', 'jpeg' => 'image/jpeg',
-        'gif'   => 'image/gif',
-        'svg'   => 'image/svg+xml',
-        'webp'  => 'image/webp',
+        'gif' => 'image/gif',
+        'svg' => 'image/svg+xml',
+        'webp' => 'image/webp',
         default => 'image/' . $extension
     };
 
@@ -179,21 +163,21 @@ Route::get('/storage/assets/{type}/{filename}', function ($type, $filename) {
     $path = storage_path("assets/$type/$filename");
 
     try {
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             abort(404);
         }
     } catch (\Exception $e) {
         abort(404);
     }
 
-    $extension   = pathinfo($filename, PATHINFO_EXTENSION);
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
     $contentType = match ($extension) {
-        'png'   => 'image/png',
+        'png' => 'image/png',
         'jpg', 'jpeg' => 'image/jpeg',
-        'gif'   => 'image/gif',
-        'svg'   => 'image/svg+xml',
-        'webp'  => 'image/webp',
-        'ico'   => 'image/x-icon',
+        'gif' => 'image/gif',
+        'svg' => 'image/svg+xml',
+        'webp' => 'image/webp',
+        'ico' => 'image/x-icon',
         default => 'image/' . $extension
     };
 

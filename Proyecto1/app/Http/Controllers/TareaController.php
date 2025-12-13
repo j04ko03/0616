@@ -6,7 +6,6 @@ use App\Clases\Utilitat;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Container\Attributes\Auth;
-use Illuminate\Http\Request;
 
 class TareaController extends Controller
 {
@@ -16,18 +15,18 @@ class TareaController extends Controller
     public function index()
     {
         //
-        try{
+        try {
             $tarea = Tarea::all();
             session()->flash('success', 'Se pasan correctamente los datos');
-            $response = view ('tarea.index', compact('tarea'));
-        }catch(QueryException $e){
+            $response = view('tarea.index', compact('tarea'));
+        } catch (QueryException $e) {
             $missatge = Utilitat::errorMessage($e);
             session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
             $response = redirect()->back();
         }
 
         return $response;
-        
+
         $tarea = Tarea::all();
         return view('tarea.index', compact('tarea'));
     }
@@ -44,7 +43,10 @@ class TareaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
- public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         // Validación
         $validated = $request->validate([
@@ -54,7 +56,7 @@ class TareaController extends Controller
             'fechaEntrega' => 'required|date',
             'responsableId' => 'required|exists:Usuario,id',
             'idSprint' => 'nullable|exists:Sprint,id',
-            'proyectoId' => 'required|exists:Proyectos,id',
+            'proyectoId' => 'required|exists:Proyecto,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:Tag,id',
             'usuariosAsignados' => 'nullable|array',
@@ -70,17 +72,14 @@ class TareaController extends Controller
         $tarea->responsableId = $request->input('responsableId');
         $tarea->idSprint = $request->input('idSprint');
         $tarea->fechaEntrega = $request->input('fechaEntrega');
-        
-        try{
+
+        try {
             $tarea->save();
-            session()->flash('success', 'Se han borrado los datos');
-        }catch(QueryException $e){
+            session()->flash('success', 'Se ha creado la tarea');
+        } catch (QueryException $e) {
             $missatge = Utilitat::errorMessage($e);
-            session()->flash('error', 'No se han borrrado los datos' . ' - ' . $missatge);
+            return redirect()->back()->with('error', 'No se han guardado los datos' . ' - ' . $missatge);
         }
-        // return redirect()->route('project.controller', ['idProyecto' => $request->input('proyectoId')]); TODO
-        $tarea->isDeleted = false;
-        $tarea->save();
 
         // Sincronizar tags
         if ($request->has('tags')) {
@@ -119,7 +118,7 @@ class TareaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-  public function update(Request $request, Tarea $tarea)
+    public function update(Request $request, Tarea $tarea)
     {
         // Validación
         $validated = $request->validate([
@@ -129,7 +128,7 @@ class TareaController extends Controller
             'fechaEntrega' => 'required|date',
             'responsableId' => 'required|exists:Usuario,id',
             'idSprint' => 'nullable|exists:Sprint,id',
-            'proyectoId' => 'required|exists:Proyectos,id',
+            'proyectoId' => 'required|exists:Proyecto,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:Tag,id',
             'usuariosAsignados' => 'nullable|array',
@@ -140,7 +139,7 @@ class TareaController extends Controller
         $tarea->titulo = $request->input('titulo');
         $tarea->descripcion = $request->input('descripcion');
         $tarea->estadoId = $request->input('estado');
-        $tarea->proyectoId = $request->input('proyectoId');
+        // $tarea->proyectoId = $request->input('proyectoId'); // Generalmente no movemos tareas entre proyectos, pero si es necesario descomentar
         $tarea->responsableId = $request->input('responsableId');
         $tarea->idSprint = $request->input('idSprint');
         $tarea->fechaEntrega = $request->input('fechaEntrega');
@@ -157,7 +156,7 @@ class TareaController extends Controller
         if ($request->has('usuariosAsignados')) {
             $tarea->usuarios()->sync($request->input('usuariosAsignados'));
         } else {
-            $tarea->usuarios()->sync([]); 
+            $tarea->usuarios()->sync([]);
         }
 
         return redirect()->route('project.controller', ['idProyecto' => $tarea->proyectoId])
@@ -169,29 +168,21 @@ class TareaController extends Controller
      */
     public function destroy(Tarea $tarea)
     {
-        //Para borrar
-        try{
-            $tarea->delete();
-            session()->flash('success', 'Se pasan correctamente los datos');
-            $response = redirect()->route('tasks.index');
-        }catch(QueryException $e){
-            $missatge = Utilitat::errorMessage($e);
-            session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
-            $response = redirect()->back();
-        }
-        
-        return $response;
         // Guardo en una variable la id del proyecto para redirigir después de eliminar la tarea.
         $proyectoId = $tarea->proyectoId;
-        
+
         // Eliminar relaciones (o datos huérfanos creo que se llaman...).
         $tarea->tags()->detach();
         $tarea->usuarios()->detach();
-        
+
         // Eliminar tarea
-        $tarea->delete();
-        
-        return redirect()->route('project.controller', ['idProyecto' => $proyectoId])
-            ->with('success', 'Tarea eliminada correctamente');
+        try {
+            $tarea->delete();
+            return redirect()->route('project.controller', ['idProyecto' => $proyectoId])
+                ->with('success', 'Tarea eliminada correctamente');
+        } catch (QueryException $e) {
+            $missatge = Utilitat::errorMessage($e);
+            return redirect()->back()->with('error', 'No se ha podido eliminar la tarea' . ' - ' . $missatge);
+        }
     }
 }
