@@ -1,9 +1,24 @@
+/**
+ * Rellenar lista de usuarios al editar un grupo.
+ * 
+ * Carga los datos del grupo seleccionado en el formulario de edición:
+ * - Rellena el nombre del grupo
+ * - Carga los usuarios que ya pertenecen al grupo
+ * - Configura el formulario para enviar a la URL correcta
+ * - Alterna entre vista de crear y editar
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 const grupoCards = document.querySelectorAll('.grupoCard');
 const anadirGrupo = document.getElementById('anadir');
 const formEditar = document.getElementById('formEditarGrupo');
 
+/**
+ * Cargar datos del grupo al hacer click en una tarjeta de grupo.
+ */
 grupoCards.forEach(card => {
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function () {
         console.log("CCLLIICCKK");
         const grupoId = card.dataset.id;
         const nombre = card.dataset.nombre;
@@ -11,14 +26,17 @@ grupoCards.forEach(card => {
 
         console.log(card.dataset.url);
 
+        // Configurar la URL del formulario para el grupo específico
         formEditar.action = card.dataset.url;
 
-        // Ocultar crear grupo y mostrar editar
+        // Cambiar de vista crear a editar
         document.getElementById('crearGrupoContainer').style.display = 'none';
         document.getElementById('editarGrupoContainer').style.display = 'block';
 
-        // Rellenar título y usuarios seleccionados
+        // Rellenar título del grupo
         document.getElementById('tituloGrupoEdit').value = nombre;
+
+        // Rellenar usuarios seleccionados
         const contenedorUsuarios = document.getElementById('usuarios-seleccionados-editar');
         contenedorUsuarios.innerHTML = '';
 
@@ -33,12 +51,18 @@ grupoCards.forEach(card => {
                 <button type="button" class="remove-user">×</button>
                 <input type="hidden" name="usuarios[]" value="${u.id}" class="input-usuario-hidden">
             `;
+
+            // Añadir funcionalidad al botón de eliminar
             div.querySelector('.remove-user').addEventListener('click', () => div.remove());
+
             contenedorUsuarios.appendChild(div);
         });
     });
 });
 
+/**
+ * Volver a la vista de crear grupo al hacer click en añadir.
+ */
 anadirGrupo.addEventListener('click', () => {
     document.getElementById('crearGrupoContainer').style.display = 'block';
     document.getElementById('editarGrupoContainer').style.display = 'none';

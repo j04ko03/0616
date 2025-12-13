@@ -1,3 +1,13 @@
+/**
+ * Popup de confirmación genérico para formularios.
+ * 
+ * Intercepta el envío de formularios para mostrar un popup de confirmación
+ * antes de enviar. El usuario debe hacer click en "Aceptar" para enviar
+ * el formulario, o "Cancelar" para cerrar el popup sin enviar.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const btnModificar = document.querySelector("form button[type='submit']");
@@ -5,18 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnCancelar = document.getElementById("btnCancelar");
     const btnAceptar = document.getElementById("btnAceptar");
 
-    // Abrir popup antes de enviar --> Modificable por VIEW
+    /**
+     * Interceptar el envío del formulario para mostrar popup de confirmación.
+     */
     btnModificar.addEventListener("click", function (e) {
         e.preventDefault();
         popup.style.display = "flex";
     });
 
-    // Cancelar → cerrar popup
+    /**
+     * Cancelar la acción y cerrar el popup.
+     */
     btnCancelar.addEventListener("click", function () {
         popup.style.display = "none";
     });
 
-    // Aceptar → enviar formulario
+    /**
+     * Confirmar la acción y enviar el formulario.
+     */
     btnAceptar.addEventListener("click", function () {
         btnModificar.closest("form").submit();
     });

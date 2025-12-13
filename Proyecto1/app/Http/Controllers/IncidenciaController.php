@@ -36,7 +36,7 @@ class IncidenciaController extends Controller
      * @param Request $request Recibe la incidencia como string.
      * @return \Illuminate\Http\RedirectResponse Redirecciona otra vez hacia Perfil.
      * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
-     * @author josep <jguius2021@cepnet.net>
+     * @author Joaquín <joaquinmscollo@gmail.com>
      */
     public function store(Request $request)
     {
@@ -92,7 +92,7 @@ class IncidenciaController extends Controller
      * @param Incidencia $incidencia Recibe la incidencia por parÃ¡metro.
      * @return \Illuminate\Http\RedirectResponse Redirecciona devuelta hacia VistaGlobal.
      * @throws QueryException En caso de error hace uso de la clase de Utilitat para devolver el error.
-     * @author josep <jguius2021@cepnet.net>
+     * @author Joaquín <joaquinmscollo@gmail.com>
      */
     public function destroy(Incidencia $incidencia)
     {

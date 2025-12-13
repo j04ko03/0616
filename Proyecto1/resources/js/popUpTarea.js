@@ -1,3 +1,16 @@
+/**
+ * Gestión del popup de ta reas - Versión completa.
+ * 
+ * Maneja todas las interacciones del popup de tareas incluyendo:
+ * - Abrir/cerrar popup para crear o editar tareas
+ * - Configuración de fecha mínima en el campo de fecha de entrega
+ * - Mostrar formulario de confirmación para eliminar tarea
+ * - Redirigir a la ruta correcta para editar una tarea específica
+ * - Limpiar URL al cerrar (eliminar tareaId de la URL)
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 // TASK POPUP MANAGEMENT
 // Elementos del DOM
 const taskPopupBg = document.getElementById("taskPopup");
@@ -8,7 +21,7 @@ const formDeleteTask = document.getElementById("form-delete-task");
 const cancelDeleteTaskBtn = document.getElementById("cancel-delete-task-btn");
 const addTaskBtn = document.getElementById("add-task-btn");
 
-// Configurar fecha mínima como hoy
+// CONFIGURAR FECHA MÍNIMA COMO HOY
 const today = new Date().toISOString().split("T")[0];
 const fechaEntregaInput = document.getElementById("fechaEntrega");
 if (fechaEntregaInput) {
@@ -77,7 +90,10 @@ if (formDeleteTask) {
     });
 }
 
-// FUNCIÓN PARA CERRAR EL POPUP
+/**
+ * Cierra el popup de tareas y restaura el estado inicial.
+ * También limpia la URL eliminando el tareaId si existe.
+ */
 function closeTaskPopup() {
     taskPopupBg.style.display = "none";
     if (taskForm) {
@@ -100,8 +116,12 @@ function closeTaskPopup() {
     }
 }
 
-// ABRIR POPUP PARA EDITAR TAREA (desde otros scripts)
-// ABRIR POPUP PARA EDITAR TAREA (desde otros scripts)
+/**
+ * Abre el popup de tareas para editar una tarea específica.
+ * Función global que puede ser llamada desde otros scripts.
+ * 
+ * @param {number|null} tareaId - ID de la tarea a editar, null para crear nueva
+ */
 window.openTaskPopup = function (tareaId = null) {
     if (tareaId) {
         // Redirigir al controlador usando la ruta generada por Blade (reemplazando el placeholder)

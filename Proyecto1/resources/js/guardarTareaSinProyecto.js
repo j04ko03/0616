@@ -1,3 +1,13 @@
+/**
+ * Guardar tareas en localStorage sin proyecto asignado durante su creación.
+ * 
+ * Permite crear tareas temporales que se guardan en localStorage hasta
+ * que se cree el proyecto. Útil para el flujo de creación de proyecto
+ * donde se añaden tareas antes de guardar el proyecto.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 const tituloTarea = document.getElementById('tituloTarea');
 const fechaEntrega = document.getElementById('fechaEntrega');
 const presupuesto = document.getElementById('presupuesto');
@@ -8,30 +18,33 @@ const addTareaFantasma = document.getElementById('addTareaFantasma');
 const textArea = document.getElementById('textArea');
 const responsableId = document.getElementById('labelId');
 
-//Vamos a crear una funcion para guardar las tareas en el local storage, pero antes debemos recuperar de local las tareas en caso de que existan
-addTareaFantasma.addEventListener("click", function(e){
+/**
+ * Guardar tarea temporal en localStorage al hacer click en añadir tarea.
+ * La tarea se guarda con fecha/hora precisa para mantener orden.
+ */
+addTareaFantasma.addEventListener("click", function (e) {
 
     //Parseamos el JSON para añadir las tareas de la local a nuestra variable
     let tareasTemporales = JSON.parse(localStorage.getItem("tareasTemporales")) || [];
     const now = new Date();
 
-    const horas = now.getHours();        
-    const minutos = now.getMinutes();    
-    const segundos = now.getSeconds();   
+    const horas = now.getHours();
+    const minutos = now.getMinutes();
+    const segundos = now.getSeconds();
     const milisegundos = now.getMilliseconds();
 
     //Recogemos Usuarios de la lista de las tareas
     const usuariosSeleccionadosArray = Array.from(document.querySelectorAll('#usuarios-seleccionados .usuario-seleccionado'))
-    .map(div => ({
-        id: div.dataset.id,
-        nombre: div.dataset.name,
-        tipo: div.dataset.tipo
-    }));
+        .map(div => ({
+            id: div.dataset.id,
+            nombre: div.dataset.name,
+            tipo: div.dataset.tipo
+        }));
 
-    //Creamos una tarea
+    // Crear nueva tarea temporal
     const nuevaTarea = {
         titulo: tituloTarea.value,
-        fechaEntrega: `${fechaEntrega.value} ${String(horas).padStart(2,'0')}:${String(minutos).padStart(2,'0')}:${String(segundos).padStart(2,'0')}:${String(milisegundos).padStart(3,'0')}`,
+        fechaEntrega: `${fechaEntrega.value} ${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}:${String(milisegundos).padStart(3, '0')}`,
         presupuesto: presupuesto.value,
         estado: estado.value,
         descripcion: textArea.value,
@@ -57,4 +70,3 @@ addTareaFantasma.addEventListener("click", function(e){
 
     alert("Tarea guardada temporalmente. Ahora puedes volver al proyecto.");
 }); 
-

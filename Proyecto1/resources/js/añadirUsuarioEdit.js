@@ -1,23 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // -------------------- EDITAR GRUPO --------------------
+/**
+ * Gestor de selección de usuarios para editar grupos.
+ * 
+ * Similar a añadirUsuario.js pero específico para el formulario de edición.
+ * Proporciona las mismas funcionalidades:
+ * - Mostrar/ocultar lista de usuarios
+ * - Buscar/filtrar usuarios en tiempo real
+ * - Añadir usuarios a la lista de seleccionados del grupo a editar
+ * - Evitar duplicados
+ * - Eliminar usuarios seleccionados
+ * 
+ * Diferencia clave: usa IDs y contenedores específicos para el formulario de edición.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
+    // ELEMENTOS DEL DOM PARA EDITAR GRUPO
     const addUserBtnEditar = document.getElementById('add-user-btn-editar');
     const userListEditar = document.getElementById('user-list-editar');
     const userSearchEditar = document.getElementById('user-search-editar');
     const usuariosSeleccionadosEditar = document.getElementById('usuarios-seleccionados-editar');
     const userItemsEditar = userListEditar.querySelectorAll('.user-item');
 
-    // Mostrar/ocultar lista al hacer clic en el botón
-    addUserBtnEditar.addEventListener('click', function() {
+    /**
+     * Mostrar/ocultar lista al hacer clic en el botón de añadir usuario.
+     */
+    addUserBtnEditar.addEventListener('click', function () {
         userListEditar.classList.toggle('show');
         userSearchEditar.style.display = userListEditar.classList.contains('show') ? 'block' : 'none';
-        
+
         if (userListEditar.classList.contains('show')) {
             userSearchEditar.focus();
         }
     });
 
-    // Filtrar usuarios al escribir en el buscador
-    userSearchEditar.addEventListener('input', function() {
+    /**
+     * Filtrar usuarios al escribir en el buscador.
+     */
+    userSearchEditar.addEventListener('input', function () {
         const searchTerm = this.value.toLowerCase();
         userItemsEditar.forEach(item => {
             const userName = item.getAttribute('data-user').toLowerCase();
@@ -25,24 +45,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Añadir usuario/grupo a la lista de seleccionados
+    /**
+     * Añadir usuario a la lista de seleccionados al hacer click.
+     */
     userItemsEditar.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const userName = this.getAttribute('data-user');
             const userType = this.getAttribute('data-type');
             const userId = this.getAttribute('data-id');
 
             let tipoUsuario = "usuario";
 
-            switch(userType){
+            // Determinar el tipo de usuario
+            switch (userType) {
                 case "1":
-                    tipoUsuario = "Super Usuario"
+                    tipoUsuario = "Super Usuario";
                     break;
                 case "2":
-                    tipoUsuario = "Usuario normal"
+                    tipoUsuario = "Usuario normal";
                     break;
                 default:
-                    tipoUsuario = "Usuario normal"
+                    tipoUsuario = "Usuario normal";
                     break;
             }
 
@@ -64,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button type="button" class="remove-user">×</button>
                 `;
 
-                // Crear input oculto
+                // Crear input oculto para enviar al servidor
                 const inputHidden = document.createElement('input');
                 inputHidden.type = 'hidden';
                 inputHidden.name = 'usuarios[]';
@@ -76,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 usuariosSeleccionadosEditar.appendChild(usuarioDiv);
 
                 // Añadir funcionalidad para eliminar
-                usuarioDiv.querySelector('.remove-user').addEventListener('click', function() {
+                usuarioDiv.querySelector('.remove-user').addEventListener('click', function () {
                     usuarioDiv.remove();
                 });
             }
@@ -91,8 +114,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Ocultar lista al hacer clic fuera
-    document.addEventListener('click', function(event) {
+    /**
+     * Ocultar lista al hacer clic fuera del contenedor de edición.
+     */
+    document.addEventListener('click', function (event) {
         if (!event.target.closest('#editarGrupoContainer .user-dropdown')) {
             userListEditar.classList.remove('show');
             userSearchEditar.style.display = 'none';

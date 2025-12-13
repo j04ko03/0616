@@ -1,48 +1,68 @@
-document.addEventListener('DOMContentLoaded', function() {
+/**
+ * Gestión de visibilidad y validación de contraseñas.
+ * 
+ * Funcionalidades principales:
+ * 1. Toggle para mostrar/ocultar contraseña (cambio entre texto plano y asteriscos)
+ * 2. Mostrar campo de confirmación solo cuando la contraseña tiene más de 7 caracteres
+ * 3. Validación visual de coincidencia de contraseñas (borde verde/rojo)
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
     const passwordInput = document.getElementById('password');
     const passwordConfirmGroup = document.getElementById('passwordConfirmGroup');
     const passwordConfirmInput = document.getElementById('password_confirmation');
-    
-    // ===== FUNCIÓN PARA TOGGLE =====
+
+    /**
+     * Configura el toggle de visibilidad para un campo de contraseña.
+     * Cambia entre type="password" y type="text", y actualiza el icono del ojo.
+     * 
+     * @param {string} toggleId - ID del botón de toggle
+     * @param {string} inputId - ID del input de contraseña
+     */
     function setupPasswordToggle(toggleId, inputId) {
         const toggle = document.getElementById(toggleId);
         const input = document.getElementById(inputId);
-        
+
         if (toggle && input) {
             const eyeIcon = toggle.querySelector('.eye-icon');
-            
+
             if (!eyeIcon) {
                 console.warn(`No se encontró eye-icon para ${toggleId}`);
                 return;
             }
-            
-            toggle.addEventListener('click', function() {
+
+            toggle.addEventListener('click', function () {
                 const isPassword = input.type === 'password';
                 input.type = isPassword ? 'text' : 'password';
                 eyeIcon.textContent = isPassword ? '🙉' : '🙈';
                 eyeIcon.title = isPassword ? 'Ocultar contraseña' : 'Mostrar contraseña';
-                
+
                 input.classList.toggle('password-visible', isPassword);
             });
-            
+
             eyeIcon.title = 'Mostrar contraseña';
         }
     }
-    
-    // ===== INICIALIZAR TOGGLES =====
+
+    // INICIALIZAR TOGGLES
     setupPasswordToggle('passwordToggle', 'password');
-    
+
     if (document.getElementById('passwordConfirmToggle')) {
         setupPasswordToggle('passwordConfirmToggle', 'password_confirmation');
     }
-    
-    // ===== LÓGICA DE CONFIRMACIÓN =====
+
+    // LÓGICA DE CONFIRMACIÓN DE CONTRASEÑA
     if (passwordInput && passwordConfirmGroup) {
         passwordConfirmGroup.style.display = 'none';
-        
-        passwordInput.addEventListener('input', function() {
+
+        /**
+         * Mostrar/ocultar campo de confirmación según longitud de la contraseña.
+         */
+        passwordInput.addEventListener('input', function () {
             const password = this.value;
-            
+
             if (password.length > 7) {
                 passwordConfirmGroup.style.display = 'block';
                 setTimeout(() => {
@@ -59,11 +79,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        /**
+         * Validar coincidencia de contraseñas con feedback visual.
+         */
         if (passwordConfirmInput) {
-            passwordConfirmInput.addEventListener('input', function() {
+            passwordConfirmInput.addEventListener('input', function () {
                 const password = passwordInput.value;
                 const confirm = this.value;
-                
+
                 if (confirm.length > 0) {
                     if (password === confirm) {
                         this.style.borderColor = 'var(--color-success)';

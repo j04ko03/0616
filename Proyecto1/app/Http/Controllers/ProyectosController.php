@@ -1,6 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+/**
+ * Controlador para la gesti贸n de proyectos.
+ * 
+ * Maneja el CRUD completo de proyectos y funcionalidades adicionales:
+ * - Creaci贸n de proyectos con tareas asociadas
+ * - Gesti贸n de usuarios del proyecto (a帽adir, eliminar, promover a admin)
+ * - Gesti贸n de grupos de usuarios
+ * - Subida de fotograf铆as del proyecto
+ * - Eliminaci贸n l贸gica (soft delete con isDeleted)
+ * 
+ * @package App\Http\Controllers
+ */
 
 use App\Models\Grupo;
 use App\Models\Proyectos;
@@ -17,7 +29,13 @@ use Exception;
 class ProyectosController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Listar todos los proyectos del sistema.
+     * 
+     * Obtiene todos los proyectos ordenados por ID y los pasa a la vista.
+     * Maneja errores de base de datos.
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse Vista con todos los proyectos o redirecci贸n en caso de error
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function index()
     {
@@ -32,7 +50,11 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario para crear un nuevo proyecto.
+     * 
+     * M茅todo vac铆o, actualmente no implementado.
+     * 
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function create()
     {
@@ -40,7 +62,15 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear y guardar un nuevo proyecto con tareas asociadas.
+     * 
+     * Valida los datos, crea el proyecto, asigna al usuario actual como
+     * administrador, y crea todas las tareas asociadas desde el input
+     * hidden 'tareas' (JSON). Cada tarea puede tener usuarios asignados.
+     * 
+     * @param Request $request Datos del proyecto (titulo, fecha-limite, descripcion, presupuesto, link) y tareas en JSON
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n al proyecto creado con mensaje de 茅xito o error
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function store(Request $request)
     {
@@ -101,7 +131,12 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar un proyecto espec铆fico.
+     * 
+     * M茅todo vac铆o, actualmente no implementado.
+     * 
+     * @param Proyectos $proyectos Instancia del proyecto a mostrar
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function show(Proyectos $proyectos)
     {
@@ -109,7 +144,12 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar un proyecto existente.
+     * 
+     * M茅todo vac铆o, actualmente no implementado.
+     * 
+     * @param Proyectos $proyectos Instancia del proyecto a editar
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function edit(Proyectos $proyectos)
     {
@@ -117,7 +157,15 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar un proyecto existente en la base de datos.
+     * 
+     * Actualiza los campos del proyecto: t铆tulo, fecha l铆mite, link,
+     * descripci贸n, presupuesto y estado.
+     * 
+     * @param Request $request Datos actualizados del proyecto
+     * @param Proyectos $proyecto Instancia del proyecto a actualizar
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n con mensaje de 茅xito o error
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function update(Request $request, Proyectos $proyecto)
     {
@@ -138,7 +186,14 @@ class ProyectosController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Realizar eliminaci贸n l贸gica de un proyecto.
+     * 
+     * En lugar de eliminar el proyecto, marca el campo isDeleted como true
+     * para mantener el registro en la base de datos (soft delete).
+     * 
+     * @param Proyectos $proyecto Instancia del proyecto a eliminar
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n al home con mensaje de 茅xito o error
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
      */
     public function destroy(Proyectos $proyecto)
     {
@@ -153,6 +208,17 @@ class ProyectosController extends Controller
         }
     }
 
+    /**
+     * A帽adir un usuario al proyecto mediante su email.
+     * 
+     * Valida el email, busca el usuario y lo a帽ade al proyecto con rol
+     * "Miembro". Verifica que el usuario no est茅 ya en el proyecto.
+     * 
+     * @param Request $request Datos con el email del usuario
+     * @param Proyectos $project Instancia del proyecto
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n con mensaje de 茅xito, error o info
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
+     */
     public function addUser(Request $request, Proyectos $project)
     {
         try {
@@ -179,8 +245,19 @@ class ProyectosController extends Controller
         }
     }
 
-    //Funcion para guardar fotografias
-    public function subirFotoPro(Request $request) {
+    /**
+     * Subir una fotograf铆a para un proyecto.
+     * 
+     * Recibe una imagen, la valida, la guarda en storage/app/public/assets/fotosPro/
+     * con un nombre 煤nico basado en el nombre del proyecto y su ID.
+     * Actualiza el campo 'img' del proyecto con el nombre del archivo.
+     * 
+     * @param Request $request Debe contener el archivo 'foto' y el 'idProyecto'
+     * @return \Illuminate\Http\JsonResponse JSON con 茅xito/error y la ruta de la imagen
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
+     */
+    public function subirFotoPro(Request $request)
+    {
         try {
             info('Archivo recibido:', ['foto' => $request->file('foto'), 'idProyecto' => $request->idProyecto]);
 
@@ -231,7 +308,19 @@ class ProyectosController extends Controller
         }
     }
 
-    public function removeUser(Request $request, Proyectos $project) {
+    /**
+     * Eliminar un usuario del proyecto.
+     * 
+     * Solo los administradores del proyecto pueden eliminar usuarios.
+     * Verifica los permisos antes de eliminar la relaci贸n usuario-proyecto.
+     * 
+     * @param Request $request Debe contener 'user_id_delete'
+     * @param Proyectos $project Instancia del proyecto
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n con mensaje de 茅xito o error
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
+     */
+    public function removeUser(Request $request, Proyectos $project)
+    {
         try {
             $request->validate([
                 'user_id_delete' => 'required|exists:Usuario,id'
@@ -253,7 +342,20 @@ class ProyectosController extends Controller
         }
     }
 
-    public function updateUserAdmin(Request $request, Proyectos $project) {
+    /**
+     * Promover un usuario a administrador del proyecto.
+     * 
+     * Solo los administradores del proyecto pueden promover a otros usuarios.
+     * Verifica permisos y que el usuario no sea ya administrador antes de actualizar.
+     * Usa updateExistingPivot para modificar el rol en la tabla intermedia.
+     * 
+     * @param Request $request Debe contener 'user_id_admin'
+     * @param Proyectos $project Instancia del proyecto
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n con mensaje de 茅xito, error o info
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
+     */
+    public function updateUserAdmin(Request $request, Proyectos $project)
+    {
         try {
             $request->validate([
                 'user_id_admin' => 'required|exists:Usuario,id'
@@ -283,7 +385,20 @@ class ProyectosController extends Controller
         }
     }
 
-    public function addGroup(Request $request, Proyectos $project) {
+    /**
+     * A帽adir un grupo completo de usuarios al proyecto.
+     * 
+     * Solo los administradores pueden a帽adir grupos. Busca el grupo por nombre,
+     * obtiene todos sus usuarios y los a帽ade al proyecto con rol "Miembro".
+     * Usa syncWithoutDetaching para no eliminar usuarios existentes.
+     * 
+     * @param Request $request Debe contener 'group-name'
+     * @param Proyectos $project Instancia del proyecto
+     * @return \Illuminate\Http\RedirectResponse Redirecci贸n con mensaje de 茅xito, error o info
+     * @author Joaqu韓 <joaquinmscollo@gmail.com>
+     */
+    public function addGroup(Request $request, Proyectos $project)
+    {
         try {
             $request->validate([
                 'group-name' => 'required|exists:Grupo,descripcion'
@@ -306,7 +421,7 @@ class ProyectosController extends Controller
                 return redirect()->back()->with('info', 'El grupo no tiene miembros');
             }
 
-            foreach($users as $user) {
+            foreach ($users as $user) {
                 if (!$project->usuarios()->where('usuarioId', $user->id)->exists()) {
                     $project->usuarios()->syncWithoutDetaching([
                         $user->id => ['rol' => 'Miembro']

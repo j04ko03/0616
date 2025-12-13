@@ -34,7 +34,7 @@ class GrupoController extends Controller
      * array. Primero guarda el grupo y luego mediante un attach guarda los datos en la tabla intermedia.
      * @param Request $request Nombre del grupo y array de usuarios
      * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
-     * @author josep <jguius2021@cepnet.net>
+     * @author Joaquín <joaquinmscollo@gmail.com>
      */
     public function store(Request $request)
     {
@@ -84,7 +84,7 @@ class GrupoController extends Controller
      * @param Request $request Array de usuarios
      * @param Grupo $grupo id de grupo (Grupo)
      * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
-     * @author josep <jguius2021@cepnet.net>
+     * @author Joaquín <joaquinmscollo@gmail.com>
      */
     public function update(Request $request, Grupo $grupo)
     {
@@ -109,7 +109,7 @@ class GrupoController extends Controller
      * Borra el grupo seleccionado. Borra los usuarios en ese grupo con el detach()
      * @param Grupo $grupo id de grupo (Grupo)
      * @return \Illuminate\Http\RedirectResponse Hace un redirect hacia la Vista Global.
-     * @author josep <jguius2021@cepnet.net>
+     * @author Joaquín <joaquinmscollo@gmail.com>
      */
     public function destroy(Grupo $grupo)
     {

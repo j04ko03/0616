@@ -1,8 +1,22 @@
+/**
+ * Subida de fotografía para proyectos desde selector de archivos.
+ * 
+ * Permite subir una imagen para cada proyecto desde las tarjetas de proyecto.
+ * Funcionalidades:
+ * - Selección de imagen (.png, .jpg, .jpeg)
+ * - Subida al servidor mediante fetch con FormData
+ * - Recarga automática de la página para mostrar la nueva imagen
+ * 
+ * NOTA: Requiere la variable global RUTA_SUBIR_FOTO_PRO definida en Blade.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.card-contenedor');
 
     cards.forEach(card => {
-        
+
 
         // Evitar añadir listeners duplicados
         if (card.dataset.fotoListenerAdded) return;
@@ -16,19 +30,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const imagenProyecto = contenedorFoto.querySelector('.imagen-proyecto');
         if (!capturaBtn || !uploadFile || !imagenProyecto) return;
 
-        // Hacer clic para abrir selector de archivos
+        /**
+         * Abrir selector de archivos al hacer click en el botón de captura.
+         */
         capturaBtn.addEventListener('click', e => {
             e.stopPropagation();
             uploadFile.click();
         });
 
-        // Cuando el usuario selecciona una foto
+        /**
+         * Procesar archivo seleccionado y subirlo al servidor.
+         */
         uploadFile.addEventListener('change', e => {
             e.stopPropagation();
             const file = e.target.files[0];
             if (!file) return;
 
-            if (!["image/png","image/jpeg","image/jpg"].includes(file.type)) {
+            if (!["image/png", "image/jpeg", "image/jpg"].includes(file.type)) {
                 alert("Por favor, sube una imagen .png o .jpg válida.");
                 return;
             }
@@ -39,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('foto', file);
             formData.append('idProyecto', idProyecto);
 
+            /**
+             * Enviar imagen al servidor mediante fetch.
+             */
             fetch(RUTA_SUBIR_FOTO_PRO, {
                 method: 'POST',
                 headers: {
@@ -46,40 +67,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: formData
             })
-            .then(async res => {
-                const text = await res.text();
+                .then(async res => {
+                    const text = await res.text();
 
-                try {
-                    return JSON.parse(text);
-                } catch (e) {
-                    console.error("Respuesta del servidor NO JSON:", text);
-                    throw new Error("Servidor no devolvió JSON válido.");
-                }
-            })
-            .then(data => {
-                if (data.success) {
-                    console.log("Foto subida correctamente:", data.ruta);
-                    imagenProyecto.src = data.ruta; // mostrar foto subida
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error("Respuesta del servidor NO JSON:", text);
+                        throw new Error("Servidor no devolvió JSON válido.");
+                    }
+                })
+                .then(data => {
+                    if (data.success) {
+                        console.log("Foto subida correctamente:", data.ruta);
+                        imagenProyecto.src = data.ruta; // mostrar foto subida
 
-                    
 
-                    // Esperar 1 segundo y recargar solo la imagen
-                    setTimeout(() => {
-                        //const srcOriginal = imagenProyecto.src.split('?')[0]; // quitar query si existe
-                        //imagenProyecto.src = srcOriginal + '?t=' + new Date().getTime(); // añade timestamp para forzar recarga
-                        window.location.reload();
-                        console.log("Página recargada para actualizar imagen.");
-                    }, 2000);
 
-                } else {
-                    alert("Error al subir la foto: " + data.mensaje);
-                }
-            })
-            .catch(err => {
-                console.error("ERROR FETCH:", err);
-            });
+                        // Recargar página después de 2 segundos para mostrar nueva imagen
+                        setTimeout(() => {
+                            //const srcOriginal = imagenProyecto.src.split('?')[0]; // quitar query si existe
+                            //imagenProyecto.src = srcOriginal + '?t=' + new Date().getTime(); // añade timestamp para forzar recarga
+                            window.location.reload();
+                            console.log("Página recargada para actualizar imagen.");
+                        }, 2000);
 
-            
+                    } else {
+                        alert("Error al subir la foto: " + data.mensaje);
+                    }
+                })
+                .catch(err => {
+                    console.error("ERROR FETCH:", err);
+                });
+
+
 
         });
     });

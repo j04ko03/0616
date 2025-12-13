@@ -1,5 +1,17 @@
 <?php
+
 namespace App\Http\Controllers;
+/**
+ * Controlador para la gestión de tareas del proyecto.
+ * 
+ * Maneja el CRUD completo de tareas incluyendo:
+ * - Creación y edición de tareas
+ * - Asociación con proyectos, sprints y usuarios
+ * - Gestión de tags
+ * - Eliminación de tareas y sus relaciones
+ * 
+ * @package App\Http\Controllers
+ */
 
 use App\Models\Tarea;
 use App\Clases\Utilitat;
@@ -10,7 +22,13 @@ use Illuminate\Container\Attributes\Auth;
 class TareaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Listar todas las tareas del sistema.
+     * 
+     * Obtiene todas las tareas de la base de datos y las pasa a la vista.
+     * Maneja errores de base de datos usando la clase Utilitat.
+     * 
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse Vista con todas las tareas o redirección en caso de error
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function index()
     {
@@ -26,14 +44,16 @@ class TareaController extends Controller
         }
 
         return $response;
-
-        $tarea = Tarea::all();
-        return view('tarea.index', compact('tarea'));
     }
 
 
     /**
-     * Show the form for creating a new resource.
+     * Mostrar el formulario para crear una nueva tarea.
+     * 
+     * Retorna la vista del formulario de creación de tareas.
+     * 
+     * @return \Illuminate\View\View Vista del formulario de creación de tareas
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function create()
     {
@@ -41,10 +61,15 @@ class TareaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    /**
-     * Store a newly created resource in storage.
+     * Guardar una nueva tarea en la base de datos.
+     * 
+     * Valida los datos recibidos, crea la tarea y sincroniza las relaciones
+     * con tags y usuarios asignados. Al finalizar redirige al proyecto
+     * al que pertenece la tarea.
+     * 
+     * @param Request $request Datos de la tarea (titulo, descripcion, estado, fechaEntrega, responsableId, idSprint, proyectoId, tags[], usuariosAsignados[])
+     * @return \Illuminate\Http\RedirectResponse Redirección al proyecto con mensaje de éxito o error
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function store(Request $request)
     {
@@ -96,7 +121,13 @@ class TareaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Mostrar una tarea específica.
+     * 
+     * Retorna la vista de detalle de una tarea particular.
+     * 
+     * @param Tarea $tarea Instancia de la tarea a mostrar (inyección de modelo)
+     * @return \Illuminate\View\View Vista con los detalles de la tarea
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function show(Tarea $tarea)
     {
@@ -104,7 +135,14 @@ class TareaController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Mostrar el formulario para editar una tarea existente.
+     * 
+     * Carga todos los datos necesarios para el formulario de edición:
+     * estados, sprints, tags disponibles y lista de usuarios.
+     * 
+     * @param Tarea $tarea Instancia de la tarea a editar (inyección de modelo)
+     * @return \Illuminate\View\View Vista del formulario de edición con la tarea y datos relacionados
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function edit(Tarea $tarea)
     {
@@ -116,7 +154,16 @@ class TareaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualizar una tarea existente en la base de datos.
+     * 
+     * Valida y actualiza los datos de la tarea, sincroniza las relaciones
+     * con tags y usuarios asignados. Usa sync() para manejar correctamente
+     * la adición y eliminación de relaciones.
+     * 
+     * @param Request $request Datos actualizados de la tarea
+     * @param Tarea $tarea Instancia de la tarea a actualizar (inyección de modelo)
+     * @return \Illuminate\Http\RedirectResponse Redirección al proyecto con mensaje de éxito
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function update(Request $request, Tarea $tarea)
     {
@@ -164,7 +211,15 @@ class TareaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminar una tarea de la base de datos.
+     * 
+     * Antes de eliminar la tarea, se eliminan todas las relaciones
+     * con tags y usuarios (detach) para evitar datos huérfanos.
+     * Luego elimina la tarea y redirige al proyecto.
+     * 
+     * @param Tarea $tarea Instancia de la tarea a eliminar (inyección de modelo)
+     * @return \Illuminate\Http\RedirectResponse Redirección al proyecto con mensaje de éxito o error
+     * @author Joaqu�n <joaquinmscollo@gmail.com>
      */
     public function destroy(Tarea $tarea)
     {

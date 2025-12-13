@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 /**
-*@package App\Http\Controllers
-*/
+ *@package App\Http\Controllers
+ */
 
 use App\Clases\Utilitat;
 use App\Models\Solicitud;
@@ -41,7 +41,7 @@ class SolicitudController extends Controller
     public function store(Request $request)
     {
         //
-        
+
         $request->validate([
             'clave' => 'required|string',
         ]);
@@ -50,11 +50,11 @@ class SolicitudController extends Controller
         $solicitud->descripcion = "Solicitud";
         $solicitud->idUsuario = auth()->user()->id;
 
-        try{
+        try {
             $solicitud->save();
             session()->flash('success', 'Se guardado correctamente los datos');
             $response = redirect()->route('perfil.controller')->with('success', 'Solicitud creada correctamente.');
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             $missatge = Utilitat::errorMessage($e);
             session()->flash('error', 'No se hacreado los datos' . ' - ' . $missatge);
             $response = redirect()->back();
@@ -101,11 +101,11 @@ class SolicitudController extends Controller
     public function destroy(Solicitud $solicitude)
     {
         //
-        try{
+        try {
             $solicitude->delete();
-            session()->flash('success', 'Se borra correctamente solicitud' . ' - ' . $solicitude.id);
+            session()->flash('success', 'Se borra correctamente solicitud' . ' - ' . $solicitude . id);
             $response = redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente.');
-        }catch(QueryException $e){
+        } catch (QueryException $e) {
             $missatge = Utilitat::errorMessage($e);
             session()->flash('error', 'No se han obtenido los datos' . ' - ' . $missatge);
             $response = redirect()->back();
@@ -131,17 +131,17 @@ class SolicitudController extends Controller
         $user->tipoUser = 1;
         $user->save();
 
-        try{
+        try {
             $solicitude->delete();
-            session()->flash('success', 'Se borra correctamente la solicitud ' . ' - ' . $solicitude.id);
-            $response =  redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente y Usuario Update');
-        }catch(QueryException $e){
+            session()->flash('success', 'Se borra correctamente la solicitud ' . ' - ' . $solicitude . id);
+            $response = redirect()->route('vistaGlobal.controller')->with('success', 'Solicitud eliminada correctamente y Usuario Update');
+        } catch (QueryException $e) {
             $missatge = Utilitat::errorMessage($e);
             session()->flash('error', 'No se han borrado los datos' . ' - ' . $missatge);
             $response = redirect()->back();
         }
 
         return $response;
-        
+
     }
 }

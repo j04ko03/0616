@@ -1,3 +1,14 @@
+/**
+ * Gestión del popup de tareas - Versión alternativa.
+ * 
+ * Similar a popUpTarea.js pero con algunas diferencias:
+ * - Usa un botón diferente para abrir (#boton en lugar de #add-task-btn)
+ * - No incluye limpieza de URL al cerrar
+ * - La función openTaskPopup solo imprime en consola en lugar de redirigir
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 // TASK POPUP MANAGEMENT
 
 // Elementos del DOM
@@ -11,7 +22,7 @@ const cancelDeleteTaskBtn = document.getElementById("cancel-delete-task-btn");
 // Botón "Añadir tarea" del proyecto
 const addTaskBtn = document.getElementById("boton");
 
-// Configurar fecha mínima como hoy
+// CONFIGURAR FECHA MÍNIMA COMO HOY
 const today = new Date().toISOString().split("T")[0];
 const fechaEntregaInput = document.getElementById("fechaEntrega");
 if (fechaEntregaInput) {
@@ -37,7 +48,6 @@ if (quitTaskBtn) {
     });
 }
 
-// CERRAR POPUP AL HACER CLICK EN EL FONDO
 // CERRAR POPUP AL HACER CLICK EN EL FONDO
 if (taskPopupBg) {
     taskPopupBg.addEventListener("click", function (e) {
@@ -81,7 +91,9 @@ if (formDeleteTask) {
     });
 }
 
-// FUNCIÓN PARA CERRAR EL POPUP
+/**
+ * Cierra el popup de tareas y restaura el estado inicial.
+ */
 function closeTaskPopup() {
     taskPopupBg.style.display = "none";
     if (taskForm) {
@@ -92,8 +104,12 @@ function closeTaskPopup() {
     }
 }
 
-// ABRIR POPUP PARA EDITAR TAREA (desde los items del kanban)
-// Esta función se puede llamar desde otros scripts
+/**
+ * Abre el popup de tareas para editar una tarea.
+ * Función global que puede ser llamada desde otros scripts (items del kanban).
+ * 
+ * @param {number|null} tareaId - ID de la tarea a editar, null para crear nueva
+ */
 window.openTaskPopup = function (tareaId = null) {
     if (tareaId) {
         // Si hay un ID, cargar los datos de la tarea

@@ -1,11 +1,30 @@
-// MINIMUM TODAY
+/**
+ * Gestión completa de la vista de proyecto.
+ * 
+ * Este archivo gestiona todas las funcionalidades principales de la página de proyecto:
+ * - Configuración de fecha mínima para inputs de fecha
+ * - Redirección entre proyectos mediante dropdown
+ * - Gestión de múltiples popups:
+ *   - Añadir usuario
+ *   - Actualizar/modificar proyecto
+ *   - Eliminar proyecto (confirmación)
+ *   - Eliminar usuario de proyecto
+ *   - Promover usuario a administrador
+ *   - Añadir grupo de usuarios
+ * 
+ * Todos los popups comparten un fondo común (#popup-bg) para mejorar UX.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
+// CONFIGURACIÓN DE FECHA MÍNIMA
 const todayProject = new Date().toISOString().split("T")[0];
 const inputDateProject = document.querySelector("#fecha-limite");
 if (inputDateProject) {
     inputDateProject.min = todayProject;
 }
 
-// REDIRECT TO NEW URL WITH PROJECT ID
+// REDIRECCIÓN ENTRE PROYECTOS
 const projectsSelect = document.getElementById("projects");
 if (projectsSelect) {
     projectsSelect.addEventListener("change", function (e) {
@@ -13,10 +32,10 @@ if (projectsSelect) {
     });
 }
 
-// GLOBAL POPUP ELEMENTS
+// ELEMENTO GLOBAL DE FONDO DE POPUP
 const popupBg = document.getElementById("popup-bg");
 
-// ADD USER POP-UP
+// ==================== POPUP DE AÑADIR USUARIO ====================
 const formAddUser = document.getElementById("form-add-user");
 const addUserBtn = document.getElementById("add-user");
 const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
@@ -45,7 +64,7 @@ if (formAddUser) {
     });
 }
 
-// POP-UP UPDATE-DELETE PROJECT
+// ==================== POPUP DE ACTUALIZAR/ELIMINAR PROYECTO ====================
 const updateProjectBtn = document.getElementById("update-project");
 const popupQuitBtn = document.getElementById("quit-btn");
 const formUpdateProject = document.getElementById("update-project-form");
@@ -74,7 +93,7 @@ if (formUpdateProject) {
     });
 }
 
-// POP-UP DELETE PROJECT CONFIRMATION
+// ==================== POPUP DE CONFIRMACIÓN DE ELIMINAR PROYECTO ====================
 const popupDeleteProject = document.getElementById("popup-delete-project-confirmation");
 const deleteProjectBtn = document.getElementById("delete-project");
 const formDeleteProjectConfirmation = document.getElementById("form-delete-project");
@@ -114,7 +133,7 @@ if (formDeleteProjectConfirmation) {
     });
 }
 
-// DELETE AND UPDATE USER FROM PROJECT
+// ==================== ELIMINAR Y PROMOVER USUARIOS DEL PROYECTO ====================
 const popupUserProject = document.querySelectorAll(".popup-edit-user");
 const formDeleteUserProject = document.getElementById("delete-user-project");
 const formUpdateUserAdmin = document.getElementById("update-user-admin");
@@ -125,6 +144,7 @@ if (popupUserProject.length > 0) {
             const clickedUpdate = e.target.closest(".user-admin");
             const clickedDelete = e.target.closest(".delete-user");
 
+            // Si se hace click en promover a admin
             if (clickedUpdate && popupBg && formUpdateUserAdmin) {
                 const message = formUpdateUserAdmin.querySelector("p");
                 if (message) message.textContent = `¿Seguro que quiere hacer administrador a ${popupUser.dataset.nombre}?`;
@@ -138,7 +158,9 @@ if (popupUserProject.length > 0) {
                     const hiddenInput = `<input type="hidden" name="user_id_admin" id="user_id_admin" value="${popupUser.dataset.id}">`;
                     formUpdateUserAdmin.insertAdjacentHTML("beforeend", hiddenInput);
                 }
-            } else if (clickedDelete && popupBg && formDeleteUserProject) {
+            }
+            // Si se hace click en eliminar usuario
+            else if (clickedDelete && popupBg && formDeleteUserProject) {
                 const message = formDeleteUserProject.querySelector("p");
                 if (message) message.textContent = `¿Seguro que quiere eliminar a ${popupUser.dataset.nombre}?`;
                 popupBg.style.display = "flex";
@@ -189,7 +211,7 @@ if (formUpdateUserAdmin) {
     });
 }
 
-// ADD GROUP
+// ==================== AÑADIR GRUPO ====================
 const cancelAddGrpBtn = document.getElementById("cancel-add-grp-btn");
 const formAddGrp = document.getElementById("add-grp-form");
 const addGrpBtn = document.getElementById("add-group");
@@ -218,7 +240,7 @@ if (formAddGrp) {
     });
 }
 
-// GLOBAL BACKGROUND
+// ==================== CERRAR POPUPS AL HACER CLICK EN EL FONDO ====================
 if (popupBg) {
     popupBg.addEventListener("click", function (e) {
         e.stopPropagation();

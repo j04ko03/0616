@@ -1,3 +1,17 @@
+/**
+ * Captura de fotografía de perfil con cámara o subida de archivo.
+ * 
+ * Permite al usuario:
+ * 1. Tomar foto usando la cámara del dispositivo
+ * 2. Subir imagen desde archivo (.png, .jpg, .jpeg)
+ * 3. Subir la imagen al servidor mediante fetch
+ * 4. Mostrar preview de la foto seleccionada
+ * 
+ * NOTA: Requiere la variable global RUTA_SUBIR_FOTO definida en Blade.
+ * 
+ * @author Joaqu�n <joaquinmscollo@gmail.com>
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('cameraModal');
     const uploadBtn = document.getElementById('upload');
@@ -12,6 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let stream;
 
+    /**
+     * Abrir modal de cámara y solicitar permiso para acceder a la cámara.
+     */
     img.addEventListener('click', async (e) => {
         e.preventDefault();
         modal.style.display = 'flex';
@@ -24,12 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /**
+     * Cerrar modal y detener el stream de la cámara.
+     */
     closeBtn.addEventListener('click', () => {
         modal.style.display = 'none';
         if (stream) stream.getTracks().forEach(track => track.stop());
     });
 
-    // Tomar foto directamente al contenedor de perfil
+    /**
+     * Tomar foto desde la cámara y mostrarla en el contenedor de perfil.
+     */
     document.getElementById('takePhoto').addEventListener('click', () => {
         if (!video.videoWidth || !video.videoHeight) return alert("La cámara aún no está lista.");
 
@@ -49,16 +71,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (stream) stream.getTracks().forEach(track => track.stop());
     });
 
+    /**
+     * Abrir selector de archivo al hacer click en el botón de subir.
+     */
     imgUpload.addEventListener('click', () => {
         uploadFile.click(); // Solo abre selector de archivo, no el modal
     });
 
-    // Subida desde archivo
+    /**
+     * Subir imagen desde archivo seleccionado.
+     */
     uploadFile.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (file && (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg")) {
             const reader = new FileReader();
-            reader.onload = function(evt) {
+            reader.onload = function (evt) {
                 previewContainer.innerHTML = `<img src="${evt.target.result}" alt="Foto subida">`;
                 modal.style.display = 'none';
                 subirImagenAlServidor(evt.target.result);
@@ -70,9 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-
-
+    /**
+     * Enviar imagen al servidor mediante fetch y FormData.
+     * 
+     * @param {string} dataUrl - Data URL de la imagen en formato base64
+     */
     function subirImagenAlServidor(dataUrl) {
         fetch(dataUrl)
             .then(res => res.blob())
@@ -87,28 +116,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     body: formData
                 })
-                .then(async res => {
-                // Si la respuesta NO es JSON → lanzo error manual
-                    const text = await res.text();
+                    .then(async res => {
+                        // Si la respuesta NO es JSON → lanzo error manual
+                        const text = await res.text();
 
-                    try {
-                        return JSON.parse(text);
-                    } catch (e) {
-                        console.error("Respuesta del servidor:", text);
-                        throw new Error("El servidor no devolvió JSON. Revisa la ruta o el controlador.");
-                    }
-                })
-                .then(data => {
-                    if (data.success) {
-                        console.log("Foto subida correctamente");
-                        console.log("Ruta almacenada:", data.ruta);
-                    } else {
-                        alert("Error al subir la foto.");
-                    }
-                })
-                .catch(err => {
-                    console.error("ERROR FETCH:", err);
-                });
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error("Respuesta del servidor:", text);
+                            throw new Error("El servidor no devolvió JSON. Revisa la ruta o el controlador.");
+                        }
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            console.log("Foto subida correctamente");
+                            console.log("Ruta almacenada:", data.ruta);
+                        } else {
+                            alert("Error al subir la foto.");
+                        }
+                    })
+                    .catch(err => {
+                        console.error("ERROR FETCH:", err);
+                    });
             });
     }
 });
