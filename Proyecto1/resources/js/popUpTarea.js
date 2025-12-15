@@ -8,7 +8,7 @@
  * - Redirigir a la ruta correcta para editar una tarea específica
  * - Limpiar URL al cerrar (eliminar tareaId de la URL)
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // TASK POPUP MANAGEMENT

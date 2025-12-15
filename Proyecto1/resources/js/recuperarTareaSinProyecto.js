@@ -7,7 +7,7 @@
  * - Enviar tareas junto con el formulario del proyecto
  * - Limpiar localStorage al cerrar o guardar
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 //Extraemos los datos de la local storage, en caso que haya se llena array, sino se deja vacia
@@ -21,6 +21,8 @@ const hacerPut = document.getElementById("project");
  * Mostrar las tareas de localStorage en el contenedor visual.
  */
 function mostrarLocal() {
+    if (!contenedorTareas) return;
+
     //limpiamos el contenedor
     contenedorTareas.innerHTML = "";
     contenedorTareas.innerHTML = `<p id="add-tareas-msg"></p>`;
@@ -38,11 +40,11 @@ function mostrarLocal() {
  * 
  * @param {number} indice - Índice de la tarea a eliminar en el array
  */
-function borrarTarea(indice) {
+window.borrarTarea = function (indice) {
     tareasTemporales.splice(indice, 1);
     localStorage.setItem("tareasTemporales", JSON.stringify(tareasTemporales));
     mostrarLocal();
-}
+};
 
 //Mostrar tareas inicial
 mostrarLocal();
@@ -50,20 +52,24 @@ mostrarLocal();
 /**
  * Limpiar localStorage al cerrar el formulario.
  */
-cerrar.addEventListener("click", function (e) {
-    localStorage.clear();
-});
+if (cerrar) {
+    cerrar.addEventListener("click", function (e) {
+        localStorage.clear();
+    });
+}
 
 /**
  * Al guardar proyecto, enviar tareas como input hidden y limpiar localStorage.
  */
-hacerPut.addEventListener("submit", function (e) {
-    // Agregar tareas como input hidden JSON
-    const tareasInput = document.createElement("input");
-    tareasInput.type = "hidden";
-    tareasInput.name = "tareas";
-    tareasInput.value = JSON.stringify(tareasTemporales);
-    hacerPut.appendChild(tareasInput);
+if (hacerPut) {
+    hacerPut.addEventListener("submit", function (e) {
+        // Agregar tareas como input hidden JSON
+        const tareasInput = document.createElement("input");
+        tareasInput.type = "hidden";
+        tareasInput.name = "tareas";
+        tareasInput.value = JSON.stringify(tareasTemporales);
+        hacerPut.appendChild(tareasInput);
 
-    localStorage.clear();
-});
+        localStorage.clear();
+    });
+}

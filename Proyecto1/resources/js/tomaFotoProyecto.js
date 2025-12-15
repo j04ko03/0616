@@ -7,9 +7,7 @@
  * - Subida al servidor mediante fetch con FormData
  * - Recarga automática de la página para mostrar la nueva imagen
  * 
- * NOTA: Requiere la variable global RUTA_SUBIR_FOTO_PRO definida en Blade.
- * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -60,11 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
             /**
              * Enviar imagen al servidor mediante fetch.
              */
+            if (typeof RUTA_SUBIR_FOTO_PRO === 'undefined') {
+                console.error("RUTA_SUBIR_FOTO_PRO no definida.");
+                return;
+            }
+
+            const csrfToken = document.querySelector('meta[name="csrf-token"]');
+            const headers = {};
+            if (csrfToken) headers['X-CSRF-TOKEN'] = csrfToken.getAttribute('content');
+
             fetch(RUTA_SUBIR_FOTO_PRO, {
                 method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
+                headers: headers,
                 body: formData
             })
                 .then(async res => {
@@ -86,8 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Recargar página después de 2 segundos para mostrar nueva imagen
                         setTimeout(() => {
-                            //const srcOriginal = imagenProyecto.src.split('?')[0]; // quitar query si existe
-                            //imagenProyecto.src = srcOriginal + '?t=' + new Date().getTime(); // añade timestamp para forzar recarga
                             window.location.reload();
                             console.log("Página recargada para actualizar imagen.");
                         }, 2000);
@@ -99,9 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(err => {
                     console.error("ERROR FETCH:", err);
                 });
-
-
-
         });
     });
 });

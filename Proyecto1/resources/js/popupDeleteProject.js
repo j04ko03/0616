@@ -8,89 +8,106 @@
  * Incluye lógica para abrir, cerrar y gestionar clicks en el fondo
  * para cerrar los popups.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // POP-UP UPDATE-DELETE PROJECT
-const popupBg = document.getElementById("popup-bg");
-const updateProjectBtn = document.getElementById("update-project");
-const popupQuitBtn = document.getElementById("quit-btn");
-const formUpdateProject = document.getElementById("update-project-form");
+const popupBgKey = document.getElementById("popup-bg"); // Rename to avoid conflict if included with others
+const updateProjectBtnKey = document.getElementById("update-project");
+const popupQuitBtnKey = document.getElementById("quit-btn");
+const formUpdateProjectKey = document.getElementById("update-project-form");
+
+// Reuse or new variables? The logic below seems independent.
 
 /**
  * Abrir popup de actualización de proyecto.
  */
-updateProjectBtn.addEventListener("click", function () {
-    popupBg.style.display = "flex";
-    formUpdateProject.style.display = "flex";
-});
+if (updateProjectBtnKey) {
+    updateProjectBtnKey.addEventListener("click", function () {
+        if (popupBgKey) popupBgKey.style.display = "flex";
+        if (formUpdateProjectKey) formUpdateProjectKey.style.display = "flex";
+    });
+}
 
 /**
  * Cerrar popup de actualización con el botón X.
  */
-popupQuitBtn.addEventListener("click", function () {
-    formUpdateProject.style.display = "none";
-    popupBg.style.display = "none";
-});
+if (popupQuitBtnKey) {
+    popupQuitBtnKey.addEventListener("click", function () {
+        if (formUpdateProjectKey) formUpdateProjectKey.style.display = "none";
+        if (popupBgKey) popupBgKey.style.display = "none";
+    });
+}
 
 /**
  * Cerrar todos los popups al hacer click en el fondo.
  */
-popupBg.addEventListener("click", function (e) {
-    e.stopPropagation();
-    formUpdateProject.style.display = "none";
-    popupDeleteProject.style.display = "none";
-    formAddUser.style.display = "none";
-    popupBg.style.display = "none";
-});
+if (popupBgKey) {
+    popupBgKey.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (formUpdateProjectKey) formUpdateProjectKey.style.display = "none";
+        // Check if other popups exist before accessing style
+        const popupDelete = document.getElementById("popup-delete-project-confirmation");
+        if (popupDelete) popupDelete.style.display = "none";
+
+        const formAdd = document.getElementById("form-add-user");
+        if (formAdd) formAdd.style.display = "none";
+
+        popupBgKey.style.display = "none";
+    });
+}
 
 /**
  * Evitar que clicks dentro del formulario cierren el popup.
  */
-formUpdateProject.addEventListener("click", (e) => {
-    e.stopPropagation();
-});
+if (formUpdateProjectKey) {
+    formUpdateProjectKey.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
 
 // POP-UP DELETE PROJECT CONFIRMATION
-const popupDeleteProject = document.getElementById(
-    "popup-delete-project-confirmation"
-);
-const deleteProjectBtn = document.getElementById("delete-project");
-const formDeleteProjectConfirmation = document.getElementById(
-    "form-delete-project"
-);
-const cancelDeleteProjectBtnConfirmation = document.getElementById(
-    "cancel-delete-project-btn"
-);
+const popupDeleteProjectKey = document.getElementById("popup-delete-project-confirmation");
+const deleteProjectBtnKey = document.getElementById("delete-project");
+const formDeleteProjectConfirmationKey = document.getElementById("form-delete-project");
+const cancelDeleteProjectBtnConfirmationKey = document.getElementById("cancel-delete-project-btn");
 
 /**
  * Abrir popup de confirmación de eliminación de proyecto.
  */
-deleteProjectBtn.addEventListener("click", function () {
-    popupDeleteProject.style.display = "flex";
-    formDeleteProjectConfirmation.style.display = "flex";
-});
+if (deleteProjectBtnKey) {
+    deleteProjectBtnKey.addEventListener("click", function () {
+        if (popupDeleteProjectKey) popupDeleteProjectKey.style.display = "flex";
+        if (formDeleteProjectConfirmationKey) formDeleteProjectConfirmationKey.style.display = "flex";
+    });
+}
 
 /**
  * Cancelar la eliminación y cerrar el popup de confirmación.
  */
-cancelDeleteProjectBtnConfirmation.addEventListener("click", function (e) {
-    popupDeleteProject.style.display = "none";
-    formDeleteProjectConfirmation.style.display = "none";
-});
+if (cancelDeleteProjectBtnConfirmationKey) {
+    cancelDeleteProjectBtnConfirmationKey.addEventListener("click", function (e) {
+        if (popupDeleteProjectKey) popupDeleteProjectKey.style.display = "none";
+        if (formDeleteProjectConfirmationKey) formDeleteProjectConfirmationKey.style.display = "none";
+    });
+}
 
 /**
  * Cerrar popup de eliminación al hacer click en el fondo.
  */
-popupDeleteProject.addEventListener("click", function (e) {
-    e.stopPropagation();
-    formDeleteProjectConfirmation.style.display = "none";
-    popupDeleteProject.style.display = "none";
-});
+if (popupDeleteProjectKey) {
+    popupDeleteProjectKey.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (formDeleteProjectConfirmationKey) formDeleteProjectConfirmationKey.style.display = "none";
+        popupDeleteProjectKey.style.display = "none";
+    });
+}
 
 /**
  * Evitar que clicks dentro del formulario de confirmación cierren el popup.
  */
-formDeleteProjectConfirmation.addEventListener("click", function (e) {
-    e.stopPropagation();
-});
+if (formDeleteProjectConfirmationKey) {
+    formDeleteProjectConfirmationKey.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+}

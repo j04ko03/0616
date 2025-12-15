@@ -11,7 +11,7 @@
  * 
  * Diferencia clave: usa IDs y contenedores específicos para el formulario de edición.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', function () {

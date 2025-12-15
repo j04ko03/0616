@@ -7,7 +7,7 @@
  * - Configura el formulario para enviar a la URL correcta
  * - Alterna entre vista de crear y editar
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 const grupoCards = document.querySelectorAll('.grupoCard');
@@ -27,43 +27,59 @@ grupoCards.forEach(card => {
         console.log(card.dataset.url);
 
         // Configurar la URL del formulario para el grupo específico
-        formEditar.action = card.dataset.url;
+        if (formEditar) formEditar.action = card.dataset.url;
 
         // Cambiar de vista crear a editar
-        document.getElementById('crearGrupoContainer').style.display = 'none';
-        document.getElementById('editarGrupoContainer').style.display = 'block';
+        const crearContainer = document.getElementById('crearGrupoContainer');
+        const editarContainer = document.getElementById('editarGrupoContainer');
+
+        if (crearContainer) crearContainer.style.display = 'none';
+        if (editarContainer) editarContainer.style.display = 'block';
 
         // Rellenar título del grupo
-        document.getElementById('tituloGrupoEdit').value = nombre;
+        const tituloEdit = document.getElementById('tituloGrupoEdit');
+        if (tituloEdit) tituloEdit.value = nombre;
 
         // Rellenar usuarios seleccionados
         const contenedorUsuarios = document.getElementById('usuarios-seleccionados-editar');
-        contenedorUsuarios.innerHTML = '';
+        if (contenedorUsuarios) {
+            contenedorUsuarios.innerHTML = '';
 
-        usuarios.forEach(u => {
-            const div = document.createElement('div');
-            div.className = 'usuario-seleccionado';
-            div.dataset.id = u.id;
-            div.dataset.name = u.nombre;
-            div.dataset.tipo = u.tipoUser;
-            div.innerHTML = `
-                <span>${u.nombre} (${u.tipoUser == 1 ? 'Super Usuario' : 'Usuario normal'})</span>
-                <button type="button" class="remove-user">×</button>
-                <input type="hidden" name="usuarios[]" value="${u.id}" class="input-usuario-hidden">
-            `;
+            usuarios.forEach(u => {
+                const div = document.createElement('div');
+                div.className = 'usuario-seleccionado';
+                div.dataset.id = u.id;
+                div.dataset.name = u.nombre;
+                div.dataset.tipo = u.tipoUser;
+                div.innerHTML = `
+                    <span>${u.nombre} (${u.tipoUser == 1 ? 'Super Usuario' : 'Usuario normal'})</span>
+                    <button type="button" class="remove-user">X</button>
+                    <input type="hidden" name="usuarios[]" value="${u.id}" class="input-usuario-hidden">
+                `;
 
-            // Añadir funcionalidad al botón de eliminar
-            div.querySelector('.remove-user').addEventListener('click', () => div.remove());
+                // Añadir funcionalidad al botón de eliminar
+                div.querySelector('.remove-user').addEventListener('click', () => div.remove());
 
-            contenedorUsuarios.appendChild(div);
-        });
+                contenedorUsuarios.appendChild(div);
+            });
+        }
     });
 });
 
 /**
  * Volver a la vista de crear grupo al hacer click en añadir.
  */
-anadirGrupo.addEventListener('click', () => {
-    document.getElementById('crearGrupoContainer').style.display = 'block';
-    document.getElementById('editarGrupoContainer').style.display = 'none';
-});
+if (anadirGrupo) {
+    anadirGrupo.addEventListener('click', () => {
+        const crearContainer = document.getElementById('crearGrupoContainer');
+        const editarContainer = document.getElementById('editarGrupoContainer');
+
+        if (crearContainer) crearContainer.style.display = 'block';
+        if (editarContainer) editarContainer.style.display = 'none';
+
+        // Limpiamos el formulario de editar para evitar confusiones
+        if (formEditar) formEditar.reset();
+        const contenedorUsuarios = document.getElementById('usuarios-seleccionados-editar');
+        if (contenedorUsuarios) contenedorUsuarios.innerHTML = '';
+    });
+}

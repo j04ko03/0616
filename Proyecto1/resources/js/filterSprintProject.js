@@ -7,7 +7,7 @@
  * - "no-sprint": mostrar solo tareas sin sprint asignado
  * - ID de sprint específico: mostrar solo tareas de ese sprint
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // FILTER TASKS BY SPRINT

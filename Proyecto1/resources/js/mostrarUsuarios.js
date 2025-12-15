@@ -4,7 +4,7 @@
  * Carga la lista de usuarios desde el servidor cuando se abre el popup
  * de crear tarea. Los usuarios se agrupan por tipo (Administradores y Usuarios normales).
  * 
- * @author Joaquín <joaquinmscollo@gmail.com>
+ * @author JoaquÃ­n <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', function () {

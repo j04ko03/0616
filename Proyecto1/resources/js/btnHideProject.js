@@ -5,7 +5,7 @@
  * asociadas a un proyecto. Incluye bot贸n de expansi贸n (+),
  * contracci贸n (-) y bot贸n de cerrar (X).
  * 
- * @author Joaqu韓 <joaquinmscollo@gmail.com>
+ * @author Joaqu铆n <joaquinmscollo@gmail.com>
  */
 
 const buttonPlus = document.getElementById('plus');

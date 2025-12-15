@@ -1,6 +1,8 @@
 /**
- * Sistema de filtro para múltiples tablas en vista global
- * Filtra automáticamente según la pestaña activa
+ * Sistema de filtro para múltiples tablas en vista global.
+ * Filtra automáticamente según la pestaña activa.
+ * 
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 class VistaGlobalFilter {
@@ -9,7 +11,7 @@ class VistaGlobalFilter {
         this.searchBtn = document.getElementById('search-btn');
         this.tabButtons = document.querySelectorAll('.tabs-btn');
         this.currentTab = 1; // Pestaña por defecto
-        
+
         this.tabConfigs = {
             1: { // Usuarios
                 container: '.content-section-1',
@@ -47,12 +49,14 @@ class VistaGlobalFilter {
     }
 
     init() {
+        if (!this.buscarInput) return;
+
         // Detectar pestaña activa inicial
         this.detectActiveTab();
-        
+
         // Configurar eventos
         this.setupEvents();
-        
+
         // Aplicar filtro inicial si hay valor
         if (this.buscarInput.value) {
             this.applyFilter(this.buscarInput.value);
@@ -66,7 +70,7 @@ class VistaGlobalFilter {
                 this.currentTab = parseInt(btn.dataset.tab);
             }
         });
-        
+
         // Si no se encuentra, usar la primera
         if (!this.currentTab) {
             this.currentTab = 1;
@@ -80,19 +84,24 @@ class VistaGlobalFilter {
         });
 
         // Evento en botón de búsqueda
-        this.searchBtn.addEventListener('click', () => {
-            this.applyFilter(this.buscarInput.value);
-        });
+        if (this.searchBtn) {
+            this.searchBtn.addEventListener('click', () => {
+                this.applyFilter(this.buscarInput.value);
+            });
+        }
 
         // Evento en cambio de pestaña
-        document.querySelector('#tab-container').addEventListener('click', (e) => {
-            if (e.target.classList.contains('tabs-btn')) {
-                setTimeout(() => {
-                    this.detectActiveTab();
-                    this.applyFilter(this.buscarInput.value);
-                }, 50);
-            }
-        });
+        const tabContainer = document.querySelector('#tab-container');
+        if (tabContainer) {
+            tabContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tabs-btn')) {
+                    setTimeout(() => {
+                        this.detectActiveTab();
+                        this.applyFilter(this.buscarInput.value);
+                    }, 50);
+                }
+            });
+        }
 
         // Tecla Enter para buscar
         this.buscarInput.addEventListener('keypress', (e) => {
@@ -127,7 +136,7 @@ class VistaGlobalFilter {
 
         items.forEach(item => {
             let matches = false;
-            
+
             // Buscar en atributos de datos
             config.dataAttributes.forEach(attr => {
                 const value = item.getAttribute(attr);
@@ -135,7 +144,7 @@ class VistaGlobalFilter {
                     matches = true;
                 }
             });
-            
+
             // Si no tiene atributos de datos, buscar en texto
             if (!matches) {
                 const text = item.textContent.toLowerCase();
@@ -143,7 +152,7 @@ class VistaGlobalFilter {
                     matches = true;
                 }
             }
-            
+
             // Buscar en campos específicos según la pestaña
             if (!matches && config.searchFields) {
                 config.searchFields.forEach(field => {
@@ -157,7 +166,7 @@ class VistaGlobalFilter {
             // Mostrar u ocultar
             item.style.display = matches ? '' : 'none';
             item.classList.toggle('filtered-out', !matches);
-            
+
             if (matches) visibleCount++;
         });
 
@@ -167,16 +176,18 @@ class VistaGlobalFilter {
     updateCounter(visible, total) {
         // Actualizar contador en el input (opcional)
         const counter = document.getElementById('filter-counter');
-        
+
         if (!counter) {
             // Crear contador si no existe
             const counterEl = document.createElement('span');
             counterEl.id = 'filter-counter';
             counterEl.className = 'filter-counter';
             counterEl.textContent = ` (${visible}/${total})`;
-            
+
             // Insertar después del input
-            this.buscarInput.parentNode.appendChild(counterEl);
+            if (this.buscarInput.parentNode) {
+                this.buscarInput.parentNode.appendChild(counterEl);
+            }
         } else {
             counter.textContent = ` (${visible}/${total})`;
         }
@@ -185,7 +196,7 @@ class VistaGlobalFilter {
     clearFilter() {
         this.buscarInput.value = '';
         this.applyFilter('');
-        
+
         const counter = document.getElementById('filter-counter');
         if (counter) {
             counter.remove();
@@ -196,7 +207,7 @@ class VistaGlobalFilter {
 // Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     window.vistaGlobalFilter = new VistaGlobalFilter();
-    
+
     // También hacer disponible para otros scripts
     if (typeof window.appFilters === 'undefined') {
         window.appFilters = {};

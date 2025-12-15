@@ -5,7 +5,7 @@
  * hacia la vista detallada del proyecto. Extrae el ID del proyecto
  * desde el data attribute y redirige.
  * 
- * @author Joaquín <joaquinmscollo@gmail.com>
+ * @author JoaquÃ­n <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,12 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
          * Redirigir al proyecto al hacer click en la tarjeta.
          */
         pro.addEventListener('click', () => {
-            const proyecto = JSON.parse(pro.dataset.projecte);
-            console.log(proyecto);
-            const idProyecto = proyecto.id;
-            const url = `/project/${idProyecto}`;
-            console.log('Redirecting to:', url);
-            window.location.href = "/0616/Proyecto1/public" + url;
+            if (pro.dataset.projecte) {
+                try {
+                    const proyecto = JSON.parse(pro.dataset.projecte);
+                    const idProyecto = proyecto.id;
+                    const url = `/project/${idProyecto}`;
+                    // Assuming relative path needs prefix, based on original code
+                    window.location.href = "/0616/Proyecto1/public" + url;
+                } catch (e) {
+                    console.error("Error parsing project data", e);
+                }
+            }
         });
     });
 }); 

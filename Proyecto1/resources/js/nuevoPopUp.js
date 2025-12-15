@@ -5,7 +5,7 @@
  * antes de enviar. El usuario debe hacer click en "Aceptar" para enviar
  * el formulario, o "Cancelar" para cerrar el popup sin enviar.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,23 +18,29 @@ document.addEventListener("DOMContentLoaded", () => {
     /**
      * Interceptar el envío del formulario para mostrar popup de confirmación.
      */
-    btnModificar.addEventListener("click", function (e) {
-        e.preventDefault();
-        popup.style.display = "flex";
-    });
+    if (btnModificar && popup) {
+        btnModificar.addEventListener("click", function (e) {
+            e.preventDefault();
+            popup.style.display = "flex";
+        });
+    }
 
     /**
      * Cancelar la acción y cerrar el popup.
      */
-    btnCancelar.addEventListener("click", function () {
-        popup.style.display = "none";
-    });
+    if (btnCancelar && popup) {
+        btnCancelar.addEventListener("click", function () {
+            popup.style.display = "none";
+        });
+    }
 
     /**
      * Confirmar la acción y enviar el formulario.
      */
-    btnAceptar.addEventListener("click", function () {
-        btnModificar.closest("form").submit();
-    });
+    if (btnAceptar && btnModificar) {
+        btnAceptar.addEventListener("click", function () {
+            btnModificar.closest("form").submit();
+        });
+    }
 
 });

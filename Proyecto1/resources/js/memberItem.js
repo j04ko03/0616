@@ -7,7 +7,7 @@
  * - Cerrar el popup al hacer click fuera
  * - Evitar propagación de eventos
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 const btnOptions = document.querySelectorAll(".button-member");
@@ -29,7 +29,9 @@ btnOptions.forEach((btn) => {
             return user.dataset.id === memberClicked.dataset.id;
         })[0];
 
-        popupUser.classList.toggle("display");
+        if (popupUser) {
+            popupUser.classList.toggle("display");
+        }
 
         e.stopPropagation();
     });

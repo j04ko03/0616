@@ -6,7 +6,7 @@
  * - No incluye limpieza de URL al cerrar
  * - La función openTaskPopup solo imprime en consola en lugar de redirigir
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // TASK POPUP MANAGEMENT
@@ -37,7 +37,7 @@ if (fechaEntregaInput) {
 if (addTaskBtn) {
     addTaskBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        taskPopupBg.style.display = "flex";
+        if (taskPopupBg) taskPopupBg.style.display = "flex";
     });
 }
 
@@ -68,7 +68,7 @@ if (taskForm) {
 if (deleteTaskBtn) {
     deleteTaskBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        if (formDeleteTask) {
+        if (formDeleteTask && taskForm) {
             taskForm.style.display = "none";
             formDeleteTask.style.display = "flex";
         }
@@ -79,8 +79,10 @@ if (deleteTaskBtn) {
 if (cancelDeleteTaskBtn) {
     cancelDeleteTaskBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        formDeleteTask.style.display = "none";
-        taskForm.style.display = "flex";
+        if (formDeleteTask && taskForm) {
+            formDeleteTask.style.display = "none";
+            taskForm.style.display = "flex";
+        }
     });
 }
 
@@ -95,7 +97,7 @@ if (formDeleteTask) {
  * Cierra el popup de tareas y restaura el estado inicial.
  */
 function closeTaskPopup() {
-    taskPopupBg.style.display = "none";
+    if (taskPopupBg) taskPopupBg.style.display = "none";
     if (taskForm) {
         taskForm.style.display = "flex";
     }
@@ -112,9 +114,7 @@ function closeTaskPopup() {
  */
 window.openTaskPopup = function (tareaId = null) {
     if (tareaId) {
-        // Si hay un ID, cargar los datos de la tarea
-        // Esto requeriría una petición AJAX o tener los datos ya cargados
         console.log("Editando tarea:", tareaId);
     }
-    taskPopupBg.style.display = "flex";
+    if (taskPopupBg) taskPopupBg.style.display = "flex";
 };

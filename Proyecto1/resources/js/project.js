@@ -14,7 +14,7 @@
  * 
  * Todos los popups comparten un fondo común (#popup-bg) para mejorar UX.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // CONFIGURACIÓN DE FECHA MÍNIMA

@@ -6,7 +6,7 @@
  * 2. Limpia el localStorage al salir de ciertas rutas específicas
  *    (crear-proyecto y tareas) para evitar mantener datos obsoletos
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', function () {

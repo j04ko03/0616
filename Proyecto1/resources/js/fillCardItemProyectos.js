@@ -10,7 +10,7 @@
  * Actualiza los contadores visuales en la tarjeta para mostrar
  * el progreso del proyecto.
  * 
- * @author Joaquín <joaquinmscollo@gmail.com>
+ * @author JoaquÃ­n <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -18,37 +18,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach(card => {
 
-        const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : {};
+        const data = card.dataset.proyecto ? JSON.parse(card.dataset.proyecto) : null;
 
-        const tareasValidar = card.querySelector('#TareasValidar');
-        const tareasCompletadas = card.querySelector('#TareasCompletadas');
-        const tareasPendientes = card.querySelector('#TareasPendientes');
+        if (data) {
+            const tareasValidar = card.querySelector('#TareasValidar');
+            const tareasCompletadas = card.querySelector('#TareasCompletadas');
+            const tareasPendientes = card.querySelector('#TareasPendientes');
 
-        let tareaCompletasCuenta = 0;
-        let tareaPendienteCuenta = 0;
-        let tareaValidarCuenta = 0;
+            let tareaCompletasCuenta = 0;
+            let tareaPendienteCuenta = 0;
+            let tareaValidarCuenta = 0;
 
-        // Contar tareas por estado
-        data.tareas.forEach(tarea => {
-            switch (tarea.estadoId) {
-                case '1':
-                    tareaPendienteCuenta++;
-                    break;
-                case '2':
-                    tareaValidarCuenta++;
-                    break;
-                case '3':
-                    tareaCompletasCuenta++;
-                    break;
-                default:
-                    break;
+            // Contar tareas por estado
+            if (data.tareas) {
+                data.tareas.forEach(tarea => {
+                    switch (String(tarea.estadoId)) {
+                        case '1':
+                            tareaPendienteCuenta++;
+                            break;
+                        case '2':
+                            tareaValidarCuenta++;
+                            break;
+                        case '3':
+                            tareaCompletasCuenta++;
+                            break;
+                        default:
+                            break;
+                    }
+                });
             }
-        });
 
-        // Actualizar los contadores en la interfaz
-        tareasValidar.textContent = tareaValidarCuenta;
-        tareasCompletadas.textContent = tareaCompletasCuenta;
-        tareasPendientes.textContent = tareaPendienteCuenta;
-
+            // Actualizar los contadores en la interfaz
+            if (tareasValidar) tareasValidar.textContent = tareaValidarCuenta;
+            if (tareasCompletadas) tareasCompletadas.textContent = tareaCompletasCuenta;
+            if (tareasPendientes) tareasPendientes.textContent = tareaPendienteCuenta;
+        }
     });
 });

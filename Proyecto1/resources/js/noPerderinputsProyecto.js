@@ -9,7 +9,7 @@
  * - Recuperar datos guardados al volver a la página de crear proyecto
  * - Limpiar localStorage al crear el proyecto o cerrar el formulario
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -35,28 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
      * Restaurar valores de los inputs desde localStorage si existen.
      */
     try {
-        if (tituloInputR) {
-
+        if (tituloInputR && tituloInput) {
             tituloInput.value = tituloInputR;
         }
 
-        if (fechaLimiteInputR) {
+        if (fechaLimiteInputR && fechaLimiteInput) {
             fechaLimiteInput.value = fechaLimiteInputR;
         }
 
-        if (tituloInputR) {
-            tituloInput.value = tituloInputR;
-        }
-
-        if (linkInputR) {
+        if (linkInputR && linkInput) {
             linkInput.value = linkInputR;
         }
 
-        if (descripcionInputR) {
+        if (descripcionInputR && descripcionInput) {
             descripcionInput.value = descripcionInputR;
         }
 
-        if (presupuestoInputR) {
+        if (presupuestoInputR && presupuestoInput) {
             presupuestoInput.value = presupuestoInputR;
         }
 
@@ -67,34 +62,40 @@ document.addEventListener("DOMContentLoaded", () => {
     /**
      * Guardar datos en localStorage antes de ir a añadir tareas.
      */
-    addTareas.addEventListener('click', () => {
-        //Guardar en la local Storage
-        localStorage.setItem("tituloInput", tituloInput.value);
-        localStorage.setItem("fechaLimiteInput", fechaLimiteInput.value);
-        localStorage.setItem("linkInput", linkInput.value);
-        localStorage.setItem("descripcionInput", descripcionInput.value);
-        localStorage.setItem("presupuestoInput", presupuestoInput.value);
-    });
+    if (addTareas) {
+        addTareas.addEventListener('click', () => {
+            //Guardar en la local Storage
+            if (tituloInput) localStorage.setItem("tituloInput", tituloInput.value);
+            if (fechaLimiteInput) localStorage.setItem("fechaLimiteInput", fechaLimiteInput.value);
+            if (linkInput) localStorage.setItem("linkInput", linkInput.value);
+            if (descripcionInput) localStorage.setItem("descripcionInput", descripcionInput.value);
+            if (presupuestoInput) localStorage.setItem("presupuestoInput", presupuestoInput.value);
+        });
+    }
 
     /**
      * Limpiar localStorage al crear el proyecto exitosamente.
      */
-    addProyecto.addEventListener('click', () => {
-        //Eliminar en la local Storage
-        localStorage.removeItem("tituloInput");
-        localStorage.removeItem("fechaLimiteInput");
-        localStorage.removeItem("linkInput");
-        localStorage.removeItem("descripcionInput");
-        localStorage.removeItem("presupuestoInput");
-    });
+    if (addProyecto) {
+        addProyecto.addEventListener('click', () => {
+            //Eliminar en la local Storage
+            localStorage.removeItem("tituloInput");
+            localStorage.removeItem("fechaLimiteInput");
+            localStorage.removeItem("linkInput");
+            localStorage.removeItem("descripcionInput");
+            localStorage.removeItem("presupuestoInput");
+        });
+    }
 
     /**
      * Limpiar todo localStorage al cerrar el formulario.
      */
-    cerrar CrearProyecto.addEventListener('click', () => {
-        //Eliminar en la local Storage
-        localStorage.clear();
-    });
+    if (cerrarCrearProyecto) {
+        cerrarCrearProyecto.addEventListener('click', () => {
+            //Eliminar en la local Storage
+            localStorage.clear();
+        });
+    }
 
     /**
      * Detectar cambios de página (aunque no se usa actualmente).

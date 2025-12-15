@@ -6,7 +6,7 @@
  * 2. Mostrar campo de confirmación solo cuando la contraseña tiene más de 7 caracteres
  * 3. Validación visual de coincidencia de contraseñas (borde verde/rojo)
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', function () {

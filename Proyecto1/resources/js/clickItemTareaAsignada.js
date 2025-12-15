@@ -5,7 +5,7 @@
  * y redirige a la URL del proyecto correspondiente almacenada en el atributo data-url.
  * También cambia el cursor para indicar que los elementos son clickeables.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 // MANEJO DE CLICK EN TAREAS ASIGNADAS

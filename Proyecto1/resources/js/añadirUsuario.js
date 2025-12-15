@@ -9,7 +9,7 @@
  * - Eliminar usuarios seleccionados
  * - Configurar fecha mínima como hoy para inputs de fecha
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', function () {
