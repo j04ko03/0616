@@ -7,7 +7,7 @@
 @endpush
 
 @section('content')
-    @include('errores2')  
+    @include('errores2')   
     <!--<div id="errores">
         @include('errores')
     </div>-->

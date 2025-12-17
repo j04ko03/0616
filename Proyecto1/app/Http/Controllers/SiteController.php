@@ -45,7 +45,7 @@ class SiteController extends Controller
         
         try{
             $usuario = Auth::user();
-
+dd($usuario::with('proyectos')->get());
             $proyectosRecientes = $usuario->proyectos()->orderBy('fechaModificacion', 'desc')
                 ->take(6)
                 ->get();
