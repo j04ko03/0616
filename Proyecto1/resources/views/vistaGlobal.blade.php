@@ -22,6 +22,7 @@
             <button class="tabs-btn" data-tab="3">Proyectos ({{ count($proyectos) }})</button>
             <button class="tabs-btn" data-tab="4">Grupos</button>
             <button class="tabs-btn" data-tab="5">Incidencias ({{ count($incidencias) }})</button>
+            <button class="tabs-btn" data-tab="6">Tags</button>
         </div>
         <div id="main-content">
             <form>
@@ -164,6 +165,67 @@
                 @foreach ($incidencias as $incidencia)
                     <x-incidenciaItem descripcion="{{ $incidencia['descripcion'] }}" nombreUser="{{ $incidencia->usuario['nombre'] }}" id="{{ $incidencia->idIncidencia }}"/>
                 @endforeach
+            </div>
+            <div class="tabs-content content-section-6" style="height: 100%; border: 1px solid red" class="contenedorScroll">
+                
+                <div class="tag-wrapper" style="width: 100%">
+                    <div class="tag-card" style="border: 1px solid green">
+                        <h1 class="tag-title">Crear Tag</h1>
+
+
+                        <form method="POST">
+                        @csrf
+
+
+                        <div style="display: flex; flex-wrap: nowrap; flex-direction: column; width: 100%; height: 100%; border: 1px solid orange; justify-content: space-around; align-items: center">
+
+                            <div style="border: 1px solid blue; width: 80%; height: 10%; display: flex; flex-wrap: wrap; justify-content: space-between">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input
+                                    style="width: 450xp;"
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    value="{{ old('name') }}"
+                                    placeholder="Ej: Urgente"
+                                    required
+                                    >
+                                    @error('name')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="color">Color</label>
+                                    <div class="color-row">
+                                        <input
+                                        type="color"
+                                        id="color"
+                                        name="color"
+                                        value="{{ old('color', '#6366f1') }}"
+                                        style="border-radius: 100%;"
+                                        >
+                                        <span style="font-size:13px;color:#6b7280;"></span>
+                                    </div>
+                                    @error('color')
+                                    <div class="error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="contenedorBotonFinal" style="margin-top: 20px; display: flex; flex-wrap: wrap; width: 80%; border: 1px solid yellow; align-items: center;">
+                                <button type="submit" class="submit-btn">Guardar Tag</button>
+                            </div>
+
+                        </div>
+
+                        
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

@@ -185,3 +185,78 @@ svg {
         row-gap: 20px;
     }
 }
+
+
+/* Pestaña de los tags */
+.tag-wrapper {
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding-top: 80px;
+background: #f5f6fa;
+}
+
+
+.tag-card {
+width: 100%;
+max-width: 70%;
+height: 450px;
+background: #ffffff;
+border-radius: 12px;
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+padding: 32px;
+}
+
+
+.tag-title {
+text-align: center;
+font-size: 22px;
+font-weight: 600;
+margin-bottom: 24px;
+color: #1f2937;
+}
+
+
+.form-group {
+margin-bottom: 20px;
+}
+
+
+.form-group label {
+display: block;
+font-size: 14px;
+font-weight: 500;
+margin-bottom: 6px;
+color: #374151;
+}
+
+
+.form-group input[type="text"] {
+width: 100%;
+height: 40px;
+padding: 0 12px;
+border-radius: 8px;
+border: 1px solid #d1d5db;
+font-size: 14px;
+}
+
+
+.form-group input[type="text"]:focus {
+outline: none;
+border-color: #6366f1;
+}
+
+
+.color-row {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+
+.color-row input[type="color"] {
+width: 44px;
+height: 44px;
+border: none;
+}
