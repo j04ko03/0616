@@ -35,7 +35,7 @@ class ProyectosController extends Controller
      * Maneja errores de base de datos.
      * 
      * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse Vista con todos los proyectos o redirección en caso de error
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function index()
     {
@@ -54,7 +54,7 @@ class ProyectosController extends Controller
      * 
      * Método vacío, actualmente no implementado.
      * 
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function create()
     {
@@ -70,7 +70,7 @@ class ProyectosController extends Controller
      * 
      * @param Request $request Datos del proyecto (titulo, fecha-limite, descripcion, presupuesto, link) y tareas en JSON
      * @return \Illuminate\Http\RedirectResponse Redirección al proyecto creado con mensaje de éxito o error
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function store(Request $request)
     {
@@ -112,12 +112,27 @@ class ProyectosController extends Controller
                         'proyectoId' => $project->id,
                         'responsableId' => Auth::id(),
                         'isDeleted' => false,
-                        'idSprint' => 2
+                        'idSprint' => $tareaData['idSprint']
                     ]);
 
-                    //Asignar usuarios a la tarea (N:M)
-                    if (isset($tareaData['usuarios']) && count($tareaData['usuarios']) > 0) {
-                        $tarea->usuarios()->sync($tareaData['usuarios']); // IDs de usuarios
+                    // Asignar usuarios a la tarea (N:M)
+                    if (isset($tareaData['usuariosAsignados']) && count($tareaData['usuariosAsignados']) > 0) {
+                        // Extraer solo los IDs de los usuarios
+                        $usuariosIds = array_map(function ($usuario) {
+                            return $usuario['id'];
+                        }, $tareaData['usuariosAsignados']);
+
+                        // Añadir cada usuario al proyecto si no existe ya
+                        foreach ($usuariosIds as $usuarioId) {
+                            // Verificar si el usuario ya está en el proyecto
+                            if (!$project->usuarios()->where('usuarioId', $usuarioId)->exists()) {
+                                // Añadir usuario al proyecto como Miembro
+                                $project->usuarios()->attach($usuarioId, ['rol' => 'Miembro']);
+                            }
+                        }
+
+                        // Asignar usuarios a la tarea
+                        $tarea->usuarios()->sync($usuariosIds);
                     }
                 }
             }
@@ -136,7 +151,7 @@ class ProyectosController extends Controller
      * Método vacío, actualmente no implementado.
      * 
      * @param Proyectos $proyectos Instancia del proyecto a mostrar
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function show(Proyectos $proyectos)
     {
@@ -149,7 +164,7 @@ class ProyectosController extends Controller
      * Método vacío, actualmente no implementado.
      * 
      * @param Proyectos $proyectos Instancia del proyecto a editar
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function edit(Proyectos $proyectos)
     {
@@ -165,7 +180,7 @@ class ProyectosController extends Controller
      * @param Request $request Datos actualizados del proyecto
      * @param Proyectos $proyecto Instancia del proyecto a actualizar
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function update(Request $request, Proyectos $proyecto)
     {
@@ -193,7 +208,7 @@ class ProyectosController extends Controller
      * 
      * @param Proyectos $proyecto Instancia del proyecto a eliminar
      * @return \Illuminate\Http\RedirectResponse Redirección al home con mensaje de éxito o error
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function destroy(Proyectos $proyecto)
     {
@@ -217,7 +232,7 @@ class ProyectosController extends Controller
      * @param Request $request Datos con el email del usuario
      * @param Proyectos $project Instancia del proyecto
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito, error o info
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function addUser(Request $request, Proyectos $project)
     {
@@ -254,7 +269,7 @@ class ProyectosController extends Controller
      * 
      * @param Request $request Debe contener el archivo 'foto' y el 'idProyecto'
      * @return \Illuminate\Http\JsonResponse JSON con éxito/error y la ruta de la imagen
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function subirFotoPro(Request $request)
     {
@@ -269,9 +284,10 @@ class ProyectosController extends Controller
             $idProyecto = $request->idProyecto;
 
             // Crear carpeta si no existe
-            $path = storage_path('app/public/assets/fotosPro/');
+            $path = storage_path('assets/fotosPro/');
             if (!file_exists($path)) {
-                mkdir($path, 0777, true);
+                mkdir($path, 0775, true);
+                chmod($path, 0775);
             }
 
             $proyectoA = Proyectos::find($idProyecto);
@@ -317,7 +333,7 @@ class ProyectosController extends Controller
      * @param Request $request Debe contener 'user_id_delete'
      * @param Proyectos $project Instancia del proyecto
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito o error
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function removeUser(Request $request, Proyectos $project)
     {
@@ -352,7 +368,7 @@ class ProyectosController extends Controller
      * @param Request $request Debe contener 'user_id_admin'
      * @param Proyectos $project Instancia del proyecto
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito, error o info
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function updateUserAdmin(Request $request, Proyectos $project)
     {
@@ -395,7 +411,7 @@ class ProyectosController extends Controller
      * @param Request $request Debe contener 'group-name'
      * @param Proyectos $project Instancia del proyecto
      * @return \Illuminate\Http\RedirectResponse Redirección con mensaje de éxito, error o info
-     * @author Joaqu�n <joaquinmscollo@gmail.com>
+     * @author Joaqu?n <joaquinmscollo@gmail.com>
      */
     public function addGroup(Request $request, Proyectos $project)
     {
