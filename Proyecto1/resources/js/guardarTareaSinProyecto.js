@@ -11,7 +11,6 @@
 const tituloTarea = document.getElementById('tituloTarea');
 const fechaEntrega = document.getElementById('fechaEntrega');
 const presupuesto = document.getElementById('presupuesto');
-//Puedo obtener el user con auth o con id
 const estado = document.getElementById('estado');
 const sprint = document.getElementById('sprint');
 const addTareaFantasma = document.getElementById('addTareaFantasma');

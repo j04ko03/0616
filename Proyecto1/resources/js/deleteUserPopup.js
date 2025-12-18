@@ -14,9 +14,6 @@
 const popupUserProject = document.querySelectorAll(".popup-edit-user");
 const formDeleteUserProject = document.getElementById("delete-user-project");
 
-// Ensure popupBg is available or check safely
-// const popupBg = document.getElementById("popup-bg"); // Assuming global variable strategy from other files
-
 if (popupUserProject.length > 0 && formDeleteUserProject) {
     popupUserProject.forEach((popupUser) => {
         popupUser.addEventListener("click", function (e) {

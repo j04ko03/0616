@@ -9,7 +9,7 @@
  * 
  * Incluye indicadores visuales (color verde) para la sección activa.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', () => {

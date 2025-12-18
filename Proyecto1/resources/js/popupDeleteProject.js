@@ -12,12 +12,10 @@
  */
 
 // POP-UP UPDATE-DELETE PROJECT
-const popupBgKey = document.getElementById("popup-bg"); // Rename to avoid conflict if included with others
+const popupBgKey = document.getElementById("popup-bg");
 const updateProjectBtnKey = document.getElementById("update-project");
 const popupQuitBtnKey = document.getElementById("quit-btn");
 const formUpdateProjectKey = document.getElementById("update-project-form");
-
-// Reuse or new variables? The logic below seems independent.
 
 /**
  * Abrir popup de actualización de proyecto.
@@ -46,7 +44,7 @@ if (popupBgKey) {
     popupBgKey.addEventListener("click", function (e) {
         e.stopPropagation();
         if (formUpdateProjectKey) formUpdateProjectKey.style.display = "none";
-        // Check if other popups exist before accessing style
+        
         const popupDelete = document.getElementById("popup-delete-project-confirmation");
         if (popupDelete) popupDelete.style.display = "none";
 

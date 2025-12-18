@@ -5,7 +5,7 @@
  * entre la sección de proyectos y la sección de tareas.
  * Incluye estilos visuales para indicar la sección activa.
  * 
- * @author Joaqu�n <joaquinmscollo@gmail.com>
+ * @author Joaquín <joaquinmscollo@gmail.com>
  */
 
 document.addEventListener('DOMContentLoaded', () => {

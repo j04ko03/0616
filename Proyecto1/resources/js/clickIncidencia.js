@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (card) {
                 const incidenciaId = card.dataset.id; // obtenemos el data-id
                 console.log('Eliminar incidencia con ID:', incidenciaId);
-                // Aquí iría la lógica para elimiar la incidencia (petición fetch/axios)
             }
         });
     });

@@ -174,8 +174,5 @@ if (taskForm) {
         // Cerrar popup después de enviar
         closePopup();
 
-        // Aquí se puede añadir la lógica para añadir la tarea al tablero Kanban
-        // alert('Tarea creada exitosamente!'); 
-        // Logic to send to backend would go here
     });
 }

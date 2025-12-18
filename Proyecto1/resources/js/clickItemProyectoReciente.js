@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const proyecto = JSON.parse(pro.dataset.projecte);
                     const idProyecto = proyecto.id;
                     const url = `/project/${idProyecto}`;
-                    // Assuming relative path needs prefix, based on original code
                     window.location.href = "/0616/Proyecto1/public" + url;
                 } catch (e) {
                     console.error("Error parsing project data", e);

@@ -2,7 +2,7 @@
  * Actualización del título de la página y limpieza de localStorage.
  * 
  * Funcionalidades:
- * 1. Actualiza el título de la página dinámicamente según la ruta actual
+ * 1. Actualiza el título de la página dinámicamente según la ruta actual (arriba, en la pestaña del navegador)
  * 2. Limpia el localStorage al salir de ciertas rutas específicas
  *    (crear-proyecto y tareas) para evitar mantener datos obsoletos
  * 

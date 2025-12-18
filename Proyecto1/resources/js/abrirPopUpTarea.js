@@ -14,11 +14,7 @@
  */
 window.openTaskPopup = function () {
     const taskForm = document.getElementById('taskForm');
-    const popup = document.getElementById('popup'); // Assuming 'popup' is the ID, though addTask.js uses 'taskPopup'. Verification needed? 
-    // Wait, the original code used global 'popup'. 
-    // addTask.js uses 'taskPopup'. 
-    // This file seems to rely on a global 'popup' variable. 
-    // I will keep logic 'as is' but fix comments.
+    const popup = document.getElementById('popup');
 
     if (taskForm) taskForm.reset();
     if (typeof popup !== 'undefined' && popup) {

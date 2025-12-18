@@ -10,9 +10,7 @@
 // ADD USER POP-UP
 const formAddUser = document.getElementById("form-add-user");
 const addUserBtn = document.getElementById("add-user");
-const cancelAddUserBtn = document.getElementById("cancel-add-user-btn");
-// Note: 'popupBg' is assumed to be defined globally usually in another file. 
-// If it's not defined, this script will error. 
+const cancelAddUserBtn = document.getElementById("cancel-add-user-btn"); 
 
 // Abrir popup al hacer click en el botón de añadir usuario
 if (addUserBtn && formAddUser) {
